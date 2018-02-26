@@ -1,0 +1,11 @@
+; Registar App Settings
+[App]
+api_client_name = APPLICATION'S NAME
+api_client_website = HTTPS://YOURDOMAIN.COM/
+
+; MySQL Settings
+[Mysql]
+db_host = YOUR DATABASE'S HOST
+db_user = YOUR DATABASE'S USER
+db_pass = YOUR DATABASE'S PASSWORD
+db_name = YOUR DATABASE'S NAME
