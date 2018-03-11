@@ -1,0 +1,53 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+RewriteCond %{HTTP_HOST} ^www\.(.+?)$
+RewriteRule ^(.*)$ https://$1 [R=301,L]
+
+# Main
+RewriteBase /
+RewriteRule ^home/?$ / [R=301]
+
+RewriteBase /login
+RewriteRule ^login/?$ login/login\.php [NC,L,QSA]
+RewriteRule ^auth/?$ login/auth\.php [NC,L,QSA]
+RewriteRule ^logout/?$ login/logout\.php [NC,L,QSA]
+RewriteRule ^terms/?$ login/terms\.php [NC,L,QSA]
+
+# LTL
+RewriteBase /local
+RewriteRule ^local/?$ local\.php [NC,L]
+
+# FTL
+RewriteBase /federated
+RewriteRule ^federated/?$ federated\.php [NC,L]
+
+# Notice
+RewriteBase /notifications
+RewriteRule ^notifications/?$ notifications\.php [NC,L]
+
+# Search
+RewriteBase /search
+RewriteRule ^search/?$ search_hash_tag\.php [NC,L,QSA]
+RewriteRule ^search/users/?$ search_user\.php [NC,L,QSA]
+
+# User
+RewriteBase /
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/?$ user\.php?user=@$1@$2\.$3 [NC,L,QSA]
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/status/(.+?)?$ user\.php?user=@$1@$2\.$3&status=$4 [NC,L,QSA]
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/media/?$ user_only_media\.php?user=@$1@$2\.$3 [NC,L,QSA]
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/with_replies/?$ user_include_replies\.php?user=@$1@$2\.$3 [NC,L,QSA]
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/followers/?$ user_followers\.php?user=@$1@$2\.$3 [NC,L,QSA]
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/following/?$ user_following\.php?user=@$1@$2\.$3 [NC,L,QSA]
+RewriteRule ^@(.+)@(.+)\.([a-z]+)/favourites/?$ user_favorite\.php?user=@$1@$2\.$3 [NC,L,QSA]
+
+# Image
+RewriteBase /
+RewriteRule ^avatars/original/missing\.png$ assets/images/missing\.png [NC,L]
+RewriteRule ^headers/original/missing\.png$ assets/images/missing_header\.png [NC,L]
+
+# 404
+RewriteRule ^404/?$ 404\.php [NC,L,QSA]
+ErrorDocument 404 /404
+
+</IfModule>
