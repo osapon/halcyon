@@ -100,7 +100,7 @@ or <a href="https://joinmastodon.org/">create an account</a>
 <span></span>
 </div>
 <div class="login_form_main">
-<input name="acct" type="text" class="login_form_input" placeholder="johndoe@example.com" required>
+<input name="acct" type="text" class="login_form_input" placeholder="@johndoe@example.com" required>
 <label class="login_form_continue pointer">
 <i class="fa fa-chevron-circle-right" aria-hidden="true"></i>
 <input id="login_continue" type="submit" value="" class="invisible"></input>
