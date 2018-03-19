@@ -1414,7 +1414,7 @@ function setFollows(mid, param, load_options) {
 let isSyncing = true,
 followsList = [];
 api.get('accounts/'+mid+'/'+param, load_options, function(follows) {
-
+ 
 for (let i in follows) {
 follows_template(follows[i]).appendTo("#js-follows_profile");
 followsList.unshift(follows[i].id);
@@ -1486,7 +1486,9 @@ $("#js_followers_count").text(AccountObj.followers_count);
 $("#js_profile_displayname").text(AccountObj.display_name);
 $("#js_profile_username").text(AccountObj.acct);
 $("#js_profile_bio").html(AccountObj.note);
-if( AccountObj.id === current_id ) {
+console.log(AccountObj.id);
+console.log(current_id);
+if( AccountObj.id == current_id ) {
 $(`<a href="https://${current_instance}/settings/profile">
 <button class="profile_edit_button relationship_button">
 <span>Edit profile</span>
@@ -1634,6 +1636,12 @@ setOverlayMediaWithoutStatus($(this).attr('src'));
 })
 $(function() {
 $(document).on('click', '#creat_status', function(e) {
+switch(localStorage.getItem("setting_post_privacy")) {
+case "public":picon="globe";break;
+case "unlisted":picon="unlock-alt";break;
+case "private":picon="lock";break;
+case "direct":picon="envelope";break;
+}
 $('.overlay_status').removeClass('invisible');
 $("#js-overlay_content_wrap .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
@@ -1642,7 +1650,7 @@ $('#overlay_status_form .status_textarea textarea').addClass('focus');
 $('.overlay_status .submit_status_label').addClass('active_submit_button');
 $('#overlay_status_form .status_textarea textarea').focus()
 $('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa " + localStorage.getItem("setting_post_privacy"));
+$('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 });
 $(document).on('change keyup','#overlay_status_form textarea, #overlay_status_form .status_spoiler', function(e) {
 if (
@@ -1807,9 +1815,15 @@ $('#header_status_form .expand_privacy_menu_button > i').attr('class', $(this).a
 $('#header_status_form .expand_privacy_menu').addClass('invisible');
 });
 $(document).on('click','#header_status_form', function(e) {
+switch(localStorage.getItem("setting_post_privacy")) {
+case "public":picon="globe";break;
+case "unlisted":picon="unlock-alt";break;
+case "private":picon="lock";break;
+case "direct":picon="envelope";break;
+}
 if(!$('#header_status_form .status_textarea textarea').hasClass('focus')) {
 $('#header_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa " + localStorage.getItem("setting_post_privacy"));
+$('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#header_status_form .status_textarea textarea').addClass('focus');
 $('#header_status_form .status_bottom').removeClass('invisible');
 $('#header_status_form .submit_status_label').addClass('active_submit_button');
@@ -1905,13 +1919,19 @@ $('#reply_status_form .submit_status_label').removeClass('active_submit_button')
 }
 });
 $(document).on('click','#reply_status_form', function(e) {
+switch(localStorage.getItem("setting_post_privacy")) {
+case "public":picon="globe";break;
+case "unlisted":picon="unlock-alt";break;
+case "private":picon="lock";break;
+case "direct":picon="envelope";break;
+}
 if(!$('#reply_status_form .status_textarea textarea').hasClass('focus')) {
 $('#reply_status_form .status_textarea textarea').addClass('focus');
 $('#reply_status_form .status_bottom').removeClass('invisible');
 $('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val("@"+$('#reply_status_form').attr('username')+" ");
 $('#reply_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#reply_status_form .expand_privacy_menu_button > i').attr('class', "fa " + localStorage.getItem("setting_post_privacy"));
+$('#reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 }
 });
 $(document).on('change keyup','#reply_status_form textarea, #reply_status_form .status_spoiler', function(e) {
@@ -2044,6 +2064,12 @@ e.stopPropagation();
 const sid= $(this).attr('tid'),
 acct = $(this).attr('acct'),
 display_name = $(this).attr('display_name');
+switch(localStorage.getItem("setting_post_privacy")) {
+case "public":picon="globe";break;
+case "unlisted":picon="unlock-alt";break;
+case "private":picon="lock";break;
+case "direct":picon="envelope";break;
+}
 $('.single_reply_status').removeClass('invisible');
 $("#js-overlay_content_wrap .temporary_object").empty();
 $(".single_reply_status .status_preview").empty();
@@ -2053,7 +2079,7 @@ $('.single_reply_status .submit_status_label').addClass('active_submit_button');
 $('#single_reply_status_form .status_textarea textarea').addClass('focus');
 $('#single_reply_status_form .status_textarea textarea').focus()
 $('#single_reply_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa " + localStorage.getItem("setting_post_privacy"));
+$('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
 $('.single_reply_status .single_reply_status_header span').text("Reply to "+display_name);
 $('#single_reply_status_form textarea').val(acct+" ");
@@ -2233,8 +2259,8 @@ $(this).text("HIDE");
 $(this).text("SHOW");
 }
 const html_post_steraming = $(`<select name="post_steraming">
-<option value="manual">Manual update</option>
 <option value="auto">Auto update</option>
+<option value="manual">Manual update</option>
 </select>`)
 const html_post_privacy = $(`<select name="post_privacy">
 <option value="public" selected>Public</option>

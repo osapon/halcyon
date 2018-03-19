@@ -28,7 +28,7 @@ echo "
 localStorage.setItem('current_id','$account_id');
 localStorage.setItem('current_instance','$domain');
 localStorage.setItem('current_authtoken', '$access_token');
-localStorage.setItem('setting_post_stream', 'manual');
+localStorage.setItem('setting_post_stream', 'auto');
 localStorage.setItem('setting_post_privacy', 'public');
 localStorage.setItem('setting_local_instance', 'default');
 localStorage.setItem('setting_search_filter', 'all');

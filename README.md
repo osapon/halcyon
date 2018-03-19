@@ -6,12 +6,13 @@ A Mastodon web client that looks like Twitter
 <img src="https://halcyon.cybre.space/login/assets/images/preview0.png">
 
 ## Blog
+- Release of Version 1.0.1 - Two bugfixes
 - [Release of Version 1.0.0](http://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
+- https://social.dev-wiki.de - 1.0.1
 - https://halcyon.cybre.space - Outdated
-- https://social.dev-wiki.de - 1.0.0
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
