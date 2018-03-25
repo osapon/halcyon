@@ -11,6 +11,7 @@ A Mastodon web client that looks like Twitter
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
+- https://halcyon.toromino.de - 1.0.1
 - https://social.dev-wiki.de - 1.0.1
 - https://halcyon.cybre.space - Outdated
 
