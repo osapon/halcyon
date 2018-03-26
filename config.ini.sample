@@ -1,4 +1,5 @@
 ; Registar App Settings
 [App]
-api_client_name = APPLICATION'S NAME
-api_client_website = HTTPS://YOURDOMAIN.COM/
+api_client_name = Your application name
+api_client_website = https://example.com/
+

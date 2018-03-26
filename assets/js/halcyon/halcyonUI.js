@@ -1414,7 +1414,7 @@ function setFollows(mid, param, load_options) {
 let isSyncing = true,
 followsList = [];
 api.get('accounts/'+mid+'/'+param, load_options, function(follows) {
- 
+
 for (let i in follows) {
 follows_template(follows[i]).appendTo("#js-follows_profile");
 followsList.unshift(follows[i].id);

@@ -16,8 +16,12 @@ Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a>
 <a href="https://github.com/halcyon-suite/halcyon">Source code</a>
 </li>
 <li>
-<a href="http://instances.list">Other instances</a>
+<a href="http://instances.social">Other instances</a>
+</li>
+<li>
+Version <?php echo file_get_contents("version.txt") ?>
 </li>
 </ul>
 </footer>
 <img style="display:block;margin:16px auto;width: 30%;opacity: .3;" src="/assets/images/halcyon.png">
+

@@ -6,12 +6,13 @@ A Mastodon web client that looks like Twitter
 <img src="https://halcyon.cybre.space/login/assets/images/preview0.png">
 
 ## Blog
+- Release of Version 1.0.2 - Fixed a Firefox-only bug and some wrong links, added version info and an annoying cookie notice (sorry, but that's EU law)
 - Release of Version 1.0.1 - Two bugfixes
 - [Release of Version 1.0.0](http://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://halcyon.toromino.de - 1.0.1
+- https://halcyon.toromino.de - 1.0.2
 - https://social.dev-wiki.de - 1.0.1
 - https://halcyon.cybre.space - Outdated
 

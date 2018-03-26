@@ -32,7 +32,9 @@ die();
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/login/assets/css/style.css" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="//cdn.staticfile.org/cookieconsent2/3.0.4/cookieconsent.min.css">
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.staticfile.org/cookieconsent2/3.0.4/cookieconsent.min.js"></script>
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/login/assets/js/halcyon_login.js"></script>
 <script>
@@ -68,7 +70,7 @@ location.href = "/";
 <span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
 </li>
 </a>
-<a class="no-underline">
+<a href="/terms/" class="no-underline">
 <li>
 <span><i class="fa fa-balance-scale" aria-hidden="true"></i>Terms</span>
 </li>
@@ -132,7 +134,7 @@ Halcyon is standard <span style="font-weight: bold">Twitter like client</span> o
 </div>
 <h2>Contact / Feedback</h2>
 <p>
-Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">＠halcyon@social.csswg.org</a><br />
+Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">ï¼ halcyon@social.csswg.org</a><br />
 Email: <a href="http://www.nikisoft.one/contact.php" target="_blank">Use my contact form</a><br />
 Github: <a href="https://github.com/halcyon-suite/halcyon" target="_blank">halcyon-suite/halcyon</a>
 </p>
@@ -149,9 +151,24 @@ Bitcoin: 1D6GThQqHQYnruKYrKyW9JC86ZGWxjt1hK<br />
 <i class="fa fa-angle-up" aria-hidden="true"></i>
 </a>
 </div>
-<span>Photo by <a href="https://www.flickr.com/photos/95387826@N08/">Michio Morimoto on Flickr</a> (CC BY 2.0)</span>
+<span>Photo by <a href="https://www.flickr.com/photos/95387826@N08/">Michio Morimoto on Flickr</a> (CC BY 2.0)</span><br/>
+<span>Halcyon version <?php echo file_get_contents("../version.txt") ?></span>
 </footer>
 </body>
+<script>
+window.cookieconsent.initialise({
+"palette": {
+"popup": {
+"background": "#000"
+},
+"button": {
+"background": "#f1d600"
+}
+},
+"theme": "classic",
+"position": "bottom"
+});
+</script>
 <?php if (isset($_GET['cause'])): ?>
 <script>
 $(function() {

@@ -8,7 +8,9 @@
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/login/assets/css/style.css" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="//cdn.staticfile.org/cookieconsent2/3.0.4/cookieconsent.min.css">
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.staticfile.org/cookieconsent2/3.0.4/cookieconsent.min.js"></script>
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/login/assets/js/halcyon_login.js"></script>
 </head>
@@ -45,7 +47,7 @@
 <span><i class="fa fa-envelope" aria-hidden="true"></i>Contact</span>
 </li>
 </a>
-<a href="#login_form_wrap" class="no-underline">
+<a href="/login/#login_form_wrap" class="no-underline">
 <li>
 <span><i class="fa fa-user-circle-o" aria-hidden="true"></i>Login</span>
 </li>
@@ -55,10 +57,11 @@
 </div>
 </div>
 </header>
+<?php $config = parse_ini_file('../config.ini',true) ?>
 <main id="main">
 <article id="article">
 <h1>Halcyon Terms of Use</h1>
-<p class="description">This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at <a href="http://example.com">example.com</a>.</p>
+<p class="description">This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at <a href="<?php echo $config["App"]["api_client_website"] ?>"><?php echo $config["App"]["api_client_website"] ?></a>.</p>
 <br/>
 <h2>1. Agreement</h2>
 <p>By logging into Halcyon you agree to this terms of use agreement. Do not use this service if you do not agree to these terms.</p>
@@ -77,7 +80,7 @@
 <ul>
 <li>actions violating the laws of countries</li>
 <li>actions contrary to public order and standards of decency</li>
-<li>violation of third party’s right to intellectual property, brand, privacy, etc.</li>
+<li>violation of third partyâ€™s right to intellectual property, brand, privacy, etc.</li>
 <li>acts of violence, sexual nature, of discrimination</li>
 <li>phishing or spamming</li>
 <li>actions causing problem to the network infrastructure of Halcyon</li>
@@ -95,6 +98,21 @@
 <i class="fa fa-angle-up" aria-hidden="true"></i>
 </a>
 </div>
-<span>Photo by <a href="https://www.flickr.com/photos/95387826@N08/">Michio Morimoto on Flickr</a> (CC BY 2.0)</span>
+<span>Halcyon version <?php echo file_get_contents("../version.txt") ?></span>
 </footer>
 </body>
+<script>
+window.cookieconsent.initialise({
+"palette": {
+"popup": {
+"background": "#000"
+},
+"button": {
+"background": "#f1d600"
+}
+},
+"theme": "classic",
+"position": "bottom"
+});
+</script>
+</html>
