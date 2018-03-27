@@ -151,7 +151,7 @@ $(document).on('click', function(e) {
 $('.header_my_account_nav').addClass('invisible');
 $('.expand_menu').addClass('invisible');
 });
-})
+});
 function mediaattachments_template(status) {
 let media_views = "";
 if(status.media_attachments[0].remote_url != null) {
@@ -215,7 +215,8 @@ if (
 status.account.id !== JSON.parse(localStorage.getItem("what_to_follow_0")).id &
 status.account.id !== JSON.parse(localStorage.getItem("what_to_follow_1")).id &
 status.account.id !== JSON.parse(localStorage.getItem("what_to_follow_2")).id &
-status.account.id !== current_id
+status.account.id != current_id &
+current_following_ids.indexOf(status.account.id) === -1
 ) {
 localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(status.account) );
 }
@@ -314,7 +315,8 @@ if (
 status.reblog.account.id !== JSON.parse(localStorage.getItem("what_to_follow_0")).id &
 status.reblog.account.id !== JSON.parse(localStorage.getItem("what_to_follow_1")).id &
 status.reblog.account.id !== JSON.parse(localStorage.getItem("what_to_follow_2")).id &
-status.account.id!== current_id
+status.reblog.account.id != current_id &
+current_following_ids.indexOf(status.reblog.account.id) === -1
 ) {
 localStorage.setItem("what_to_follow_" + String(Math.floor(Math.random()*3)), JSON.stringify(status.reblog.account));
 }

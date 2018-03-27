@@ -1299,17 +1299,28 @@ margin-top: 0px;
 transition: 0.13s ease-out;
 }
 .side_widget form.pulldown_form.view {
-height: 240px;
+height: auto;
 opacity: 1;
 margin-top: 16px;
 transition: 0.13s ease-out;
 }
 .side_widget select, .side_widget input {
 margin: 8px 0 16px;
+padding-left:5px;
 width: 100%;
 font-size: 14px;
 color: #66757F;
 box-sizing: border-box;
+height:30px;
+border:1px solid #E8EEF1;
+border-radius:2px;
+background-color:#F5F8FA;
+outline:0;
+}
+.side_widget select:active, .side_widget input:focus {
+outline:0;
+border:1px solid #189EFC;
+background-color:transparent;
 }
 .side_widget .account_box {
 display: flex;
@@ -1540,11 +1551,13 @@ border-radius: 16px;
 border: 1px solid #E8EEF1;
 background-color: #F5F8FA;
 height: 100%;
-transition: 0.15s ease-out;;
+transition: 0.15s ease-out;
 }
 #header .header_nav_wrap .header_right_box .search_form .search_form_input:focus {
 background-color: transparent;
-transition: 0.15s ease-out;;
+transition: 0.15s ease-out;
+outline:0;
+border:2px solid #189EFC;
 }
 #header .header_nav_wrap .header_right_box .search_form .search_form_submit {
 display: block;
