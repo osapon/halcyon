@@ -49,7 +49,6 @@
 <input id="single_reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
 <div class="submit_status_label_wrap">
 <span class="character_count">
-500
 </span>
 <label for="single_reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">

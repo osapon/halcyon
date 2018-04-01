@@ -3458,10 +3458,10 @@ $(this).html($(this).html().replace(emoji[i], emoji_dict[emoji[i]]));
 $(this).removeClass('emoji_poss');
 }
 }
-$(this).html($(this).html().replace("✅", "<img class='emoji' src='/assets/images/self_auth_min.png' />"));
+$(this).html($(this).html().replace("✅", "<img class='emoji' src='/assets/images/self_auth_min.png'>"));
 });
 twemoji.parse(document.body,{base:(location.protocol==="https:"?"https:":"http:")+"//cdn.staticfile.org/twemoji/2.2.5/"});
-};
+}
 function replaced_emoji_return(original) {
 const emoji = original.match(/(:.+?:)/g);
 for(let i in emoji) {
@@ -3469,5 +3469,5 @@ if(emoji_dict[emoji[i]]) {
 original = original.replace(emoji[i], emoji_dict[emoji[i]]);
 }
 }
-return original
-};
+return original;
+}

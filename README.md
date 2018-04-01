@@ -5,7 +5,11 @@ A Mastodon web client that looks like Twitter
 
 <img src="https://halcyon.cybre.space/login/assets/images/preview0.png">
 
+## Stay tuned
+Follow or Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
+
 ## Blog
+- [Release of Version 1.1.0 and upcoming features](http://nikisoft.myblog.de/nikisoft/art/11389499/Halcyon-What-we-did-and-what-we-will-do)
 - Release of Version 1.0.3 - "Who to follow" doesn't show people you already follow anymore and design of preferences and search bar is now much better
 - Release of Version 1.0.2 - Fixed a Firefox-only bug and some wrong links, added version info and an annoying cookie notice (sorry, but that's EU law)
 - Release of Version 1.0.1 - Two bugfixes
@@ -13,8 +17,8 @@ A Mastodon web client that looks like Twitter
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://halcyon.toromino.de - 1.0.3
-- https://social.dev-wiki.de - 1.0.1
+- https://halcyon.toromino.de - 1.1.0
+- https://social.dev-wiki.de - 1.1.0
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.

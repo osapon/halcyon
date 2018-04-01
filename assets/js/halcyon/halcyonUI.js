@@ -220,6 +220,9 @@ current_following_ids.indexOf(status.account.id) === -1
 ) {
 localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(status.account) );
 }
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
+}
 const status_account_link= getRelativeURL(status.account.url, status.account.id),
 status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
 status_attr_datetime = getConversionedDate(null, status.created_at);
@@ -319,6 +322,9 @@ status.reblog.account.id != current_id &
 current_following_ids.indexOf(status.reblog.account.id) === -1
 ) {
 localStorage.setItem("what_to_follow_" + String(Math.floor(Math.random()*3)), JSON.stringify(status.reblog.account));
+}
+for(i=0;i<status.reblog.emojis.length;i++) {
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
 }
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
 status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
@@ -425,6 +431,9 @@ const toot_author_link = getRelativeURL(NotificationObj.status.account.url, Noti
 toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 if( NotificationObj.type=='favourite' ){
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
+}
 const html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
 <div class="notice_author_box">
@@ -461,6 +470,9 @@ ${NotificationObj.status.account.display_name}
 </li>`);
 return $(html);
 } else if ( NotificationObj.type === 'reblog' ) {
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
+}
 const sid= NotificationObj.status.id,
 html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
@@ -507,6 +519,9 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
+}
 if (NotificationObj.status.spoiler_text) {
 alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
 article_option = 'content_warning';
@@ -650,6 +665,9 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
+}
 if (status.spoiler_text) {
 alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
 article_option = 'content_warning';
@@ -784,7 +802,7 @@ ${media_views}
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"/>
 <div class="submit_status_label_wrap">
 <span class="character_count">
-500
+${current_instance_charlimit}
 </span>
 <!-- Submit -->
 <label for="reply_status_form_submit" class="submit_status_label">
@@ -809,6 +827,9 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
+for(i=0;i<status.reblog.emojis.length;i++) {
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
+}
 if (status.spoiler_text) {
 alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
 article_option = 'content_warning';
@@ -943,7 +964,7 @@ ${media_views}
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"/>
 <div class="submit_status_label_wrap">
 <span class="character_count">
-500
+${current_instance_charlimit}
 </span>
 <!-- Submit -->
 <label for="reply_status_form_submit" class="submit_status_label">
@@ -994,6 +1015,9 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
+}
 if ( status.spoiler_text ) {
 alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
 article_option = 'content_warning';
@@ -1082,6 +1106,9 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
+for(i=0;i<status.reblog.emojis.length;i++) {
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
+}
 if ( status.spoiler_text ) {
 alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
 article_option = 'content_warning';
@@ -1653,6 +1680,7 @@ $('.overlay_status .submit_status_label').addClass('active_submit_button');
 $('#overlay_status_form .status_textarea textarea').focus()
 $('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
 $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
+$('#overlay_status_form .character_count').html(current_instance_charlimit);
 });
 $(document).on('change keyup','#overlay_status_form textarea, #overlay_status_form .status_spoiler', function(e) {
 if (
@@ -1661,11 +1689,11 @@ e.keyCode !== 17&
 e.keyCode !== undefined
 ) {
 const textCount = $('#overlay_status_form textarea').val().length + $('#overlay_status_form .status_spoiler').val().length;
-let textLen = ( 500 - textCount );
+let textLen = ( current_instance_charlimit - textCount );
 if ( textLen <= -1 ) {
 $('#overlay_status_form .character_count').addClass('red');
 $('#overlay_status_form').addClass('ready');
-} else if ( textLen === 500 ) {
+} else if ( textLen === current_instance_charlimit ) {
 $('#overlay_status_form').addClass('ready');
 } else {
 $('#overlay_status_form .character_count').removeClass('red');
@@ -1724,7 +1752,7 @@ $('#overlay_status_form .status_textarea .media_attachments_preview_area').addCl
 form.reset();
 $('#overlay_status_form').removeClass('ready');
 $('#overlay_status_form .status_textarea').removeClass('disallow_select');
-$('#overlay_status_form .character_count').html('500');
+$('#overlay_status_form .character_count').html(current_instance_charlimit);
 $('.overlay_status .submit_status_label').removeClass('active_submit_button');
 $('.overlay_status').addClass('invisible');
 $('#js-overlay_content_wrap').removeClass('view');
@@ -1757,7 +1785,7 @@ $('#overlay_status_form .status_textarea .media_attachments_preview_area').addCl
 form.reset();
 $('#overlay_status_form').removeClass('ready');
 $('#overlay_status_form .status_textarea').removeClass('disallow_select');
-$('#overlay_status_form .character_count').html('500');
+$('#overlay_status_form .character_count').html(current_instance_charlimit);
 $('.overlay_status .submit_status_label').removeClass('active_submit_button');
 $('.overlay_status').addClass('invisible');
 $('#js-overlay_content_wrap').removeClass('view');
@@ -1791,11 +1819,11 @@ e.keyCode !== 17&
 e.keyCode !== undefined
 ) {
 const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
-let textLen = ( 500 - textCount );
+let textLen = ( current_instance_charlimit - textCount );
 if ( textLen <= -1 ) {
 $('#header_status_form .character_count').addClass('red');
 $('#header_status_form').addClass('ready');
-} else if ( textLen === 500 ) {
+} else if ( textLen === current_instance_charlimit ) {
 $('#header_status_form').addClass('ready');
 } else {
 $('#header_status_form .character_count').removeClass('red');
@@ -1829,6 +1857,7 @@ $('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" 
 $('#header_status_form .status_textarea textarea').addClass('focus');
 $('#header_status_form .status_bottom').removeClass('invisible');
 $('#header_status_form .submit_status_label').addClass('active_submit_button');
+$('#header_status_form .character_count').html(current_instance_charlimit);
 }
 });
 $(document).on('change','#header_status_media_atta', function(e) {
@@ -1869,7 +1898,7 @@ $('#header_status_form .status_textarea .media_attachments_preview_area').addCla
 form.reset();
 $('#header_status_form').removeClass('ready');
 $('#header_status_form .status_textarea').removeClass('disallow_select');
-$('#header_status_form .character_count').html('500');
+$('#header_status_form .character_count').html(current_instance_charlimit);
 });
 } else {
 const dummy_form = $('<form></form>').append($('#header_status_media_atta')),
@@ -1897,7 +1926,7 @@ $('#header_status_form .status_textarea .media_attachments_preview_area').addCla
 form.reset();
 $('#header_status_form').removeClass('ready');
 $('#header_status_form .status_textarea').removeClass('disallow_select');
-$('#header_status_form .character_count').html('500');
+$('#header_status_form .character_count').html(current_instance_charlimit);
 });
 });
 break;
@@ -1934,6 +1963,7 @@ $('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val("@"+$('#reply_status_form').attr('username')+" ");
 $('#reply_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
 $('#reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
+$('#reply_status_form .character_count').html(current_instance_charlimit);
 }
 });
 $(document).on('change keyup','#reply_status_form textarea, #reply_status_form .status_spoiler', function(e) {
@@ -1943,11 +1973,11 @@ e.keyCode !== 17&
 e.keyCode !== undefined
 ) {
 const textCount = $('#reply_status_form textarea').val().length + $('#reply_status_form .status_spoiler').val().length;
-let textLen = ( 500 - textCount );
+let textLen = ( current_instance_charlimit - textCount );
 if ( textLen <= -1 ) {
 $('#reply_status_form .character_count').addClass('red');
 $('#reply_status_form').addClass('ready');
-} else if ( textLen === 500 ) {
+} else if ( textLen === current_instance_charlimit ) {
 $('#reply_status_form').addClass('ready');
 } else {
 $('#reply_status_form .character_count').removeClass('red');
@@ -2007,7 +2037,7 @@ $('#reply_status_form .status_textarea .media_attachments_preview_area').addClas
 form.reset();
 $('#reply_status_form').removeClass('ready');
 $('#reply_status_form .status_textarea').removeClass('disallow_select');
-$('#reply_status_form .character_count').html('500');
+$('#reply_status_form .character_count').html(current_instance_charlimit);
 $('.reply_status .submit_status_label').removeClass('active_submit_button');
 context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
 replace_emoji();
@@ -2040,7 +2070,7 @@ $('#reply_status_form .status_textarea .media_attachments_preview_area').addClas
 form.reset();
 $('#reply_status_form').removeClass('ready');
 $('#reply_status_form .status_textarea').removeClass('disallow_select');
-$('#reply_status_form .character_count').html('500');
+$('#reply_status_form .character_count').html(current_instance_charlimit);
 $('.reply_status .submit_status_label').removeClass('active_submit_button');
 context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
 replace_emoji();
@@ -2085,6 +2115,7 @@ $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa
 $('#single_reply_status_form').attr('tid',sid);
 $('.single_reply_status .single_reply_status_header span').text("Reply to "+display_name);
 $('#single_reply_status_form textarea').val(acct+" ");
+$('#single_reply_status_form .character_count').html(current_instance_charlimit);
 api.get('statuses/'+sid+'/', function(status) {
 timeline_template(status).appendTo(".single_reply_status .status_preview");
 replace_emoji();
@@ -2098,11 +2129,11 @@ e.keyCode !== 17&
 e.keyCode !== undefined
 ) {
 const textCount = $('#single_reply_status_form textarea').val().length + $('#single_reply_status_form .status_spoiler').val().length;
-let textLen = ( 500 - textCount );
+let textLen = ( current_instance_charlimit - textCount );
 if ( textLen <= -1 ) {
 $('#single_reply_status_form .character_count').addClass('red');
 $('#single_reply_status_form').addClass('ready');
-} else if ( textLen === 500 ) {
+} else if ( textLen === current_instance_charlimit ) {
 $('#single_reply_status_form').addClass('ready');
 } else {
 $('#single_reply_status_form .character_count').removeClass('red');
@@ -2162,7 +2193,7 @@ $('#single_reply_status_form .status_textarea .media_attachments_preview_area').
 form.reset();
 $('#single_reply_status_form').removeClass('ready');
 $('#single_reply_status_form .status_textarea').removeClass('disallow_select');
-$('#single_reply_status_form .character_count').html('500');
+$('#single_reply_status_form .character_count').html(current_instance_charlimit);
 $('.single_reply_status .submit_status_label').removeClass('active_submit_button');
 $('.single_reply_status').addClass('invisible');
 $('#js-overlay_content_wrap').removeClass('view');
@@ -2197,7 +2228,7 @@ $('#single_reply_status_form .status_textarea .media_attachments_preview_area').
 form.reset();
 $('#single_reply_status_form').removeClass('ready');
 $('#single_reply_status_form .status_textarea').removeClass('disallow_select');
-$('#single_reply_status_form .character_count').html('500');
+$('#single_reply_status_form .character_count').html(current_instance_charlimit);
 $('.single_reply_status .submit_status_label').removeClass('active_submit_button');
 $('.single_reply_status').addClass('invisible');
 $('#js-overlay_content_wrap').removeClass('view');

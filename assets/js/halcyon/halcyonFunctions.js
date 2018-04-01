@@ -128,7 +128,25 @@ $(".current_following_count_link").attr('href', current_following_count_link);
 $(".current_followers_count_link").attr('href', current_followers_count_link);
 replace_emoji();
 });
-$.cookie("session", "true", { path: '/' });
+api.get("accounts/"+current_id+"/following",function(data) {
+followings = new Array();
+for(i=0;i<data.length;i++) {
+followings.push(data[i].id);
+}
+localStorage.setItem("current_following_ids",JSON.stringify(followings));
+current_following_ids = followings;
+});
+api.get("instance",function(data) {
+if(data.max_toot_chars) {
+localStorage.setItem("current_instance_charlimit",data.max_toot_chars);
+current_instance_charlimit = data.max_toot_chars;
+}
+else {
+localStorage.setItem("current_instance_charlimit",500);
+current_instance_charlimit = 500;
+}
+});
+$.cookie("session","true",{path:'/'});
 }
 function refreshApp() {
 current_id = Number(localStorage.getItem("current_id"));
@@ -140,30 +158,18 @@ api_user_token: authtoken
 });
 current_display_name = localStorage.getItem("current_display_name");
 current_acct = localStorage.getItem("current_acct");
-current_url= localStorage.getItem("current_url");
+current_url = localStorage.getItem("current_url");
 current_header = localStorage.getItem("current_header");
 current_avatar = localStorage.getItem("current_avatar");
 current_statuses_count = localStorage.getItem("current_statuses_count");
-current_following_count= localStorage.getItem("current_following_count");
-current_followers_count= localStorage.getItem("current_followers_count");
-current_statuses_count_link= localStorage.getItem("current_statuses_count_link");
+current_following_count = localStorage.getItem("current_following_count");
+current_followers_count = localStorage.getItem("current_followers_count");
+current_statuses_count_link = localStorage.getItem("current_statuses_count_link");
 current_following_count_link = localStorage.getItem("current_following_count_link");
 current_followers_count_link = localStorage.getItem("current_followers_count_link");
-current_favourites_link= localStorage.getItem("current_favourites_link");
-if(!localStorage.getItem("current_following_ids")) {
-current_following_ids = new Array();
-api.get("accounts/"+current_id+"/following",function(data) {
-followings = new Array();
-for(i=0;i<data.length;i++) {
-followings.push(data[i].id);
-}
-localStorage.setItem("current_following_ids",JSON.stringify(followings));
-current_following_ids = followings;
-});
-}
-else {
-current_following_ids = JSON.parse(localStorage.getItem("current_following_ids"));
-}
+current_favourites_link = localStorage.getItem("current_favourites_link");
+current_following_ids = localStorage.getItem("current_following_ids");
+current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
 }
 function setCurrentProfile() {
 $(".js_current_profile_displayname").text(current_display_name);
