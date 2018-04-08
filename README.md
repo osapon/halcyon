@@ -19,6 +19,7 @@ Follow or Mastodon account and never miss an important update: [@halcyon@social.
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
 - https://halcyon.toromino.de - 1.1.0
 - https://social.dev-wiki.de - 1.1.0
+- https://itter.photog.social - 1.1.0
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
