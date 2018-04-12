@@ -4,19 +4,19 @@
 Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a>
 </li>
 <li>
-<a class="footer_widget_about">About</a>
+<a class="footer_widget_about"><?=_('About this instance')?></a>
 </li>
 <li>
-<a class="footer_widget_terms">Terms</a>
+<a class="footer_widget_terms"><?=_('Terms this instance')?></a>
 </li>
 <li>
 <a href="https://github.com/tootsuite/documentation/blob/master/Using-Mastodon/Apps.md">Apps</a>
 </li>
 <li>
-<a href="https://github.com/halcyon-suite/halcyon">Source code</a>
+<a href="<?=$config['App']['source_link']?>"><?=_('Source')?></a>
 </li>
 <li>
-<a href="http://instances.social">Other instances</a>
+<a href="http://instances.social"><?=_('Other instances')?></a>
 </li>
 <li>
 Version <?php echo file_get_contents("version.txt") ?>

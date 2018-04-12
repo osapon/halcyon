@@ -2,4 +2,7 @@
 [App]
 api_client_name = Your application name
 api_client_website = https://example.com/
-
+default_lang = en_US
+news_link = https://social.csswg.org/@halcyon
+source_link = https://github.com/halcyon-suite/halcyon
+contact_link = http://www.nikisoft.one/contact.php

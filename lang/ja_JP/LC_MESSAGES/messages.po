@@ -1,0 +1,178 @@
+msgid ""
+msgstr ""
+"Language: ja_JP\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 
+msgid "Login"
+msgstr "ログイン"
+
+#: 
+msgid "News"
+msgstr "ニュース"
+
+#: 
+msgid "Source"
+msgstr "ソース"
+
+#: 
+msgid "Terms"
+msgstr "利用規約"
+
+#: 
+msgid "Contact"
+msgstr "連絡先"
+
+#: 
+msgid "Login to Halcyon"
+msgstr "Halcyonでログイン"
+
+#: 
+msgid "or"
+msgstr "または"
+
+#: 
+msgid "create an account"
+msgstr "アカウント作成"
+
+#: 
+msgid "I agree with the Terms"
+msgstr "<a href='/terms'>利用規約</a>に同意します"
+
+#: 
+msgid "What is Halcyon"
+msgstr "Halcyonとは何ですか"
+
+#: 
+msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+msgstr "Halcyon はマストドン用の<span style='font-weight: bold'>Twitterに似せたクライアント</span>です。あなたが所属するインスタンスにログインして使うことができます。ツイートのようにトゥートしてみましょう。"
+
+#: 
+msgid "Contact / Feedback"
+msgstr "連絡先 / フィードバック"
+
+#: 
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon 利用規約"
+
+#: 
+msgid "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+msgstr "この利用規約は、次に記述されているアドレスで提供されている Halcyon for Mastodon (略してHalcyon)に提示されているものです"
+
+#: 
+msgid "Home"
+msgstr "ホーム"
+
+#: 
+msgid "Local"
+msgstr "ローカル"
+
+#: 
+msgid "Federated"
+msgstr "連合"
+
+#: 
+msgid "Notifications"
+msgstr "通知"
+
+#: 
+msgid "Search Mastodon"
+msgstr "検索"
+
+#: 
+msgid "View profile"
+msgstr "プロフィールを見る"
+
+#: 
+msgid "Settings"
+msgstr "ユーザー設定"
+
+#: 
+msgid "Log out"
+msgstr "ログアウト"
+
+#: 
+msgid "Toot"
+msgstr "トゥート"
+
+#: 
+msgid "TOOTS"
+msgstr "投稿"
+
+#: 
+msgid "FOLLOWING"
+msgstr "フォロー"
+
+#: 
+msgid "FOLLOWERS"
+msgstr "フォロワー"
+
+#: 
+msgid "Preferences"
+msgstr "設定"
+
+#: 
+msgid "SHOW"
+msgstr "表示"
+
+#: 
+msgid "New posts streaming"
+msgstr "新着投稿のストリーミング"
+
+#: 
+msgid "Default post privacy"
+msgstr "投稿の公開範囲"
+
+#: 
+msgid "Local instance"
+msgstr "ローカルに表示するインスタンス"
+
+#: 
+msgid "Hashtag search filter"
+msgstr "ハッシュタグ検索フィルター"
+
+#: 
+msgid "What's happening?"
+msgstr "今なにしてる？"
+
+#: 
+msgid "Content warning"
+msgstr "ここに警告を書いてください"
+
+#: 
+msgid "Public"
+msgstr "<abbr title='公開TLに投稿する'>公開</abbr>"
+
+#: 
+msgid "Unlisted"
+msgstr "<abbr title='公開TLで表示しない'>未収載</abbr>"
+
+#: 
+msgid "Followers-only"
+msgstr "<abbr title='フォロワーだけに公開'>非公開</abbr>"
+
+#: 
+msgid "Direct"
+msgstr "<abbr title='メンションしたユーザーだけに公開'>ダイレクト</abbr>"
+
+#: 
+msgid "View new Toots"
+msgstr "<span></span> 件の新着トゥート"
+
+#: 
+msgid "About this instance"
+msgstr "このインスタンスについて"
+
+#: 
+msgid "Terms this instance"
+msgstr "このインスタンスの利用規約"
+
+#: 
+msgid "Other instances"
+msgstr "他のインスタンス"
+
+#: 
+msgid "Follow"
+msgstr "フォロー"

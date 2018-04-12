@@ -14,7 +14,7 @@
 </a>
 <button class="follow_button" mid="" data="">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -31,7 +31,7 @@
 </a>
 <button class="follow_button" mid="" data="">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -48,7 +48,7 @@
 </a>
 <button class="follow_button" mid="" data="">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>

@@ -1,4 +1,6 @@
-<!DOCTYPE HTML>
+<?php
+require_once('../lang.php');
+?><!DOCTYPE HTML>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -27,29 +29,29 @@
 <div id="header_menu_wrap" class="header_box header_left_box">
 <nav class="header_box_child nav_box">
 <ul>
-<a href="https://social.csswg.org/@halcyon" class="no-underline">
+<a href="<?=$config['App']['news_link']?>" class="no-underline">
 <li>
-<span><i class="fa fa-newspaper-o" aria-hidden="true"></i>News</span>
+<span><i class="fa fa-newspaper-o" aria-hidden="true"></i><?=_('News')?></span>
 </li>
 </a>
-<a href="https://github.com/halcyon-suite/halcyon" class="no-underline">
+<a href="<?=$config['App']['source_link']?>" class="no-underline">
 <li>
-<span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
+<span><i class="fa fa-code" aria-hidden="true"></i><?=_('Source')?></span>
 </li>
 </a>
 <a class="no-underline">
 <li>
-<span><i class="fa fa-balance-scale" aria-hidden="true"></i>Terms</span>
+<span><i class="fa fa-balance-scale" aria-hidden="true"></i><?=_('Terms')?></span>
 </li>
 </a>
-<a href="http://www.nikisoft.one/contact.php" class="no-underline">
+<a href="<?=$config['App']['contact_link']?>" class="no-underline">
 <li>
-<span><i class="fa fa-envelope" aria-hidden="true"></i>Contact</span>
+<span><i class="fa fa-envelope" aria-hidden="true"></i><?=_('Contact')?></span>
 </li>
 </a>
 <a href="/login/#login_form_wrap" class="no-underline">
 <li>
-<span><i class="fa fa-user-circle-o" aria-hidden="true"></i>Login</span>
+<span><i class="fa fa-user-circle-o" aria-hidden="true"></i><?=_('Login')?></span>
 </li>
 </a>
 </ul>
@@ -60,8 +62,8 @@
 <?php $config = parse_ini_file('../config.ini',true) ?>
 <main id="main">
 <article id="article">
-<h2>Halcyon Terms of Use</h2>
-<p class="description">This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at <a href="<?php echo $config["App"]["api_client_website"] ?>"><?php echo $config["App"]["api_client_website"] ?></a>.</p><br/>
+<h2><?=_('Halcyon Terms of Use')?></h2>
+<p class="description"><?=_('This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at')?> <a href="<?php echo $config["App"]["api_client_website"] ?>"><?php echo $config["App"]["api_client_website"] ?></a>.</p><br/>
 <?php echo file_get_contents("../terms.txt") ?>
 </article>
 </main>

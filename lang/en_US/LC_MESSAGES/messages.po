@@ -1,0 +1,178 @@
+msgid ""
+msgstr ""
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 
+msgid "Login"
+msgstr "Login"
+
+#: 
+msgid "News"
+msgstr "News"
+
+#: 
+msgid "Source"
+msgstr "Source"
+
+#: 
+msgid "Terms"
+msgstr "Terms"
+
+#: 
+msgid "Contact"
+msgstr "Contact"
+
+#: 
+msgid "Login to Halcyon"
+msgstr "Login to Halcyon"
+
+#: 
+msgid "or"
+msgstr "or"
+
+#: 
+msgid "create an account"
+msgstr "create an account"
+
+#: 
+msgid "I agree with the Terms"
+msgstr "I agree with the <a href="/terms">Terms</a>"
+
+#: 
+msgid "What is Halcyon"
+msgstr "What is Halcyon"
+
+#: 
+msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+msgstr "Halcyon is standard <span style='font-weight: bold'>Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+
+#: 
+msgid "Contact / Feedback"
+msgstr "Contact / Feedback"
+
+#: 
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon Terms of Use"
+
+#: 
+msgid "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+msgstr "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+
+#: 
+msgid "Home"
+msgstr "Home"
+
+#: 
+msgid "Local"
+msgstr "Local"
+
+#: 
+msgid "Federated"
+msgstr "Federated"
+
+#: 
+msgid "Notifications"
+msgstr "Notifications"
+
+#: 
+msgid "Search Mastodon"
+msgstr "Search Mastodon"
+
+#: 
+msgid "View profile"
+msgstr "View profile"
+
+#: 
+msgid "Settings"
+msgstr "Settings"
+
+#: 
+msgid "Log out"
+msgstr "Log out"
+
+#: 
+msgid "Toot"
+msgstr "Toot"
+
+#: 
+msgid "TOOTS"
+msgstr "TOOTS"
+
+#: 
+msgid "FOLLOWING"
+msgstr "FOLLOWING"
+
+#: 
+msgid "FOLLOWERS"
+msgstr "FOLLOWERS"
+
+#: 
+msgid "Preferences"
+msgstr "Preferences"
+
+#: 
+msgid "SHOW"
+msgstr "SHOW"
+
+#: 
+msgid "New posts streaming"
+msgstr "New posts streaming"
+
+#: 
+msgid "Default post privacy"
+msgstr "Default post privacy"
+
+#: 
+msgid "Local instance"
+msgstr "Local instance"
+
+#: 
+msgid "Hashtag search filter"
+msgstr "Hashtag search filter"
+
+#: 
+msgid "What's happening?"
+msgstr "What's happening?"
+
+#: 
+msgid "Content warning"
+msgstr "Content warning"
+
+#: 
+msgid "Public"
+msgstr "Public"
+
+#: 
+msgid "Unlisted"
+msgstr "Unlisted"
+
+#: 
+msgid "Followers-only"
+msgstr "Followers-only"
+
+#: 
+msgid "Direct"
+msgstr "Direct"
+
+#: 
+msgid "View new Toots"
+msgstr "View <span></span> new Toots"
+
+#: 
+msgid "About this instance"
+msgstr "About this instance"
+
+#: 
+msgid "Terms this instance"
+msgstr "Terms this instance"
+
+#: 
+msgid "Other instances"
+msgstr "Other instances"
+
+#: 
+msgid "Follow"
+msgstr "Follow"

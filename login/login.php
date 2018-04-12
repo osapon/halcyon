@@ -1,4 +1,5 @@
 <?php
+require_once(__DIR__.'/../lang.php');
 require_once('../authorize/mastodon.php');
 use HalcyonSuite\HalcyonForMastodon\Mastodon;
 use Exception;
@@ -60,29 +61,29 @@ location.href = "/";
 <div id="header_menu_wrap" class="header_box header_left_box">
 <nav class="header_box_child nav_box">
 <ul>
-<a href="https://social.csswg.org/@halcyon" class="no-underline">
+<a href="<?=$config['App']['news_link']?>" class="no-underline">
 <li>
-<span><i class="fa fa-newspaper-o" aria-hidden="true"></i>News</span>
+<span><i class="fa fa-newspaper-o" aria-hidden="true"></i><?=_('News')?></span>
 </li>
 </a>
-<a href="https://github.com/halcyon-suite/halcyon" class="no-underline">
+<a href="<?=$config['App']['source_link']?>" class="no-underline">
 <li>
-<span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
+<span><i class="fa fa-code" aria-hidden="true"></i><?=_('Source')?></span>
 </li>
 </a>
 <a href="/terms/" class="no-underline">
 <li>
-<span><i class="fa fa-balance-scale" aria-hidden="true"></i>Terms</span>
+<span><i class="fa fa-balance-scale" aria-hidden="true"></i><?=_('Terms')?></span>
 </li>
 </a>
-<a href="http://www.nikisoft.one/contact.php" class="no-underline">
+<a href="<?=$config['App']['contact_link']?>" class="no-underline">
 <li>
-<span><i class="fa fa-envelope" aria-hidden="true"></i>Contact</span>
+<span><i class="fa fa-envelope" aria-hidden="true"></i><?=_('Contact')?></span>
 </li>
 </a>
 <a href="#login_form_wrap" class="no-underline">
 <li>
-<span><i class="fa fa-user-circle-o" aria-hidden="true"></i>Login</span>
+<span><i class="fa fa-user-circle-o" aria-hidden="true"></i><?=_('Login')?></span>
 </li>
 </a>
 </ul>
@@ -94,9 +95,9 @@ location.href = "/";
 <div id="login_form_wrap">
 <div class="login_form">
 <form method="POST" >
-<h2>Login to Halcyon</h2>
+<h2><?=_('Login to Halcyon')?></h2>
 <p>
-or <a href="https://joinmastodon.org/">create an account</a>
+<?=_('or')?> <a href="https://joinmastodon.org/"><?=_('create an account')?></a>
 </p>
 <div class="session_aleart">
 <span></span>
@@ -111,7 +112,7 @@ or <a href="https://joinmastodon.org/">create an account</a>
 <div class="login_form_agree">
 <label class="login_form_agree_check disallow_select pointer">
 <i class="fa fa-check-square-o" aria-hidden="true"></i>
-I agree with the <a href="/terms">Terms</a>
+<?=_('I agree with the Terms')?>
 <input id="agree" type="checkbox" required checked class="invisible"/>
 </label>
 </div>
@@ -119,9 +120,9 @@ I agree with the <a href="/terms">Terms</a>
 </div>
 </div>
 <article id="article">
-<h2>What is Halcyon</h2>
+<h2><?=_('What is Halcyon')?></h2>
 <p>
-Halcyon is standard <span style="font-weight: bold">Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet.
+<?=_("Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet.")?>
 </p>
 <div class="image_wrap">
 <ul>
@@ -132,15 +133,10 @@ Halcyon is standard <span style="font-weight: bold">Twitter like client</span> o
 <button class="prev_button switch_button"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 <button class="next_button switch_button"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 </div>
-<h2>Contact / Feedback</h2>
+<h2><?=_('Contact / Feedback')?></h2>
 <p>
-Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">ï¼ halcyon@social.csswg.org</a><br />
-Email: <a href="http://www.nikisoft.one/contact.php" target="_blank">Use my contact form</a><br />
-Github: <a href="https://github.com/halcyon-suite/halcyon" target="_blank">halcyon-suite/halcyon</a>
-</p>
-<h2>Help us</h2>
-<p>
-Bitcoin: 1D6GThQqHQYnruKYrKyW9JC86ZGWxjt1hK<br />
+Mastodon: <a href="<?=$config['App']['contact_link']?>" target="_blank"><?=$config['App']['contact_link']?></a><br />
+Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config['App']['source_link']?></a>
 </p>
 </article>
 </main>
