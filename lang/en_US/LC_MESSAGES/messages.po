@@ -39,7 +39,7 @@ msgstr "create an account"
 
 #: 
 msgid "I agree with the Terms"
-msgstr "I agree with the <a href="/terms">Terms</a>"
+msgstr "I agree with the <a href='/terms'>Terms</a>"
 
 #: 
 msgid "What is Halcyon"
