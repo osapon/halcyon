@@ -20,6 +20,7 @@ These instances are publicly accessible and usable by everyone, no matter which 
 - https://halcyon.toromino.de - 1.1.0
 - https://social.dev-wiki.de - 1.1.0
 - https://itter.photog.social - 1.1.0
+- https://halcyon.osa-p.net - 1.1.0(Japanese)
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.

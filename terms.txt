@@ -1,21 +1,22 @@
-<h2>1. Agreement</h2>
-<p>By logging into Halcyon you agree to this terms of use agreement. Do not use this service if you do not agree to these terms.</p>
-<h2>2. Change</h2>
-<p>We reserve the right to modify these terms of use at any time if deemed necessary.</p>
-<h2>3. Account</h2>
-<p>Users can connect to various Mastodon accounts from Halcyon, and Halcyon will not interfere with those connection.</p>
-<h2>4. Content</h2>
-<p>Halcyon does not own the right to or hold responsibility for any text, image, animation, audio content accessible from Halcyon. The right and responsibility belong to the owners of instances that host those content.</p>
-<h2>5. Guideline</h2>
-<p>Halcyon reserves the right to terminate service for</p>
-<ul>
-<li>actions violating the laws of countries</li>
-<li>actions contrary to public order and standards of decency</li>
-<li>violation of third party’s right to intellectual property, brand, privacy, etc.</li>
-<li>acts of violence, sexual nature, of discrimination</li>
-<li>phishing or spamming</li>
-<li>actions causing problem to the network infrastructure of Halcyon</li>
+<h2>1. 契約</h2>
+<p>Halcyon にログインすることにより、この利用規約に同意したことになります。以下の条件に同意しない場合は、このサービスを使用しないでください。</p>
+<h2>2. 変更</h2>
+<p>サービス提供者は、必要に応じてこれらの利用規約をいつでも変更する権利があります。</p>
+<h2>3. アカウント</h2>
+<p>利用者は Halcyon から様々なマストドンアカウントへ接続することができ、それらの接続には干渉しません。ただし、後の項で挙げるガイドラインに触れるものは別とします。</p>
+<h2>4. 内容の権利</h2>
+<p>Halcyon は Halcyon からアクセス可能な文章、画像、アニメーション、音声などの内容に対する権利を有しておらず、責任を負いません。これらの権利と責任は、それらのコンテンツをホストするインスタンスの規約に準じます。</p>
+<h2>5. ガイドライン</h2>
+<p>以下のような行為が行われた場合、サービスの提供を停止する場合があります。</p>
+<ul style="list-style:inside;">
+<li>日本国の法律に違反する行為</li>
+<li>公序良俗に反する行為</li>
+<li>第三者の知的財産権、ブランド、プライバシーなどの権利侵害</li>
+<li>暴力行為、性的性質、差別行為</li>
+<li>フィッシングまたはスパム</li>
+<li>サービスのネットワークインフラに問題を引き起こす行動</li>
 </ul>
-<h2>6. Disclaimer</h2>
-<p>Halcyon is not responsible for any damage caused by using this service.</p>
-<p>Last updated 2017/5/12</p>
+<p>また、このサービスでは接続ログを保持しており、捜査機関等の正式な手続きによって提供する場合があります。</p>
+<h2>6. 免責事項</h2>
+<p>Halcyonは、このサービスを使用して起きたいかなる損害についても責任を負いません。</p>
+<p>最終更新日 2018/4/12</p>
