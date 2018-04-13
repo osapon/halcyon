@@ -9,3 +9,11 @@
   bindtextdomain('messages', __DIR__.'/lang');
   bind_textdomain_codeset('messages', 'UTF-8');
   textdomain('messages');
+  if (!function_exists('pgettext')) {
+    function pgettext($context, $msgid) {
+      $contextString = "{$context}\004{$msgid}";
+      $translation = _($contextString);
+      if ($translation == $contextString) return $msgid;
+      else return $translation;
+    }
+  }

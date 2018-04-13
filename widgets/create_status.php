@@ -25,16 +25,16 @@
 <i class="fa fa-globe" aria-hidden="true"></i>
 <div class="expand_privacy_menu invisible">
 <label for="header_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i><?=_('Public')?>
+<i class="fa fa-globe" aria-hidden="true"></i><?=pgettext('TootForm','Public')?>
 </label>
 <label for="header_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i><?=_('Unlisted')?>
+<i class="fa fa-unlock-alt" aria-hidden="true"></i><?=pgettext('TootForm','Unlisted')?>
 </label>
 <label for="header_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i><?=_('Followers-only')?>
+<i class="fa fa-lock" aria-hidden="true"></i><?=pgettext('TootForm','Followers-only')?>
 </label>
 <label for="header_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i><?=_('Direct')?>
+<i class="fa fa-envelope" aria-hidden="true"></i><?=pgettext('TootForm','Direct')?>
 </label>
 </div>
 </div>

@@ -118,6 +118,10 @@ msgid "SHOW"
 msgstr "SHOW"
 
 #: 
+msgid "HIDE"
+msgstr "HIDE"
+
+#: 
 msgid "New posts streaming"
 msgstr "New posts streaming"
 
@@ -142,18 +146,22 @@ msgid "Content warning"
 msgstr "Content warning"
 
 #: 
+msgctxt "TootForm"
 msgid "Public"
 msgstr "Public"
 
 #: 
+msgctxt "TootForm"
 msgid "Unlisted"
 msgstr "Unlisted"
 
 #: 
+msgctxt "TootForm"
 msgid "Followers-only"
 msgstr "Followers-only"
 
 #: 
+msgctxt "TootForm"
 msgid "Direct"
 msgstr "Direct"
 
@@ -176,3 +184,99 @@ msgstr "Other instances"
 #: 
 msgid "Follow"
 msgstr "Follow"
+
+#: 
+msgid "Auto update"
+msgstr "Auto update"
+
+#: 
+msgid "Manual update"
+msgstr "Manual update"
+
+#: 
+msgctxt "Option"
+msgid "Public"
+msgstr "Public"
+
+#: 
+msgctxt "Option"
+msgid "Unlisted"
+msgstr "Unlisted"
+
+#: 
+msgctxt "Option"
+msgid "Followers-only"
+msgstr "Followers-only"
+
+#: 
+msgctxt "Option"
+msgid "Direct"
+msgstr "Direct"
+
+#: 
+msgid "All instances"
+msgstr "All instances"
+
+#: 
+msgid "Local only"
+msgstr "Local only"
+
+#: 
+msgid "All"
+msgstr "All"
+
+#: 
+msgid "View new notitification"
+msgstr "View <span></span> new notitification"
+
+#: 
+msgid "boosted Your Toot"
+msgstr "boosted Your Toot"
+
+#: 
+msgid "favourited Your Toot"
+msgstr "favourited Your Toot"
+
+#: 
+msgid "followed you"
+msgstr "followed you"
+
+#: 
+msgid "Boosted"
+msgstr "Boosted"
+
+#: 
+msgid "SHOW MORE"
+msgstr "SHOW MORE"
+
+#: 
+msgid "SHOW LESS"
+msgstr "SHOW LESS"
+
+#: 
+msgid "Toots"
+msgstr "Toots"
+
+#: 
+msgid "Toots &amp; replies"
+msgstr "Toots &amp; replies"
+
+#: 
+msgid "Media"
+msgstr "Media"
+
+#: 
+msgid "FOLLOWS YOU"
+msgstr "FOLLOWS YOU"
+
+#: 
+msgid "Photos and toots"
+msgstr "Photos and toots"
+
+#: 
+msgid "Reply"
+msgstr "Reply"
+
+#: 
+msgid "Edit profile"
+msgstr "Edit profile"

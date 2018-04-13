@@ -118,6 +118,10 @@ msgid "SHOW"
 msgstr "表示"
 
 #: 
+msgid "HIDE"
+msgstr "隠す"
+
+#: 
 msgid "New posts streaming"
 msgstr "新着投稿のストリーミング"
 
@@ -142,18 +146,22 @@ msgid "Content warning"
 msgstr "ここに警告を書いてください"
 
 #: 
+msgctxt "TootForm"
 msgid "Public"
 msgstr "<abbr title='公開TLに投稿する'>公開</abbr>"
 
 #: 
+msgctxt "TootForm"
 msgid "Unlisted"
 msgstr "<abbr title='公開TLで表示しない'>未収載</abbr>"
 
 #: 
+msgctxt "TootForm"
 msgid "Followers-only"
 msgstr "<abbr title='フォロワーだけに公開'>非公開</abbr>"
 
 #: 
+msgctxt "TootForm"
 msgid "Direct"
 msgstr "<abbr title='メンションしたユーザーだけに公開'>ダイレクト</abbr>"
 
@@ -176,3 +184,99 @@ msgstr "他のインスタンス"
 #: 
 msgid "Follow"
 msgstr "フォロー"
+
+#: 
+msgid "Auto update"
+msgstr "自動更新"
+
+#: 
+msgid "Manual update"
+msgstr "手動更新"
+
+#: 
+msgctxt "Option"
+msgid "Public"
+msgstr "公開：公開TLに投稿する"
+
+#: 
+msgctxt "Option"
+msgid "Unlisted"
+msgstr "未収載：公開TLで表示しない"
+
+#: 
+msgctxt "Option"
+msgid "Followers-only"
+msgstr "非公開：フォロワーだけに公開"
+
+#: 
+msgctxt "Option"
+msgid "Direct"
+msgstr "ダイレクト：メンションしたユーザーだけに公開"
+
+#: 
+msgid "All instances"
+msgstr "全てのインスタンス"
+
+#: 
+msgid "Local only"
+msgstr "ログインしているインスタンスだけ"
+
+#: 
+msgid "All"
+msgstr "全て"
+
+#: 
+msgid "View new notitification"
+msgstr "<span></span> 件の新着通知を見る"
+
+#: 
+msgid "boosted Your Toot"
+msgstr "さんがあなたのトゥートをブーストしました"
+
+#: 
+msgid "favourited Your Toot"
+msgstr "さんがあなたのトゥートをふぁぼりました"
+
+#: 
+msgid "followed you"
+msgstr "さんにフォローされました"
+
+#: 
+msgid "Boosted"
+msgstr "さんがブースト"
+
+#: 
+msgid "SHOW MORE"
+msgstr "もっと見る"
+
+#: 
+msgid "SHOW LESS"
+msgstr "隠す"
+
+#: 
+msgid "Toots"
+msgstr "投稿"
+
+#: 
+msgid "Toots &amp; replies"
+msgstr "投稿と返信"
+
+#: 
+msgid "Media"
+msgstr "メディア"
+
+#: 
+msgid "FOLLOWS YOU"
+msgstr "フォローされています"
+
+#: 
+msgid "Photos and toots"
+msgstr "の画像と投稿"
+
+#: 
+msgid "Reply"
+msgstr "返信"
+
+#: 
+msgid "Edit profile"
+msgstr "プロフィールを編集"

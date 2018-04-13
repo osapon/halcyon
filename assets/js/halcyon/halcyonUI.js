@@ -119,10 +119,10 @@ $(document).on('click','.cw_button', function(e) {
 e.stopPropagation();
 const article = $(this).parent();
 if ( article.hasClass('content_warning') ) {
-$(this).text('SHOW LESS');
+$(this).text(Pomo.getText('SHOW LESS'));
 article.removeClass('content_warning');
 } else {
-$(this).text('SHOW MORE');
+$(this).text(Pomo.getText('SHOW MORE'));
 article.addClass('content_warning');
 }
 return false;
@@ -232,7 +232,7 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 if ( status.spoiler_text ) {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+Pomo.getText('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 if (status.reblogs_count) {
@@ -336,7 +336,7 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 if ( status.reblog.spoiler_text ) {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+Pomo.getText('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 if (status.reblog.reblogs_count) {
@@ -352,7 +352,7 @@ const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} `+Pomo.getText('Boosted')+`</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -444,7 +444,7 @@ const html = (`
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> favourited Your Toot
+<span class="emoji_poss" >${NotificationObj.account.display_name}</span> `+Pomo.getText('favourited Your Toot')+`
 </a>
 </div>
 <div class="notice_entry_body">
@@ -484,7 +484,7 @@ html = (`
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> boosted Your Toot
+<span class="emoji_poss" >${NotificationObj.account.display_name}</span> `+Pomo.getText('boosted Your Toot')+`
 </a>
 </div>
 <blockquote class="notice_entry_body">
@@ -523,7 +523,7 @@ for(i=0;i<NotificationObj.status.emojis.length;i++) {
 NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
 }
 if (NotificationObj.status.spoiler_text) {
-alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
+alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
 }
 if (NotificationObj.status.reblogs_count) {
@@ -615,7 +615,7 @@ const html=(`
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> followed you
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> `+Pomo.getText('followed you')+`
 </a>
 </div>
 </li>`);
@@ -669,7 +669,7 @@ for(i=0;i<status.emojis.length;i++) {
 status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
 }
 if (status.spoiler_text) {
-alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
+alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
 }
 if (status.reblogs_count) {
@@ -780,16 +780,16 @@ ${media_views}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>Public
+<i class="fa fa-globe" aria-hidden="true"></i>`+Pomo.getText('Public', {context: 'TootForm'})+`
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>Unlisted
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>`+Pomo.getText('Unlisted', {context: 'TootForm'})+`
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>Followers-only
+<i class="fa fa-lock" aria-hidden="true"></i>`+Pomo.getText('Followers-only', {context: 'TootForm'})+`
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>Direct
+<i class="fa fa-envelope" aria-hidden="true"></i>`+Pomo.getText('Direct', {context: 'TootForm'})+`
 </label>
 </div>
 </div>
@@ -831,7 +831,7 @@ for(i=0;i<status.reblog.emojis.length;i++) {
 status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
 }
 if (status.spoiler_text) {
-alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
+alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
 }
 if (status.reblog.reblogs_count) {
@@ -942,16 +942,16 @@ ${media_views}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>Public
+<i class="fa fa-globe" aria-hidden="true"></i>`+Pomo.getText('Public', {context: 'TootForm'})+`
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>Unlisted
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>`+Pomo.getText('Unlisted', {context: 'TootForm'})+`
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>Followers-only
+<i class="fa fa-lock" aria-hidden="true"></i>`+Pomo.getText('Followers-only', {context: 'TootForm'})+`
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>Direct
+<i class="fa fa-envelope" aria-hidden="true"></i>`+Pomo.getText('Direct', {context: 'TootForm'})+`
 </label>
 </div>
 </div>
@@ -1019,7 +1019,7 @@ for(i=0;i<status.emojis.length;i++) {
 status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
 }
 if ( status.spoiler_text ) {
-alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
+alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
 }
 if (status.reblogs_count) {
@@ -1110,7 +1110,7 @@ for(i=0;i<status.reblog.emojis.length;i++) {
 status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
 }
 if ( status.spoiler_text ) {
-alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
+alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
 }
 if (status.reblog.reblogs_count) {
@@ -1126,7 +1126,7 @@ const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} `+Pomo.getText('Boosted')+`</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -1520,8 +1520,8 @@ console.log(current_id);
 if( AccountObj.id == current_id ) {
 $(`<a href="https://${current_instance}/settings/profile">
 <button class="profile_edit_button relationship_button">
-<span>Edit profile</span>
-</button
+<span>`+Pomo.getText('Edit profile')+`</span>
+</button>
 </a>`).appendTo('.profile_button_box');
 $(`<a href="${current_favourites_link}">
 <h2>FAVOURITES</h2>
@@ -1562,7 +1562,7 @@ replace_emoji();
 function setRecentImages(mid) {
 api.get("accounts/"+mid+"/statuses", [{name:'only_media',data:'true'},{name:'limit',data:'6'}], function(statuses) {
 if ( statuses.length ) {
-$('#js_profile_recent_images span').text(`${statuses[0].account.statuses_count} Photos and toots`);
+$('#js_profile_recent_images span').text(`${statuses[0].account.statuses_count} `+Pomo.getText('Photos and toots'));
 $('#js_profile_recent_images a').attr('href', $("#media_link").attr('href'));
 for ( i in statuses ) {
 $(`<div class="profile_recent_images_item media_attachment" otype="image" sid="${statuses[i].id}" url="${statuses[i].media_attachments[0].preview_url}">
@@ -2286,25 +2286,25 @@ history.pushState(null, null, current_file);
 $(function () {
 $(document).on('click','.side_widget.stream_options .form_title button', function(e) {
 $(this).parent().next('.pulldown_form').toggleClass('view');
-if ( $(this).text() === "SHOW" ) {
-$(this).text("HIDE");
+if ( $(this).text() === Pomo.getText('SHOW') ) {
+  $(this).text(Pomo.getText('HIDE'));
 } else {
-$(this).text("SHOW");
+  $(this).text(Pomo.getText('SHOW'));
 }
 const html_post_steraming = $(`<select name="post_steraming">
-<option value="auto">Auto update</option>
-<option value="manual">Manual update</option>
+<option value="auto">`+Pomo.getText('Auto update')+`</option>
+<option value="manual">`+Pomo.getText('Manual update')+`</option>
 </select>`)
 const html_post_privacy = $(`<select name="post_privacy">
-<option value="public" selected>Public</option>
-<option value="unlisted">Unlisted</option>
-<option value="private">Followers-only</option>
-<option value="direct">Direct</option>
+<option value="public" selected>`+Pomo.getText('Public', {context:'Option'})+`</option>
+<option value="unlisted">`+Pomo.getText('Unlisted', {context:'Option'})+`</option>
+<option value="private">`+Pomo.getText('Followers-only', {context:'Option'})+`</option>
+<option value="direct">`+Pomo.getText('Direct', {context:'Option'})+`</option>
 </select>`)
 const html_local_instance = $(`<input name="local_instance" placeholder="Blank for default" type="text" class="disallow_enter"/>`)
 const html_search_filter = $(`<select name="search_filter">
-<option value="all" selected>All instances</option>
-<option value="local">Local only</option>
+<option value="all" selected>`+Pomo.getText('All instances')+`</option>
+<option value="local">`+Pomo.getText('Local only')+`</option>
 </select>`)
 html_post_steraming.val(localStorage.getItem("setting_post_stream"));
 html_post_privacy.val(localStorage.getItem("setting_post_privacy"));

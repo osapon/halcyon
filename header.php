@@ -10,6 +10,7 @@ require_once('./lang.php');
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="gettext" type="text/x-gettext-translation" href="/lang/<?=$locale?>/LC_MESSAGES/messages.po"/>
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/halcyon/halcyonFunctions.js"></script>
 <script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
@@ -17,20 +18,32 @@ require_once('./lang.php');
 <script src="/assets/js/shortcut.js"></script>
 <script src="/assets/js/replace_emoji.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
+<script src="/assets/js/pomo/src/dist/pomo.js"></script>
 <script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
 <script>
 if (
-!localStorage.getItem("current_id") |
-!localStorage.getItem("current_instance") |
-!localStorage.getItem("current_authtoken")
+  !localStorage.getItem("current_id") |
+  !localStorage.getItem("current_instance") |
+  !localStorage.getItem("current_authtoken")
 ){
-location.href = "/login";
+  location.href = "/login";
 } else {
-if( $.cookie("session") === "true" ) {
-refreshApp();
-} else if ( $.cookie("session") === undefined ) {
-resetApp();
-}
+  if( $.cookie("session") === "true" ) {
+    Pomo.domain = 'messages';
+    Pomo.returnStrings = true;
+    Pomo.unescapeStrings = true;
+    var pomo_def = Pomo.load(null,
+    {
+      format: 'po',
+      mode: 'link',
+      translation_domain: 'messages'
+    });
+    pomo_def.ready(function() {
+    });
+    refreshApp();
+  } else if ( $.cookie("session") === undefined ) {
+    resetApp();
+  }
 }
 </script>
 </head>
