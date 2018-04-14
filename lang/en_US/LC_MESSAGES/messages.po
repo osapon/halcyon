@@ -280,3 +280,19 @@ msgstr "Reply"
 #: 
 msgid "Edit profile"
 msgstr "Edit profile"
+
+#: 
+msgid "Compose new Toot"
+msgstr "Compose new Toot"
+
+#: 
+msgid "PEOPLE"
+msgstr "PEOPLE"
+
+#: 
+msgid "FAVOURITES"
+msgstr "FAVOURITES"
+
+#: 
+msgid "Show"
+msgstr "Show"

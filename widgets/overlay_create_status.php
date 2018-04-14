@@ -1,14 +1,14 @@
 <div class="overlay_status invisible">
 <header class="overlay_status_header">
-<span>Compose new Toot</span>
+<span><?=_('Compose new Toot')?></span>
 </header>
 <form id="overlay_status_form" name="overlay_status_form" class="status_form ready">
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="Content warning" type="text">
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="<?=_('Content warning')?>" type="text">
 </div>
 <div class="status_main">
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="What's happening?"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="<?=_("What's happening?")?>"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -26,16 +26,16 @@
 <i class="fa fa-globe" aria-hidden="true"></i>
 <div class="expand_privacy_menu invisible">
 <label for="overlay_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>Public
+<i class="fa fa-globe" aria-hidden="true"></i><?=pgettext('TootForm','Public')?>
 </label>
 <label for="overlay_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>Unlisted
+<i class="fa fa-unlock-alt" aria-hidden="true"></i><?=pgettext('TootForm','Unlisted')?>
 </label>
 <label for="overlay_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>Followers-only
+<i class="fa fa-lock" aria-hidden="true"></i><?=pgettext('TootForm','Followers-only')?>
 </label>
 <label for="overlay_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>Direct
+<i class="fa fa-envelope" aria-hidden="true"></i><?=pgettext('TootForm','Direct')?>
 </label>
 </div>
 </div>
@@ -52,7 +52,7 @@
 <label for="overlay_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-fw fa-pencil-square-o"></i>
-<span>Toot</span>
+<span><?=_('Toot')?></span>
 </div>
 </label>
 </div>

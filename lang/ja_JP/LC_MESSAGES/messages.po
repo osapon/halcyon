@@ -235,7 +235,7 @@ msgstr "さんがあなたのトゥートをブーストしました"
 
 #: 
 msgid "favourited Your Toot"
-msgstr "さんがあなたのトゥートをふぁぼりました"
+msgstr "さんがあなたのトゥートをお気に入りに登録しました"
 
 #: 
 msgid "followed you"
@@ -280,3 +280,23 @@ msgstr "返信"
 #: 
 msgid "Edit profile"
 msgstr "プロフィールを編集"
+
+#: 
+msgid "Compose new Toot"
+msgstr "トゥートする"
+
+#: 
+msgid "PEOPLE"
+msgstr "人々"
+
+#: 
+msgid "FAVOURITES"
+msgstr "お気に入り"
+
+#: 
+msgid "Show"
+msgstr "見る"
+
+#: 
+msgid "Following"
+msgstr "フォロー中"

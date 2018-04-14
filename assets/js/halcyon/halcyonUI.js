@@ -19,7 +19,7 @@ api.post("follows", {uri:$(this).attr('data')}, function (data) {
 }
 $(this).toggleClass('follow_button');
 $(this).toggleClass('following_button');
-$(this).html('<span>Following</span>');
+$(this).html('<span>'+Pomo.getText('Following')+'</span>');
 return false;
 });
 $(document).on('click','.following_button', function(e) {
@@ -30,7 +30,7 @@ api.post('accounts/'+$(this).attr('mid')+'/unfollow', function (data) {
 }
 $(this).toggleClass('following_button');
 $(this).toggleClass('follow_button');
-$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>Follow</span>');
+$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+Pomo.getText('Follow')+'</span>');
 return false;
 });
 $(document).on('click','.mute_button', function(e) {
@@ -48,7 +48,7 @@ api.post('accounts/'+$(this).attr('mid')+'/unmute', function (data) {
 }
 $(this).toggleClass('muting_button');
 $(this).toggleClass('follow_button');
-$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>Follow</span>');
+$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+Pomo.getText('Follow')+'</span>');
 putMessage("Unmuted this user");
 return false;
 });
@@ -68,7 +68,7 @@ api.post('accounts/'+$(this).attr('mid')+'/unblock', function (data) {
 }
 $(this).toggleClass('blocking_button');
 $(this).toggleClass('follow_button');
-$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>Follow</span>');
+$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+Pomo.getText('Follow')+'</span>');
 putMessage("Unblocked this user");
 return false;
 });
@@ -636,7 +636,7 @@ const html = (`
 </div>
 <button class="follow_button action_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span>`+Pomo.getText('Follow')+`</span>
 </button>
 <div class="follows_profile_name_box emoji_poss">
 <a class="js_follows_profile_link" href="${profile_link}">
@@ -1454,7 +1454,7 @@ if ( RelationshipsObj[i].following ) {
 const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
 button.removeClass("follow_button");
 button.addClass("following_button");
-button.text('Following');
+button.text(Pomo.getText('Following'));
 }
 }
 });
@@ -1481,7 +1481,7 @@ if ( RelationshipsObj[i].following ) {
 const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
 button.removeClass("follow_button");
 button.addClass("following_button");
-button.text('Following');
+button.text(Pomo.getText('Following'));
 }
 }
 });
@@ -1524,8 +1524,8 @@ $(`<a href="https://${current_instance}/settings/profile">
 </button>
 </a>`).appendTo('.profile_button_box');
 $(`<a href="${current_favourites_link}">
-<h2>FAVOURITES</h2>
-<span>Show</span>
+<h2>`+Pomo.getText('FAVOURITES')+`</h2>
+<span>`+Pomo.getText('Show')+`</span>
 </a>`).appendTo("#js-profile_nav_favourites");
 } else {
 api.get('accounts/relationships', [{name:'id', data:String(AccountObj.id)}], function(RelationshipObj) {
@@ -1547,12 +1547,12 @@ $(`<!-- wont work -->
 </button>`).appendTo('.profile_button_box');
 } else if(RelationshipObj[0].following){
 $(`<button class="following_button relationship_button" mid="${AccountObj.id}">
-<span>Following</span>
+<span>`+Pomo.getText('Following')+`</span>
 </button>`).appendTo('.profile_button_box');
 } else {
 $(`<button class="follow_button relationship_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span>`+Pomo.getText('Follow')+`</span>
 </button>`).appendTo('.profile_button_box');
 }
 });
