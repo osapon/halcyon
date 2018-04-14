@@ -4,6 +4,9 @@
 Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a>
 </li>
 <li>
+<a id="shortcut_guide"><?=_('Shortcut key')?></a>
+</li>
+<li>
 <a class="footer_widget_about"><?=_('About this instance')?></a>
 </li>
 <li>

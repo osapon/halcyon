@@ -300,3 +300,43 @@ msgstr "見る"
 #: 
 msgid "Following"
 msgstr "フォロー中"
+
+#: 
+msgid "Shortcut key"
+msgstr "ショートカットキー"
+
+#: 
+msgid "Open the toot form"
+msgstr "トゥートフォームを開く"
+
+#: 
+msgid "Move focus to search field"
+msgstr "検索欄へフォーカス移動"
+
+#: 
+msgid "Toot in toot form"
+msgstr "トゥートフォームで投稿"
+
+#: 
+msgid "Switch to home time line"
+msgstr "ホームタイムラインへ切り替え"
+
+#: 
+msgid "Switch to local time line"
+msgstr "ローカルタイムラインへ切り替え"
+
+#: 
+msgid "Switch to federated time line"
+msgstr "連合タイムラインへ切り替え"
+
+#: 
+msgid "Switch to notifications"
+msgstr "通知へ切り替え"
+
+#: 
+msgid "Switch to favourites"
+msgstr "お気に入りへ切り替え"
+
+#: 
+msgid "Open this guide"
+msgstr "この説明を開く"

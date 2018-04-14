@@ -296,3 +296,47 @@ msgstr "FAVOURITES"
 #: 
 msgid "Show"
 msgstr "Show"
+
+#: 
+msgid "Following"
+msgstr "Following"
+
+#: 
+msgid "Shortcut key"
+msgstr "Shortcut key"
+
+#: 
+msgid "Open the toot form"
+msgstr "Open the toot form"
+
+#: 
+msgid "Move focus to search field"
+msgstr "Move focus to search field"
+
+#: 
+msgid "Toot in toot form"
+msgstr "Toot in toot form"
+
+#: 
+msgid "Switch to home time line"
+msgstr "Switch to home time line"
+
+#: 
+msgid "Switch to local time line"
+msgstr "Switch to local time line"
+
+#: 
+msgid "Switch to federated time line"
+msgstr "Switch to federated time line"
+
+#: 
+msgid "Switch to notifications"
+msgstr "Switch to notifications"
+
+#: 
+msgid "Switch to favourites"
+msgstr "Switch to favourites"
+
+#: 
+msgid "Open this guide"
+msgstr "Open this guide"

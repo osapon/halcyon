@@ -1706,144 +1706,151 @@ setOverlayMediaWithoutStatus($(this).attr('src'));
 })
 
 $(function() {
-$(document).on('click', '#creat_status', function(e) {
-switch(localStorage.getItem("setting_post_privacy")) {
-case "public":picon="globe";break;
-case "unlisted":picon="unlock-alt";break;
-case "private":picon="lock";break;
-case "direct":picon="envelope";break;
-}
-$('.overlay_status').removeClass('invisible');
-$("#js-overlay_content_wrap .temporary_object").empty();
-$('#js-overlay_content_wrap').addClass('view');
-$('#js-overlay_content_wrap').addClass('black_08');
-$('#overlay_status_form .status_textarea textarea').addClass('focus');
-$('.overlay_status .submit_status_label').addClass('active_submit_button');
-$('#overlay_status_form .status_textarea textarea').focus()
-$('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
-$('#overlay_status_form .character_count').html(current_instance_charlimit);
-});
-$(document).on('change keyup','#overlay_status_form textarea, #overlay_status_form .status_spoiler', function(e) {
-if (
-e.keyCode !== 224 &
-e.keyCode !== 17&
-e.keyCode !== undefined
-) {
-const textCount = $('#overlay_status_form textarea').val().length + $('#overlay_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if ( textLen <= -1 ) {
-$('#overlay_status_form .character_count').addClass('red');
-$('#overlay_status_form').addClass('ready');
-} else if ( textLen === current_instance_charlimit ) {
-$('#overlay_status_form').addClass('ready');
-} else {
-$('#overlay_status_form .character_count').removeClass('red');
-$('#overlay_status_form').removeClass('ready');
-}
-$(this).val(replaced_emoji_return($(this).val()));
-$('#overlay_status_form .character_count').text(textLen);
-}
-});
-$(document).on('click','#overlay_status_form .status_CW', function(e) {
-$('#overlay_status_form .status_spoiler').toggleClass('invisible');
-});
-$(document).on('click','#overlay_status_form .expand_privacy_menu_button', function(e) {
-$('#overlay_status_form .expand_privacy_menu').removeClass('invisible');
-});
-$(document).on('click','#overlay_status_form .status_privacy.select_privacy', function(e) {
-e.stopPropagation();
-$('#overlay_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-$('#overlay_status_form .expand_privacy_menu').addClass('invisible');
-});
-$(document).on('change','#overlay_status_media_atta', function(e) {
-$('#overlay_status_form .media_attachments_preview_area').empty();
-$('#overlay_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-let reader= new FileReader();
-reader.readAsDataURL(f);
-reader.onloadend = (function() {
-return function (e) {
-const html = (`<div class="media_attachments_preview">
-<img src="${e.target.result}"/>
-</div>`);
-$(html).appendTo('#overlay_status_form .media_attachments_preview_area');
-}
-})(f);
-}
-});
-$(document).on('click','#overlay_status_form .status_NSFW', function(e) {
-$('#overlay_status_form .media_attachments_preview_area').toggleClass('nsfw');
-});
-$(document).on('click','#overlay_status_form .submit_status_label', function(e) {
-$('#overlay_status_form').addClass('ready');
-$('#overlay_status_form .status_textarea').addClass('disallow_select');
-$('#overlay_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
-const form = document.forms.overlay_status_form;
-if ( !$('#overlay_status_media_atta')[0].files.length ) {
-const params = {
-status : form.status_textarea.value,
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value
-}
-api.post("statuses", params, function (data) {
-$('#overlay_status_form .media_attachments_preview_area').empty();
-$('#overlay_status_form .status_spoiler').addClass('invisible');
-$('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-form.reset();
-$('#overlay_status_form').removeClass('ready');
-$('#overlay_status_form .status_textarea').removeClass('disallow_select');
-$('#overlay_status_form .character_count').html(current_instance_charlimit);
-$('.overlay_status .submit_status_label').removeClass('active_submit_button');
-$('.overlay_status').addClass('invisible');
-$('#js-overlay_content_wrap').removeClass('view');
-$('#js-overlay_content_wrap').removeClass('black_05');
-putMessage('Your Toot was posted!');
-});
-} else {
-const dummy_form= $('<form></form>').append($('#overlay_status_media_atta')),
-files = dummy_form[0][0].files,
-filesLen= files.length -1;
-let media_array = [];
-$("#overlay_status_form .status_bottom").append($('<input id="overlay_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
-for (let i=0; i<files.length; i++) {
-let formData = new FormData();
-formData.append('file', files[i]);
-if ( i === 3 || i === filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-const params = {
-status : form.status_textarea.value,
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-media_ids: media_array
-}
-api.post("statuses", params, function (data) {
-$('#overlay_status_form .media_attachments_preview_area').empty();
-$('#overlay_status_form .status_spoiler').addClass('invisible');
-$('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-form.reset();
-$('#overlay_status_form').removeClass('ready');
-$('#overlay_status_form .status_textarea').removeClass('disallow_select');
-$('#overlay_status_form .character_count').html(current_instance_charlimit);
-$('.overlay_status .submit_status_label').removeClass('active_submit_button');
-$('.overlay_status').addClass('invisible');
-$('#js-overlay_content_wrap').removeClass('view');
-$('#js-overlay_content_wrap').removeClass('black_05');
-putMessage('Your Toot was posted!');
-});
-});
-break;
-} else if ( i < filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-});
-}
-}
-}
-});
+  $(document).on('click', '#creat_status', function(e) {
+  switch(localStorage.getItem("setting_post_privacy")) {
+  case "public":picon="globe";break;
+  case "unlisted":picon="unlock-alt";break;
+  case "private":picon="lock";break;
+  case "direct":picon="envelope";break;
+  }
+  $('.overlay_status').removeClass('invisible');
+  $("#js-overlay_content_wrap .temporary_object").empty();
+  $('#js-overlay_content_wrap').addClass('view');
+  $('#js-overlay_content_wrap').addClass('black_08');
+  $('#overlay_status_form .status_textarea textarea').addClass('focus');
+  $('.overlay_status .submit_status_label').addClass('active_submit_button');
+  $('#overlay_status_form .status_textarea textarea').focus()
+  $('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
+  $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
+  $('#overlay_status_form .character_count').html(current_instance_charlimit);
+  });
+  $(document).on('change keyup','#overlay_status_form textarea, #overlay_status_form .status_spoiler', function(e) {
+  if (
+  e.keyCode !== 224 &
+  e.keyCode !== 17&
+  e.keyCode !== undefined
+  ) {
+  const textCount = $('#overlay_status_form textarea').val().length + $('#overlay_status_form .status_spoiler').val().length;
+  let textLen = ( current_instance_charlimit - textCount );
+  if ( textLen <= -1 ) {
+  $('#overlay_status_form .character_count').addClass('red');
+  $('#overlay_status_form').addClass('ready');
+  } else if ( textLen === current_instance_charlimit ) {
+  $('#overlay_status_form').addClass('ready');
+  } else {
+  $('#overlay_status_form .character_count').removeClass('red');
+  $('#overlay_status_form').removeClass('ready');
+  }
+  $(this).val(replaced_emoji_return($(this).val()));
+  $('#overlay_status_form .character_count').text(textLen);
+  }
+  });
+  $(document).on('click','#overlay_status_form .status_CW', function(e) {
+  $('#overlay_status_form .status_spoiler').toggleClass('invisible');
+  });
+  $(document).on('click','#overlay_status_form .expand_privacy_menu_button', function(e) {
+  $('#overlay_status_form .expand_privacy_menu').removeClass('invisible');
+  });
+  $(document).on('click','#overlay_status_form .status_privacy.select_privacy', function(e) {
+  e.stopPropagation();
+  $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
+  $('#overlay_status_form .expand_privacy_menu').addClass('invisible');
+  });
+  $(document).on('change','#overlay_status_media_atta', function(e) {
+  $('#overlay_status_form .media_attachments_preview_area').empty();
+  $('#overlay_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
+  for ( let i = 0, f; f = e.target.files[i]; i++ ) {
+  let reader= new FileReader();
+  reader.readAsDataURL(f);
+  reader.onloadend = (function() {
+  return function (e) {
+  const html = (`<div class="media_attachments_preview">
+  <img src="${e.target.result}"/>
+  </div>`);
+  $(html).appendTo('#overlay_status_form .media_attachments_preview_area');
+  }
+  })(f);
+  }
+  });
+  $(document).on('click','#overlay_status_form .status_NSFW', function(e) {
+  $('#overlay_status_form .media_attachments_preview_area').toggleClass('nsfw');
+  });
+  $(document).on('click','#overlay_status_form .submit_status_label', function(e) {
+  $('#overlay_status_form').addClass('ready');
+  $('#overlay_status_form .status_textarea').addClass('disallow_select');
+  $('#overlay_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
+  const form = document.forms.overlay_status_form;
+  if ( !$('#overlay_status_media_atta')[0].files.length ) {
+  const params = {
+  status : form.status_textarea.value,
+  sensitive: form.status_nsfw.checked,
+  spoiler_text : form.status_spoiler.value,
+  visibility : form.privacy_option.value
+  }
+  api.post("statuses", params, function (data) {
+  $('#overlay_status_form .media_attachments_preview_area').empty();
+  $('#overlay_status_form .status_spoiler').addClass('invisible');
+  $('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+  form.reset();
+  $('#overlay_status_form').removeClass('ready');
+  $('#overlay_status_form .status_textarea').removeClass('disallow_select');
+  $('#overlay_status_form .character_count').html(current_instance_charlimit);
+  $('.overlay_status .submit_status_label').removeClass('active_submit_button');
+  $('.overlay_status').addClass('invisible');
+  $('#js-overlay_content_wrap').removeClass('view');
+  $('#js-overlay_content_wrap').removeClass('black_05');
+  putMessage('Your Toot was posted!');
+  });
+  } else {
+  const dummy_form= $('<form></form>').append($('#overlay_status_media_atta')),
+  files = dummy_form[0][0].files,
+  filesLen= files.length -1;
+  let media_array = [];
+  $("#overlay_status_form .status_bottom").append($('<input id="overlay_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
+  for (let i=0; i<files.length; i++) {
+  let formData = new FormData();
+  formData.append('file', files[i]);
+  if ( i === 3 || i === filesLen ) {
+  api.postMedia("media", formData, function (postMedia) {
+  media_array.unshift(postMedia.id);
+  const params = {
+  status : form.status_textarea.value,
+  sensitive: form.status_nsfw.checked,
+  spoiler_text : form.status_spoiler.value,
+  visibility : form.privacy_option.value,
+  media_ids: media_array
+  }
+  api.post("statuses", params, function (data) {
+  $('#overlay_status_form .media_attachments_preview_area').empty();
+  $('#overlay_status_form .status_spoiler').addClass('invisible');
+  $('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+  form.reset();
+  $('#overlay_status_form').removeClass('ready');
+  $('#overlay_status_form .status_textarea').removeClass('disallow_select');
+  $('#overlay_status_form .character_count').html(current_instance_charlimit);
+  $('.overlay_status .submit_status_label').removeClass('active_submit_button');
+  $('.overlay_status').addClass('invisible');
+  $('#js-overlay_content_wrap').removeClass('view');
+  $('#js-overlay_content_wrap').removeClass('black_05');
+  putMessage('Your Toot was posted!');
+  });
+  });
+  break;
+  } else if ( i < filesLen ) {
+  api.postMedia("media", formData, function (postMedia) {
+  media_array.unshift(postMedia.id);
+  });
+  }
+  }
+  }
+  });
+
+  $(document).on('click', '#shortcut_guide', function(e) {
+    $('.overlay_shortcut_guide').removeClass('invisible');
+    $("#js-overlay_content_wrap .temporary_object").empty();
+    $('#js-overlay_content_wrap').addClass('view');
+    $('#js-overlay_content_wrap').addClass('black_08');
+  });
 })
 
 $(function() {
@@ -2306,29 +2313,30 @@ return false;
 })
 
 $(function() {
-$(document).on('click','.temporary_object > *, .parmanent_object > *', function(e) {
-e.stopPropagation();
-});
-$(document).on('click','#js-overlay_content_wrap', function(e) {
-$(this).removeClass('view');
-$("#js-overlay_content_wrap .temporary_object").empty();
-$("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
-$('#js-overlay_content_wrap .overlay_status').addClass('invisible');
-$('#js-overlay_content_wrap .single_reply_status').addClass('invisible');
-$('#js-overlay_content_wrap .overlay_copy_link').addClass('invisible');
-$('#js-overlay_content .temporary_object, #js-overlay_content .parmanent_object').removeClass('visible');
-$('#js-overlay_content_wrap .overlay_status.submit_status_label').removeClass('active_submit_button');
-$('#js-overlay_content_wrap .single_reply_status .submit_status_label').removeClass('active_submit_button');
-$('#js-overlay_content_wrap #reply_status_form .submit_status_label').removeClass('active_submit_button');
-$('#js-overlay_content_wrap #header_status_form.submit_status_label').removeClass('active_submit_button');
-$('#js-overlay_content_wrap').removeClass('black_05');
-$('#js-overlay_content_wrap').removeClass('black_08');
-if ( current_file === "/user" ) {
-history.pushState(null, null, "/"+location.pathname.split("/")[1]+location.search);
-} else {
-history.pushState(null, null, current_file);
-}
-});
+  $(document).on('click','.temporary_object > *, .parmanent_object > *', function(e) {
+    e.stopPropagation();
+  });
+  $(document).on('click','#js-overlay_content_wrap', function(e) {
+    $(this).removeClass('view');
+    $("#js-overlay_content_wrap .temporary_object").empty();
+    $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
+    $('#js-overlay_content_wrap .overlay_status').addClass('invisible');
+    $('#js-overlay_content_wrap .single_reply_status').addClass('invisible');
+    $('#js-overlay_content_wrap .overlay_copy_link').addClass('invisible');
+    $('#js-overlay_content_wrap .overlay_shortcut_guide').addClass('invisible');
+    $('#js-overlay_content .temporary_object, #js-overlay_content .parmanent_object').removeClass('visible');
+    $('#js-overlay_content_wrap .overlay_status.submit_status_label').removeClass('active_submit_button');
+    $('#js-overlay_content_wrap .single_reply_status .submit_status_label').removeClass('active_submit_button');
+    $('#js-overlay_content_wrap #reply_status_form .submit_status_label').removeClass('active_submit_button');
+    $('#js-overlay_content_wrap #header_status_form.submit_status_label').removeClass('active_submit_button');
+    $('#js-overlay_content_wrap').removeClass('black_05');
+    $('#js-overlay_content_wrap').removeClass('black_08');
+    if ( current_file === "/user" ) {
+      history.pushState(null, null, "/"+location.pathname.split("/")[1]+location.search);
+    } else {
+      history.pushState(null, null, current_file);
+    }
+  });
 })
 
 $(function () {
@@ -2390,59 +2398,65 @@ putMessage("Changed setting to "+$(this).val() );
 })
 
 $(function() {
-shortcut.add("n",function() {
-$("#creat_status").click();
-},{
- "disable_in_input":true,
-});
-shortcut.add("/",function() {
-$("#search_form").focus();
-},{
-"disable_in_input":true,
-'keycode':191
-});
-shortcut.add("Meta+Enter",function() {
-$(".active_submit_button").click();
-});
-shortcut.add("Ctrl+Enter",function() {
-$(".active_submit_button").click();
-});
-shortcut.add(".",function() {
-$("#js-stream_update").click();
-},{
- "disable_in_input":true,
-});
-shortcut.add("Shift+h",function() {
-location.href="/home";
-},{
-"disable_in_input":true,
-});
-shortcut.add("Shift+l",function() {
-location.href="/local";
-},{
-"disable_in_input":true,
-});
-shortcut.add("Shift+f",function() {
-location.href="/federated";
-},{
-"disable_in_input":true,
-});
-shortcut.add("Shift+n",function() {
-location.href="/notifications";
-},{
-"disable_in_input":true,
-});
-shortcut.add("Shift+p",function() {
-location.href=current_url;
-},{
-"disable_in_input":true,
-});
-shortcut.add("Shift+v",function() {
-location.href=current_favourites_link;
-},{
-"disable_in_input":true,
-});
-shortcut.add("esc",function() {
-$("#js-overlay_content_wrap").click();
-});
+  shortcut.add("n",function() {
+    $("#creat_status").click();
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("/",function() {
+    $("#search_form").focus();
+  },{
+    "disable_in_input":true,
+    'keycode':191
+  });
+  shortcut.add("Meta+Enter",function() {
+    $(".active_submit_button").click();
+  });
+  shortcut.add("Ctrl+Enter",function() {
+    $(".active_submit_button").click();
+  });
+  shortcut.add(".",function() {
+    $("#js-stream_update").click();
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("Shift+h",function() {
+    location.href="/home";
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("Shift+l",function() {
+    location.href="/local";
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("Shift+f",function() {
+    location.href="/federated";
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("Shift+n",function() {
+    location.href="/notifications";
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("Shift+p",function() {
+    location.href=current_url;
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("Shift+v",function() {
+    location.href=current_favourites_link;
+  },{
+    "disable_in_input":true,
+  });
+  shortcut.add("esc",function() {
+    $("#js-overlay_content_wrap").click();
+  });
+  shortcut.add("Shift+/",function() {
+    $("#shortcut_guide").click();
+  },{
+    "disable_in_input":true,
+    'keycode':191
+  });
 });

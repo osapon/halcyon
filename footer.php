@@ -9,6 +9,7 @@
 <?php include dirname(__FILE__).('/widgets/overlay_create_status.php'); ?>
 <?php include dirname(__FILE__).('/widgets/overlay_single_reply.php'); ?>
 <?php include dirname(__FILE__).('/widgets/overlay_copy_link.php'); ?>
+<?php include dirname(__FILE__).('/widgets/overlay_shortcut_guide.php'); ?>
 </div>
 <button class="close_button"><i class="fa fa-times" aria-hidden="true"></i></button>
 </div>

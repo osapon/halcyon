@@ -552,6 +552,38 @@ box-sizing: border-box;
 font-size: 14px;
 border-radius: 3px;
 }
+
+.overlay_shortcut_guide {
+	width: 600px;
+	margin: auto;
+	margin-top: 20%;
+}
+.overlay_shortcut_guide_header {
+	width: 600px;
+	padding: 16px;
+	box-sizing: border-box;
+	background-color: #fff;
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+	margin: auto;
+	text-align: center;
+	color: #66757F;
+	font-size: 18px;
+	font-weight: 300;
+	border-bottom: 1px solid #E6ECF0;
+}
+.overlay_shortcut_guide .overlay_shortcut_guide_form {
+	width: 600px;
+	padding: 16px;
+	box-sizing: border-box;
+	background-color: #fff;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+	margin: auto;
+}
+.overlay_shortcut_guide table {line-height: 180%;}
+.shortcut_button {background-color: #888; color: #FFF;padding:4px;margin:1px;}
+
 .relationship_button {
 display: flex;
 flex-wrap: nowrap;
@@ -1395,6 +1427,9 @@ margin-right: 4px;
 }
 .side_widget .account_box .label_box .following_button span {
 font-weight: 600;
+}
+.side_widget a {
+	cursor: pointer;
 }
 #header {
 display: flex;
