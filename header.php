@@ -1,5 +1,19 @@
 <?php
 require_once('./lang.php');
+
+function filedate($filename){
+  $filename = str_replace('/..', '', $filename);
+  $file_path = __DIR__.$filename;
+  if (file_exists($file_path)) {
+    $query = date('ymdHis', filemtime($file_path));
+    $output_filename = $filename.'?'.$query;
+    return $output_filename;
+  }
+  else {
+    return $filename;
+  }
+}
+
 ?><!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -8,16 +22,16 @@ require_once('./lang.php');
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
-<link rel="stylesheet" href="/assets/css/style.css" media="all">
+<link rel="stylesheet" href="<?php echo filedate('/assets/css/style.css'); ?>" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
-<link rel="gettext" type="text/x-gettext-translation" href="/lang/<?=$locale?>/LC_MESSAGES/messages.po"/>
+<link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/lang/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/halcyon/halcyonFunctions.js"></script>
 <script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/assets/js/shortcut.js"></script>
 <script src="/assets/js/replace_emoji.js"></script>
-<script src="/assets/js/halcyon/halcyonUI.js"></script>
+<script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
 <script src="/assets/js/pomo/src/dist/pomo.js"></script>
 <script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
 <script>
