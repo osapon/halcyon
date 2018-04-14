@@ -1,5 +1,24 @@
+function htmlEscape(strings, ...values) {
+  var handleString = function(str) {
+    return str.replace(/&/g, '&amp;')
+              .replace(/>/g, '&gt;')
+              .replace(/</g, '&lt;')
+              .replace(/"/g, '&quot;')
+              .replace(/'/g, '&#039;')
+              .replace(/`/g, '&#096;');
+  };
+  var res = '';
+  for(var i=0, l=strings.length; i<l; i+=1) {
+    res += handleString(strings[i]);
+    if(i < values.length) {
+      res += handleString(values[i]);
+    }
+  }
+  return res;
+};
+
 $(function() {
-$('input[type="file"]').val('');
+  $('input[type="file"]').val('');
 });
 $(function() {
 $(document).on('click','a', function(e) {
@@ -146,12 +165,14 @@ e.stopImmediatePropagation()
 return false;
 });
 });
+
 $(function() {
 $(document).on('click', function(e) {
 $('.header_my_account_nav').addClass('invisible');
 $('.expand_menu').addClass('invisible');
 });
 });
+
 function mediaattachments_template(status) {
 let media_views = "";
 if(status.media_attachments[0].remote_url != null) {
@@ -209,6 +230,7 @@ media_views += "</div>";
 }
 return media_views;
 }
+
 function timeline_template(status) {
 if (status.reblog === null) {
 if (
@@ -257,7 +279,7 @@ const html=(`
 <div class="text_ellipsis">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.account.display_name}
+${htmlEscape`${status.account.display_name}`}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -291,7 +313,7 @@ ${media_views}
 </article>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape`${status.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -352,7 +374,7 @@ const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} `+Pomo.getText('Boosted')+`</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape`${status.account.display_name}`} ${Pomo.getText('Boosted')}</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -366,7 +388,7 @@ const html = (`
 <div class="text_ellipsis">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${status.reblog.account.display_name}
+${htmlEscape`${status.reblog.account.display_name}`}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -400,7 +422,7 @@ ${media_views}
 </article>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}">
+<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${htmlEscape`${status.reblog.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -424,6 +446,7 @@ ${media_views}
 return $(html)
 }
 }
+
 function notifications_template(NotificationObj) {
 const notice_author_link = getRelativeURL(NotificationObj.account.url, NotificationObj.account.id);
 if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
@@ -444,7 +467,7 @@ const html = (`
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> `+Pomo.getText('favourited Your Toot')+`
+<span class="emoji_poss" >${htmlEscape`${NotificationObj.account.display_name}`}</span> ${Pomo.getText('favourited Your Toot')}
 </a>
 </div>
 <div class="notice_entry_body">
@@ -453,7 +476,7 @@ const html = (`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
+${htmlEscape`${NotificationObj.status.account.display_name}`}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -484,7 +507,7 @@ html = (`
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> `+Pomo.getText('boosted Your Toot')+`
+<span class="emoji_poss" >${htmlEscape`${NotificationObj.account.display_name}`}</span> ${Pomo.getText('boosted Your Toot')}
 </a>
 </div>
 <blockquote class="notice_entry_body">
@@ -493,7 +516,7 @@ html = (`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
+${htmlEscape`${NotificationObj.status.account.display_name}`}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -548,7 +571,7 @@ const html=(`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
+${htmlEscape`${NotificationObj.status.account.display_name}`}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -582,7 +605,7 @@ ${media_views}
 </article>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${NotificationObj.account.display_name}">
+<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${htmlEscape`${NotificationObj.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -615,13 +638,14 @@ const html=(`
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> `+Pomo.getText('followed you')+`
+<span class="emoji_poss">${htmlEscape`${NotificationObj.account.display_name}`}</span> ${Pomo.getText('followed you')}
 </a>
 </div>
 </li>`);
 return $(html);
 }
 }
+
 function follows_template(AccountObj) {
 const array = AccountObj.url.split('/'),
 profile_link = '/'+array[array.length-1]+'@'+array[array.length-2]+'?mid='+AccountObj.id+'&';
@@ -636,12 +660,12 @@ const html = (`
 </div>
 <button class="follow_button action_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>`+Pomo.getText('Follow')+`</span>
+<span>${Pomo.getText('Follow')}</span>
 </button>
 <div class="follows_profile_name_box emoji_poss">
 <a class="js_follows_profile_link" href="${profile_link}">
 <h2 class="js_follows_profile_displayname">
-${AccountObj.display_name}
+${htmlEscape`${AccountObj.display_name}`}
 </h2>
 <span class="js_follows_profile_username">
 @${AccountObj.acct}
@@ -655,6 +679,7 @@ ${AccountObj.display_name}
 </div>`);
 return $(html)
 }
+
 function status_template(status, class_options) {
 if ( status.reblog === null ) {
 const status_account_link= getRelativeURL(status.account.url, status.account.id),
@@ -690,7 +715,7 @@ const html=(`
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.account.display_name}
+${htmlEscape`${status.account.display_name}`}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -725,7 +750,7 @@ ${media_views}
 </section>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape`${status.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -780,16 +805,16 @@ ${media_views}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>`+Pomo.getText('Public', {context: 'TootForm'})+`
+<i class="fa fa-globe" aria-hidden="true"></i>${Pomo.getText('Public', {context: 'TootForm'})}
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>`+Pomo.getText('Unlisted', {context: 'TootForm'})+`
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>${Pomo.getText('Unlisted', {context: 'TootForm'})}
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>`+Pomo.getText('Followers-only', {context: 'TootForm'})+`
+<i class="fa fa-lock" aria-hidden="true"></i>${Pomo.getText('Followers-only', {context: 'TootForm'})}
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>`+Pomo.getText('Direct', {context: 'TootForm'})+`
+<i class="fa fa-envelope" aria-hidden="true"></i>${Pomo.getText('Direct', {context: 'TootForm'})}
 </label>
 </div>
 </div>
@@ -852,7 +877,7 @@ const html=(`
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.reblog.account.display_name}
+${htmlEscape`${status.reblog.account.display_name}`}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -887,7 +912,7 @@ ${media_views}
 </section>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape`${status.reblog.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -942,16 +967,16 @@ ${media_views}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>`+Pomo.getText('Public', {context: 'TootForm'})+`
+<i class="fa fa-globe" aria-hidden="true"></i>${Pomo.getText('Public', {context: 'TootForm'})}
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>`+Pomo.getText('Unlisted', {context: 'TootForm'})+`
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>${Pomo.getText('Unlisted', {context: 'TootForm'})}
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>`+Pomo.getText('Followers-only', {context: 'TootForm'})+`
+<i class="fa fa-lock" aria-hidden="true"></i>${Pomo.getText('Followers-only', {context: 'TootForm'})}
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>`+Pomo.getText('Direct', {context: 'TootForm'})+`
+<i class="fa fa-envelope" aria-hidden="true"></i>${Pomo.getText('Direct', {context: 'TootForm'})}
 </label>
 </div>
 </div>
@@ -982,6 +1007,7 @@ history.pushState(null, null, getRelativeURL(status.reblog.account.url, status.r
 return $(html)
 }
 }
+
 function media_template(status, mediaURL) {
 if ( !status ) {
 const html = (`
@@ -1005,6 +1031,7 @@ ${status_template}
 return $(html)
 }
 }
+
 function context_template(status, class_options) {
 if ( status.reblog === null ) {
 const status_account_link= getRelativeURL(status.account.url, status.account.id),
@@ -1041,7 +1068,7 @@ const html=(`
 <header class="toot_header">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.account.display_name}
+${htmlEscape`${status.account.display_name}`}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -1074,7 +1101,7 @@ ${media_views}
 </article>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" username="${status.account.username}" display_name="${status.account.display_name}">
+<button class="reply_button" tid="${status.id}" username="${status.account.username}" display_name="${htmlEscape`${status.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1126,7 +1153,7 @@ const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} `+Pomo.getText('Boosted')+`</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape`${status.account.display_name}`} ${Pomo.getText('Boosted')}</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -1137,7 +1164,7 @@ const html=(`
 <header class="toot_header">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${status.reblog.account.display_name}
+${htmlEscape`${status.reblog.account.display_name}`}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -1170,7 +1197,7 @@ ${media_views}
 </article>
 <footer class="toot_footer">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" username="${status.reblog.account.username}" display_name="${status.reblog.account.display_name}">
+<button class="reply_button" tid="${status.reblog.id}" username="${status.reblog.account.username}" display_name="${htmlEscape`${status.reblog.account.display_name}`}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1194,6 +1221,7 @@ ${media_views}
 return $(html)
 }
 }
+
 function setTimeline(level,load_options) {
 let isSyncing = true;
 if ( load_options === undefined ) {
@@ -1320,6 +1348,7 @@ statuses = [];
 });
 });
 };
+
 function setOtherTimeline(instance, load_options) {
 let isSyncing = true;
 if ( load_options === undefined ) {
@@ -1385,6 +1414,7 @@ load_options.shift();
 };
 });
 };
+
 function setNotifications(load_options) {
 let isSyncing = true;
 if (load_options === undefined) {
@@ -1439,6 +1469,7 @@ replace_emoji();
 }
 });
 }
+
 function setFollows(mid, param, load_options) {
 let isSyncing = true,
 followsList = [];
@@ -1497,6 +1528,7 @@ load_options.shift();
 };
 });
 };
+
 function setUserSearch(query) {
 api.get('search', [{name:'q',data:query},{name:'resolve',data:'true'}], function(search) {
 for(let i in search.accounts) {
@@ -1506,6 +1538,7 @@ $("#js-follows_footer > i").css({"display":"none"});
 replace_emoji();
 });
 };
+
 function setAccount(AccountObj) {
 $("#js_header_image").attr('src', AccountObj.header);
 $("#js_profile_image").attr('src', AccountObj.avatar);
@@ -1520,12 +1553,12 @@ console.log(current_id);
 if( AccountObj.id == current_id ) {
 $(`<a href="https://${current_instance}/settings/profile">
 <button class="profile_edit_button relationship_button">
-<span>`+Pomo.getText('Edit profile')+`</span>
+<span>${Pomo.getText('Edit profile')}</span>
 </button>
 </a>`).appendTo('.profile_button_box');
 $(`<a href="${current_favourites_link}">
-<h2>`+Pomo.getText('FAVOURITES')+`</h2>
-<span>`+Pomo.getText('Show')+`</span>
+<h2>${Pomo.getText('FAVOURITES')}</h2>
+<span>${Pomo.getText('Show')}</span>
 </a>`).appendTo("#js-profile_nav_favourites");
 } else {
 api.get('accounts/relationships', [{name:'id', data:String(AccountObj.id)}], function(RelationshipObj) {
@@ -1547,22 +1580,23 @@ $(`<!-- wont work -->
 </button>`).appendTo('.profile_button_box');
 } else if(RelationshipObj[0].following){
 $(`<button class="following_button relationship_button" mid="${AccountObj.id}">
-<span>`+Pomo.getText('Following')+`</span>
+<span>${Pomo.getText('Following')}</span>
 </button>`).appendTo('.profile_button_box');
 } else {
 $(`<button class="follow_button relationship_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>`+Pomo.getText('Follow')+`</span>
+<span>${Pomo.getText('Follow')}</span>
 </button>`).appendTo('.profile_button_box');
 }
 });
 };
 replace_emoji();
 }
+
 function setRecentImages(mid) {
 api.get("accounts/"+mid+"/statuses", [{name:'only_media',data:'true'},{name:'limit',data:'6'}], function(statuses) {
 if ( statuses.length ) {
-$('#js_profile_recent_images span').text(`${statuses[0].account.statuses_count} `+Pomo.getText('Photos and toots'));
+$('#js_profile_recent_images span').text(`${statuses[0].account.statuses_count} ${Pomo.getText('Photos and toots')}`);
 $('#js_profile_recent_images a').attr('href', $("#media_link").attr('href'));
 for ( i in statuses ) {
 $(`<div class="profile_recent_images_item media_attachment" otype="image" sid="${statuses[i].id}" url="${statuses[i].media_attachments[0].preview_url}">
@@ -1572,6 +1606,7 @@ $(`<div class="profile_recent_images_item media_attachment" otype="image" sid="$
 }
 });
 };
+
 function badges_update(){
 let current_count = Number(localStorage.getItem("notification_count"));
 if ( current_count ) {
@@ -1591,6 +1626,7 @@ $('#header .header_nav_list .notification_badge').removeClass('invisible')
 }
 });
 }
+
 function setOverlayStatus(sid) {
 if ( !window.getSelection().toString() ) {
 $("#js-overlay_content .temporary_object").empty();
@@ -1619,6 +1655,7 @@ replace_emoji();
 });
 }
 }
+
 $(function() {
 $(document).on('click','.toot_entry.ancestors_status, .toot_entry.descendants_status', function(e) {
 $("#js-overlay_content .temporary_object").empty();
@@ -1627,6 +1664,7 @@ $(document).on('click','.toot_entry', function(e) {
 setOverlayStatus($(this).attr('sid'));
 });
 })
+
 function setOverlayMedia(sid,url) {
 $("#js-overlay_content .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
@@ -1644,6 +1682,7 @@ replace_emoji();
 }
 });
 }
+
 $(function() {
 $(document).on('click','.media_attachment[otype="image"]', function(e) {
 e.stopPropagation();
@@ -1651,18 +1690,21 @@ setOverlayMedia($(this).attr('sid'),$(this).attr('url'));
 $('.media_detail .toot_entry .media_views').addClass('invisible');
 });
 })
+
 function setOverlayMediaWithoutStatus(url) {
 $("#js-overlay_content .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_05');
 media_template(null, url).appendTo("#js-overlay_content .temporary_object");
 }
+
 $(function() {
 $(document).on('click','img[mediaaccess="true"]', function(e) {
 e.stopPropagation();
 setOverlayMediaWithoutStatus($(this).attr('src'));
 });
 })
+
 $(function() {
 $(document).on('click', '#creat_status', function(e) {
 switch(localStorage.getItem("setting_post_privacy")) {
@@ -1803,6 +1845,7 @@ media_array.unshift(postMedia.id);
 }
 });
 })
+
 $(function() {
 $(document).on('click', function(e) {
 if (!$(e.target).closest('#header_status_form').length) {
@@ -1939,6 +1982,7 @@ media_array.unshift(postMedia.id);
 }
 });
 })
+
 $(function() {
 $(document).on('click', function(e) {
 if (!$(e.target).closest('#reply_status_form').length) {
@@ -2087,6 +2131,7 @@ media_array.unshift(postMedia.id);
 }
 });
 })
+
 $(function() {
 $(document).on('click','single_reply_status_header, #single_reply_status_form', function(e) {
 e.stopPropagation();
@@ -2247,6 +2292,7 @@ media_array.unshift(postMedia.id);
 }
 });
 })
+
 $(function() {
 $(document).on('click','.copylink_button', function(e) {
 e.stopPropagation();
@@ -2258,6 +2304,7 @@ $('.overlay_copy_link_form input').val($(this).attr('url'));
 return false;
 });
 })
+
 $(function() {
 $(document).on('click','.temporary_object > *, .parmanent_object > *', function(e) {
 e.stopPropagation();
@@ -2283,6 +2330,7 @@ history.pushState(null, null, current_file);
 }
 });
 })
+
 $(function () {
 $(document).on('click','.side_widget.stream_options .form_title button', function(e) {
 $(this).parent().next('.pulldown_form').toggleClass('view');
@@ -2292,19 +2340,19 @@ if ( $(this).text() === Pomo.getText('SHOW') ) {
   $(this).text(Pomo.getText('SHOW'));
 }
 const html_post_steraming = $(`<select name="post_steraming">
-<option value="auto">`+Pomo.getText('Auto update')+`</option>
-<option value="manual">`+Pomo.getText('Manual update')+`</option>
+<option value="auto">${Pomo.getText('Auto update')}</option>
+<option value="manual">${Pomo.getText('Manual update')}</option>
 </select>`)
 const html_post_privacy = $(`<select name="post_privacy">
-<option value="public" selected>`+Pomo.getText('Public', {context:'Option'})+`</option>
-<option value="unlisted">`+Pomo.getText('Unlisted', {context:'Option'})+`</option>
-<option value="private">`+Pomo.getText('Followers-only', {context:'Option'})+`</option>
-<option value="direct">`+Pomo.getText('Direct', {context:'Option'})+`</option>
+<option value="public" selected>${Pomo.getText('Public', {context:'Option'})}</option>
+<option value="unlisted">${Pomo.getText('Unlisted', {context:'Option'})}</option>
+<option value="private">${Pomo.getText('Followers-only', {context:'Option'})}</option>
+<option value="direct">${Pomo.getText('Direct', {context:'Option'})}</option>
 </select>`)
 const html_local_instance = $(`<input name="local_instance" placeholder="Blank for default" type="text" class="disallow_enter"/>`)
 const html_search_filter = $(`<select name="search_filter">
-<option value="all" selected>`+Pomo.getText('All instances')+`</option>
-<option value="local">`+Pomo.getText('Local only')+`</option>
+<option value="all" selected>${Pomo.getText('All instances')}</option>
+<option value="local">${Pomo.getText('Local only')}</option>
 </select>`)
 html_post_steraming.val(localStorage.getItem("setting_post_stream"));
 html_post_privacy.val(localStorage.getItem("setting_post_privacy"));
@@ -2340,6 +2388,7 @@ localStorage.setItem("setting_local_instance", "default" );
 putMessage("Changed setting to "+$(this).val() );
 });
 })
+
 $(function() {
 shortcut.add("n",function() {
 $("#creat_status").click();
