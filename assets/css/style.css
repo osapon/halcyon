@@ -961,6 +961,30 @@ height: calc( 100% / 3 );
 .media_views[media_length="4"] .media_attachments_right .media_attachment[mediacount="3"] {
 padding-bottom: 0;
 }
+
+#slider_prev {
+	position: absolute;
+	top: 50%;
+	left: -20px;
+	cursor: pointer;
+	color: #FFF;
+}
+#slider_prev::before {
+	content: "\f053";
+	font-family: FontAwesome;
+}
+#slider_next {
+  position: absolute;
+  top: 50%;
+  right: -20px;
+  cursor: pointer;
+  color: #FFF;
+}
+#slider_next::before {
+	content: "\f054";
+	font-family: FontAwesome;
+}
+
 .timeline .notice_entry {
 padding: 10px 12px 10px 70px;
 font-size: 14px;

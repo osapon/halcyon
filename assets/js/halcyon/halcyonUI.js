@@ -174,61 +174,61 @@ $('.expand_menu').addClass('invisible');
 });
 
 function mediaattachments_template(status) {
-let media_views = "";
-if(status.media_attachments[0].remote_url != null) {
-status.media_attachments[0].url = status.media_attachments[0].remote_url;
-}
-if ( status.media_attachments[0].url === "/files/original/missing.png" ) {
-return "";
-} else if ( !status.sensitive ) {
-media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'>`;
-} else {
-media_views = `
+  let media_views = "";
+  if(status.media_attachments[0].remote_url != null) {
+    status.media_attachments[0].url = status.media_attachments[0].remote_url;
+  }
+  if ( status.media_attachments[0].url === "/files/original/missing.png" ) {
+    return "";
+  } else if ( !status.sensitive ) {
+    media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'>`;
+  } else {
+    media_views = `
 <div class='media_views sensitive' media_length='${status.media_attachments.length}'>
 <div class='sensitive_alart'>
 <span class="text1">Sensitive content</span>
 <span class="text2">Click to view</span>
 </div>`;
-}
-if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
-media_views += (`
+  }
+  if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
+    media_views += (`
 <div class="media_attachment" otype="video/gifv" mediacount="0">
 <video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen autoplay loop muted></video>
 </div>`);
-} else {
-if ( status.media_attachments.length <= 2 ) {
-for ( let i in status.media_attachments ) {
-if(status.media_attachments[i].remote_url != null) {
-status.media_attachments[i].url = status.media_attachments[i].remote_url;
-}
-media_views += (`
+  } else {
+    if ( status.media_attachments.length <= 2 ) {
+      for ( let i in status.media_attachments ) {
+        if(status.media_attachments[i].remote_url != null) {
+          status.media_attachments[i].url = status.media_attachments[i].remote_url;
+        }
+        media_views += (`
 <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
 <img src="${status.media_attachments[i].url}" window_view="enable" />
 </div>`);
-}
-} else {
-for ( let i in status.media_attachments ) {
-if (Number(i) === 1) {
-if(status.media_attachments[i].remote_url != null) {
-status.media_attachments[i].url = status.media_attachments[i].remote_url;
-}
-media_views += (`
+      }
+    } else {
+      for ( let i in status.media_attachments ) {
+        if (Number(i) === 1) {
+          if(status.media_attachments[i].remote_url != null) {
+            status.media_attachments[i].url = status.media_attachments[i].remote_url;
+          }
+          media_views += (`
 <div class="media_attachments_right">
 <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
 <img src="${status.media_attachments[i].url}" window_view="enable"/>
 </div>`);
-} else {
-media_views += (`
+        } else {
+          media_views += (`
 <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
 <img src="${status.media_attachments[i].url}" window_view="enable"/>
 </div>`);
-}
-}
-media_views += "</div>";
-}
-media_views += "</div>";
-}
-return media_views;
+        }
+      }
+      media_views += "</div>";
+    }
+    media_views += "</div>";
+  }
+  return media_views;
 }
 
 function timeline_template(status) {
@@ -1009,18 +1009,21 @@ return $(html)
 }
 
 function media_template(status, mediaURL) {
-if ( !status ) {
-const html = (`
+  if ( !status ) {
+    const html = (`
 <div class="media_detail">
 <div class="media_box">
 <img src="${mediaURL}" />
 </div>
 </div>`);
-return $(html)
-} else {
-const status_template = timeline_template(status).html(),
-html = (`
+    return $(html)
+  } else {
+    var multi_img=false;
+    if ((arguments.length==4) && (arguments[2].length>1)) {multi_img=true;}
+    const status_template = timeline_template(status).html(),
+    html = (`
 <div class="media_detail">
+${multi_img?`<p id="slider_prev"></p><p id="slider_next"></p>`:''}
 <div class="media_box">
 <img src="${mediaURL}" />
 </div>
@@ -1028,8 +1031,8 @@ html = (`
 ${status_template}
 </div>
 </div>`);
-return $(html)
-}
+    return $(html)
+  }
 }
 
 function context_template(status, class_options) {
@@ -1665,37 +1668,49 @@ setOverlayStatus($(this).attr('sid'));
 });
 })
 
-function setOverlayMedia(sid,url) {
-$("#js-overlay_content .temporary_object").empty();
-$('#js-overlay_content_wrap').addClass('view');
-$('#js-overlay_content_wrap').addClass('black_08');
-$('#js-overlay_content .temporary_object').addClass('visible');
-api.get("statuses/"+sid, function(status) {
-if ( !status.reblog ) {
-media_template(status, url).appendTo("#js-overlay_content .temporary_object");
-replaceInternalLink();
-replace_emoji();
-} else {
-media_template(status.reblog, url).appendTo("#js-overlay_content .temporary_object");
-replaceInternalLink();
-replace_emoji();
-}
-});
+function setOverlayMedia(sid,urls,open_image_idx) {
+console.log('setOverlayMedia');
+  $("#js-overlay_content .temporary_object").empty();
+  $('#js-overlay_content_wrap').addClass('view');
+  $('#js-overlay_content_wrap').addClass('black_08');
+  $('#js-overlay_content .temporary_object').addClass('visible');
+  api.get("statuses/"+sid, function(status) {
+    media_template((!status.reblog)?status:status.reblog, urls[open_image_idx], urls, open_image_idx).appendTo("#js-overlay_content .temporary_object");
+    replaceInternalLink();
+    replace_emoji();
+    $("#slider_prev").on('click', function(){
+      open_image_idx--;
+      if ( open_image_idx < 0 ) open_image_idx = urls.length - 1;
+      $(".media_box > img").attr('src', urls[open_image_idx]);
+    });
+    $("#slider_next").on('click', function(){
+      open_image_idx++;
+      if ( open_image_idx >= urls.length ) open_image_idx = 0;
+      $(".media_box > img").attr('src', urls[open_image_idx]);
+    });
+  });
 }
 
 $(function() {
-$(document).on('click','.media_attachment[otype="image"]', function(e) {
-e.stopPropagation();
-setOverlayMedia($(this).attr('sid'),$(this).attr('url'));
-$('.media_detail .toot_entry .media_views').addClass('invisible');
-});
+  $(document).on('click','.media_attachment[otype="image"]', function(e) {
+    e.stopPropagation();
+    var images=$(this).parents(".media_views").find("img"), urls=[], url = $(this).attr('url');
+    var open_image_idx = 0;
+    for(idx=0,num=images.length;idx<num;idx++){
+      var v = $(images[idx]).attr('src');
+      urls.push(v);
+      if (url == v) open_image_idx = idx;
+    }
+    setOverlayMedia($(this).attr('sid'),urls, open_image_idx);
+    $('.media_detail .toot_entry .media_views').addClass('invisible');
+  });
 })
 
 function setOverlayMediaWithoutStatus(url) {
-$("#js-overlay_content .temporary_object").empty();
-$('#js-overlay_content_wrap').addClass('view');
-$('#js-overlay_content_wrap').addClass('black_05');
-media_template(null, url).appendTo("#js-overlay_content .temporary_object");
+  $("#js-overlay_content .temporary_object").empty();
+  $('#js-overlay_content_wrap').addClass('view');
+  $('#js-overlay_content_wrap').addClass('black_05');
+  media_template(null, url).appendTo("#js-overlay_content .temporary_object");
 }
 
 $(function() {
