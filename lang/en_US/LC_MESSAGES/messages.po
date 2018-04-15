@@ -340,3 +340,15 @@ msgstr "Switch to favourites"
 #: 
 msgid "Open this guide"
 msgstr "Open this guide"
+
+#: 
+msgid "Copy link to Toot"
+msgstr "Copy link to Toot"
+
+#: 
+msgid "Delete Toot"
+msgstr "Delete Toot"
+
+#: 
+msgid "View original"
+msgstr "View original"

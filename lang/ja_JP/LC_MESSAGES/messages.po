@@ -340,3 +340,15 @@ msgstr "お気に入りへ切り替え"
 #: 
 msgid "Open this guide"
 msgstr "この説明を開く"
+
+#: 
+msgid "Copy link to Toot"
+msgstr "トゥートへのリンクをコピー"
+
+#: 
+msgid "Delete Toot"
+msgstr "トゥート削除"
+
+#: 
+msgid "View original"
+msgstr "オリジナルを見る"
