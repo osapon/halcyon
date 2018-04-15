@@ -34,6 +34,7 @@ function filedate($filename){
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
 <script src="/assets/js/pomo/src/dist/pomo.js"></script>
 <script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
+<script src="//cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
 <script>
 if (
   !localStorage.getItem("current_id") |

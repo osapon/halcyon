@@ -343,7 +343,7 @@ msgstr "この説明を開く"
 
 #: 
 msgid "Copy link to Toot"
-msgstr "トゥートへのリンクをコピー"
+msgstr "トゥートへのリンク"
 
 #: 
 msgid "Delete Toot"

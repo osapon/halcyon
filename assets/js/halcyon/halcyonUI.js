@@ -402,13 +402,13 @@ ${htmlEscape`${status.reblog.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>
+<li><a class="copylink_button" url="${status.reblog.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
+<li class="delete"><a class="delete_button" tid="${status.reblog.id}">${Pomo.getText('Delete Toot')}</a></li>
 <li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
 <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">View original</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${Pomo.getText('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -585,13 +585,13 @@ ${htmlEscape`${NotificationObj.status.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${NotificationObj.status.id}">Delete Toot</a></li>
+<li><a class="copylink_button" url="${status.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
+<li class="delete"><a class="delete_button" tid="${NotificationObj.status.id}">${Pomo.getText('Delete Toot')}</a></li>
 <li class="mute"><a>Mute @${NotificationObj.status.account.username}</a></li>
 <li class="block"><a>Block @${NotificationObj.status.account.username}</a></li>
 </ul>
 <ul>
-<li><a href="${NotificationObj.status.url}" target="_blank">View original</a></li>
+<li><a href="${NotificationObj.status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -727,13 +727,13 @@ ${htmlEscape`${status.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
+<li><a class="copylink_button" url="${status.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
+<li class="delete"><a class="delete_button" tid="${status.id}">${Pomo.getText('Delete Toot')}</a></li>
 <li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
 <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">View original</a></li>
+<li><a href="${status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -889,13 +889,13 @@ ${htmlEscape`${status.reblog.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>
+<li><a class="copylink_button" url="${status.reblog.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
+<li class="delete"><a class="delete_button" tid="${status.reblog.id}">${Pomo.getText('Delete Toot')}</a></li>
 <li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
 <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">View original</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${Pomo.getText('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -1081,13 +1081,13 @@ ${htmlEscape`${status.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
+<li><a class="copylink_button" url="" >${Pomo.getText('Copy link to Toot')}</a></li>
+<li class="delete"><a class="delete_button" tid="${status.id}">${Pomo.getText('Delete Toot')}</a></li>
 <li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
 <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">View original</a></li>
+<li><a href="${status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -1177,13 +1177,13 @@ ${htmlEscape`${status.reblog.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>
+<li><a class="copylink_button" url="" >${Pomo.getText('Copy link to Toot')}</a></li>
+<li class="delete"><a class="delete_button" tid="${status.reblog.id}">${Pomo.getText('Delete Toot')}</a></li>
 <li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.id}">Mute @${status.reblog.account.username}</a></li>
 <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.id}">Block @${status.reblog.account.username}</a></li>
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">View original</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${Pomo.getText('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -2308,7 +2308,11 @@ $(function() {
     $('#js-overlay_content_wrap').addClass('black_08');
     $('.overlay_copy_link').removeClass('invisible');
     $('.overlay_copy_link_form input').val($(this).attr('url'));
-
+    var clipboard = new ClipboardJS('.copy_button');
+    clipboard.on('success', function(e) {
+      clipboard.destroy();
+      $('#js-overlay_content_wrap', document).trigger('click');
+    });
     return false;
   });
 })

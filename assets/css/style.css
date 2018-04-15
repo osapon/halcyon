@@ -619,6 +619,9 @@ font-weight: 600;
 .profile_edit_button{background-color: #FFF;color: #66757F;border: 1px solid #66757F;}
 .profile_edit_button:hover,
 .profile_edit_button:hover i {background-color: #F5F8FA;}
+.copy_button{background-color: #FFF;color: #66757F;border: 1px solid #66757F;}
+.copy_button:hover,
+.copy_button:hover i {background-color: #F5F8FA;}
 .timeline_header {
 background-color: #fff;
 box-sizing: border-box;
