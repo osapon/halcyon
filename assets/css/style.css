@@ -716,7 +716,7 @@ font-size: 14px;
 padding-right: 16px;
 }
 .toot_entry .toot_entry_body .toot_content .toot_header .text_ellipsis a {
-line-height: 1;
+line-height: 1.1;
 height: 16.5px;
 margin-bottom: -4.5px;
 }
@@ -1562,7 +1562,7 @@ font-weight: 400;
 }
 #header .header_nav_wrap .header_center_box {
 display: flex;
-flex: 1.2;
+flex: 0.5;
 height: 100%;
 box-sizing: border-box;
 padding: 8px 0;
