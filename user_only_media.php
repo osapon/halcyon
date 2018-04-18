@@ -90,7 +90,7 @@ const query = '<?= htmlspecialchars((string)filter_input(INPUT_GET, 'user'), ENT
 api.get('search', [{name:'q',data:query},{name:'resolve',data:'true'}], function(search) {
 if ( !search.accounts.length ) {
 location.href="/404.php";
-} else if ( "@"+search.accounts[0].acct === query ) {
+} else if ("@"+search.accounts[0].acct === query || "@"+search.accounts[0].acct+"@"+localStorage.current_instance === query) {
 setAccount(search.accounts[0]);
 setTimeline("accounts/"+search.accounts[0].id+"/statuses",[{name:'only_media',data:'true'}]);
 setRecentImages(search.accounts[0].id);

@@ -136,6 +136,15 @@ post: function (endpoint) {
     data: postData,
     headers: {"Authorization": "Bearer " + config.api_user_token},
     success: function(data, textStatus) {
+      if(endpoint == "statuses") {
+        $(".js_current_toots_count").html(++localStorage.current_statuses_count);
+      }
+      else if(endpoint.indexOf("/follow") != -1) {
+        $(".js_current_following_count").html(++localStorage.current_following_count);
+      }
+      else if(endpoint.indexOf("/unfollow") != -1) {
+        $(".js_current_following_count").html(--localStorage.current_following_count);
+      }
       console.log("Successful POST API request to " +apiBase+endpoint);
       callback(data,textStatus)
     },
@@ -181,6 +190,9 @@ url: apiBase + endpoint,
 type: "DELETE",
 headers: {"Authorization": "Bearer " + config.api_user_token},
 success: function(data, textStatus) {
+if(endpoint.indexOf("statuses") != -1) {
+$(".js_current_toots_count").html(--localStorage.current_statuses_count);
+}
 console.log("Successful DELETE API request to " +apiBase+endpoint);
 callback(data,textStatus)
 },

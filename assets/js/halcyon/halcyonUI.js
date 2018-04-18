@@ -1617,6 +1617,9 @@ $('#header .header_nav_list .notification_badge').removeClass('invisible');
 $('#header .header_nav_list .notification_badge').text( current_count );
 }
 api.stream("user", function(userstream) {
+if(userstream.event == "notification" && userstream.payload.type == "follow") {
+$(".js_current_followers_count").html(++localStorage.current_followers_count);
+}
 if (userstream.event === "update" & location.pathname !== "/" ) {
 $('#header .header_nav_list .home_badge').removeClass('invisible');
 } else if (userstream.event === "notification" & location.pathname !== "/notifications") {
