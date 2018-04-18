@@ -192,3 +192,37 @@ setTimeout(function(){
 $("#overlay_message").removeClass("view");
 },3000);
 };
+
+
+async function post(param) {
+  return new Promise(async function (resolve, reject) {
+    var media_array = [],
+        form = param.form;
+    if ( param.files ) {
+      let files = param.files;
+      for (let i = 0; i < files.length; i++) {
+        media_array.push( await uploadFile(i, files[i]) );
+      }
+    }
+    var params = {
+      status : form.status_textarea.value,
+      sensitive: form.status_nsfw.checked,
+      spoiler_text : form.status_spoiler.value,
+      visibility : form.privacy_option.value
+    }
+    if ( media_array ) params.media_ids = media_array;
+    api.post("statuses", params, function (data) {
+      resolve();
+    });
+  });
+};
+
+function uploadFile(idx, file) {
+  return new Promise((resolve, reject) => {
+    let formData = new FormData();
+    formData.append('file', file);
+    api.postMedia("media", formData, function (postMedia) {
+      resolve(postMedia.id);
+    });
+  });
+};

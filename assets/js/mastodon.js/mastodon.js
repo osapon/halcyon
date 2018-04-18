@@ -122,58 +122,58 @@ location.href = "/logout"
 });
 },
 post: function (endpoint) {
-var postData, callback;
-if (typeof arguments[1] === "function") {
-postData = {};
-callback = arguments[1];
-} else {
-postData = arguments[1];
-callback = arguments[2];
-}
-$.ajax({
-url: apiBase + endpoint,
-type: "POST",
-data: postData,
-headers: {"Authorization": "Bearer " + config.api_user_token},
-success: function(data, textStatus) {
-console.log("Successful POST API request to " +apiBase+endpoint);
-callback(data,textStatus)
-},
-error: function(xhr, textStatus, errorThrown) {
-putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
-if ( xhr.status === 401 ) {
-location.href = "/logout"
-}
-}
-});
+  var postData, callback;
+  if (typeof arguments[1] === "function") {
+    postData = {};
+    callback = arguments[1];
+  } else {
+    postData = arguments[1];
+    callback = arguments[2];
+  }
+  $.ajax({
+    url: apiBase + endpoint,
+    type: "POST",
+    data: postData,
+    headers: {"Authorization": "Bearer " + config.api_user_token},
+    success: function(data, textStatus) {
+      console.log("Successful POST API request to " +apiBase+endpoint);
+      callback(data,textStatus)
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
+      if ( xhr.status === 401 ) {
+        location.href = "/logout"
+      }
+    }
+  });
 },
 postMedia: function (endpoint) {
-var postData, callback;
-if (typeof arguments[1] === "function") {
-postData = {};
-callback = arguments[1];
-} else {
-postData = arguments[1];
-callback = arguments[2];
-}
-$.ajax({
-url: apiBase + endpoint,
-type: "POST",
-data: postData,
-contentType: false,
-processData: false,
-headers: {"Authorization": "Bearer " + config.api_user_token},
-success: function(data, textStatus) {
-console.log("Successful POST API request to " +apiBase+endpoint);
-callback(data,textStatus)
-},
-error: function(xhr, textStatus, errorThrown) {
-putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
-if ( xhr.status === 401 ) {
-location.href = "/logout"
-}
-}
-});
+  var postData, callback;
+  if (typeof arguments[1] === "function") {
+    postData = {};
+    callback = arguments[1];
+  } else {
+    postData = arguments[1];
+    callback = arguments[2];
+  }
+  $.ajax({
+    url: apiBase + endpoint,
+    type: "POST",
+    data: postData,
+    contentType: false,
+    processData: false,
+    headers: {"Authorization": "Bearer " + config.api_user_token},
+    success: function(data, textStatus) {
+      console.log("Successful POST API request to " +apiBase+endpoint);
+      callback(data,textStatus)
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
+      if ( xhr.status === 401 ) {
+        location.href = "/logout"
+      }
+    }
+  });
 },
 delete: function (endpoint, callback) {
 $.ajax({
