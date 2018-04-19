@@ -211,6 +211,7 @@ async function post(param) {
       visibility : form.privacy_option.value
     }
     if ( media_array ) params.media_ids = media_array;
+    if ( param.in_reply_to_id ) params.in_reply_to_id = param.in_reply_to_id;
     api.post("statuses", params, function (data) {
       resolve();
     });

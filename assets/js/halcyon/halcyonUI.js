@@ -2016,6 +2016,7 @@ $(function() {
       $('#reply_status_form .status_bottom').append($('<input id="reply_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
     }
     param.form = document.forms.reply_status_form;
+    param.in_reply_to_id = $('#reply_status_form').attr('sid');
     post(param).then(function(){
       $('#reply_status_form .media_attachments_preview_area').empty();
       $('#reply_status_form .status_spoiler').addClass('invisible');
@@ -2129,6 +2130,7 @@ $(function() {
       $("#single_reply_status_form .status_bottom").append($('<input id="single_reply_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
     }
     param.form = document.forms.single_reply_status_form;
+    param.in_reply_to_id = $('#single_reply_status_form').attr('tid');
     post(param).then(function(){
       $('#single_reply_status_form .media_attachments_preview_area').empty();
       $('#single_reply_status_form .status_spoiler').addClass('invisible');
