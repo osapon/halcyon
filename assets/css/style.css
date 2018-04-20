@@ -2046,6 +2046,7 @@ object-fit: cover;
 }
 #main .article_wrap .center_column {
 	width: auto;
+	min-width: 600px;
 	padding: 10px 5px;
 	box-sizing: border-box;
 	float:right;
