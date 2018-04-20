@@ -964,21 +964,31 @@ padding-bottom: 0;
 
 #slider_prev {
 	position: absolute;
-	top: 50%;
-	left: -20px;
+	top: 35%;
+	left: -2em;
 	cursor: pointer;
 	color: #FFF;
+	height: 8em;
+	line-height: 8em;
+	background-color: rgba(0,0,0,0.5);
+	width: 2em;
+	text-align: center;
 }
 #slider_prev::before {
 	content: "\f053";
 	font-family: FontAwesome;
 }
 #slider_next {
-  position: absolute;
-  top: 50%;
-  right: -20px;
-  cursor: pointer;
-  color: #FFF;
+	position: absolute;
+	top: 35%;
+	right: -2em;
+	cursor: pointer;
+	color: #FFF;
+	height: 8em;
+	line-height: 8em;
+	background-color: rgba(0,0,0,0.5);
+	width: 2em;
+	text-align: center;
 }
 #slider_next::before {
 	content: "\f054";
