@@ -138,6 +138,10 @@ msgid "Hashtag search filter"
 msgstr "ハッシュタグ検索フィルター"
 
 #: 
+msgid "HASHTAG"
+msgstr "ハッシュタグ"
+
+#: 
 msgid "What's happening?"
 msgstr "今なにしてる？"
 

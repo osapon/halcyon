@@ -680,6 +680,15 @@ ${htmlEscape`${AccountObj.display_name}`}
 return $(html)
 }
 
+function hashtag_template(hashtag) {
+  const html = (`
+<div class="hashtag">
+<a class="mention hashtag" href='/search/tag/?q=${encodeURIComponent(`${htmlEscape`${hashtag}`}`)}' rel='tag'>#<span>${htmlEscape`${hashtag}`}</span></a>
+</div>
+`);
+  return $(html);
+}
+
 function status_template(status, class_options) {
 if ( status.reblog === null ) {
 const status_account_link= getRelativeURL(status.account.url, status.account.id),

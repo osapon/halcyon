@@ -138,6 +138,10 @@ msgid "Hashtag search filter"
 msgstr "Hashtag search filter"
 
 #: 
+msgid "HASHTAG"
+msgstr "HASHTAG"
+
+#: 
 msgid "What's happening?"
 msgstr "What's happening?"
 

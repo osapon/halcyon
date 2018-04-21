@@ -1070,6 +1070,27 @@ color: #AAB8C2;
 font-size: 36px;
 text-align: center;
 }
+#js-hashtag{
+	display: flex;
+	margin-bottom: 10px;
+	width: 900px;
+	box-sizing: border-box;
+	height: auto;
+	flex-wrap: wrap;
+}
+#js-hashtag div.hashtag{
+	margin: 0 5px;
+	padding: 5px;
+	box-sizing: border-box;
+	border-radius: 5px;
+	background-color: #fff;
+	overflow: hidden;
+	border: 1px solid #E6ECF0;
+}
+#js-hashtag .hashtag a{
+	color: #189EFC;
+}
+
 #js-follows_profile{
 display: flex;
 width: 900px;
@@ -1905,6 +1926,7 @@ color: #66757F;
 /*! font-size: 13px; */
 }
 #main .search_nav_wrap #js-search_nav_peoples.view a ,
+#main .search_nav_wrap #js-search_nav_hashtag.view a ,
 #main .search_nav_wrap #js-search_nav_toots.view a {
 border-top: 4px solid transparent;
 border-bottom: 4px solid #189EFC;

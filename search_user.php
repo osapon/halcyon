@@ -23,6 +23,7 @@ $('title').text(query+' - Halcyon Search');
 $('#js-search_title_box > h1').text(query);
 $('#js-search_nav_peoples').toggleClass('view');
 $('#js-search_nav_toots a ').attr('href','/search'+location.search);
+$('#js-search_nav_hashtag a ').attr('href','/search/tag'+location.search);
 $('#js-search_nav_peoples a ').attr('href','/search/users'+location.search);
 setUserSearch(query);
 <?php endif; ?>
