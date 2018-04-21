@@ -8,23 +8,24 @@ A Mastodon web client that looks like Twitter
 ## Stay tuned
 Follow or Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
 
+## Instances
+These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
+- https://halcyon.toromino.de - 1.1.2
+- https://social.dev-wiki.de - 1.1.1
+- https://halcyon.bka.li - 1.1.1
+- https://itter.photog.social - 1.1.1
+- https://halcyon.cybre.space - Outdated
+
+You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
+
 ## Blog
+- Release of Version 1.1.2 - Privacy modes are now correctly displayed and used for replies,use username if display name doesn't exist,bugs on search page fixed
 - Release of Version 1.1.1 - Fixed error 404 when viewing profile of own instance,numbers below profile on the left do now change during session,added nginx config
 - [Release of Version 1.1.0 and upcoming features](http://nikisoft.myblog.de/nikisoft/art/11389499/Halcyon-What-we-did-and-what-we-will-do)
 - Release of Version 1.0.3 - "Who to follow" doesn't show people you already follow anymore and design of preferences and search bar is now much better
 - Release of Version 1.0.2 - Fixed a Firefox-only bug and some wrong links, added version info and an annoying cookie notice (sorry, but that's EU law)
 - Release of Version 1.0.1 - Two bugfixes
 - [Release of Version 1.0.0](http://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
-
-## Instances
-These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://halcyon.toromino.de - 1.1.1
-- https://social.dev-wiki.de - 1.1.1
-- https://halcyon.bka.li - 1.1.1
-- https://itter.photog.social - 1.1.0
-- https://halcyon.cybre.space - Outdated
-
-You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Features
 - Twitter like UI, familiar interface.

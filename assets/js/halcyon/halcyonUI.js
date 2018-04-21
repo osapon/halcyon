@@ -244,6 +244,28 @@ toot_favourites_count = status.favourites_count;
 if ( status.media_attachments.length ) {
 media_views = mediaattachments_template(status);
 }
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+switch(status.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+}
+if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+toot_footer_width = " style='width:320px'";
+toot_reblog_button = (`<div class="toot_reaction">
+<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>`);
+}
+else {
+toot_footer_width = "";
+toot_reblog_button = "";
+}
 const html=(`
 <li sid="${status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -289,23 +311,23 @@ ${status.content}
 </span>
 ${media_views}
 </article>
-<footer class="toot_footer">
+<footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
 </div>
-<div class="toot_reaction">
-<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>
+${toot_reblog_button}
 <div class="toot_reaction">
 <button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
 <i class="fa fa-fw fa-star"></i>
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
 </button>
 </div>
 </footer>
@@ -347,6 +369,16 @@ toot_favourites_count = status.reblog.favourites_count;
 }
 if ( status.reblog.media_attachments.length ) {
 media_views = mediaattachments_template(status.reblog);
+}
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+if(status.reblog.account.display_name.length == 0) {
+status.reblog.account.display_name = status.reblog.account.username;
+}
+switch(status.reblog.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
 }
 const html = (`
 <li sid="${status.id}" class="toot_entry">
@@ -398,9 +430,9 @@ ${status.reblog.content}
 </span>
 ${media_views}
 </article>
-<footer class="toot_footer">
+<footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}">
+<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -417,6 +449,11 @@ ${media_views}
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
 </button>
 </div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+</button>
+</div>
 </footer>
 </section>
 </div>
@@ -426,6 +463,9 @@ return $(html)
 }
 function notifications_template(NotificationObj) {
 const notice_author_link = getRelativeURL(NotificationObj.account.url, NotificationObj.account.id);
+if(NotificationObj.account.display_name.length == 0) {
+NotificationObj.account.display_name = NotificationObj.account.username;
+}
 if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
 const toot_author_link = getRelativeURL(NotificationObj.status.account.url, NotificationObj.status.account.id),
 toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
@@ -535,6 +575,28 @@ toot_favourites_count = NotificationObj.status.favourites_count;
 if (NotificationObj.status.media_attachments.length) {
 media_views = mediaattachments_template(NotificationObj.status);
 }
+if(NotificationObj.status.account.display_name.length == 0) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.username;
+}
+switch(NotificationObj.status.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+}
+if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+toot_footer_width = " style='width:320px'";
+toot_reblog_button = (`<div class="toot_reaction">
+<button class="boost_button" tid="${NotificationObj.status.id}" reblogged="${NotificationObj.status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>`);
+}
+else {
+toot_footer_width = "";
+toot_reblog_button = "";
+}
 const html=(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -580,23 +642,23 @@ ${NotificationObj.status.content}
 </span>
 ${media_views}
 </article>
-<footer class="toot_footer">
+<footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${NotificationObj.account.display_name}">
+<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
 </div>
-<div class="toot_reaction">
-<button class="boost_button" tid="${NotificationObj.status.id}" reblogged="${NotificationObj.status.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>
+${toot_reblog_button}
 <div class="toot_reaction">
 <button class="fav_button" tid="${NotificationObj.status.id}" favourited="${NotificationObj.status.favourited}">
 <i class="fa fa-fw fa-star"></i>
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
 </button>
 </div>
 </footer>
@@ -625,6 +687,9 @@ return $(html);
 function follows_template(AccountObj) {
 const array = AccountObj.url.split('/'),
 profile_link = '/'+array[array.length-1]+'@'+array[array.length-2]+'?mid='+AccountObj.id+'&';
+if(AccountObj.display_name.length == 0) {
+AccountObj.display_name = AccountObj.username;
+}
 const html = (`
 <div class="follows_profile_box" mid="${AccountObj.id}">
 <div class="follows_profile_header">
@@ -681,6 +746,32 @@ toot_favourites_count = status.favourites_count;
 if (status.media_attachments.length) {
 media_views = mediaattachments_template(status);
 }
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+checked_public = "";
+checked_unlisted = "";
+checked_private = "";
+checked_direct = "";
+switch(status.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
+case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";checked_private=" checked";break;
+case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";checked_direct=" checked";break;
+}
+if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+toot_footer_width = " style='width:320px'";
+toot_reblog_button = (`<div class="toot_reaction">
+<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>`);
+}
+else {
+toot_footer_width = "";
+toot_reblog_button = "";
+}
 const html=(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -723,23 +814,23 @@ ${media_views}
 </article>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </section>
-<footer class="toot_footer">
+<footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
 </div>
-<div class="toot_reaction">
-<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>
+${toot_reblog_button}
 <div class="toot_reaction">
 <button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
 <i class="fa fa-fw fa-star"></i>
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
 </button>
 </div>
 </footer>
@@ -776,7 +867,7 @@ ${media_views}
 <!-- Privacy options -->
 <div class="status_privacy status_option_button expand_privacy_menu_button">
 <!-- Expand menu -->
-<i class="fa fa-globe" aria-hidden="true"></i>
+<i class="fa fa-${toot_privacy_icon}" aria-hidden="true"></i>
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
@@ -796,10 +887,10 @@ ${media_views}
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
-<input id="reply_status_public" name='privacy_option' value="public" class="invisible" type="radio"/>
-<input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"/>
-<input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio"/>
-<input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"/>
+<input id="reply_status_public" name='privacy_option' value="public" class="invisible" type="radio"${checked_public}>
+<input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
+<input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio"${checked_private}>
+<input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"${checked_direct}>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -843,6 +934,18 @@ toot_favourites_count = status.reblog.favourites_count;
 if(status.reblog.media_attachments.length){
 media_views = mediaattachments_template(status.reblog);
 }
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+if(status.reblog.account.display_name.length == 0) {
+status.reblog.account.display_name = status.reblog.account.username;
+}
+checked_public = "";
+checked_unlisted = "";
+switch(status.reblog.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
+}
 const html=(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -885,9 +988,9 @@ ${media_views}
 </article>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </section>
-<footer class="toot_footer">
+<footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -902,6 +1005,11 @@ ${media_views}
 <button class="fav_button" tid="${status.reblog.id}" favourited="${status.reblog.favourited}">
 <i class="fa fa-fw fa-star"></i>
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
 </button>
 </div>
 </footer>
@@ -938,7 +1046,7 @@ ${media_views}
 <!-- Privacy options -->
 <div class="status_privacy status_option_button expand_privacy_menu_button">
 <!-- Expand menu -->
-<i class="fa fa-globe" aria-hidden="true"></i>
+<i class="fa fa-${toot_privacy_icon}" aria-hidden="true"></i>
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
@@ -958,10 +1066,10 @@ ${media_views}
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
-<input id="reply_status_public" name='privacy_option' value="public" class="invisible" type="radio"/>
-<input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"/>
-<input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio"/>
-<input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"/>
+<input id="reply_status_public" name='privacy_option' value="public" class="invisible" type="radio"${checked_public}>
+<input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
+<input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio">
+<input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -1031,6 +1139,28 @@ toot_favourites_count = status.favourites_count;
 if( status.media_attachments.length) {
 media_views = mediaattachments_template(status);
 }
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+switch(status.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+}
+if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+toot_footer_width = " style='width:320px'";
+toot_reblog_button = (`<div class="toot_reaction">
+<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>`);
+}
+else {
+toot_footer_width = "";
+toot_reblog_button = "";
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="toot_entry_body">
@@ -1072,23 +1202,23 @@ ${status.content}
 </span>
 ${media_views}
 </article>
-<footer class="toot_footer">
+<footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" username="${status.account.username}" display_name="${status.account.display_name}">
+<button class="reply_button" tid="${status.id}" username="${status.account.username}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
 </div>
-<div class="toot_reaction">
-<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>
+${toot_reblog_button}
 <div class="toot_reaction">
 <button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
 <i class="fa fa-fw fa-star"></i>
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
 </button>
 </div>
 </footer>
@@ -1121,6 +1251,16 @@ toot_favourites_count = status.reblog.favourites_count;
 }
 if (status.reblog.media_attachments.length) {
 media_views = mediaattachments_template(status.reblog);
+}
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+if(status.reblog.account.display_name.length == 0) {
+status.reblog.account.display_name = status.reblog.account.username;
+}
+switch(status.reblog.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
 }
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
@@ -1168,9 +1308,9 @@ ${status.reblog.content}
 </span>
 ${media_views}
 </article>
-<footer class="toot_footer">
+<footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" username="${status.reblog.account.username}" display_name="${status.reblog.account.display_name}">
+<button class="reply_button" tid="${status.reblog.id}" username="${status.reblog.account.username}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1185,6 +1325,11 @@ ${media_views}
 <button class="fav_button" tid="${status.reblog.id}" favourited="${status.reblog.favourited}">
 <i class="fa fa-fw fa-star"></i>
 <span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
 </button>
 </div>
 </footer>
@@ -1953,19 +2098,11 @@ $('#reply_status_form .submit_status_label').removeClass('active_submit_button')
 }
 });
 $(document).on('click','#reply_status_form', function(e) {
-switch(localStorage.getItem("setting_post_privacy")) {
-case "public":picon="globe";break;
-case "unlisted":picon="unlock-alt";break;
-case "private":picon="lock";break;
-case "direct":picon="envelope";break;
-}
 if(!$('#reply_status_form .status_textarea textarea').hasClass('focus')) {
 $('#reply_status_form .status_textarea textarea').addClass('focus');
 $('#reply_status_form .status_bottom').removeClass('invisible');
 $('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val("@"+$('#reply_status_form').attr('username')+" ");
-$('#reply_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#reply_status_form .character_count').html(current_instance_charlimit);
 }
 });
@@ -2099,7 +2236,8 @@ e.stopPropagation();
 const sid= $(this).attr('tid'),
 acct = $(this).attr('acct'),
 display_name = $(this).attr('display_name');
-switch(localStorage.getItem("setting_post_privacy")) {
+privacy_mode = $(this).attr("privacy");
+switch(privacy_mode) {
 case "public":picon="globe";break;
 case "unlisted":picon="unlock-alt";break;
 case "private":picon="lock";break;
@@ -2113,7 +2251,7 @@ $('#js-overlay_content_wrap').addClass('black_08');
 $('.single_reply_status .submit_status_label').addClass('active_submit_button');
 $('#single_reply_status_form .status_textarea textarea').addClass('focus');
 $('#single_reply_status_form .status_textarea textarea').focus()
-$('#single_reply_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
+$('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
 $('.single_reply_status .single_reply_status_header span').text("Reply to "+display_name);
