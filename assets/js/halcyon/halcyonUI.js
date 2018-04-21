@@ -16,6 +16,15 @@ function htmlEscape(strings, ...values) {
   }
   return res;
 };
+(function(SP) {
+  SP.emoji_replace || (SP.emoji_replace = function(emoji_info) {
+    let str = this;
+    for(i=0;i<emoji_info.length;i++) {
+      str = str.replace(new RegExp(":"+emoji_info[i].shortcode+":","g"),"<img src='"+emoji_info[i].static_url+"' class='emoji' title=':"+emoji_info[i].shortcode+":'>");
+    }
+    return str;
+  });
+})(String.prototype);
 
 $(function() {
   $('input[type="file"]').val('');
@@ -242,9 +251,7 @@ current_following_ids.indexOf(status.account.id) === -1
 ) {
 localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(status.account) );
 }
-for(i=0;i<status.emojis.length;i++) {
-status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
-}
+status.content = status.content.emoji_replace(status.emojis);
 const status_account_link= getRelativeURL(status.account.url, status.account.id),
 status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
 status_attr_datetime = getConversionedDate(null, status.created_at);
@@ -345,9 +352,7 @@ current_following_ids.indexOf(status.reblog.account.id) === -1
 ) {
 localStorage.setItem("what_to_follow_" + String(Math.floor(Math.random()*3)), JSON.stringify(status.reblog.account));
 }
-for(i=0;i<status.reblog.emojis.length;i++) {
-status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
-}
+status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
 status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
 status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
@@ -454,9 +459,7 @@ const toot_author_link = getRelativeURL(NotificationObj.status.account.url, Noti
 toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 if( NotificationObj.type=='favourite' ){
-for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
-}
+  NotificationObj.status.content = NotificationObj.status.content.emoji_replace(NotificationObj.status.emojis);
 const html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
 <div class="notice_author_box">
@@ -493,9 +496,7 @@ ${htmlEscape`${NotificationObj.status.account.display_name}`}
 </li>`);
 return $(html);
 } else if ( NotificationObj.type === 'reblog' ) {
-for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
-}
+  NotificationObj.status.content = NotificationObj.status.content.emoji_replace(NotificationObj.status.emojis);
 const sid= NotificationObj.status.id,
 html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
@@ -542,9 +543,7 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
-}
+NotificationObj.status.content = NotificationObj.status.content.emoji_replace(NotificationObj.status.emojis);
 if (NotificationObj.status.spoiler_text) {
 alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
@@ -699,9 +698,7 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-for(i=0;i<status.emojis.length;i++) {
-status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
-}
+status.content = status.content.emoji_replace(status.emojis);
 if (status.spoiler_text) {
 alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
@@ -861,9 +858,7 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-for(i=0;i<status.reblog.emojis.length;i++) {
-status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
-}
+status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
 if (status.spoiler_text) {
 alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
@@ -1054,9 +1049,7 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-for(i=0;i<status.emojis.length;i++) {
-status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
-}
+status.content = status.content.emoji_replace(status.emojis);
 if ( status.spoiler_text ) {
 alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
@@ -1145,9 +1138,7 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-for(i=0;i<status.reblog.emojis.length;i++) {
-status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
-}
+status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
 if ( status.spoiler_text ) {
 alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
 article_option = 'content_warning';
