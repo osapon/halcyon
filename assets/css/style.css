@@ -746,32 +746,41 @@ color: #AAB8C2;
 color: #189EFC;
 }
 .toot_entry .toot_entry_body .toot_content .toot_header .expand_button_wrap .expand_menu {
-display: block;
-position: absolute;
-cursor: pointer;
-top: 36px;
-right: -152px;
-width: 180px;
-padding: 8px 21px;
-font-size: 12px;
-border-radius: 3px;
-box-sizing: border-box;
-background-color: #fff;
-box-shadow: 0.5px 0.5px 3px rgba(0,0,0,0.26);
-z-index: 1;
+	display: block;
+	position: absolute;
+	cursor: pointer;
+	top: 36px;
+	right: 0px;
+	width: 180px;
+	padding: 8px 21px;
+	font-size: 12px;
+	border-radius: 3px;
+	box-sizing: border-box;
+	background-color: #fff;
+	box-shadow: 0.5px 0.5px 3px rgba(0,0,0,0.26);
+	z-index: 1;
 }
 .toot_entry .toot_entry_body .toot_content .toot_header .expand_button_wrap .expand_menu::before {
-display: block;
-content: "";
-z-index: -1;
-width: 20px;
-height: 20px;
-position: absolute;
-transform: rotate(45deg);
-top: -5px;
-left: 8px;
-background-color: #fff;
+	display: block;
+	content: "";
+	z-index: -1;
+	width: 20px;
+	height: 20px;
+	position: absolute;
+	transform: rotate(45deg);
+	top: -5px;
+	right: 8px;
+	background-color: #fff;
 }
+@media (min-width:1200px) {
+	.toot_entry .toot_entry_body .toot_content .toot_header .expand_button_wrap .expand_menu {
+		right: -152px;
+	}
+	.toot_entry .toot_entry_body .toot_content .toot_header .expand_button_wrap .expand_menu::before {
+		left: 8px;
+	}
+}
+
 .toot_entry .toot_entry_body .toot_content .toot_header .expand_button_wrap .expand_menu ul {
 margin: 0 -21px;
 margin-bottom: 8px;
