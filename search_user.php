@@ -16,7 +16,7 @@
 </div>
 </main>
 <script>
-current_file = location.pathname;
+current_file = location.pathname+location.search;
 <?php if(isset($_GET['q'])): ?>
 const query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
 $('title').text(query+' - Halcyon Search');

@@ -29,8 +29,8 @@
 </div>
 </main>
 <script>
-current_file = location.pathname;
-<?php if (isset($_GET['q'])): ?>
+current_file = location.pathname+location.search;
+<?php if(isset($_GET['q'])) { ?>
 $(function() {
 const query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
 $('#main > .article_wrap > .center_column > .timeline_header > .header_items > .item').text("#"+query);
@@ -47,6 +47,8 @@ setTimeline("timelines/tag/"+query, [{name:"local",data:"ture"}]);
 }
 replace_emoji();
 });
-<?php endif; ?>
+<?php } else { ?>
+window.location.href = "/";
+<?php } ?>
 </script>
 <?php include ('footer.php'); ?>
