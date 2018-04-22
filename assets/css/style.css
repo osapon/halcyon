@@ -892,6 +892,20 @@ overflow: hidden;
 width: 100%;
 height: 100%;
 }
+.media_views .spoiler_button {
+	position: absolute;
+	top: 4px;
+	left: 4px;
+	padding: 0px 3px;
+	border-radius: 5px;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.media_views .spoiler_button::before {
+	font-family: FontAwesome;
+	content:'\F06E';
+	color: #AAB8C2;
+}
 .media_views .media_attachment > * {
 width: 100%;
 height: 100%;

@@ -227,3 +227,16 @@ function uploadFile(idx, file) {
     });
   });
 };
+
+function isSpoilerImage(oid) {
+  var spoiler_oids = JSON.parse(localStorage.getItem('spoiler_oids'));
+  if ( !spoiler_oids ) return false;
+  return (spoiler_oids.indexOf(oid) !== -1);
+}
+function setSpoilerImage(oid) {
+  if ( isSpoilerImage(oid) ) return;
+  var spoiler_oids = JSON.parse(localStorage.getItem('spoiler_oids'));
+  if ( !spoiler_oids ) spoiler_oids = [];
+  if ( spoiler_oids.push(oid) > 1000 ) spoiler_oids.shift();
+  localStorage.setItem('spoiler_oids', JSON.stringify(spoiler_oids));
+}

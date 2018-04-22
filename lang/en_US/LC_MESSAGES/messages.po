@@ -356,3 +356,11 @@ msgstr "Delete Toot"
 #: 
 msgid "View original"
 msgstr "View original"
+
+#: 
+msgid "Sensitive content"
+msgstr "Sensitive content"
+
+#: 
+msgid "Click to view"
+msgstr "Click to view"

@@ -156,9 +156,20 @@ article.addClass('content_warning');
 return false;
 });
 $(document).on('click','.sensitive_alart', function(e) {
-e.stopPropagation();
-$(this).toggleClass('invisible');
-return false;
+  e.stopPropagation();
+  $(this).toggleClass('invisible');
+  $(this).siblings('.spoiler_button').toggleClass('invisible');
+  return false;
+});
+$(document).on('click','.spoiler_button', function(e) {
+  e.stopPropagation();
+  $(this).toggleClass('invisible');
+  $(this).siblings('.sensitive_alart').toggleClass('invisible');
+  var medias = $(this).siblings('.media_attachment');
+  for(let i=0; i<medias.length; i++) {
+    setSpoilerImage($(medias[i]).attr('oid'));
+  }
+  return false;
 });
 $(document).on('click','.header_account_avatar', function(e) {
 e.stopPropagation();
@@ -189,19 +200,19 @@ function mediaattachments_template(status) {
   }
   if ( status.media_attachments[0].url === "/files/original/missing.png" ) {
     return "";
-  } else if ( !status.sensitive ) {
-    media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'>`;
   } else {
+    if (( !status.sensitive ) && ( isSpoilerImage( status.media_attachments[i].id ) )) status.sensitive = true;
     media_views = `
 <div class='media_views sensitive' media_length='${status.media_attachments.length}'>
-<div class='sensitive_alart'>
-<span class="text1">Sensitive content</span>
-<span class="text2">Click to view</span>
+<div class='spoiler_button ${status.sensitive?'invisible':''}'></div>
+<div class='sensitive_alart ${!status.sensitive?'invisible':''}'>
+<span class="text1">${Pomo.getText('Sensitive content')}</span>
+<span class="text2">${Pomo.getText('Click to view')}</span>
 </div>`;
   }
   if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
     media_views += (`
-<div class="media_attachment" otype="video/gifv" mediacount="0">
+<div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[0].id}">
 <video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen autoplay loop muted></video>
 </div>`);
   } else {

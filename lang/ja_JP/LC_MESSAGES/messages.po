@@ -356,3 +356,11 @@ msgstr "トゥート削除"
 #: 
 msgid "View original"
 msgstr "オリジナルを見る"
+
+#: 
+msgid "Sensitive content"
+msgstr "非表示のメディア"
+
+#: 
+msgid "Click to view"
+msgstr "クリックして表示"
