@@ -240,3 +240,10 @@ function setSpoilerImage(oid) {
   if ( spoiler_oids.push(oid) > 1000 ) spoiler_oids.shift();
   localStorage.setItem('spoiler_oids', JSON.stringify(spoiler_oids));
 }
+function removeSpoilerImage(oid) {
+  if ( !isSpoilerImage(oid) ) return;
+  var spoiler_oids = JSON.parse(localStorage.getItem('spoiler_oids'));
+  if ( !spoiler_oids ) spoiler_oids = [];
+  spoiler_oids.splice( spoiler_oids.indexOf(oid), 1 );
+  localStorage.setItem('spoiler_oids', JSON.stringify(spoiler_oids));
+}

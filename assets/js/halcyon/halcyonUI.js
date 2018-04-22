@@ -159,6 +159,10 @@ $(document).on('click','.sensitive_alart', function(e) {
   e.stopPropagation();
   $(this).toggleClass('invisible');
   $(this).siblings('.spoiler_button').toggleClass('invisible');
+  var medias = $(this).siblings('.media_attachment');
+  for(let i=0; i<medias.length; i++) {
+    removeSpoilerImage($(medias[i]).attr('oid'));
+  }
   return false;
 });
 $(document).on('click','.spoiler_button', function(e) {
