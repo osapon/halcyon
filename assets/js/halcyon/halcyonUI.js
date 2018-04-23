@@ -16,6 +16,15 @@ function htmlEscape(strings, ...values) {
   }
   return res;
 };
+function icon(url) {
+  let orig_url = url, setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
+  if (( setting_autoplay_animated == 'no' ) && (url.match(/\.gif$/))) {
+    url = url.replace('/original/', '/static/').replace(/\.gif$/, '.png');
+    return '<img src="'+url+'" data-url="'+url+'" data-orig-url="'+orig_url+'">';
+  }
+  return '<img src="'+url+'">';
+}
+
 (function(SP) {
   SP.emoji_replace || (SP.emoji_replace = function(emoji_info) {
     let str = this;
@@ -215,9 +224,11 @@ function mediaattachments_template(status) {
 </div>`;
   }
   if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
+    let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
     media_views += (`
+<div class="gif_mark"></div>
 <div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[0].id}">
-<video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen autoplay loop muted></video>
+<video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted></video>
 </div>`);
   } else {
     if ( status.media_attachments.length <= 2 ) {
@@ -315,7 +326,7 @@ const html=(`
 <div class="toot_entry_body">
 <a href="${status_account_link}">
 <div class="icon_box">
-<img src="${status.account.avatar}">
+${icon(status.account.avatar)}
 </div>
 </a>
 <section class="toot_content">
@@ -432,7 +443,7 @@ const html = (`
 <div class="toot_entry_body">
 <a href="${status_reblog_account_link}">
 <div class="icon_box">
-<img src="${status.reblog.account.avatar}">
+${icon(status.reblog.account.avatar)}
 </div>
 </a>
 <section class="toot_content">
@@ -520,7 +531,7 @@ const html = (`
 <div class="notice_author_box">
 <a href="${notice_author_link}">
 <div class="icon_box">
-<img src="${NotificationObj.account.avatar}">
+${icon(NotificationObj.account.avatar)}
 </div>
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
@@ -558,7 +569,7 @@ html = (`
 <div class="notice_author_box">
 <a href="${notice_author_link}">
 <div class="icon_box">
-<img src="${NotificationObj.account.avatar}">
+${icon(NotificationObj.account.avatar)}
 </div>
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
@@ -639,7 +650,7 @@ const html=(`
 <div class="toot_entry_body">
 <a href="${toot_author_link}">
 <div class="icon_box">
-<img src="${NotificationObj.status.account.avatar}">
+${icon(NotificationObj.status.account.avatar)}
 </div>
 </a>
 <section class="toot_content">
@@ -709,7 +720,7 @@ const html=(`
 <div class="notice_author_box">
 <a href="${notice_author_link}">
 <div class="icon_box">
-<img src="${NotificationObj.account.avatar}">
+${icon(NotificationObj.account.avatar)}
 </div>
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
@@ -823,7 +834,7 @@ const html=(`
 <div class="toot_detail_body">
 <header class="toot_header">
 <div class="icon_box">
-<img src="${status.account.avatar}">
+${icon(status.account.avatar)}
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
@@ -995,7 +1006,7 @@ const html=(`
 <div class="toot_detail_body">
 <header class="toot_header">
 <div class="icon_box">
-<img src="${status.reblog.account.avatar}">
+${icon(status.reblog.account.avatar)}
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
@@ -1212,7 +1223,7 @@ const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="toot_entry_body">
 <div class="icon_box">
-<img src="${status.account.avatar}">
+${icon(status.account.avatar)}
 </div>
 <section class="toot_content">
 <header class="toot_header">
@@ -1316,7 +1327,7 @@ const html=(`
 </div>
 <div class="toot_entry_body">
 <div class="icon_box">
-<img src="${status.reblog.account.avatar}">
+${icon(status.reblog.account.avatar)}
 </div>
 <section class="toot_content">
 <header class="toot_header">
@@ -1832,12 +1843,12 @@ setOverlayStatus($(this).attr('sid'));
 })
 
 function setOverlayMedia(sid,urls,open_image_idx) {
-console.log('setOverlayMedia');
   $("#js-overlay_content .temporary_object").empty();
   $('#js-overlay_content_wrap').addClass('view');
   $('#js-overlay_content_wrap').addClass('black_08');
   $('#js-overlay_content .temporary_object').addClass('visible');
   api.get("statuses/"+sid, function(status) {
+
     media_template((!status.reblog)?status:status.reblog, urls[open_image_idx], urls, open_image_idx).appendTo("#js-overlay_content .temporary_object");
     replaceInternalLink();
     replace_emoji();
@@ -1864,6 +1875,7 @@ $(function() {
       urls.push(v);
       if (url == v) open_image_idx = idx;
     }
+    //if ( images.length == 0 ) urls.push(url);
     setOverlayMedia($(this).attr('sid'),urls, open_image_idx);
     $('.media_detail .toot_entry .media_views').addClass('invisible');
   });
@@ -2346,62 +2358,89 @@ $(function() {
   });
 })
 
+$(document).on('mouseenter', '.icon_box > img', function() {
+  let img = $(this);
+  if (typeof (img.attr('data-orig-url')) == 'undefined' ) return;
+  img.attr('src', img.attr('data-orig-url'));
+});
+$(document).on('mouseleave', '.icon_box > img', function() {
+  let img = $(this);
+  if (typeof (img.attr('data-orig-url')) == 'undefined' ) return;
+  img.attr('src', img.attr('data-url'));
+});
+$(document).on('mouseenter', 'video', function() {
+  if (typeof ($(this).attr('autoplay')) == 'undefined' ) this.play();
+});
+$(document).on('mouseleave', 'video', function() {
+  if (typeof ($(this).attr('autoplay')) == 'undefined' ) this.pause();
+});
+
 $(function () {
-$(document).on('click','.side_widget.stream_options .form_title button', function(e) {
-$(this).parent().next('.pulldown_form').toggleClass('view');
-if ( $(this).text() === Pomo.getText('SHOW') ) {
-  $(this).text(Pomo.getText('HIDE'));
-} else {
-  $(this).text(Pomo.getText('SHOW'));
-}
-const html_post_steraming = $(`<select name="post_steraming">
+  $(document).on('click','.side_widget.stream_options .form_title button', function(e) {
+    $(this).parent().next('.pulldown_form').toggleClass('view');
+    if ( $(this).text() === Pomo.getText('SHOW') ) {
+      $(this).text(Pomo.getText('HIDE'));
+    } else {
+      $(this).text(Pomo.getText('SHOW'));
+    }
+    const html_post_steraming = $(`<select name="post_steraming">
 <option value="auto">${Pomo.getText('Auto update')}</option>
 <option value="manual">${Pomo.getText('Manual update')}</option>
 </select>`)
-const html_post_privacy = $(`<select name="post_privacy">
+    const html_post_privacy = $(`<select name="post_privacy">
 <option value="public" selected>${Pomo.getText('Public', {context:'Option'})}</option>
 <option value="unlisted">${Pomo.getText('Unlisted', {context:'Option'})}</option>
 <option value="private">${Pomo.getText('Followers-only', {context:'Option'})}</option>
 <option value="direct">${Pomo.getText('Direct', {context:'Option'})}</option>
 </select>`)
-const html_local_instance = $(`<input name="local_instance" placeholder="Blank for default" type="text" class="disallow_enter"/>`)
-const html_search_filter = $(`<select name="search_filter">
+    const html_local_instance = $(`<input name="local_instance" placeholder="Blank for default" type="text" class="disallow_enter"/>`)
+    const html_search_filter = $(`<select name="search_filter">
 <option value="all" selected>${Pomo.getText('All instances')}</option>
 <option value="local">${Pomo.getText('Local only')}</option>
 </select>`)
-html_post_steraming.val(localStorage.getItem("setting_post_stream"));
-html_post_privacy.val(localStorage.getItem("setting_post_privacy"));
-html_local_instance.val(localStorage.getItem("setting_local_instance"));
-html_search_filter.val(localStorage.getItem("setting_search_filter"));
-$('.post_steraming_wrap').html(html_post_steraming)
-$('.post_privacy_wrap').html(html_post_privacy);
-$('.local_instance_wrap').html(html_local_instance);
-$('.search_filter_wrap').html(html_search_filter);
-return false;
-});
-$(document).on('change',".post_steraming_wrap select[name='post_steraming']", function(e) {
-localStorage.setItem("setting_post_stream", $(this).val() );
-putMessage("Changed setting to "+$(this).val() );
-});
-$(document).on('change', ".post_privacy_wrap select[name='post_privacy']", function(e) {
-localStorage.setItem("setting_post_privacy", $(this).val() );
-putMessage("Changed setting to "+$(this).val() );
-});
-$(document).on('change',".search_filter_wrap select[name='search_filter']", function(e) {
-localStorage.setItem("setting_search_filter", $(this).val() );
-putMessage("Changed setting to "+$(this).val() );
-});
-$(document).on('focus',".local_instance_wrap input[name='local_instance']", function(e) {
-$(this).attr("placeholder","https://"+current_instance);
-});
-$(document).on('change',".local_instance_wrap input[name='local_instance']", function(e) {
-if ( $(this).val() ) {
-localStorage.setItem("setting_local_instance", $(this).val() );
-} else {
-localStorage.setItem("setting_local_instance", "default" );
-}
-putMessage("Changed setting to "+$(this).val() );
-});
+    const html_autoplay_animated = $(`<select name="autoplay_animated">
+<option value="yes" selected>${Pomo.getText('Yes')}</option>
+<option value="no">${Pomo.getText('No')}</option>
+</select>`)
+    html_post_steraming.val(localStorage.getItem("setting_post_stream"));
+    html_post_privacy.val(localStorage.getItem("setting_post_privacy"));
+    html_local_instance.val(localStorage.getItem("setting_local_instance"));
+    html_search_filter.val(localStorage.getItem("setting_search_filter"));
+    html_autoplay_animated.val(localStorage.getItem("setting_autoplay_animated"));
+    $('.post_steraming_wrap').html(html_post_steraming)
+    $('.post_privacy_wrap').html(html_post_privacy);
+    $('.local_instance_wrap').html(html_local_instance);
+    $('.search_filter_wrap').html(html_search_filter);
+    $('.autoplay_animated_wrap').html(html_autoplay_animated);
+    return false;
+  });
+  $(document).on('change',".post_steraming_wrap select[name='post_steraming']", function(e) {
+    localStorage.setItem("setting_post_stream", $(this).val() );
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', $("option:selected", this).text()));
+  });
+  $(document).on('change', ".post_privacy_wrap select[name='post_privacy']", function(e) {
+    localStorage.setItem("setting_post_privacy", $(this).val() );
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', $("option:selected", this).text()));
+  });
+  $(document).on('change',".search_filter_wrap select[name='search_filter']", function(e) {
+    localStorage.setItem("setting_search_filter", $(this).val() );
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', $("option:selected", this).text()));
+  });
+  $(document).on('change',".autoplay_animated_wrap select[name='autoplay_animated']", function(e) {
+    localStorage.setItem("setting_autoplay_animated", $(this).val() );
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', $("option:selected", this).text()));
+  });
+  $(document).on('focus',".local_instance_wrap input[name='local_instance']", function(e) {
+    $(this).attr("placeholder","https://"+current_instance);
+  });
+  $(document).on('change',".local_instance_wrap input[name='local_instance']", function(e) {
+    if ( $(this).val() ) {
+      localStorage.setItem("setting_local_instance", $(this).val() );
+    } else {
+      localStorage.setItem("setting_local_instance", "default" );
+    }
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', $(this).val()));
+  });
 })
 
 $(function() {

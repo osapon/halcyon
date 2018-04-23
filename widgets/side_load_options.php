@@ -16,5 +16,8 @@
 <h3><?=_('Hashtag search filter')?></h3>
 <div class="search_filter_wrap">
 </div>
+<h3><?=_('Auto-play animated GIFs')?></h3>
+<div class="autoplay_animated_wrap">
+</div>
 </form>
 </div>

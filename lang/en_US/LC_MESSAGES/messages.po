@@ -364,3 +364,20 @@ msgstr "Sensitive content"
 #: 
 msgid "Click to view"
 msgstr "Click to view"
+
+#: 
+msgid "Auto-play animated GIFs"
+msgstr "Auto-play animated GIFs"
+
+#: 
+msgid "Yes"
+msgstr "Yes"
+
+#: 
+msgid "No"
+msgstr "No"
+
+#: 
+msgid "Changed setting to"
+msgstr "Changed setting to ${val}"
+

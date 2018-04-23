@@ -364,3 +364,19 @@ msgstr "非表示のメディア"
 #: 
 msgid "Click to view"
 msgstr "クリックして表示"
+
+#: 
+msgid "Auto-play animated GIFs"
+msgstr "アニメーションGIFを自動再生する"
+
+#: 
+msgid "Yes"
+msgstr "はい"
+
+#: 
+msgid "No"
+msgstr "いいえ"
+
+#: 
+msgid "Changed setting to"
+msgstr "${val}に変更しました"

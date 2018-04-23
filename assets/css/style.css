@@ -914,6 +914,19 @@ object-fit: cover;
 .media_views .media_attachment > iframe {
 object-fit: fill;
 }
+.media_views .gif_mark {
+	position: absolute;
+	bottom: 4px;
+	left: 4px;
+	padding: 0px 3px;
+	border-radius: 5px;
+	z-index: 2;
+	background-color: rgba(0, 0, 0, 0.5);
+}
+.media_views .gif_mark::before {
+	content:'GIF';
+	color: #AAB8C2;
+}
 .media_views.sensitive .sensitive_alart {
 display: flex;
 z-index: 1;
