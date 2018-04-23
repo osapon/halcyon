@@ -172,18 +172,20 @@ current_following_ids = localStorage.getItem("current_following_ids");
 current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
 }
 function setCurrentProfile() {
-$(".js_current_profile_displayname").text(current_display_name);
-$(".js_current_profile_username").text(current_acct);
-$(".js_current_profile_link").attr("href", current_url);
-$(".js_current_header_image").attr("src", current_header);
-$(".js_current_profile_image").attr("src", current_avatar);
-$(".js_current_toots_count").text(current_statuses_count);
-$(".js_current_following_count").text(current_following_count);
-$(".js_current_followers_count").text(current_followers_count);
-$(".current_toots_count_link").attr("href", current_statuses_count_link);
-$(".current_following_count_link").attr("href", current_following_count_link);
-$(".current_followers_count_link").attr("href", current_followers_count_link);
-replace_emoji();
+  if(typeof current_acct != 'undefined') {
+    $(".js_current_profile_displayname").text(current_display_name);
+    $(".js_current_profile_username").text(current_acct);
+    $(".js_current_profile_link").attr("href", current_url);
+    $(".js_current_header_image").attr("src", current_header);
+    $(".js_current_profile_image").attr("src", current_avatar);
+    $(".js_current_toots_count").text(current_statuses_count);
+    $(".js_current_following_count").text(current_following_count);
+    $(".js_current_followers_count").text(current_followers_count);
+    $(".current_toots_count_link").attr("href", current_statuses_count_link);
+    $(".current_following_count_link").attr("href", current_following_count_link);
+    $(".current_followers_count_link").attr("href", current_followers_count_link);
+    replace_emoji();
+  }
 }
 function putMessage(Message) {
 $('#overlay_message').addClass('view');

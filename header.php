@@ -36,6 +36,16 @@ function filedate($filename){
 <script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
 <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
 <script>
+Pomo.domain = 'messages';
+Pomo.returnStrings = true;
+Pomo.unescapeStrings = true;
+var pomo_def = Pomo.load(null,
+{
+  format: 'po',
+  mode: 'link',
+  translation_domain: 'messages'
+});
+
 if (
   !localStorage.getItem("current_id") |
   !localStorage.getItem("current_instance") |
@@ -44,17 +54,6 @@ if (
   location.href = "/login";
 } else {
   if( $.cookie("session") === "true" ) {
-    Pomo.domain = 'messages';
-    Pomo.returnStrings = true;
-    Pomo.unescapeStrings = true;
-    var pomo_def = Pomo.load(null,
-    {
-      format: 'po',
-      mode: 'link',
-      translation_domain: 'messages'
-    });
-    pomo_def.ready(function() {
-    });
     refreshApp();
   } else if ( $.cookie("session") === undefined ) {
     resetApp();
