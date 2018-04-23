@@ -1875,7 +1875,7 @@ $(function() {
       urls.push(v);
       if (url == v) open_image_idx = idx;
     }
-    //if ( images.length == 0 ) urls.push(url);
+    if ( images.length == 0 ) urls.push(url);
     setOverlayMedia($(this).attr('sid'),urls, open_image_idx);
     $('.media_detail .toot_entry .media_views').addClass('invisible');
   });
