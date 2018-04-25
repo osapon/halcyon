@@ -138,6 +138,19 @@ location.href = "/";
 Mastodon: <a href="<?=$config['App']['contact_link']?>" target="_blank"><?=$config['App']['contact_link']?></a><br />
 Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config['App']['source_link']?></a>
 </p>
+<h2>このサーバのHalcyonは機能追加されています</h2>
+<p>
+<ul style="list-style:inside;">
+<li>多言語対応</li>
+<li>複数枚画像の投稿不具合修正</li>
+<li>複数枚画像の閲覧ビューワー</li>
+<li>WebUIと同様の検索処理</li>
+<li>画像の非表示化</li>
+<li>GIFアニメの再生停止機能（選択可）</li>
+<li>2カラム表示</li>
+<li>トゥートアドレスのクリップボードコピー機能</li>
+</ul>
+</p>
 </article>
 </main>
 <!-- FOOTER -->
