@@ -2099,6 +2099,14 @@ word-wrap: break-word;
 #main .article_wrap .left_column .profile_section_wrap > .profile_bio a {
 color: #2588D0;
 }
+#main .article_wrap .left_column .profile_section_wrap > .profile_bio table {
+	border-collapse: collapse;
+	background-color: #fff;
+}
+#main .article_wrap .left_column .profile_section_wrap > .profile_bio > table td {
+	border: 1px solid #ECF1F4;
+	border-radius: 5px;
+}
 #js_profile_recent_images a {
 color: #2588D0;
 font-size: 13px;

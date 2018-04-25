@@ -1729,8 +1729,13 @@ $("#js_followers_count").text(AccountObj.followers_count);
 $("#js_profile_displayname").text(AccountObj.display_name);
 $("#js_profile_username").text(AccountObj.acct);
 $("#js_profile_bio").html(AccountObj.note);
-console.log(AccountObj.id);
-console.log(current_id);
+if (AccountObj.fields) {
+  let field = '';
+  for(let i = 0, max = AccountObj.fields.length; i < max; i++) {
+    field = field + `<tr><td>${htmlEscape(`${AccountObj.fields[i].name}`)}</td><td>${AccountObj.fields[i].value}</td></tr>`;
+  }
+  $("#js_header_fiels").html('<table>'+field+'</table>');
+}
 if( AccountObj.id == current_id ) {
 $(`<a href="https://${current_instance}/settings/profile">
 <button class="profile_edit_button relationship_button">
