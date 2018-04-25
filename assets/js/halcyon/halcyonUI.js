@@ -214,7 +214,7 @@ function mediaattachments_template(status) {
   if ( status.media_attachments[0].url === "/files/original/missing.png" ) {
     return "";
   } else {
-    if (( !status.sensitive ) && ( isSpoilerImage( status.media_attachments[i].id ) )) status.sensitive = true;
+    if (( !status.sensitive ) && ( isSpoilerImage( status.media_attachments[0].id ) )) status.sensitive = true;
     media_views = `
 <div class='media_views sensitive' media_length='${status.media_attachments.length}'>
 <div class='spoiler_button ${status.sensitive?'invisible':''}'></div>
