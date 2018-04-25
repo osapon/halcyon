@@ -380,3 +380,7 @@ msgstr "いいえ"
 #: 
 msgid "Changed setting to"
 msgstr "${val}に変更しました"
+
+#: 
+msgid "Exist new Toot."
+msgstr "新しいトゥートがあります。"

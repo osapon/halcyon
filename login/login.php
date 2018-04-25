@@ -149,6 +149,7 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 <li>GIFアニメの再生停止機能（選択可）</li>
 <li>2カラム表示</li>
 <li>トゥートアドレスのクリップボードコピー機能</li>
+<li>タイムラインの自動スクロールによる誤操作を防止</li>
 </ul>
 </p>
 </article>

@@ -381,3 +381,7 @@ msgstr "No"
 msgid "Changed setting to"
 msgstr "Changed setting to ${val}"
 
+#: 
+msgid "Exist new Toot."
+msgstr "Exist new Toot."
+
