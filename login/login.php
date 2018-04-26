@@ -150,6 +150,7 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 <li>2カラム表示</li>
 <li>トゥートアドレスのクリップボードコピー機能</li>
 <li>タイムラインの自動スクロールによる誤操作を防止</li>
+<li>通知タブの分類分け</li>
 </ul>
 </p>
 </article>
