@@ -6,9 +6,24 @@
 <article class="center_column">
 <header class="timeline_header">
 <ul class="header_items">
-<li class="item toots view">
-<a href="#">
+<li class="item all">
+<a href="notifications">
 <?=_('All')?>
+</a>
+</li>
+<li class="item reply">
+<a href="notifications?target=reply">
+<?=_('Reply')?>
+</a>
+</li>
+<li class="item follow">
+<a href="notifications?target=follow">
+<?=_('Follow')?>
+</a>
+</li>
+<li class="item bf">
+<a href="notifications?target=bf">
+<?=_('Boost & Favorite')?>
 </a>
 </li>
 </ul>
@@ -34,9 +49,24 @@
 </main>
 <script>
 current_file = location.pathname;
+<?php
+$allow_target=['follow','reply','bf'];
+$target = 'all';
+if (in_array( $_GET['target'], $allow_target )) $target = $_GET['target'];
+?>
+$(".header_items > .<?=$target?>").addClass('view');
 $("#notifications_nav").addClass('view');
 localStorage.setItem("notification_count", 0);
-setNotifications();
+var options = [];
+if ( '<?=$target?>' != 'all' ) {
+  if ( '<?=$target?>' != 'follow' ) options.push({name:'exclude_types[]', data:'follow'});
+  if ( '<?=$target?>' != 'reply' ) options.push({name:'exclude_types[]', data:'mention'});
+  if ( '<?=$target?>' != 'bf' ) {
+    options.push({name:'exclude_types[]', data:'favourite'});
+    options.push({name:'exclude_types[]', data:'reblog'});
+  }
+}
+setNotifications(options);
 $('title').text('Halcyon / Notifications')
 </script>
 <?php include ('footer.php'); ?>

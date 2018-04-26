@@ -384,3 +384,8 @@ msgstr "${val}に変更しました"
 #: 
 msgid "Exist new Toot."
 msgstr "新しいトゥートがあります。"
+
+#: 
+msgid "Boost & Favorite"
+msgstr "ブーストとお気に入り"
+
