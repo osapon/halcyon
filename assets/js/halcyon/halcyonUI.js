@@ -1204,7 +1204,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" username="${status.account.username}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1310,7 +1310,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" username="${status.reblog.account.username}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -2455,6 +2455,9 @@ $('.post_steraming_wrap').html(html_post_steraming)
 $('.post_privacy_wrap').html(html_post_privacy);
 $('.local_instance_wrap').html(html_local_instance);
 $('.search_filter_wrap').html(html_search_filter);
+if(localStorage.setting_link_previews == "true") {
+$("#setting_link_previews")[0].checked = true;
+}
 return false;
 });
 $(document).on('change',".post_steraming_wrap select[name='post_steraming']", function(e) {
@@ -2479,6 +2482,16 @@ localStorage.setItem("setting_local_instance", $(this).val() );
 localStorage.setItem("setting_local_instance", "default" );
 }
 putMessage("Changed setting to "+$(this).val() );
+});
+$("#setting_link_previews").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_link_previews","true");
+putMessage("Link preview enabled");
+}
+else {
+localStorage.setItem("setting_link_previews","false");
+putMessage("Link preview disabled");
+}
 });
 })
 $(function() {

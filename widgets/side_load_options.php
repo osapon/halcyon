@@ -16,5 +16,12 @@
 <h3>Hashtag search filter</h3>
 <div class="search_filter_wrap">
 </div>
+<h3>Enable link previews</h3>
+<div class="switch">
+<input type="checkbox" id="setting_link_previews">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
 </form>
 </div>
