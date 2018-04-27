@@ -14,7 +14,7 @@ These instances are publicly accessible and usable by everyone, no matter which 
 - https://social.dev-wiki.de - 1.1.1
 - https://halcyon.bka.li - 1.1.1
 - https://itter.photog.social - 1.1.1
-- https://halcyon.osa-p.net - 1.1.2(Japanese)
+- https://halcyon.osa-p.net - 1.1.2(Japanese + other feature)
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
@@ -32,6 +32,15 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Twitter like UI, familiar interface.
 - Able to use on all instances.
 - No tracking, No ads.
+- MultiLanguage(English & Japanese).
+- Multi image toot viewer.
+- Same search processing as WebUI.
+- Sensitive image can switched for show / hide.
+- Auto-play animated GIFs(selectable stop or play).
+- 2 column view.
+- Toot URL copy to clipboard.
+- Timeline pause the auto scroll.
+- Notification tab is split.
 
 ## Requirement
 - Apache/Nginx/lighttpd
@@ -44,3 +53,4 @@ Upload it, edit config.ini and have fun!
 ## Credits
 - [Kirschn/mastodon.js](https://github.com/Kirschn/mastodon.js)
 - [yks118/Mastodon-api-php](https://github.com/yks118/Mastodon-api-php)
+- [cfv1984/Pomo](https://github.com/cfv1984/Pomo)
