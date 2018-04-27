@@ -267,16 +267,24 @@ function mediaattachments_template(status) {
 }
 
 function timeline_template(status) {
+  var target_account = {};
   if (status.reblog === null) {
-    if (
-      status.account.id !== JSON.parse(localStorage.getItem("what_to_follow_0")).id &
-      status.account.id !== JSON.parse(localStorage.getItem("what_to_follow_1")).id &
-      status.account.id !== JSON.parse(localStorage.getItem("what_to_follow_2")).id &
-      status.account.id != current_id &
-      current_following_ids.indexOf(status.account.id) === -1
-    ) {
-      localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(status.account) );
-    }
+    target_account = status.account;
+  }
+  else {
+    target_account = status.reblog.account;
+  }
+  if ( target_account.acct.indexOf('@') == -1 ) target_account.acct = target_account.acct + '@' + current_instance;
+  if (
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_0")).acct &
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_1")).acct &
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_2")).acct &
+    target_account.acct != current_acct+'@'+current_instance &
+    current_following_acct.indexOf(target_account.acct) === -1
+  ) {
+    localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(target_account) );
+  }
+  if (status.reblog === null) {
     status.content = status.content.emoji_replace(status.emojis);
     const status_account_link= getRelativeURL(status.account.url, status.account.id),
     status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
@@ -391,15 +399,6 @@ ${toot_reblog_button}
 </li>`);
     return $(html)
   } else {
-    if (
-      status.reblog.account.id !== JSON.parse(localStorage.getItem("what_to_follow_0")).id &
-      status.reblog.account.id !== JSON.parse(localStorage.getItem("what_to_follow_1")).id &
-      status.reblog.account.id !== JSON.parse(localStorage.getItem("what_to_follow_2")).id &
-      status.reblog.account.id != current_id &
-      current_following_ids.indexOf(status.reblog.account.id) === -1
-    ) {
-      localStorage.setItem("what_to_follow_" + String(Math.floor(Math.random()*3)), JSON.stringify(status.reblog.account));
-    }
     status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
     const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
     status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
