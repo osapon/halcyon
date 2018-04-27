@@ -276,10 +276,11 @@ function timeline_template(status) {
   }
   if ( target_account.acct.indexOf('@') == -1 ) target_account.acct = target_account.acct + '@' + current_instance;
   if (
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_0")).acct &
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_1")).acct &
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_2")).acct &
-    target_account.acct != current_acct+'@'+current_instance &
+    typeof current_following_acct != 'undefined' &&
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_0")).acct &&
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_1")).acct &&
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_2")).acct &&
+    target_account.acct != current_acct+'@'+current_instance &&
     current_following_acct.indexOf(target_account.acct) === -1
   ) {
     localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(target_account) );
