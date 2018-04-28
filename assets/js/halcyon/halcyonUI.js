@@ -2458,13 +2458,13 @@ $(function () {
   });
   $("#setting_link_previews").change(function() {
     if(this.checked) {
-      localStorage.setItem("setting_link_previews","true");
-      putMessage("Link preview enabled");
+      val = "true";
     }
     else {
-      localStorage.setItem("setting_link_previews","false");
-      putMessage("Link preview disabled");
+      val = "false";
     }
+    localStorage.setItem("setting_link_previews",val);
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', Pomo.getText(val, {context:'Option'}) ));
   });
 })
 

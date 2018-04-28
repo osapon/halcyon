@@ -19,7 +19,7 @@
 <h3><?=_('Auto-play animated GIFs')?></h3>
 <div class="autoplay_animated_wrap">
 </div>
-<h3>Enable link previews</h3>
+<h3><?=_('Enable link previews')?></h3>
 <div class="switch">
 <input type="checkbox" id="setting_link_previews">
 <div class="switch-btn">

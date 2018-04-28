@@ -389,3 +389,16 @@ msgstr "新しいトゥートがあります。"
 msgid "Boost & Favorite"
 msgstr "ブーストとお気に入り"
 
+#: 
+msgid "Enable link previews"
+msgstr "リンク先の詳細表示"
+
+#: 
+msgctxt "Option"
+msgid "true"
+msgstr "有効"
+
+#: 
+msgctxt "Option"
+msgid "false"
+msgstr "無効"

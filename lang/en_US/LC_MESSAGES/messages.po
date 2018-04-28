@@ -389,3 +389,16 @@ msgstr "Exist new Toot."
 msgid "Boost & Favorite"
 msgstr "Boost & Favorite"
 
+#: 
+msgid "Enable link previews"
+msgstr "Enable link previews"
+
+#: 
+msgctxt "Option"
+msgid "true"
+msgstr "enabled"
+
+#: 
+msgctxt "Option"
+msgid "false"
+msgstr "disabled"
