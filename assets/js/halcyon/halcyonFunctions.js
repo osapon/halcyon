@@ -44,6 +44,70 @@ const tags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/(.+)\/?/);
 if (tags) {
 $(this).attr('href','/search?q='+tags[1]);
 }
+if(localStorage.setting_link_previews == "true") {
+  if(!window.cards) {
+    cards = new Array();
+  }
+  var this_id = $(this).parents('.toot_entry').attr("sid");
+  if(!$(this).attr("class") && this_id != undefined) {
+    if(!cards[this_id]) {
+      api.get("statuses/"+this_id+"/card",function(data) {
+        cards[this_id] = data;
+        if($(".toot_entry[sid="+this_id+"]").children().children("section").children("article").children(".link_preview").length == 0 && data.url) {
+          $(".toot_entry[sid="+this_id+"]").children().children("section").children("article").append(
+            $("<div>").addClass("media_views").addClass("link_preview").attr("sid",this_id).attr("media_length",1).css("height","unset").data("url",data.url).append(
+            $("<img>").attr("src",data.image).width(data.width).css("max-width","200px").css("float","left").css("margin-right","5px")).append(
+            $("<strong>").text(data.title)).append($("<br>")).append(
+            $("<span>").text(data.description)).append($("<br>")).append(
+            $("<span>").css("color","#777777").text(data.url)).click(function(e) {
+              e.stopPropagation();
+              window.open($(this).data("url"),"_blank");
+            })
+          );
+        }
+        if($(".main_status[sid="+this_id+"]").children().children("section").children("article").children(".link_preview").length == 0 && data.url) {
+          $(".main_status[sid="+this_id+"]").children().children("section").children("article").append(
+            $("<div>").addClass("media_views").addClass("link_preview").attr("sid",this_id).attr("media_length",1).css("height","unset").data("url",data.url).append(
+            $("<img>").attr("src",data.image).width(data.width).css("max-width","200px").css("float","left").css("margin-right","5px")).append(
+            $("<strong>").text(data.title)).append($("<br>")).append(
+            $("<span>").text(data.description)).append($("<br>")).append(
+            $("<span>").css("color","#777777").text(data.url)).click(function(e) {
+              e.stopPropagation();
+              window.open($(this).data("url"),"_blank");
+            })
+          );
+        }
+      });
+    }
+    else {
+      data = cards[this_id];
+      if($(".toot_entry[sid="+this_id+"]").children().children("section").children("article").children(".link_preview").length == 0 && data.url) {
+        $(".toot_entry[sid="+this_id+"]").children().children("section").children("article").append(
+          $("<div>").addClass("media_views").addClass("link_preview").attr("sid",this_id).attr("media_length",1).css("height","unset").data("url",data.url).append(
+          $("<img>").attr("src",data.image).width(data.width).css("max-width","200px").css("float","left").css("margin-right","5px")).append(
+          $("<strong>").text(data.title)).append($("<br>")).append(
+          $("<span>").text(data.description)).append($("<br>")).append(
+          $("<span>").css("color","#777777").text(data.url)).click(function(e) {
+            e.stopPropagation();
+            window.open($(this).data("url"),"_blank");
+          })
+        );
+      }
+      if($(".main_status[sid="+this_id+"]").children().children("section").children("article").children(".link_preview").length == 0 && data.url) {
+        $(".main_status[sid="+this_id+"]").children().children("section").children("article").append(
+          $("<div>").addClass("media_views").addClass("link_preview").attr("sid",this_id).attr("media_length",1).css("height","unset").data("url",data.url).append(
+          $("<img>").attr("src",data.image).width(data.width).css("max-width","200px").css("float","left").css("margin-right","5px")).append(
+          $("<strong>").text(data.title)).append($("<br>")).append(
+          $("<span>").text(data.description)).append($("<br>")).append(
+          $("<span>").css("color","#777777").text(data.url)).click(function(e) {
+            e.stopPropagation();
+            window.open($(this).data("url"),"_blank");
+          })
+        );
+      }
+    }
+  }
+}
 });
 }
 function getConversionedDate(key, value) {
