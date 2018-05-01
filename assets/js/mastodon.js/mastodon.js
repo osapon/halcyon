@@ -13,8 +13,7 @@ getConfig: function(key) {
 return config[key];
 },
 get: function (endpoint) {
-var queryData, callback,
-queryStringAppend = "?";
+var queryData,callback,queryStringAppend = "?";
 if (typeof arguments[1] === "function") {
 queryData = {};
 callback = arguments[1];
@@ -22,6 +21,10 @@ callback = arguments[1];
 queryData = arguments[1];
 callback = arguments[2];
 }
+if(typeof queryData == "string") {
+queryStringAppend = queryData;
+}
+else {
 for (var i in queryData) {
 if (queryData.hasOwnProperty(i)) {
 if (typeof queryData[i] === "string") {
@@ -31,6 +34,8 @@ queryStringAppend += queryData[i].name + "="+ queryData[i].data + "&";
 }
 }
 }
+}
+var xquerydata = queryData;
 $.ajax({
 url: apiBase + endpoint + queryStringAppend,
 type: "GET",
@@ -41,9 +46,14 @@ responce_headers = xhr.getAllResponseHeaders();
 callback(data,textStatus);
 },
 error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.get(endpoint,queryStringAppend,callback);
+}
+else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
-location.href = "/logout"
+location.href = "/logout";
+}
 }
 }
 });
@@ -79,9 +89,14 @@ responce_headers = xhr.getAllResponseHeaders();
 callback(data,textStatus);
 },
 error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.getArray(endpoint,queryData,callback);
+}
+else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
-location.href = "/logout"
+location.href = "/logout";
+}
 }
 }
 });
@@ -114,9 +129,14 @@ responce_headers = xhr.getAllResponseHeaders();
 callback(data,textStatus);
 },
 error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.getOther(endpoint,queryData,callback);
+}
+else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
-location.href = "/logout"
+location.href = "/logout";
+}
 }
 }
 });
@@ -149,9 +169,14 @@ console.log("Successful POST API request to " +apiBase+endpoint);
 callback(data,textStatus)
 },
 error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.post(endpoint,postData,callback);
+}
+else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
-location.href = "/logout"
+location.href = "/logout";
+}
 }
 }
 });
@@ -177,9 +202,14 @@ console.log("Successful POST API request to " +apiBase+endpoint);
 callback(data,textStatus)
 },
 error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.postMedia(endpoint,postData,callback);
+}
+else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
-location.href = "/logout"
+location.href = "/logout";
+}
 }
 }
 });
@@ -197,16 +227,20 @@ console.log("Successful DELETE API request to " +apiBase+endpoint);
 callback(data,textStatus)
 },
 error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.delete(endpoint,callback);
+}
+else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
-location.href = "/logout"
+location.href = "/logout";
+}
 }
 }
 });
 },
 stream: function (streamType, onData) {
-var es = new WebSocket("wss://" + apiBase.substr(8)
-+"streaming?access_token=" + config.api_user_token + "&stream=" + streamType);
+var es = new WebSocket("wss://" + apiBase.substr(8) + "streaming?access_token=" + config.api_user_token + "&stream=" + streamType);
 var listener = function (event) {
 console.log("Got Data from Stream " + streamType);
 event = JSON.parse(event.data);
@@ -214,6 +248,9 @@ event.payload = JSON.parse(event.payload);
 onData(event);
 };
 es.onmessage = listener;
+es.onclose = function() {
+api.stream(streamType,onData);
+};
 }
 };
 };

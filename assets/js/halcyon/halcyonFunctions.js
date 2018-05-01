@@ -248,6 +248,24 @@ $(".js_current_followers_count").text(current_followers_count);
 $(".current_toots_count_link").attr("href", current_statuses_count_link);
 $(".current_following_count_link").attr("href", current_following_count_link);
 $(".current_followers_count_link").attr("href", current_followers_count_link);
+if(localStorage.setting_link_previews == "true") {
+$("#setting_link_previews")[0].checked = true;
+}
+if(localStorage.setting_desktop_notifications == "true") {
+$("#setting_desktop_notifications")[0].checked = true;
+if (Notification.permission === 'default') {
+Notification.requestPermission(function(p) {
+if (p === 'denied') {
+localStorage.setItem("setting_desktop_notifications","false");
+$("#setting_desktop_notifications")[0].checked = false;
+}
+});
+}
+else if(Notification.permission == "denied") {
+localStorage.setItem("setting_desktop_notifications","false");
+$("#setting_desktop_notifications")[0].checked = false;
+}
+}
 replace_emoji();
 }
 function putMessage(Message) {
@@ -257,3 +275,13 @@ setTimeout(function(){
 $("#overlay_message").removeClass("view");
 },3000);
 };
+function pushNotification(title,message) {
+if (window.Notification && localStorage.setting_desktop_notifications == "true") {
+if (Notification.permission === 'granted') {
+notify = new Notification(title, {
+body: message,
+icon: '/assets/images/halcyon_logo.png'  
+});
+}
+}
+}

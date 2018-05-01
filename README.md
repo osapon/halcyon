@@ -10,16 +10,17 @@ Follow or Mastodon account and never miss an important update: [@halcyon@social.
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://halcyon.toromino.de - 1.1.3
+- https://halcyon.toromino.de - 1.1.4
+- https://halcyon.bka.li - 1.1.4
+- https://halcyon.tilde.team - 1.1.3
+- https://itter.photog.social - 1.1.3
 - https://social.dev-wiki.de - 1.1.1
-- https://halcyon.bka.li - 1.1.3
-- https://halcyon.tilde.team - 1.1.2
-- https://itter.photog.social - 1.1.1
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
+- Release of Version 1.1.4 - Automatically reconnect on bad connection,now supports desktop notifications,added ... at the end of shortened links
 - Release of Version 1.1.3 - New function link previews introduced and bug when replying an toot which already has replies below it fixed (reply to undefined)
 - Release of Version 1.1.2 - Privacy modes are now correctly displayed and used for replies,use username if display name doesn't exist,bugs on search page fixed
 - Release of Version 1.1.1 - Fixed error 404 when viewing profile of own instance,numbers below profile on the left do now change during session,added nginx config
