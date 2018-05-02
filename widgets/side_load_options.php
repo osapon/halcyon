@@ -26,7 +26,7 @@
 <span></span>
 </div>
 </div>
-<h3>Desktop notifications</h3>
+<h3><?=_('Desktop notifications')?></h3>
 <div class="switch">
 <input type="checkbox" id="setting_desktop_notifications">
 <div class="switch-btn">

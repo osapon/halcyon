@@ -335,12 +335,12 @@ function removeSpoilerImage(oid) {
   spoiler_oids.splice( spoiler_oids.indexOf(oid), 1 );
   localStorage.setItem('spoiler_oids', JSON.stringify(spoiler_oids));
 }
-function pushNotification(title,message) {
+function pushNotification(param) {
   if (window.Notification && localStorage.setting_desktop_notifications == "true") {
     if (Notification.permission === 'granted') {
-      notify = new Notification(title, {
-        body: message,
-        icon: '/assets/images/halcyon_logo.png'  
+      notify = new Notification(param.title, {
+        body: param.message,
+        icon: (param.icon?param.icon:'/assets/images/halcyon_logo.png')
       });
     }
   }

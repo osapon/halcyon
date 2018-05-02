@@ -402,3 +402,27 @@ msgstr "有効"
 msgctxt "Option"
 msgid "false"
 msgstr "無効"
+
+#: 
+msgid "Desktop notifications"
+msgstr "デスクトップ通知"
+
+#: 
+msgid "You didn't allow notifications"
+msgstr "ブラウザでの通知が許可されていません"
+
+#: 
+msgid "favourited your toot"
+msgstr "${name}さんがお気に入りに登録しました"
+
+#: 
+msgid "boosted your toot"
+msgstr "${name}さんがブーストしました"
+
+#: 
+msgid "followed your account"
+msgstr "${name}さんにフォローされました"
+
+#: 
+msgid "mentioned you"
+msgstr "${name}さんがあなたに返信しました"

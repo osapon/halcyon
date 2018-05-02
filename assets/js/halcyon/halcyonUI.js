@@ -1794,33 +1794,64 @@ $(`<div class="profile_recent_images_item media_attachment" otype="image" sid="$
 };
 
 function badges_update(){
-let current_count = Number(localStorage.getItem("notification_count"));
-if ( current_count ) {
-$('#header .header_nav_list .notification_badge').removeClass('invisible');
-$('#header .header_nav_list .notification_badge').text( current_count );
-}
-api.stream("user", function(userstream) {
-if (userstream.event === "update" & location.pathname !== "/" ) {
-$('#header .header_nav_list .home_badge').removeClass('invisible');
-}
-else if (userstream.event === "notification" & location.pathname !== "/notifications") {
-current_count += 1;
-localStorage.setItem("notification_count", current_count );
-$('#header .header_nav_list .notification_badge').text( current_count );
-if ( $('#header .header_nav_list .notification_badge').hasClass('invisible') ) {
-$('#header .header_nav_list .notification_badge').removeClass('invisible')
-}
-if(userstream.payload.account.display_name.length == 0) {
-userstream.payload.account.display_name = userstream.payload.account.username;
-}
-switch(userstream.payload.type) {
-case "favourite":pushNotification("New favourite",userstream.payload.account.display_name+" favourited your toot");break;
-case "reblog":pushNotification("New boost",userstream.payload.account.display_name+" boosted your toot");break;
-case "follow":pushNotification("New follower",userstream.payload.account.display_name+" followed you");$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
-case "mention":pushNotification("New mention",userstream.payload.account.display_name+" mentioned you");break;
-}
-}
-});
+  let current_count = Number(localStorage.getItem("notification_count"));
+  if ( current_count ) {
+    $('#header .header_nav_list .notification_badge').removeClass('invisible');
+    $('#header .header_nav_list .notification_badge').text( current_count );
+  }
+  api.stream("user", function(userstream) {
+    if (userstream.event === "update" & location.pathname !== "/" ) {
+      $('#header .header_nav_list .home_badge').removeClass('invisible');
+    }
+    else if (userstream.event === "notification" & location.pathname !== "/notifications") {
+      current_count += 1;
+      localStorage.setItem("notification_count", current_count );
+      $('#header .header_nav_list .notification_badge').text( current_count );
+      if ( $('#header .header_nav_list .notification_badge').hasClass('invisible') ) {
+        $('#header .header_nav_list .notification_badge').removeClass('invisible')
+      }
+      if(userstream.payload.account.display_name.length == 0) {
+        userstream.payload.account.display_name = userstream.payload.account.username;
+      }
+      console.log(userstream.payload);
+      let title;
+      switch(userstream.payload.type) {
+        case "favourite":
+          title = Pomo.getText('favourited your toot').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: $('<p>').html(userstream.payload.status.content).text(),
+            icon: userstream.payload.account.avatar_static
+          });
+          break;
+        case "reblog":
+          title = Pomo.getText('boosted your toot').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: $('<p>').html(userstream.payload.status.content).text(),
+            icon: userstream.payload.account.avatar_static
+          });
+          break;
+        case "follow":
+          title = Pomo.getText('followed your account').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: '',
+            icon: userstream.payload.account.avatar_static
+          });
+          $(".js_current_followers_count").html(++localStorage.current_followers_count);
+          break;
+        case "mention":
+          title = Pomo.getText('mentioned you').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: $('<p>').html(userstream.payload.status.content).text(),
+            icon: userstream.payload.account.avatar_static
+          });
+          break;
+      }
+    }
+  });
 }
 
 function setOverlayStatus(sid) {
@@ -2475,32 +2506,30 @@ $(function () {
   });
   $("#setting_desktop_notifications").change(function() {
     if(this.checked) {
-      localStorage.setItem("setting_desktop_notifications","true");
+      val = "true";
+    }
+    else {
+      val = "false";
+    }
+    var msg = Pomo.getText("Changed setting to").replace('${val}', Pomo.getText(val, {context:'Option'}) );
+    if(this.checked) {
       if (Notification.permission === 'default') {
         Notification.requestPermission(function(p) {
           if (p === 'denied') {
-            localStorage.setItem("setting_desktop_notifications","false");
+            val = "false";
             $("#setting_desktop_notifications")[0].checked = false;
-            putMessage("You didn't allow notifications");
-          }
-          else {
-            putMessage("Desktop notifications enabled");
+            msg = Pomo.getText("You didn't allow notifications");
           }
         });
       }
       else if(Notification.permission == "denied") {
-        localStorage.setItem("setting_desktop_notifications","false");
+        val = "false";
         $("#setting_desktop_notifications")[0].checked = false;
-        putMessage("You didn't allow notifications");
-      }
-      else {
-        putMessage("Desktop notifications enabled");
+        msg = Pomo.getText("You didn't allow notifications");
       }
     }
-    else {
-      localStorage.setItem("setting_desktop_notifications","false");
-      putMessage("Desktop notifications disabled");
-    }
+    localStorage.setItem("setting_desktop_notifications",val);
+    putMessage(msg);
   });
 })
 
