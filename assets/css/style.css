@@ -35,6 +35,9 @@ color: red!important;
 .invisible {
 display: none!important;
 }
+.ellipsis:after {
+content:"...";
+}
 .no-events {
 pointer-events: none;
 }

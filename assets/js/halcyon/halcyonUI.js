@@ -1800,17 +1800,24 @@ $('#header .header_nav_list .notification_badge').removeClass('invisible');
 $('#header .header_nav_list .notification_badge').text( current_count );
 }
 api.stream("user", function(userstream) {
-if(userstream.event == "notification" && userstream.payload.type == "follow") {
-$(".js_current_followers_count").html(++localStorage.current_followers_count);
-}
 if (userstream.event === "update" & location.pathname !== "/" ) {
 $('#header .header_nav_list .home_badge').removeClass('invisible');
-} else if (userstream.event === "notification" & location.pathname !== "/notifications") {
+}
+else if (userstream.event === "notification" & location.pathname !== "/notifications") {
 current_count += 1;
 localStorage.setItem("notification_count", current_count );
 $('#header .header_nav_list .notification_badge').text( current_count );
 if ( $('#header .header_nav_list .notification_badge').hasClass('invisible') ) {
 $('#header .header_nav_list .notification_badge').removeClass('invisible')
+}
+if(userstream.payload.account.display_name.length == 0) {
+userstream.payload.account.display_name = userstream.payload.account.username;
+}
+switch(userstream.payload.type) {
+case "favourite":pushNotification("New favourite",userstream.payload.account.display_name+" favourited your toot");break;
+case "reblog":pushNotification("New boost",userstream.payload.account.display_name+" boosted your toot");break;
+case "follow":pushNotification("New follower",userstream.payload.account.display_name+" followed you");$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
+case "mention":pushNotification("New mention",userstream.payload.account.display_name+" mentioned you");break;
 }
 }
 });
@@ -2465,6 +2472,35 @@ $(function () {
     }
     localStorage.setItem("setting_link_previews",val);
     putMessage(Pomo.getText("Changed setting to").replace('${val}', Pomo.getText(val, {context:'Option'}) ));
+  });
+  $("#setting_desktop_notifications").change(function() {
+    if(this.checked) {
+      localStorage.setItem("setting_desktop_notifications","true");
+      if (Notification.permission === 'default') {
+        Notification.requestPermission(function(p) {
+          if (p === 'denied') {
+            localStorage.setItem("setting_desktop_notifications","false");
+            $("#setting_desktop_notifications")[0].checked = false;
+            putMessage("You didn't allow notifications");
+          }
+          else {
+            putMessage("Desktop notifications enabled");
+          }
+        });
+      }
+      else if(Notification.permission == "denied") {
+        localStorage.setItem("setting_desktop_notifications","false");
+        $("#setting_desktop_notifications")[0].checked = false;
+        putMessage("You didn't allow notifications");
+      }
+      else {
+        putMessage("Desktop notifications enabled");
+      }
+    }
+    else {
+      localStorage.setItem("setting_desktop_notifications","false");
+      putMessage("Desktop notifications disabled");
+    }
   });
 })
 
