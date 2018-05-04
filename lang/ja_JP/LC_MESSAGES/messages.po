@@ -402,3 +402,75 @@ msgstr "有効"
 msgctxt "Option"
 msgid "false"
 msgstr "無効"
+
+#: 
+msgid "Desktop notifications"
+msgstr "デスクトップ通知"
+
+#: 
+msgid "You didn't allow notifications"
+msgstr "ブラウザでの通知が許可されていません"
+
+#: 
+msgid "favourited your toot"
+msgstr "${name}さんがお気に入りに登録しました"
+
+#: 
+msgid "boosted your toot"
+msgstr "${name}さんがブーストしました"
+
+#: 
+msgid "followed your account"
+msgstr "${name}さんにフォローされました"
+
+#: 
+msgid "mentioned you"
+msgstr "${name}さんがあなたに返信しました"
+
+#: 
+msgid "Recently Used"
+msgstr "よく使う絵文字"
+
+#: 
+msgid "Search Results"
+msgstr "検索結果"
+
+#: 
+msgid "Search..."
+msgstr "検索..."
+
+#: 
+msgid "Custom"
+msgstr "カスタム絵文字"
+
+#: 
+msgid "People"
+msgstr "人々"
+
+#: 
+msgid "Nature"
+msgstr "自然"
+
+#: 
+msgid "Food"
+msgstr "食べ物"
+
+#: 
+msgid "Activities"
+msgstr "活動"
+
+#: 
+msgid "Travel & Places"
+msgstr "旅行と場所"
+
+#: 
+msgid "Objects"
+msgstr "物"
+
+#: 
+msgid "Symbols"
+msgstr "記号"
+
+#: 
+msgid "Flags"
+msgstr "国旗"

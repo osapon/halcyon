@@ -1410,14 +1410,14 @@ function setTimeline(level,load_options) {
           reply_sources[statuses[i].in_reply_to_id] = statuses[i].id;
           api.get('statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
             $("#js-timeline .toot_entry[sid='"+reply_sources[in_reply_statuses.id]+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
-            replace_emoji();
+            replace_emoji(true);
           });
         }
       }
     };
     links = getLinkFromXHRHeader(responce_headers);
     replaceInternalLink();
-    replace_emoji();
+    replace_emoji(true);
     if (!statuses.length) {
       $('#js-timeline_footer > i').css({"display":"none"});
     }
@@ -1438,14 +1438,14 @@ function setTimeline(level,load_options) {
                   reply_sources[statuses[i].in_reply_to_id] = statuses[i].id;
                   api.get('statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
                     $("#js-timeline .toot_entry[sid='"+reply_sources[in_reply_statuses.id]+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
-                    replace_emoji();
+                    replace_emoji(true);
                   });
                 }
               }
             };
             links = getLinkFromXHRHeader(responce_headers);
             replaceInternalLink();
-            replace_emoji();
+            replace_emoji(true);
             isSyncing = false;
           } else {
             $('.timeline_footer > i').css({"display":"none"});
@@ -1492,14 +1492,14 @@ function setTimeline(level,load_options) {
               putMessage(Pomo.getText('Exist new Toot.'));
             }
             replaceInternalLink();
-            replace_emoji();
+            replace_emoji(true);
             if ( level === "timelines/home" | level === "timelines/public" ) {
               if (userstream.payload.in_reply_to_id & !$(".toot_entry[sid='"+userstream.in_reply_to_id+"']").length) {
                 let reply_source = userstream.payload.id;
                 api.get('statuses/'+userstream.payload.in_reply_to_id, function(in_reply_statuses) {
                   $("#js-timeline .toot_entry[sid='"+reply_source+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
                   replaceInternalLink();
-                  replace_emoji();
+                  replace_emoji(true);
                 });
               }
             }
@@ -1513,13 +1513,13 @@ function setTimeline(level,load_options) {
       statuses.reverse();
       for ( let i in statuses ) {
         timeline_template(statuses[i]).prependTo("#js-timeline");
-        replace_emoji();
+        replace_emoji(true);
         if ( level === "timelines/home" | level === "timelines/public" ) {
           if (statuses[i].in_reply_to_id) {
             const reply_source = statuses[i].id;
             api.get('statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
               $("#js-timeline .toot_entry[sid='"+reply_source+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
-              replace_emoji();
+              replace_emoji(true);
             });
           }
         }
@@ -1817,32 +1817,52 @@ $('#header .header_nav_list .notification_badge').removeClass('invisible')
 }
 
 function setOverlayStatus(sid) {
-if ( !window.getSelection().toString() ) {
-$("#js-overlay_content .temporary_object").empty();
-$('#js-overlay_content_wrap').addClass('view');
-$('#js-overlay_content_wrap').addClass('black_05');
-api.get('statuses/'+sid+'/', function(status) {
-$('<div class="toot_detail_wrap"></div>').appendTo("#js-overlay_content .temporary_object");
-status_template(status, 'main_status').appendTo('#js-overlay_content .toot_detail_wrap');
-replaceInternalLink();
-replace_emoji();
-api.get('statuses/'+sid+'/context', function(status) {
-if (status.ancestors.length) {
-status.ancestors.reverse();
-for ( let i in status.ancestors ) {
-context_template(status.ancestors[i], 'ancestors_status').prependTo("#js-overlay_content .temporary_object .toot_detail_wrap");
-}
-}
-if (status.descendants.length) {
-for ( let i in status.descendants) {
-context_template(status.descendants[i], 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
-}
-}
-replaceInternalLink();
-replace_emoji();
-});
-});
-}
+  if ( !window.getSelection().toString() ) {
+    $("#js-overlay_content .temporary_object").empty();
+    $('#js-overlay_content_wrap').addClass('view');
+    $('#js-overlay_content_wrap').addClass('black_05');
+    api.get('statuses/'+sid+'/', function(status) {
+      $('<div class="toot_detail_wrap"></div>').appendTo("#js-overlay_content .temporary_object");
+      status_template(status, 'main_status').appendTo('#js-overlay_content .toot_detail_wrap');
+      replaceInternalLink();
+      replace_emoji();
+      api.get('statuses/'+sid+'/context', function(status) {
+        if (status.ancestors.length) {
+          status.ancestors.reverse();
+          for ( let i in status.ancestors ) {
+            context_template(status.ancestors[i], 'ancestors_status').prependTo("#js-overlay_content .temporary_object .toot_detail_wrap");
+          }
+        }
+        if (status.descendants.length) {
+          for ( let i in status.descendants) {
+            context_template(status.descendants[i], 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
+          }
+        }
+        replaceInternalLink();
+        replace_emoji();
+
+        $('textarea[class="emoji_poss"]', document).emojiPicker({
+          height: '400px',
+          width:  '280px',
+          recentlyLabel: Pomo.getText('Recently Used'),
+          searchLabel: Pomo.getText('Search Results'),
+          searchPlaceholder: Pomo.getText('Search...'),
+          categories: [
+                { name: 'custom', label: Pomo.getText('Custom') },
+                { name: 'people', label: Pomo.getText('People') },
+                { name: 'nature', label: Pomo.getText('Nature') },
+                { name: 'food', label: Pomo.getText('Food') },
+                { name: 'activity', label: Pomo.getText('Activities') },
+                { name: 'travel', label: Pomo.getText('Travel & Places') },
+                { name: 'object', label: Pomo.getText('Objects') },
+                { name: 'symbol', label: Pomo.getText('Symbols') },
+                { name: 'flag', label: Pomo.getText('Flags') }
+          ]
+        });
+
+      });
+    });
+  }
 }
 
 $(function() {
@@ -1907,6 +1927,21 @@ setOverlayMediaWithoutStatus($(this).attr('src'));
 });
 })
 
+function checkReadyStatusText( id ) {
+  const textCount = $(id+' textarea').val().length + $(id+' .status_spoiler').val().length;
+  let textLen = ( current_instance_charlimit - textCount );
+  if ( textLen <= -1 ) {
+    $(id+' .character_count').addClass('red');
+    $(id).addClass('ready');
+  } else if ( textLen === current_instance_charlimit ) {
+    $(id).addClass('ready');
+  } else {
+    $(id+' .character_count').removeClass('red');
+    $(id).removeClass('ready');
+  }
+  $(id+' .character_count').text(textLen);
+}
+
 $(function() {
   $(document).on('click', '#creat_status', function(e) {
   switch(localStorage.getItem("setting_post_privacy")) {
@@ -1927,25 +1962,13 @@ $(function() {
   $('#overlay_status_form .character_count').html(current_instance_charlimit);
   });
   $(document).on('change keyup','#overlay_status_form textarea, #overlay_status_form .status_spoiler', function(e) {
-  if (
-  e.keyCode !== 224 &
-  e.keyCode !== 17&
-  e.keyCode !== undefined
-  ) {
-  const textCount = $('#overlay_status_form textarea').val().length + $('#overlay_status_form .status_spoiler').val().length;
-  let textLen = ( current_instance_charlimit - textCount );
-  if ( textLen <= -1 ) {
-  $('#overlay_status_form .character_count').addClass('red');
-  $('#overlay_status_form').addClass('ready');
-  } else if ( textLen === current_instance_charlimit ) {
-  $('#overlay_status_form').addClass('ready');
-  } else {
-  $('#overlay_status_form .character_count').removeClass('red');
-  $('#overlay_status_form').removeClass('ready');
-  }
-  $(this).val(replaced_emoji_return($(this).val()));
-  $('#overlay_status_form .character_count').text(textLen);
-  }
+    if (
+      (e.keyCode !== 224) &&
+      (e.keyCode !== 17)
+    ) {
+      $(this).val(replaced_emoji_return($(this).val()));
+      checkReadyStatusText('#overlay_status_form');
+    }
   });
   $(document).on('click','#overlay_status_form .status_CW', function(e) {
   $('#overlay_status_form .status_spoiler').toggleClass('invisible');
@@ -2022,25 +2045,13 @@ $(function() {
   }
   });
   $(document).on('change keyup','#header_status_form textarea, #header_status_form .status_spoiler', function(e) {
-  if (
-  e.keyCode !== 224 &
-  e.keyCode !== 17&
-  e.keyCode !== undefined
-  ) {
-  const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
-  let textLen = ( current_instance_charlimit - textCount );
-  if ( textLen <= -1 ) {
-  $('#header_status_form .character_count').addClass('red');
-  $('#header_status_form').addClass('ready');
-  } else if ( textLen === current_instance_charlimit ) {
-  $('#header_status_form').addClass('ready');
-  } else {
-  $('#header_status_form .character_count').removeClass('red');
-  $('#header_status_form').removeClass('ready');
-  }
-  $(this).val(replaced_emoji_return($(this).val()));
-  $('#header_status_form .character_count').text(textLen);
-  }
+    if (
+      (e.keyCode !== 224) &&
+      (e.keyCode !== 17)
+    ) {
+      $(this).val(replaced_emoji_return($(this).val()));
+      checkReadyStatusText('#header_status_form');
+    }
   });
   $(document).on('click','#header_status_form .status_CW', function(e) {
   $('#header_status_form .status_spoiler').toggleClass('invisible');
@@ -2131,25 +2142,13 @@ $(function() {
   }
   });
   $(document).on('change keyup','#reply_status_form textarea, #reply_status_form .status_spoiler', function(e) {
-  if (
-  e.keyCode !== 224 &
-  e.keyCode !== 17&
-  e.keyCode !== undefined
-  ) {
-  const textCount = $('#reply_status_form textarea').val().length + $('#reply_status_form .status_spoiler').val().length;
-  let textLen = ( current_instance_charlimit - textCount );
-  if ( textLen <= -1 ) {
-  $('#reply_status_form .character_count').addClass('red');
-  $('#reply_status_form').addClass('ready');
-  } else if ( textLen === current_instance_charlimit ) {
-  $('#reply_status_form').addClass('ready');
-  } else {
-  $('#reply_status_form .character_count').removeClass('red');
-  $('#reply_status_form').removeClass('ready');
-  }
-  $(this).val(replaced_emoji_return($(this).val()));
-  $('#reply_status_form .character_count').text(textLen);
-  }
+    if (
+      (e.keyCode !== 224) &&
+      (e.keyCode !== 17)
+    ) {
+      $(this).val(replaced_emoji_return($(this).val()));
+      checkReadyStatusText('#reply_status_form');
+    }
   });
   $(document).on('click','#reply_status_form .status_CW', function(e) {
   $('#reply_status_form .status_spoiler').toggleClass('invisible');
@@ -2246,25 +2245,13 @@ $(function() {
   return false;
   });
   $(document).on('change keyup','#single_reply_status_form textarea, #single_reply_status_form .status_spoiler', function(e) {
-  if (
-  e.keyCode !== 224 &
-  e.keyCode !== 17&
-  e.keyCode !== undefined
-  ) {
-  const textCount = $('#single_reply_status_form textarea').val().length + $('#single_reply_status_form .status_spoiler').val().length;
-  let textLen = ( current_instance_charlimit - textCount );
-  if ( textLen <= -1 ) {
-  $('#single_reply_status_form .character_count').addClass('red');
-  $('#single_reply_status_form').addClass('ready');
-  } else if ( textLen === current_instance_charlimit ) {
-  $('#single_reply_status_form').addClass('ready');
-  } else {
-  $('#single_reply_status_form .character_count').removeClass('red');
-  $('#single_reply_status_form').removeClass('ready');
-  }
-  $(this).val(replaced_emoji_return($(this).val()));
-  $('#single_reply_status_form .character_count').text(textLen);
-  }
+    if (
+      (e.keyCode !== 224) &&
+      (e.keyCode !== 17)
+    ) {
+      $(this).val(replaced_emoji_return($(this).val()));
+      checkReadyStatusText('#single_reply_status_form');
+    }
   });
   $(document).on('click','#single_reply_status_form .status_CW', function(e) {
   $('#single_reply_status_form .status_spoiler').toggleClass('invisible');
@@ -2531,3 +2518,34 @@ $(function() {
     'keycode':191
   });
 });
+
+$(function() {
+  var emoji_data_read_check = window.setInterval(function(){
+    if (typeof $.fn.emojiPicker.emojis !== "undefined") {
+      clearInterval(emoji_data_read_check);
+      api.get("custom_emojis", function(data) {
+        localStorage.setItem("current_instance_custom_emojis", JSON.stringify(data));
+        setCustomEmojis(data);
+        $('textarea[class="emoji_poss"]', document).emojiPicker({
+          height: '400px',
+          width:  '280px',
+          recentlyLabel: Pomo.getText('Recently Used'),
+          searchLabel: Pomo.getText('Search Results'),
+          searchPlaceholder: Pomo.getText('Search...'),
+          categories: [
+                { name: 'custom', label: Pomo.getText('Custom') },
+                { name: 'people', label: Pomo.getText('People') },
+                { name: 'nature', label: Pomo.getText('Nature') },
+                { name: 'food', label: Pomo.getText('Food') },
+                { name: 'activity', label: Pomo.getText('Activities') },
+                { name: 'travel', label: Pomo.getText('Travel & Places') },
+                { name: 'object', label: Pomo.getText('Objects') },
+                { name: 'symbol', label: Pomo.getText('Symbols') },
+                { name: 'flag', label: Pomo.getText('Flags') }
+          ]
+        });
+      });
+    }
+  }, 1000);
+});
+

@@ -181,7 +181,7 @@ color: #189EFC;
 resize: none;
 height: 18px;
 border: none;
-max-width: 100%;
+max-width: 95%;
 font-size: 14px;
 font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
 line-height: normal;
@@ -442,7 +442,7 @@ flex: 1;
 #overlay_status_form.status_form .status_main .status_textarea textarea {
 color: #000;
 resize: none;
-max-width: 100%;
+max-width: 95%;
 height: auto;
 min-height: 72px;
 border-radius: 5px;
@@ -2584,4 +2584,10 @@ left: 32px;
 }
 .switch input:checked + .switch-btn {
 background: #189EFC;
+}
+.emojiPickerIconWrap {
+	width:100%;
+}
+#skinprefs em {
+	line-height: 1.4em;
 }

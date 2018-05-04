@@ -148,62 +148,62 @@ return datetime;
 }
 }
 function resetApp() {
-current_id = Number(localStorage.getItem("current_id"));
-current_instance = localStorage.getItem("current_instance");
-authtoken= localStorage.getItem("current_authtoken");
-api = new MastodonAPI({
-instance: 'https://'+current_instance,
-api_user_token: authtoken
-});
-api.get("accounts/verify_credentials", function(AccountObj) {
-localStorage.setItem("current_display_name", AccountObj["display_name"]);
-localStorage.setItem("current_acct", AccountObj["acct"]);
-localStorage.setItem("current_url", getRelativeURL(AccountObj["url"],AccountObj["id"]));
-localStorage.setItem("current_header", AccountObj["header"]);
-localStorage.setItem("current_avatar", AccountObj["avatar"]);
-localStorage.setItem("current_statuses_count", AccountObj["statuses_count"]);
-localStorage.setItem("current_following_count", AccountObj["following_count"]);
-localStorage.setItem("current_followers_count", AccountObj["followers_count"]);
-localStorage.setItem("current_statuses_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"]));
-localStorage.setItem("current_following_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/following'));
-localStorage.setItem("current_followers_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/followers'));
-localStorage.setItem("current_favourites_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/favourites'));
-current_display_name = localStorage.getItem("current_display_name");
-current_acct = localStorage.getItem("current_acct");
-current_url = localStorage.getItem("current_url");
-current_header = localStorage.getItem("current_header");
-current_avatar = localStorage.getItem("current_avatar");
-current_statuses_count = localStorage.getItem("current_statuses_count");
-current_following_count = localStorage.getItem("current_following_count");
-current_followers_count = localStorage.getItem("current_followers_count");
-current_statuses_count_link = localStorage.getItem("current_statuses_count_link");
-current_following_count_link = localStorage.getItem("current_following_count_link");
-current_followers_count_link = localStorage.getItem("current_followers_count_link");
-current_favourites_link = localStorage.getItem("current_favourites_link");
-$(".js_current_profile_displayname").text(current_display_name);
-$(".js_current_profile_username").text(current_acct);
-$(".js_current_profile_link").attr('href', current_url);
-$(".js_current_header_image").attr('src', current_header);
-$(".js_current_profile_image").attr('src', current_avatar);
-$(".js_current_toots_count").text(current_statuses_count);
-$(".js_current_following_count").text(current_following_count);
-$(".js_current_followers_count").text(current_followers_count);
-$(".current_toots_count_link").attr('href', current_statuses_count_link);
-$(".current_following_count_link").attr('href', current_following_count_link);
-$(".current_followers_count_link").attr('href', current_followers_count_link);
-replace_emoji();
-});
-api.get("instance",function(data) {
-if(data.max_toot_chars) {
-localStorage.setItem("current_instance_charlimit",data.max_toot_chars);
-current_instance_charlimit = data.max_toot_chars;
-}
-else {
-localStorage.setItem("current_instance_charlimit",500);
-current_instance_charlimit = 500;
-}
-});
-$.cookie("session","true",{path:'/'});
+  current_id = Number(localStorage.getItem("current_id"));
+  current_instance = localStorage.getItem("current_instance");
+  authtoken= localStorage.getItem("current_authtoken");
+  api = new MastodonAPI({
+    instance: 'https://'+current_instance,
+    api_user_token: authtoken
+  });
+  api.get("accounts/verify_credentials", function(AccountObj) {
+    localStorage.setItem("current_display_name", AccountObj["display_name"]);
+    localStorage.setItem("current_acct", AccountObj["acct"]);
+    localStorage.setItem("current_url", getRelativeURL(AccountObj["url"],AccountObj["id"]));
+    localStorage.setItem("current_header", AccountObj["header"]);
+    localStorage.setItem("current_avatar", AccountObj["avatar"]);
+    localStorage.setItem("current_statuses_count", AccountObj["statuses_count"]);
+    localStorage.setItem("current_following_count", AccountObj["following_count"]);
+    localStorage.setItem("current_followers_count", AccountObj["followers_count"]);
+    localStorage.setItem("current_statuses_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"]));
+    localStorage.setItem("current_following_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/following'));
+    localStorage.setItem("current_followers_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/followers'));
+    localStorage.setItem("current_favourites_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/favourites'));
+    current_display_name = localStorage.getItem("current_display_name");
+    current_acct = localStorage.getItem("current_acct");
+    current_url = localStorage.getItem("current_url");
+    current_header = localStorage.getItem("current_header");
+    current_avatar = localStorage.getItem("current_avatar");
+    current_statuses_count = localStorage.getItem("current_statuses_count");
+    current_following_count = localStorage.getItem("current_following_count");
+    current_followers_count = localStorage.getItem("current_followers_count");
+    current_statuses_count_link = localStorage.getItem("current_statuses_count_link");
+    current_following_count_link = localStorage.getItem("current_following_count_link");
+    current_followers_count_link = localStorage.getItem("current_followers_count_link");
+    current_favourites_link = localStorage.getItem("current_favourites_link");
+    $(".js_current_profile_displayname").text(current_display_name);
+    $(".js_current_profile_username").text(current_acct);
+    $(".js_current_profile_link").attr('href', current_url);
+    $(".js_current_header_image").attr('src', current_header);
+    $(".js_current_profile_image").attr('src', current_avatar);
+    $(".js_current_toots_count").text(current_statuses_count);
+    $(".js_current_following_count").text(current_following_count);
+    $(".js_current_followers_count").text(current_followers_count);
+    $(".current_toots_count_link").attr('href', current_statuses_count_link);
+    $(".current_following_count_link").attr('href', current_following_count_link);
+    $(".current_followers_count_link").attr('href', current_followers_count_link);
+    replace_emoji();
+  });
+  api.get("instance",function(data) {
+    if(data.max_toot_chars) {
+      localStorage.setItem("current_instance_charlimit",data.max_toot_chars);
+      current_instance_charlimit = data.max_toot_chars;
+    }
+    else {
+      localStorage.setItem("current_instance_charlimit",500);
+      current_instance_charlimit = 500;
+    }
+  });
+  $.cookie("session","true",{path:'/'});
 }
 function refreshApp() {
   current_id = Number(localStorage.getItem("current_id"));
@@ -316,4 +316,26 @@ function removeSpoilerImage(oid) {
   if ( !spoiler_oids ) spoiler_oids = [];
   spoiler_oids.splice( spoiler_oids.indexOf(oid), 1 );
   localStorage.setItem('spoiler_oids', JSON.stringify(spoiler_oids));
+}
+function pushNotification(param) {
+  if (window.Notification && localStorage.setting_desktop_notifications == "true") {
+    if (Notification.permission === 'granted') {
+      notify = new Notification(param.title, {
+        body: param.message,
+        icon: (param.icon?param.icon:'/assets/images/halcyon_logo.png')
+      });
+    }
+  }
+}
+function setCustomEmojis(emojis) {
+  for(let i = 0, max = emojis.length; i < max; i++) {
+    let emoji = emojis[i];
+    $.fn.emojiPicker.emojis.unshift({
+      "name": emoji.shortcode,
+      "unicode": emoji.static_url,
+      "shortcode": emoji.shortcode,
+      "description": emoji.shortcode,
+      "category": "custom"
+    });
+  }
 }
