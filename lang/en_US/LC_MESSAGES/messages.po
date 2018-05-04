@@ -426,3 +426,51 @@ msgstr "${name} followed you"
 #: 
 msgid "mentioned you"
 msgstr "${name} mentioned you"
+
+#: 
+msgid "Recently Used"
+msgstr "Recently Used"
+
+#: 
+msgid "Search Results"
+msgstr "Search Results"
+
+#: 
+msgid "Search..."
+msgstr "Search..."
+
+#: 
+msgid "Custom"
+msgstr "Custom"
+
+#: 
+msgid "People"
+msgstr "People"
+
+#: 
+msgid "Nature"
+msgstr "Nature"
+
+#: 
+msgid "Food"
+msgstr "Food"
+
+#: 
+msgid "Activities"
+msgstr "Activities"
+
+#: 
+msgid "Travel & Places"
+msgstr "Travel & Places"
+
+#: 
+msgid "Objects"
+msgstr "Objects"
+
+#: 
+msgid "Symbols"
+msgstr "Symbols"
+
+#: 
+msgid "Flags"
+msgstr "Flags"

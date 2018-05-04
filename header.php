@@ -24,17 +24,21 @@ function filedate($filename){
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="<?php echo filedate('/assets/css/style.css'); ?>" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.css'); ?>" media="all">
+<link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.tw2.css'); ?>" media="all">
 <link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/lang/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
-<script src="/assets/js/halcyon/halcyonFunctions.js"></script>
-<script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
+<script src="<?php echo filedate('/assets/js/halcyon/halcyonFunctions.js'); ?>"></script>
+<script src="<?php echo filedate('/assets/js/mastodon.js/mastodon.js'); ?>"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/assets/js/shortcut.js"></script>
-<script src="/assets/js/replace_emoji.js"></script>
+<script src="<?php echo filedate('/assets/js/replace_emoji.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
 <script src="/assets/js/pomo/src/dist/pomo.js"></script>
-<script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
+<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
 <script src="//cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
+<script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojipicker.js'); ?>"></script>
+<script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojis.js'); ?>"></script>
 <script>
 Pomo.domain = 'messages';
 Pomo.returnStrings = true;
