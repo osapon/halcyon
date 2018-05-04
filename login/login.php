@@ -151,6 +151,7 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 <li>トゥートアドレスのクリップボードコピー機能</li>
 <li>タイムラインの自動スクロールによる誤操作を防止</li>
 <li>通知タブの分類分け</li>
+<li>カスタム絵文字を含む絵文字入力機能</li>
 </ul>
 </p>
 </article>

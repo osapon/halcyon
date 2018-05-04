@@ -44,6 +44,7 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Toot URL copy to clipboard.
 - Timeline pause the auto scroll.
 - Notification tab is split.
+- Emoji input pad.
 
 ## Requirement
 - Apache/Nginx/lighttpd
