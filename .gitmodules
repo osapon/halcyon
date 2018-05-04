@@ -1,3 +1,6 @@
 [submodule "assets/js/pomo"]
 	path = assets/js/pomo
 	url = https://github.com/osapon/Pomo.git
+[submodule "assets/js/jquery-emoji-picker"]
+	path = assets/js/jquery-emoji-picker
+	url = https://github.com/osapon/jquery-emoji-picker.git
