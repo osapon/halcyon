@@ -279,7 +279,7 @@ const html=(`
 <div class="text_ellipsis">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.account.display_name}
+${htmlEscape(status.account.display_name)}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -313,7 +313,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape(status.account.display_name)}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -384,7 +384,7 @@ const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape(status.account.display_name)} Boosted</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -398,7 +398,7 @@ const html = (`
 <div class="text_ellipsis">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${status.reblog.account.display_name}
+${htmlEscape(status.reblog.account.display_name)}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -432,7 +432,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${htmlEscape(status.reblog.account.display_name)}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -484,7 +484,7 @@ const html = (`
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> favourited Your Toot
+<span class="emoji_poss" >${htmlEscape(NotificationObj.account.display_name)}</span> favourited Your Toot
 </a>
 </div>
 <div class="notice_entry_body">
@@ -493,7 +493,7 @@ const html = (`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
+${htmlEscape(NotificationObj.status.account.display_name)}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -524,7 +524,7 @@ html = (`
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> boosted Your Toot
+<span class="emoji_poss" >${htmlEscape(NotificationObj.account.display_name)}</span> boosted Your Toot
 </a>
 </div>
 <blockquote class="notice_entry_body">
@@ -533,7 +533,7 @@ html = (`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
+${htmlEscape(NotificationObj.status.account.display_name)}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -610,7 +610,7 @@ const html=(`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
+${htmlEscape(NotificationObj.status.account.display_name)}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -644,7 +644,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
+<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${htmlEscape(NotificationObj.account.display_name)}" privacy="${NotificationObj.status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -677,7 +677,7 @@ const html=(`
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> followed you
+<span class="emoji_poss">${htmlEscape(NotificationObj.account.display_name)}</span> followed you
 </a>
 </div>
 </li>`);
@@ -706,7 +706,7 @@ const html = (`
 <div class="follows_profile_name_box emoji_poss">
 <a class="js_follows_profile_link" href="${profile_link}">
 <h2 class="js_follows_profile_displayname">
-${AccountObj.display_name}
+${htmlEscape(AccountObj.display_name)}
 </h2>
 <span class="js_follows_profile_username">
 @${AccountObj.acct}
@@ -781,7 +781,7 @@ const html=(`
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.account.display_name}
+${htmlEscape(status.account.display_name)}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -816,7 +816,7 @@ ${media_views}
 </section>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape(status.account.display_name)}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -955,7 +955,7 @@ const html=(`
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.reblog.account.display_name}
+${htmlEscape(status.reblog.account.display_name)}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -990,7 +990,7 @@ ${media_views}
 </section>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape(status.reblog.account.display_name)}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1171,7 +1171,7 @@ const html=(`
 <header class="toot_header">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${status.account.display_name}
+${htmlEscape(status.account.display_name)}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -1204,7 +1204,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape(status.account.display_name)}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1266,7 +1266,7 @@ const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape(status.account.display_name)} Boosted</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -1277,7 +1277,7 @@ const html=(`
 <header class="toot_header">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${status.reblog.account.display_name}
+${htmlEscape(status.reblog.account.display_name)}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -1310,7 +1310,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape(status.reblog.account.display_name)}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
