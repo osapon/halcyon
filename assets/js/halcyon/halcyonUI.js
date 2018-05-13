@@ -228,7 +228,7 @@ function mediaattachments_template(status) {
     media_views += (`
 <div class="gif_mark"></div>
 <div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[0].id}">
-<video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted></video>
+<video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>
 </div>`);
   } else {
     if ( status.media_attachments.length <= 2 ) {

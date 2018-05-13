@@ -3455,10 +3455,10 @@ function replace_emoji( timelineonly ) {
     for(let i in emoji) {
       if(emoji_dict[emoji[i]]) {
         $(this).html($(this).html().replace(emoji[i], emoji_dict[emoji[i]]));
-        $(this).removeClass('emoji_poss');
       }
     }
     $(this).html($(this).html().replace("✅", "<img class='emoji' src='/assets/images/self_auth_min.png'>"));
+    $(this).removeClass('emoji_poss');
   });
   if ( timelineonly ) twemoji.parse(document.getElementById('js-timeline'),{base:(location.protocol==="https:"?"https:":"http:")+"//cdn.staticfile.org/twemoji/2.2.5/"});
   else twemoji.parse(document.body,{base:(location.protocol==="https:"?"https:":"http:")+"//cdn.staticfile.org/twemoji/2.2.5/"});
