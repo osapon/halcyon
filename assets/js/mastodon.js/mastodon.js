@@ -150,11 +150,21 @@ post: function (endpoint) {
     postData = arguments[1];
     callback = arguments[2];
   }
+  var requestHeaders = {"Authorization":"Bearer "+config.api_user_token};
+  if(endpoint == "statuses") {
+    if(arguments.length == 4) {
+      var idempotencykey = arguments[3];
+    }
+    else {
+      var idempotencykey = getRandom();
+    }
+    requestHeaders["Idempotency-Key"] = idempotencykey;
+  }
   $.ajax({
     url: apiBase + endpoint,
     type: "POST",
     data: postData,
-    headers: {"Authorization": "Bearer " + config.api_user_token},
+    headers: requestHeaders,
     success: function(data, textStatus) {
       if(endpoint == "statuses") {
         $(".js_current_toots_count").html(++localStorage.current_statuses_count);
@@ -170,7 +180,7 @@ post: function (endpoint) {
     },
     error: function(xhr, textStatus, errorThrown) {
       if(xhr.readyState == 0) {
-        api.post(endpoint,postData,callback);
+        api.post(endpoint,postData,callback,idempotencykey);
       }
       else {
         putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);

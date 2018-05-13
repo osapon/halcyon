@@ -147,6 +147,24 @@ const datetime ="・" + calendar[posted_time_original.getMonth()] + " " + posted
 return datetime;
 }
 }
+function htmlEscape(strings, ...values) {
+var handleString = function(str) {
+return str.replace(/&/g, '&amp;')
+.replace(/>/g, '&gt;')
+.replace(/</g, '&lt;')
+.replace(/"/g, '&quot;')
+.replace(/'/g, '&#039;')
+.replace(/`/g, '&#096;');
+};
+var res = '';
+for(var i=0, l=strings.length; i<l; i+=1) {
+res += handleString(strings[i]);
+if(i < values.length) {
+res += handleString(values[i]);
+}
+}
+return res;
+}
 function resetApp() {
   current_id = Number(localStorage.getItem("current_id"));
   current_instance = localStorage.getItem("current_instance");
@@ -356,4 +374,10 @@ function setCustomEmojis(emojis) {
       "category": "custom"
     });
   }
+}
+function getRandom() {
+var s4 = function() {
+return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
+}
+return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
 }
