@@ -1879,7 +1879,7 @@ function setOverlayStatus(sid) {
         replaceInternalLink();
         replace_emoji();
 
-        $('textarea[class="emoji_poss"]', document).emojiPicker({
+        $('div[class="status_textarea"] > textarea', document).emojiPicker({
           height: '400px',
           width:  '280px',
           recentlyLabel: Pomo.getText('Recently Used'),
@@ -2591,7 +2591,7 @@ $(function() {
       api.get("custom_emojis", function(data) {
         localStorage.setItem("current_instance_custom_emojis", JSON.stringify(data));
         setCustomEmojis(data);
-        $('textarea[class="emoji_poss"]', document).emojiPicker({
+        $('div[class="status_textarea"] > textarea', document).emojiPicker({
           height: '400px',
           width:  '280px',
           recentlyLabel: Pomo.getText('Recently Used'),
