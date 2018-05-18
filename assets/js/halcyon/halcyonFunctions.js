@@ -270,10 +270,10 @@ function setCurrentProfile() {
     $(".current_toots_count_link").attr("href", current_statuses_count_link);
     $(".current_following_count_link").attr("href", current_following_count_link);
     $(".current_followers_count_link").attr("href", current_followers_count_link);
-    if(localStorage.setting_link_previews == "true") {
+    if((localStorage.setting_link_previews == "true")&&($("#setting_link_previews").length)) {
       $("#setting_link_previews")[0].checked = true;
     }
-    if(localStorage.setting_desktop_notifications == "true") {
+    if((localStorage.setting_desktop_notifications == "true")&&($("#setting_desktop_notifications").length)) {
       $("#setting_desktop_notifications")[0].checked = true;
       if (Notification.permission === 'default') {
         Notification.requestPermission(function(p) {

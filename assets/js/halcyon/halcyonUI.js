@@ -1813,7 +1813,6 @@ function badges_update(){
       if(userstream.payload.account.display_name.length == 0) {
         userstream.payload.account.display_name = userstream.payload.account.username;
       }
-      console.log(userstream.payload);
       let title;
       switch(userstream.payload.type) {
         case "favourite":

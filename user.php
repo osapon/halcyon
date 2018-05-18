@@ -69,17 +69,18 @@ $("#js-profile_nav_followers > a").attr('href', location.pathname+'/followers'+l
 $("#js-profile_nav_favourites > a").attr('href', location.pathname+'/favourites'+location.search);
 <?php if (isset($_GET['mid'])): ?>
 $(function() {
-const account_id = <?= htmlspecialchars((string)filter_input(INPUT_GET, 'mid'), ENT_QUOTES) ?>;
-api.get('accounts/'+account_id, function(userprofile) {
-if ( userprofile !== null ) {
-$('title').text(replaced_emoji_return(userprofile.display_name)+' (@'+userprofile.acct+') | Halcyon');
-setAccount(userprofile);
-setTimeline("accounts/"+userprofile.id+"/statuses",[{name:'exclude_replies',data:'true'}]);
-setRecentImages(userprofile.id)
-} else {
-location.href = "/404.php";
-}
-});
+  const account_id = <?= htmlspecialchars((string)filter_input(INPUT_GET, 'mid'), ENT_QUOTES) ?>;
+  api.get('accounts/'+account_id, function(userprofile) {
+    if ( userprofile !== null ) {
+      $('title').text(replaced_emoji_return(userprofile.display_name)+' (@'+userprofile.acct+') | Halcyon');
+      setAccount(userprofile);
+      setTimeline("accounts/"+userprofile.id+"/statuses",[{name:'exclude_replies',data:'true'}]);
+      setRecentImages(userprofile.id)
+      $('.profile_button_box').prepend('<a href="'+userprofile.url+'" target="_blank"><button class="relationship_button" mid="33514"><span><?=_("View original")?></span></button></a>');
+    } else {
+      location.href = "/404.php";
+    }
+  });
 });
 <?php elseif((isset($_GET['user']))): ?>
 $(function(){
