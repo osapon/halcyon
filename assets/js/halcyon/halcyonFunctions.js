@@ -186,6 +186,7 @@ localStorage.setItem("current_statuses_count_link", getRelativeURL(AccountObj["u
 localStorage.setItem("current_following_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/following'));
 localStorage.setItem("current_followers_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/followers'));
 localStorage.setItem("current_favourites_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/favourites'));
+localStorage.setItem("current_follow_loaded","false");
 current_display_name = localStorage.getItem("current_display_name");
 current_acct = localStorage.getItem("current_acct");
 current_url = localStorage.getItem("current_url");
@@ -198,26 +199,18 @@ current_statuses_count_link = localStorage.getItem("current_statuses_count_link"
 current_following_count_link = localStorage.getItem("current_following_count_link");
 current_followers_count_link = localStorage.getItem("current_followers_count_link");
 current_favourites_link = localStorage.getItem("current_favourites_link");
-$(".js_current_profile_displayname").text(current_display_name);
-$(".js_current_profile_username").text(current_acct);
-$(".js_current_profile_link").attr('href', current_url);
-$(".js_current_header_image").attr('src', current_header);
-$(".js_current_profile_image").attr('src', current_avatar);
-$(".js_current_toots_count").text(current_statuses_count);
-$(".js_current_following_count").text(current_following_count);
-$(".js_current_followers_count").text(current_followers_count);
-$(".current_toots_count_link").attr('href', current_statuses_count_link);
-$(".current_following_count_link").attr('href', current_following_count_link);
-$(".current_followers_count_link").attr('href', current_followers_count_link);
-replace_emoji();
+setCurrentProfile();
 });
 api.get("accounts/"+current_id+"/following",function(data) {
 followings = new Array();
 for(i=0;i<data.length;i++) {
-followings.push(data[i].id);
+if(data[i].acct.indexOf("@") == -1) {
+data[i].acct = data[i].acct+"@"+current_instance;
 }
-localStorage.setItem("current_following_ids",JSON.stringify(followings));
-current_following_ids = followings;
+followings.push(data[i].acct);
+}
+localStorage.setItem("current_following_accts",JSON.stringify(followings));
+current_following_accts = followings;
 });
 api.get("instance",function(data) {
 if(data.max_toot_chars) {
@@ -251,8 +244,9 @@ current_statuses_count_link = localStorage.getItem("current_statuses_count_link"
 current_following_count_link = localStorage.getItem("current_following_count_link");
 current_followers_count_link = localStorage.getItem("current_followers_count_link");
 current_favourites_link = localStorage.getItem("current_favourites_link");
-current_following_ids = localStorage.getItem("current_following_ids");
+current_following_accts = localStorage.getItem("current_following_accts");
 current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
+$(function() {setCurrentProfile()});
 }
 function setCurrentProfile() {
 $(".js_current_profile_displayname").text(current_display_name);
@@ -284,6 +278,9 @@ localStorage.setItem("setting_desktop_notifications","false");
 $("#setting_desktop_notifications")[0].checked = false;
 }
 }
+if(localStorage.setting_who_to_follow == "true") {
+setWhoToFollow();
+}
 replace_emoji();
 }
 function putMessage(Message) {
@@ -308,4 +305,71 @@ var s4 = function() {
 return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 }
 return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+function randomNumber(min,max) {
+return Math.floor(Math.random() * (max - min)) + min;
+}
+function setWhoToFollow(sanimate) {
+if(sanimate == true) {
+$(".follow_opt_in").slideUp(function() {$(".follow_loading").slideDown()});
+}
+else {
+$(".follow_opt_in").hide();
+$(".follow_loading").show();
+}
+if(localStorage.current_follow_loaded == "true") {
+if(localStorage.who_to_follow) {
+follow_loaded = 0;
+var wtflist = JSON.parse(localStorage.who_to_follow);
+addFollowProfile(0,wtflist[randomNumber(0,wtflist.length)]);
+addFollowProfile(1,wtflist[randomNumber(0,wtflist.length)]);
+addFollowProfile(2,wtflist[randomNumber(0,wtflist.length)]);
+var checkload = setInterval(function() {
+if(follow_loaded == 3) {
+clearInterval(checkload);
+$(".follow_loading").hide();
+$(".what_to_follow").show();
+}
+},100);
+}
+else {
+$("#follow_icon").removeClass("fa-circle-o-notch").removeClass("fa-spin").addClass("fa-id-card-o").addClass("fa-stack-1x").after($("<i>").addClass("fa").addClass("fa-ban").addClass("fa-stack-2x"));
+}
+}
+else {
+var url = $("#who-to-follow-provider").html();
+url = url.replace(/{{host}}/g, encodeURIComponent(current_instance));
+url = url.replace(/{{user}}/g, encodeURIComponent(current_acct));
+$.ajax(url).done(function(data) {
+localStorage.current_follow_loaded = true;
+if(data.status == 200) {
+var wtflist = new Array();
+for(i=0;i<data.ids.length;i++) {
+if(current_following_accts.indexOf(data.ids[i].to_id) == -1) {
+wtflist.push(data.ids[i].to_id);
+}
+}
+localStorage.who_to_follow = JSON.stringify(wtflist);
+}
+setWhoToFollow();
+}).fail(function(xhr) {
+if(xhr.readyState == 0) {
+setWhoToFollow();
+}
+});
+}
+}
+function addFollowProfile(id,account) {
+api.get('search',[{name:'q',data:"@"+account},{name:'resolve',data:'true'}], function(search) {
+if(search.accounts[0].display_name.length == 0) {
+search.accounts[0].display_name = search.accounts[0].username;
+}
+$('.what_to_follow_'+id+' > .icon_box img').attr('src',search.accounts[0].avatar);
+$('.what_to_follow_'+id+' .label_box > a').attr('href',getRelativeURL(search.accounts[0].url,search.accounts[0].id));
+$('.what_to_follow_'+id+' .label_box > a > h3 .dn').text(search.accounts[0].display_name);
+$('.what_to_follow_'+id+' .label_box > a > h3 .un').text('@'+search.accounts[0].username);
+$('.what_to_follow_'+id+' .label_box > .follow_button').attr('mid',search.accounts[0].id);
+$('.what_to_follow_'+id+' .label_box > .follow_button').attr('data',search.accounts[0].url);
+follow_loaded++;
+});
 }
