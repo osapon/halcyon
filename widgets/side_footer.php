@@ -16,7 +16,10 @@ Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a>
 <a href="https://github.com/tootsuite/documentation/blob/master/Using-Mastodon/Apps.md">Apps</a>
 </li>
 <li>
-<a href="<?=$config['App']['source_link']?>"><?=_('Source')?></a>
+<a href="https://weblate.osa-p.net/projects/halcyon/web/" target="_blank">Translation</a>
+</li>
+<li>
+<a href="<?=$config['App']['source_link']?>" target="_blank"><?=_('Source')?></a>
 </li>
 <li>
 <a href="http://instances.social"><?=_('Other instances')?></a>
