@@ -275,16 +275,7 @@ function timeline_template(status) {
     target_account = status.reblog.account;
   }
   if ( target_account.acct.indexOf('@') == -1 ) target_account.acct = target_account.acct + '@' + current_instance;
-  if (
-    typeof current_following_acct != 'undefined' &&
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_0")).acct &&
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_1")).acct &&
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_2")).acct &&
-    target_account.acct != current_acct+'@'+current_instance &&
-    current_following_acct.indexOf(target_account.acct) === -1
-  ) {
-    localStorage.setItem("what_to_follow_"+String(Math.floor(Math.random()*3)), JSON.stringify(target_account) );
-  }
+  setWhoToFollow(target_account);
   if (status.reblog === null) {
     status.content = status.content.emoji_replace(status.emojis);
     const status_account_link= getRelativeURL(status.account.url, status.account.id),
@@ -2520,6 +2511,24 @@ $(function () {
 })
 
 $(function() {
+  for(idx=0;idx<3;idx++) {
+    let what_to_follow = JSON.parse(localStorage.getItem("what_to_follow_"+idx));
+    if(what_to_follow.display_name.length == 0) {
+      what_to_follow.display_name = what_to_follow.username;
+    }
+    addFollowProfile(idx,what_to_follow);
+  }
+})
+function addFollowProfile(id,account) {
+  $('.what_to_follow_'+id+' > .icon_box img').attr('src',account.avatar);
+  $('.what_to_follow_'+id+' .label_box > a').attr('href',getRelativeURL(account.url,account.id));
+  $('.what_to_follow_'+id+' .label_box > a > h3 .dn').text(account.display_name);
+  $('.what_to_follow_'+id+' .label_box > a > h3 .un').text('@'+account.username);
+  $('.what_to_follow_'+id+' .label_box > .follow_button').attr('mid',account.id);
+  $('.what_to_follow_'+id+' .label_box > .follow_button').attr('data',account.url);
+}
+
+$(function() {
   shortcut.add("n",function() {
     $("#creat_status").click();
   },{
@@ -2612,4 +2621,3 @@ $(function() {
     }
   }, 1000);
 });
-

@@ -603,10 +603,9 @@ margin-right: 4px;
 .relationship_button span {
 font-weight: 600;
 }
-.follow_button {border: 1px solid #189EFC; color: #189EFC;}
-.follow_button i {color: #189EFC}
-.follow_button:hover,
-.follow_button:hover i {background-color: #189EFC;color: #fff;}
+.follow_button,.halcyon_button {border: 1px solid #189EFC; color: #189EFC;}
+.follow_button i,.halcyon_button i {color: #189EFC}
+.follow_button:hover,.follow_button:hover i,.halcyon_button:hover,.halcyon_button:hover i {background-color: #189EFC;color: #fff;}
 .following_button,
 .following_button i {background-color: #189EFC;color: #fff;}
 .following_button:hover,
@@ -1532,6 +1531,27 @@ font-weight: 600;
 }
 .side_widget .account_box .label_box .follow_button:hover,
 .side_widget .account_box .label_box .follow_button:hover i {
+background-color: #189EFC;
+color: #fff!important;
+}
+.halcyon_button {
+display: flex;
+flex-wrap: nowrap;
+align-items: center;
+font-size: 12px;
+padding: 5px 16px;
+margin-top: 4px;
+border-radius: 4px;
+}
+.halcyon_button i {
+color: #189EFC;
+margin-right: 4px;
+}
+.halcyon_button span {
+font-weight: 600;
+}
+.halcyon_button:hover,
+.halcyon_button:hover i {
 background-color: #189EFC;
 color: #fff!important;
 }

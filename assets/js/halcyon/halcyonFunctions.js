@@ -1,4 +1,4 @@
-var current_following_acct = [];
+var current_following_accts = [];
 function getLinkFromXHRHeader(xhrheaderstring) {
 const re = xhrheaderstring.match(/link: <.+api\/v1\/(.+?)>; rel="(.+?)", <.+api\/v1\/(.+?)>; rel="(.+?)"/i);
 let di = new Object();
@@ -198,18 +198,7 @@ function resetApp() {
     current_following_count_link = localStorage.getItem("current_following_count_link");
     current_followers_count_link = localStorage.getItem("current_followers_count_link");
     current_favourites_link = localStorage.getItem("current_favourites_link");
-    $(".js_current_profile_displayname").text(current_display_name);
-    $(".js_current_profile_username").text(current_acct);
-    $(".js_current_profile_link").attr('href', current_url);
-    $(".js_current_header_image").attr('src', current_header);
-    $(".js_current_profile_image").attr('src', current_avatar);
-    $(".js_current_toots_count").text(current_statuses_count);
-    $(".js_current_following_count").text(current_following_count);
-    $(".js_current_followers_count").text(current_followers_count);
-    $(".current_toots_count_link").attr('href', current_statuses_count_link);
-    $(".current_following_count_link").attr('href', current_following_count_link);
-    $(".current_followers_count_link").attr('href', current_followers_count_link);
-    replace_emoji();
+    setCurrentProfile();
   });
   api.get("instance",function(data) {
     if(data.max_toot_chars) {
@@ -244,6 +233,7 @@ function refreshApp() {
   current_followers_count_link = localStorage.getItem("current_followers_count_link");
   current_favourites_link = localStorage.getItem("current_favourites_link");
   current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
+  $(function() {setCurrentProfile()});
 
   $.ajax({
     url:'https://followlink.osa-p.net/api/get_edge.json?id='+current_acct+'@'+current_instance+'&m=2',
@@ -252,7 +242,7 @@ function refreshApp() {
     if ( data.edges ) {
       let edges = data.edges;
       for( let i = 0, max = edges.length; i < max; i++ ) {
-        current_following_acct.push( edges[i].to_id );
+        current_following_accts.push( edges[i].to_id );
       }
     }
   });
@@ -380,4 +370,19 @@ var s4 = function() {
 return Math.floor((1 + Math.random()) * 0x10000).toString(16).substring(1);
 }
 return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
+}
+function randomNumber(min,max) {
+return Math.floor(Math.random() * (max - min)) + min;
+}
+function setWhoToFollow(target_account) {
+  if (
+    typeof current_following_accts != 'undefined' && current_following_accts.length != 0 &&
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_0")).acct &&
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_1")).acct &&
+    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_2")).acct &&
+    target_account.acct != current_acct+'@'+current_instance &&
+    current_following_accts.indexOf(target_account.acct) === -1
+  ) {
+    localStorage.setItem("what_to_follow_"+String(randomNumber(1,3)), JSON.stringify(target_account) );
+  }
 }

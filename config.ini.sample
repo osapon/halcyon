@@ -3,6 +3,7 @@
 api_client_name = Your application name
 api_client_website = https://example.com/
 default_lang = en_US
+;default_lang = ja_JP
 news_link = https://social.csswg.org/@halcyon
-source_link = https://github.com/halcyon-suite/halcyon
-contact_link = http://www.nikisoft.one/contact.php
+source_link = https://github.com/osapon/halcyon
+contact_link = https://mstdn.nere9.help/@osapon
