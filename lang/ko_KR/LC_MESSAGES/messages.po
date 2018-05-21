@@ -1,0 +1,314 @@
+msgid ""
+msgstr ""
+"Language: ko_KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"X-Generator: Poedit 2.0.7\n"
+
+msgid "Login"
+msgstr "로그인"
+
+msgid "News"
+msgstr "News"
+
+msgid "Source"
+msgstr "Source"
+
+msgid "Terms"
+msgstr "이용 약관"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Login to Halcyon"
+msgstr "Halcyon에 로그인"
+
+msgid "or"
+msgstr "하거나"
+
+msgid "create an account"
+msgstr "새 계정 만들기"
+
+msgid "I agree with the Terms"
+msgstr "<a href='/terms'>이용 약관</a>에 동의합니다"
+
+msgid "What is Halcyon"
+msgstr "Halcyon이란"
+
+msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+msgstr "Halcyon is standard <span style='font-weight: bold'>Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+
+msgid "Contact / Feedback"
+msgstr "문의 / 피드백"
+
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon 이용 약관"
+
+msgid "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+msgstr "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+
+msgid "Home"
+msgstr "홈"
+
+msgid "Local"
+msgstr "로컬"
+
+msgid "Federated"
+msgstr "연합"
+
+msgid "Notifications"
+msgstr "알림"
+
+msgid "Search Mastodon"
+msgstr "마스토돈 검색"
+
+msgid "View profile"
+msgstr "프로필 보기"
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "Log out"
+msgstr "로그아웃"
+
+msgid "Toot"
+msgstr "툿"
+
+msgid "TOOTS"
+msgstr "툿"
+
+msgid "FOLLOWING"
+msgstr "팔로잉"
+
+msgid "FOLLOWERS"
+msgstr "팔로워"
+
+msgid "Preferences"
+msgstr "설정"
+
+msgid "SHOW"
+msgstr "보기"
+
+msgid "HIDE"
+msgstr "숨기기"
+
+msgid "New posts streaming"
+msgstr "새 글 스트리밍"
+
+msgid "Default post privacy"
+msgstr "기본 전송 정책"
+
+msgid "Local instance"
+msgstr "로컬 인스턴스"
+
+msgid "Hashtag search filter"
+msgstr "해시태그 검색 필터"
+
+msgid "HASHTAG"
+msgstr "해시태그"
+
+msgid "What's happening?"
+msgstr "무슨 일이 일어나고 있나요?"
+
+msgid "Content warning"
+msgstr "내용 경고"
+
+msgctxt "TootForm"
+msgid "Public"
+msgstr "공개"
+
+msgctxt "TootForm"
+msgid "Unlisted"
+msgstr "타임라인에 비표시"
+
+msgctxt "TootForm"
+msgid "Followers-only"
+msgstr "비공개"
+
+msgctxt "TootForm"
+msgid "Direct"
+msgstr "다이렉트"
+
+msgid "View new Toots"
+msgstr "새로운 툿 <span></span> 보기"
+
+msgid "About this instance"
+msgstr "이 인스턴스에 대해서"
+
+msgid "Terms this instance"
+msgstr "이 인스턴스의 규칙"
+
+msgid "Other instances"
+msgstr "다른 인스턴스"
+
+msgid "Follow"
+msgstr "팔로우"
+
+msgid "Auto update"
+msgstr "자동 업데이트"
+
+msgid "Manual update"
+msgstr "수동 업데이트"
+
+msgctxt "Option"
+msgid "Public"
+msgstr "Public"
+
+msgctxt "Option"
+msgid "Unlisted"
+msgstr "타임라인에 비표시"
+
+msgctxt "Option"
+msgid "Followers-only"
+msgstr "비공개"
+
+msgctxt "Option"
+msgid "Direct"
+msgstr "다이렉트"
+
+msgid "All instances"
+msgstr "모든 인스턴스"
+
+msgid "Local only"
+msgstr "로컬만"
+
+msgid "All"
+msgstr "모두"
+
+msgid "View new notitification"
+msgstr "새 알림 <span></span> 보기"
+
+msgid "boosted Your Toot"
+msgstr "님이 부스트 했습니다"
+
+msgid "favourited Your Toot"
+msgstr "님이 마음에 들어했습니다"
+
+msgid "followed you"
+msgstr "님이 나를 팔로우 했습니다"
+
+msgid "Boosted"
+msgstr "부스트됨"
+
+msgid "SHOW MORE"
+msgstr "더 보기"
+
+msgid "SHOW LESS"
+msgstr "감추기"
+
+msgid "Toots"
+msgstr "툿"
+
+msgid "Toots &amp; replies"
+msgstr "툿과 답장"
+
+msgid "Media"
+msgstr "미디어"
+
+msgid "FOLLOWS YOU"
+msgstr "나를 팔로우함"
+
+msgid "Photos and toots"
+msgstr "사진과 툿"
+
+msgid "Reply"
+msgstr "답장"
+
+msgid "Edit profile"
+msgstr "프로필 편집"
+
+msgid "Compose new Toot"
+msgstr "새 툿 작성"
+
+msgid "PEOPLE"
+msgstr "PEOPLE"
+
+msgid "FAVOURITES"
+msgstr "FAVOURITES"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Following"
+msgstr "Following"
+
+msgid "Shortcut key"
+msgstr "단축키"
+
+msgid "Open the toot form"
+msgstr "Open the toot form"
+
+msgid "Move focus to search field"
+msgstr "Move focus to search field"
+
+msgid "Toot in toot form"
+msgstr "Toot in toot form"
+
+msgid "Switch to home time line"
+msgstr "Switch to home time line"
+
+msgid "Switch to local time line"
+msgstr "Switch to local time line"
+
+msgid "Switch to federated time line"
+msgstr "Switch to federated time line"
+
+msgid "Switch to notifications"
+msgstr "Switch to notifications"
+
+msgid "Switch to favourites"
+msgstr "Switch to favourites"
+
+msgid "Open this guide"
+msgstr "이 가이드 열기"
+
+msgid "Copy link to Toot"
+msgstr "툿 링크 복사"
+
+msgid "Delete Toot"
+msgstr "툿 삭제"
+
+msgid "View original"
+msgstr "원본 보기"
+
+msgid "Sensitive content"
+msgstr "민감한 컨텐츠"
+
+msgid "Click to view"
+msgstr "클릭해서 보기"
+
+msgid "Auto-play animated GIFs"
+msgstr "Auto-play animated GIFs"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+msgid "Changed setting to"
+msgstr "설정을 ${val}으로 변경했습니다"
+
+msgid "Exist new Toot."
+msgstr "Exist new Toot."
+
+msgid "Boost & Favorite"
+msgstr "부스트 & 좋아요"
+
+msgid "Enable link previews"
+msgstr "링크 미리보기 활성화"
+
+msgctxt "Option"
+msgid "true"
+msgstr "활성화"
+
+msgctxt "Option"
+msgid "false"
+msgstr "비활성화"
