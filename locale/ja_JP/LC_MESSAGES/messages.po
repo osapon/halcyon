@@ -5,472 +5,369 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 
-#: 
+msgid "Language"
+msgstr "Language"
+
+msgid "Language_en_US"
+msgstr "English(US)"
+
+msgid "Language_ja_JP"
+msgstr "日本語"
+
+msgid "Language_ko_KR"
+msgstr "한국어"
+
 msgid "Login"
 msgstr "ログイン"
 
-#: 
 msgid "News"
 msgstr "ニュース"
 
-#: 
 msgid "Source"
 msgstr "ソース"
 
-#: 
 msgid "Terms"
 msgstr "利用規約"
 
-#: 
 msgid "Contact"
 msgstr "連絡先"
 
-#: 
 msgid "Login to Halcyon"
 msgstr "Halcyonでログイン"
 
-#: 
 msgid "or"
 msgstr "または"
 
-#: 
 msgid "create an account"
 msgstr "アカウント作成"
 
-#: 
 msgid "I agree with the Terms"
 msgstr "<a href='/terms'>利用規約</a>に同意します"
 
-#: 
 msgid "What is Halcyon"
 msgstr "Halcyonとは何ですか"
 
-#: 
 msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
 msgstr "Halcyon はマストドン用の<span style='font-weight: bold'>Twitterに似せたクライアント</span>です。あなたが所属するインスタンスにログインして使うことができます。ツイートのようにトゥートしてみましょう。"
 
-#: 
 msgid "Contact / Feedback"
 msgstr "連絡先 / フィードバック"
 
-#: 
 msgid "Halcyon Terms of Use"
 msgstr "Halcyon 利用規約"
 
-#: 
 msgid "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
 msgstr "この利用規約は、次に記述されているアドレスで提供されている Halcyon for Mastodon (略してHalcyon)に提示されているものです"
 
-#: 
 msgid "Home"
 msgstr "ホーム"
 
-#: 
 msgid "Local"
 msgstr "ローカル"
 
-#: 
 msgid "Federated"
 msgstr "連合"
 
-#: 
 msgid "Notifications"
 msgstr "通知"
 
-#: 
 msgid "Search Mastodon"
 msgstr "検索"
 
-#: 
 msgid "View profile"
 msgstr "プロフィールを見る"
 
-#: 
 msgid "Settings"
 msgstr "ユーザー設定"
 
-#: 
 msgid "Log out"
 msgstr "ログアウト"
 
-#: 
 msgid "Toot"
 msgstr "トゥート"
 
-#: 
 msgid "TOOTS"
 msgstr "投稿"
 
-#: 
 msgid "FOLLOWING"
 msgstr "フォロー"
 
-#: 
 msgid "FOLLOWERS"
 msgstr "フォロワー"
 
-#: 
 msgid "Preferences"
 msgstr "設定"
 
-#: 
 msgid "SHOW"
 msgstr "表示"
 
-#: 
 msgid "HIDE"
 msgstr "隠す"
 
-#: 
 msgid "New posts streaming"
 msgstr "新着投稿のストリーミング"
 
-#: 
 msgid "Default post privacy"
 msgstr "投稿の公開範囲"
 
-#: 
 msgid "Local instance"
 msgstr "ローカルに表示するインスタンス"
 
-#: 
 msgid "Hashtag search filter"
 msgstr "ハッシュタグ検索フィルター"
 
-#: 
 msgid "HASHTAG"
 msgstr "ハッシュタグ"
 
-#: 
 msgid "What's happening?"
 msgstr "今なにしてる？"
 
-#: 
 msgid "Content warning"
 msgstr "ここに警告を書いてください"
 
-#: 
 msgctxt "TootForm"
 msgid "Public"
 msgstr "<abbr title='公開TLに投稿する'>公開</abbr>"
 
-#: 
 msgctxt "TootForm"
 msgid "Unlisted"
 msgstr "<abbr title='公開TLで表示しない'>未収載</abbr>"
 
-#: 
 msgctxt "TootForm"
 msgid "Followers-only"
 msgstr "<abbr title='フォロワーだけに公開'>非公開</abbr>"
 
-#: 
 msgctxt "TootForm"
 msgid "Direct"
 msgstr "<abbr title='メンションしたユーザーだけに公開'>ダイレクト</abbr>"
 
-#: 
 msgid "View new Toots"
 msgstr "<span></span> 件の新着トゥート"
 
-#: 
 msgid "About this instance"
 msgstr "このインスタンスについて"
 
-#: 
 msgid "Terms this instance"
 msgstr "このインスタンスの利用規約"
 
-#: 
 msgid "Other instances"
 msgstr "他のインスタンス"
 
-#: 
 msgid "Follow"
 msgstr "フォロー"
 
-#: 
 msgid "Auto update"
 msgstr "自動更新"
 
-#: 
 msgid "Manual update"
 msgstr "手動更新"
 
-#: 
 msgctxt "Option"
 msgid "Public"
 msgstr "公開：公開TLに投稿する"
 
-#: 
 msgctxt "Option"
 msgid "Unlisted"
 msgstr "未収載：公開TLで表示しない"
 
-#: 
 msgctxt "Option"
 msgid "Followers-only"
 msgstr "非公開：フォロワーだけに公開"
 
-#: 
 msgctxt "Option"
 msgid "Direct"
 msgstr "ダイレクト：メンションしたユーザーだけに公開"
 
-#: 
 msgid "All instances"
 msgstr "全てのインスタンス"
 
-#: 
 msgid "Local only"
 msgstr "ログインしているインスタンスだけ"
 
-#: 
 msgid "All"
 msgstr "全て"
 
-#: 
 msgid "View new notitification"
 msgstr "<span></span> 件の新着通知を見る"
 
-#: 
 msgid "boosted Your Toot"
 msgstr "さんがあなたのトゥートをブーストしました"
 
-#: 
 msgid "favourited Your Toot"
 msgstr "さんがあなたのトゥートをお気に入りに登録しました"
 
-#: 
 msgid "followed you"
 msgstr "さんにフォローされました"
 
-#: 
 msgid "Boosted"
 msgstr "さんがブースト"
 
-#: 
 msgid "SHOW MORE"
 msgstr "もっと見る"
 
-#: 
 msgid "SHOW LESS"
 msgstr "隠す"
 
-#: 
 msgid "Toots"
 msgstr "投稿"
 
-#: 
 msgid "Toots &amp; replies"
 msgstr "投稿と返信"
 
-#: 
 msgid "Media"
 msgstr "メディア"
 
-#: 
 msgid "FOLLOWS YOU"
 msgstr "フォローされています"
 
-#: 
 msgid "Photos and toots"
 msgstr "の画像と投稿"
 
-#: 
 msgid "Reply"
 msgstr "返信"
 
-#: 
 msgid "Edit profile"
 msgstr "プロフィールを編集"
 
-#: 
 msgid "Compose new Toot"
 msgstr "トゥートする"
 
-#: 
 msgid "PEOPLE"
 msgstr "人々"
 
-#: 
 msgid "FAVOURITES"
 msgstr "お気に入り"
 
-#: 
 msgid "Show"
 msgstr "見る"
 
-#: 
 msgid "Following"
 msgstr "フォロー中"
 
-#: 
 msgid "Shortcut key"
 msgstr "ショートカットキー"
 
-#: 
 msgid "Open the toot form"
 msgstr "トゥートフォームを開く"
 
-#: 
 msgid "Move focus to search field"
 msgstr "検索欄へフォーカス移動"
 
-#: 
 msgid "Toot in toot form"
 msgstr "トゥートフォームで投稿"
 
-#: 
 msgid "Switch to home time line"
 msgstr "ホームタイムラインへ切り替え"
 
-#: 
 msgid "Switch to local time line"
 msgstr "ローカルタイムラインへ切り替え"
 
-#: 
 msgid "Switch to federated time line"
 msgstr "連合タイムラインへ切り替え"
 
-#: 
 msgid "Switch to notifications"
 msgstr "通知へ切り替え"
 
-#: 
 msgid "Switch to favourites"
 msgstr "お気に入りへ切り替え"
 
-#: 
 msgid "Open this guide"
 msgstr "この説明を開く"
 
-#: 
 msgid "Copy link to Toot"
 msgstr "トゥートへのリンク"
 
-#: 
 msgid "Delete Toot"
 msgstr "トゥート削除"
 
-#: 
 msgid "View original"
 msgstr "オリジナルを見る"
 
-#: 
 msgid "Sensitive content"
 msgstr "非表示のメディア"
 
-#: 
 msgid "Click to view"
 msgstr "クリックして表示"
 
-#: 
 msgid "Auto-play animated GIFs"
 msgstr "アニメーションGIFを自動再生する"
 
-#: 
 msgid "Yes"
 msgstr "はい"
 
-#: 
 msgid "No"
 msgstr "いいえ"
 
-#: 
 msgid "Changed setting to"
 msgstr "${val}に変更しました"
 
-#: 
 msgid "Exist new Toot."
 msgstr "新しいトゥートがあります。"
 
-#: 
 msgid "Boost & Favorite"
 msgstr "ブーストとお気に入り"
 
-#: 
 msgid "Enable link previews"
 msgstr "リンク先の詳細表示"
 
-#: 
 msgctxt "Option"
 msgid "true"
 msgstr "有効"
 
-#: 
 msgctxt "Option"
 msgid "false"
 msgstr "無効"
 
-#: 
 msgid "Desktop notifications"
 msgstr "デスクトップ通知"
 
-#: 
 msgid "You didn't allow notifications"
 msgstr "ブラウザでの通知が許可されていません"
 
-#: 
 msgid "favourited your toot"
 msgstr "${name}さんがお気に入りに登録しました"
 
-#: 
 msgid "boosted your toot"
 msgstr "${name}さんがブーストしました"
 
-#: 
 msgid "followed your account"
 msgstr "${name}さんにフォローされました"
 
-#: 
 msgid "mentioned you"
 msgstr "${name}さんがあなたに返信しました"
 
-#: 
 msgid "Recently Used"
 msgstr "よく使う絵文字"
 
-#: 
 msgid "Search Results"
 msgstr "検索結果"
 
-#: 
 msgid "Search..."
 msgstr "検索..."
 
-#: 
 msgid "Custom"
 msgstr "カスタム絵文字"
 
-#: 
 msgid "People"
 msgstr "人々"
 
-#: 
 msgid "Nature"
 msgstr "自然"
 
-#: 
 msgid "Food"
 msgstr "食べ物"
 
-#: 
 msgid "Activities"
 msgstr "活動"
 
-#: 
 msgid "Travel & Places"
 msgstr "旅行と場所"
 
-#: 
 msgid "Objects"
 msgstr "物"
 
-#: 
 msgid "Symbols"
 msgstr "記号"
 
-#: 
 msgid "Flags"
 msgstr "国旗"

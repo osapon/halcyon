@@ -12,6 +12,18 @@ msgstr ""
 "Language-Team: \n"
 "X-Generator: Poedit 2.0.7\n"
 
+msgid "Language"
+msgstr "Language"
+
+msgid "Language_en_US"
+msgstr "English(US)"
+
+msgid "Language_ja_JP"
+msgstr "日本語"
+
+msgid "Language_ko_KR"
+msgstr "한국어"
+
 msgid "Login"
 msgstr "로그인"
 
@@ -312,3 +324,57 @@ msgstr "활성화"
 msgctxt "Option"
 msgid "false"
 msgstr "비활성화"
+
+msgid "Desktop notifications"
+msgstr "Desktop notifications"
+
+msgid "You didn't allow notifications"
+msgstr "You didn't allow notifications"
+
+msgid "favourited your toot"
+msgstr "${name} favourited your toot"
+
+msgid "boosted your toot"
+msgstr "${name} boosted your toot"
+
+msgid "followed your account"
+msgstr "${name} followed you"
+
+msgid "mentioned you"
+msgstr "${name} mentioned you"
+
+msgid "Recently Used"
+msgstr "Recently Used"
+
+msgid "Search Results"
+msgstr "Search Results"
+
+msgid "Search..."
+msgstr "Search..."
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "People"
+msgstr "People"
+
+msgid "Nature"
+msgstr "Nature"
+
+msgid "Food"
+msgstr "Food"
+
+msgid "Activities"
+msgstr "Activities"
+
+msgid "Travel & Places"
+msgstr "Travel & Places"
+
+msgid "Objects"
+msgstr "Objects"
+
+msgid "Symbols"
+msgstr "Symbols"
+
+msgid "Flags"
+msgstr "Flags"

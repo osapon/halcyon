@@ -26,7 +26,7 @@ function filedate($filename){
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.css'); ?>" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.tw2.css'); ?>" media="all">
-<link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/lang/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
+<link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/locale/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonFunctions.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/mastodon.js/mastodon.js'); ?>"></script><!-- thx @kirschn -->

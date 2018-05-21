@@ -2444,6 +2444,11 @@ $(function () {
     }
     return false;
   });
+  $(document).on('change',".language_wrap select[name='language']", function(e) {
+    $.cookie("lang",$(this).val(),{path:'/',expires: 3650});
+    location.reload(true);
+  });
+
   $(document).on('change',".post_steraming_wrap select[name='post_steraming']", function(e) {
     localStorage.setItem("setting_post_stream", $(this).val() );
     putMessage(Pomo.getText("Changed setting to").replace('${val}', $("option:selected", this).text()));
