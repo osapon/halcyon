@@ -12,6 +12,7 @@
 <script src="/assets/js/halcyon/halcyonFunctions.js"></script>
 <script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
+<script src="/assets/js/autosize/autosize.js"></script>
 <script src="/assets/js/shortcut.js"></script>
 <script src="/assets/js/replace_emoji.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>

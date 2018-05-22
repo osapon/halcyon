@@ -1395,6 +1395,7 @@ scope = "federated";
 }
 let statuses = [];
 const original_title = $('title').text();
+if(streamscope) {
 api.stream(streamscope, function(userstream) {
 if (userstream.event === "update") {
 const streaming_option = localStorage.getItem("setting_post_stream");
@@ -1425,6 +1426,7 @@ replace_emoji();
 }
 }
 });
+}
 $(document).on('click','#js-stream_update', function(e) {
 $('#header .header_nav_list .'+scope+'_badge').addClass('invisible');
 $('#js-stream_update').css({'display':'none','height':'0','padding':'0px'});
@@ -1814,7 +1816,8 @@ $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_08');
 $('#overlay_status_form .status_textarea textarea').addClass('focus');
 $('.overlay_status .submit_status_label').addClass('active_submit_button');
-$('#overlay_status_form .status_textarea textarea').focus()
+$('#overlay_status_form .status_textarea textarea').focus();
+autosize($('#overlay_status_form .status_textarea textarea'));
 $('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
 $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#overlay_status_form .character_count').html(current_instance_charlimit);
@@ -1947,6 +1950,7 @@ $('#header_status_form .submit_status_label').removeClass('active_submit_button'
 $('#header_status_form .expand_privacy_menu').addClass('invisible');
 $('#header_status_form .status_textarea textarea').removeClass('focus');
 $('#header_status_form .status_bottom').addClass('invisible');
+autosize.destroy($('#header_status_form .status_textarea textarea'));
 }
 });
 $(document).on('change keyup','#header_status_form textarea, #header_status_form .status_spoiler', function(e) {
@@ -1992,6 +1996,7 @@ if(!$('#header_status_form .status_textarea textarea').hasClass('focus')) {
 $('#header_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
 $('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#header_status_form .status_textarea textarea').addClass('focus');
+autosize($('#header_status_form .status_textarea textarea'));
 $('#header_status_form .status_bottom').removeClass('invisible');
 $('#header_status_form .submit_status_label').addClass('active_submit_button');
 $('#header_status_form .character_count').html(current_instance_charlimit);
@@ -2089,6 +2094,7 @@ $('#reply_status_form .submit_status_label').removeClass('active_submit_button')
 $(document).on('click','#reply_status_form', function(e) {
 if(!$('#reply_status_form .status_textarea textarea').hasClass('focus')) {
 $('#reply_status_form .status_textarea textarea').addClass('focus');
+autosize($('#reply_status_form .status_textarea textarea'));
 $('#reply_status_form .status_bottom').removeClass('invisible');
 $('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val("@"+$('#reply_status_form').attr('username')+" ");
@@ -2239,7 +2245,8 @@ $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_08');
 $('.single_reply_status .submit_status_label').addClass('active_submit_button');
 $('#single_reply_status_form .status_textarea textarea').addClass('focus');
-$('#single_reply_status_form .status_textarea textarea').focus()
+$('#single_reply_status_form .status_textarea textarea').focus();
+autosize($('#single_reply_status_form .status_textarea textarea'));
 $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);

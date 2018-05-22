@@ -177,10 +177,9 @@ border-radius: 3px;
 box-sizing: border-box;
 border: 1px solid #C7E7FB;
 background-color: #fff;
-overflow: hidden;
 }
 .status_form .status_main .status_textarea textarea {
-color: #189EFC;
+color: #000;
 resize: none;
 height: 18px;
 border: none;
@@ -188,10 +187,10 @@ max-width: 100%;
 font-size: 14px;
 font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
 line-height: normal;
+outline: 0;
+overflow: hidden;
 }
 .status_form .status_textarea textarea.focus {
-outline: 0;
-color: #000;
 height: 68px;
 }
 .status_form .status_textarea .media_attachments_preview_area {

@@ -253,9 +253,11 @@ stream: function (streamType, onData) {
 var es = new WebSocket("wss://" + apiBase.substr(8) + "streaming?access_token=" + config.api_user_token + "&stream=" + streamType);
 var listener = function (event) {
 console.log("Got Data from Stream " + streamType);
+if(event.data.length != 0) {
 event = JSON.parse(event.data);
 event.payload = JSON.parse(event.payload);
 onData(event);
+}
 };
 es.onmessage = listener;
 es.onclose = function() {
