@@ -383,6 +383,6 @@ function setWhoToFollow(target_account) {
     target_account.acct != current_acct+'@'+current_instance &&
     current_following_accts.indexOf(target_account.acct) === -1
   ) {
-    localStorage.setItem("what_to_follow_"+String(randomNumber(1,3)), JSON.stringify(target_account) );
+    localStorage.setItem("what_to_follow_"+String(randomNumber(0,2.99)), JSON.stringify(target_account) );
   }
 }
