@@ -34,9 +34,9 @@ if (
 localStorage.getItem("setting_local_instance") === "default" |
 localStorage.getItem("setting_local_instance") === current_instance
 ) {
-setTimeline("timelines/public", [{name:"local",data:"ture"}]);
+setTimeline("timelines/public", [{name:"local",data:"true"}]);
 } else {
-setOtherTimeline(localStorage.getItem("setting_local_instance")+"/api/v1/", [{name:"local",data:"ture"}]);
+setOtherTimeline(localStorage.getItem("setting_local_instance")+"/api/v1/", [{name:"local",data:"true"}]);
 }
 $("#local_nav").addClass('view');
 $('title').text('Halcyon / Local');

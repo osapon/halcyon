@@ -31,6 +31,7 @@ function filedate($filename){
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonFunctions.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/mastodon.js/mastodon.js'); ?>"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
+<script src="/assets/js/autosize/autosize.js"></script>
 <script src="/assets/js/shortcut.js"></script>
 <script src="<?php echo filedate('/assets/js/replace_emoji.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
