@@ -2525,10 +2525,10 @@ $(function () {
 $(function() {
   for(idx=0;idx<3;idx++) {
     let what_to_follow = JSON.parse(localStorage.getItem("what_to_follow_"+idx));
-    if(what_to_follow.display_name.length == 0) {
+    if ((what_to_follow != null)&&(typeof what_to_follow.display_name != 'undefined')&&(what_to_follow.display_name.length == 0)) {
       what_to_follow.display_name = what_to_follow.username;
     }
-    addFollowProfile(idx,what_to_follow);
+    if (what_to_follow != null) addFollowProfile(idx,what_to_follow);
   }
 })
 function addFollowProfile(id,account) {

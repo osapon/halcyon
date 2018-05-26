@@ -375,11 +375,16 @@ function randomNumber(min,max) {
 return Math.floor(Math.random() * (max - min)) + min;
 }
 function setWhoToFollow(target_account) {
+  var what_to_follow = [];
+  for(idx=0; idx<3; idx++) {
+    what_to_follow[idx] = JSON.parse(localStorage.getItem("what_to_follow_"+idx));
+    if (what_to_follow[idx] == null) what_to_follow[idx]={acct:''};
+  }
   if (
     typeof current_following_accts != 'undefined' && current_following_accts.length != 0 &&
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_0")).acct &&
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_1")).acct &&
-    target_account.acct !== JSON.parse(localStorage.getItem("what_to_follow_2")).acct &&
+    target_account.acct !== what_to_follow[0].acct &&
+    target_account.acct !== what_to_follow[1].acct &&
+    target_account.acct !== what_to_follow[2].acct &&
     target_account.acct != current_acct+'@'+current_instance &&
     current_following_accts.indexOf(target_account.acct) === -1
   ) {
