@@ -20,3 +20,7 @@
       else return $translation;
     }
   }
+
+  $lang = explode('_', $locale);
+  if (count($lang)==2) $lang = $lang[0];
+  else $lang = 'en';
