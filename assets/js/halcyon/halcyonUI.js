@@ -16,10 +16,17 @@ function htmlEscape(strings, ...values) {
   }
   return res;
 };
-function icon(url) {
-  let orig_url = url, setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
+function iconurl(url) {
+  let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
   if (( setting_autoplay_animated == 'no' ) && (url.match(/\.gif$/))) {
     url = url.replace('/original/', '/static/').replace(/\.gif$/, '.png');
+  }
+  return url;
+}
+function icon(url) {
+  let orig_url = url;
+  url = iconurl(url);
+  if ( url != orig_url ) {
     return '<img src="'+url+'" data-url="'+url+'" data-orig-url="'+orig_url+'">';
   }
   return '<img src="'+url+'">';
@@ -2532,7 +2539,7 @@ $(function() {
   }
 })
 function addFollowProfile(id,account) {
-  $('.what_to_follow_'+id+' > .icon_box img').attr('src',account.avatar);
+  $('.what_to_follow_'+id+' > .icon_box img').attr('src',iconurl(account.avatar));
   $('.what_to_follow_'+id+' .label_box > a').attr('href',getRelativeURL(account.url,account.id));
   $('.what_to_follow_'+id+' .label_box > a > h3 .dn').text(account.display_name);
   $('.what_to_follow_'+id+' .label_box > a > h3 .un').text('@'+account.username);
