@@ -371,3 +371,7 @@ msgstr "Symbols"
 
 msgid "Flags"
 msgstr "Flags"
+
+msgctxt "Notifications"
+msgid "Direct"
+msgstr "Direct"

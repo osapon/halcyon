@@ -305,7 +305,7 @@ msgid "Exist new Toot."
 msgstr "新しいトゥートがあります。"
 
 msgid "Boost & Favorite"
-msgstr "ブーストとお気に入り"
+msgstr "ブーストとふぁぼ"
 
 msgid "Enable link previews"
 msgstr "リンク先の詳細表示"
@@ -371,3 +371,7 @@ msgstr "記号"
 
 msgid "Flags"
 msgstr "国旗"
+
+msgctxt "Notifications"
+msgid "Direct"
+msgstr "ダイレクト"

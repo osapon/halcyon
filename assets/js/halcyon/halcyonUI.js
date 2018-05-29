@@ -1597,58 +1597,58 @@ load_options.shift();
 };
 
 function setNotifications(load_options) {
-let isSyncing = true;
-if (load_options === undefined) {
-var load_options = [];
-}
-api.get('notifications', load_options, function(NotificationObj) {
-for (let i in NotificationObj) {
-notifications_template(NotificationObj[i]).appendTo("#js-timeline");
-};
-links = getLinkFromXHRHeader(responce_headers);
-replaceInternalLink();
-replace_emoji();
-if (!NotificationObj.length) {
-$('#js-timeline_footer > i').css({"display":"none"});
-}
-isSyncing = false;
-});
-$(window).scroll(function () {
-if($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
-if( !isSyncing ){
-isSyncing = true;
-load_options.unshift( {name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]} );
-api.get('notifications', load_options, function(NotificationObj) {
-if (NotificationObj.length) {
-for (let i in NotificationObj) {
-notifications_template(NotificationObj[i]).appendTo("#js-timeline");
-};
-links = getLinkFromXHRHeader(responce_headers);
-replaceInternalLink();
-replace_emoji();
-isSyncing = false;
-} else {
-$('.timeline_footer > i').css({"display":"none"});
-$('.timeline_footer').append('<img style="width: 30%;opacity: .3;" src="/assets/images/halcyon.png" />');
-isSyncing = true;
-}
-});
-load_options.shift();
-};
-};
-});
-api.stream("user", function(userstream) {
-const original_title = $('title').text();
-if (userstream.event === "notification") {
-const streaming_option = localStorage.getItem("setting_post_stream");
-if ( streaming_option === "manual" ) {
-} else if ( streaming_option === "auto" ) {
-notifications_template(userstream.payload).prependTo("#js-timeline");
-replaceInternalLink();
-replace_emoji();
-}
-}
-});
+  let isSyncing = true;
+  if (load_options === undefined) {
+    var load_options = [];
+  }
+  api.get('notifications', load_options, function(NotificationObj) {
+    for (let i in NotificationObj) {
+      notifications_template(NotificationObj[i]).appendTo("#js-timeline");
+    };
+    links = getLinkFromXHRHeader(responce_headers);
+    replaceInternalLink();
+    replace_emoji();
+    if (!NotificationObj.length) {
+      $('#js-timeline_footer > i').css({"display":"none"});
+    }
+    isSyncing = false;
+  });
+  $(window).scroll(function () {
+    if($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
+      if( !isSyncing ){
+        isSyncing = true;
+        load_options.unshift( {name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]} );
+        api.get('notifications', load_options, function(NotificationObj) {
+          if (NotificationObj.length) {
+            for (let i in NotificationObj) {
+              notifications_template(NotificationObj[i]).appendTo("#js-timeline");
+            };
+            links = getLinkFromXHRHeader(responce_headers);
+            replaceInternalLink();
+            replace_emoji();
+            isSyncing = false;
+          } else {
+            $('.timeline_footer > i').css({"display":"none"});
+            $('.timeline_footer').append('<img style="width: 30%;opacity: .3;" src="/assets/images/halcyon.png" />');
+            isSyncing = true;
+          }
+        });
+        load_options.shift();
+      };
+    };
+  });
+  api.stream("user", function(userstream) {
+    const original_title = $('title').text();
+    if (userstream.event === "notification") {
+      const streaming_option = localStorage.getItem("setting_post_stream");
+      if ( streaming_option === "manual" ) {
+      } else if ( streaming_option === "auto" ) {
+        notifications_template(userstream.payload).prependTo("#js-timeline");
+        replaceInternalLink();
+        replace_emoji();
+      }
+    }
+  });
 }
 
 function setFollows(mid, param, load_options) {

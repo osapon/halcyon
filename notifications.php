@@ -5,28 +5,23 @@
 </aside>
 <article class="center_column">
 <header class="timeline_header">
-<ul class="header_items">
-<li class="item all">
-<a href="notifications">
-<?=_('All')?>
-</a>
-</li>
-<li class="item reply">
-<a href="notifications?target=reply">
-<?=_('Reply')?>
-</a>
-</li>
-<li class="item follow">
-<a href="notifications?target=follow">
-<?=_('Follow')?>
-</a>
-</li>
-<li class="item bf">
-<a href="notifications?target=bf">
-<?=_('Boost & Favorite')?>
-</a>
-</li>
-</ul>
+  <ul class="header_items">
+    <li class="item all">
+      <a href="notifications"><?=_('All')?></a>
+    </li>
+    <li class="item reply">
+      <a href="notifications?target=reply"><?=_('Reply')?></a>
+    </li>
+    <li class="item follow">
+      <a href="notifications?target=follow"><?=_('Follow')?></a>
+    </li>
+    <li class="item bf">
+      <a href="notifications?target=bf"><?=_('Boost & Favorite')?></a>
+    </li>
+    <li class="item dm">
+      <a href="notifications?target=dm"><?=pgettext('Notifications', 'Direct')?></a>
+    </li>
+  </ul>
 </header>
 <div id="js-stream_update">
 <button>
@@ -50,7 +45,7 @@
 <script>
 current_file = location.pathname;
 <?php
-$allow_target=['follow','reply','bf'];
+$allow_target=['follow','reply','bf', 'dm'];
 $target = 'all';
 if (in_array( $_GET['target'], $allow_target )) $target = $_GET['target'];
 ?>
@@ -66,7 +61,12 @@ if ( '<?=$target?>' != 'all' ) {
     options.push({name:'exclude_types[]', data:'reblog'});
   }
 }
-setNotifications(options);
+if ( '<?=$target?>' == 'dm' ) {
+  setTimeline("timelines/direct");
+}
+else {
+  setNotifications(options);
+}
 $('title').text('Halcyon / Notifications')
 </script>
 <?php include ('footer.php'); ?>
