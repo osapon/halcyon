@@ -48,7 +48,7 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - 2 column view.
 - Toot URL copy to clipboard.
 - Timeline pause the auto scroll.
-- Notification tab is split.
+- Notification tab is split(All / Reply / Follow / Boost & Fav / Direct).
 - Emoji input pad.
 
 ## Requirement
