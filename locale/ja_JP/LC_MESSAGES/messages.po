@@ -8,6 +8,9 @@ msgstr ""
 msgid "Language"
 msgstr "Language"
 
+msgid "Language_de_DE"
+msgstr "Deutsch"
+
 msgid "Language_en_US"
 msgstr "English(US)"
 
