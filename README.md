@@ -41,8 +41,8 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Twitter like UI, familiar interface.
 - Able to use on all instances.
 - No tracking, No ads.
-- MultiLanguage(English & Japanese).
-- Multi image toot viewer.
+- MultiLanguage(English / Japanese / Korean).
+- Multi image/gifv viewer.
 - Same search processing as WebUI.
 - Sensitive image can switched for show / hide.
 - Auto-play animated GIFs(selectable stop or play).
