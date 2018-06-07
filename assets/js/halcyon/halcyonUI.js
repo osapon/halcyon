@@ -900,7 +900,7 @@ ${toot_reblog_button}
 </div>
 <form id="reply_status_form" name="reply_status_form" class="status_form"sid="${status.id}" username="${status.account.acct}">
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="Content warning" type="text"/>
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="${Pomo.getText('Content warning')}" type="text"/>
 </div>
 <div class="status_main">
 <!-- current avatar -->
@@ -1077,7 +1077,7 @@ ${media_views}
 </div>
 <form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" username="${status.reblog.account.acct}">
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="Content warning" type="text"/>
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="${Pomo.getText('Content warning')}" type="text"/>
 </div>
 <div class="status_main">
 <!-- current avatar -->
@@ -2011,44 +2011,54 @@ $(function() {
   $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
   $('#overlay_status_form .character_count').html(current_instance_charlimit);
   });
-  $(document).on('change keyup','#overlay_status_form textarea, #overlay_status_form .status_spoiler', function(e) {
+  $(document).on('change keyup','form[class*="status_form"] textarea, form[class*="status_form"] .status_spoiler', function(e) {
+    var target = $(this).parents('form').attr('id').replace('_status_form', '');
     if (
       (e.keyCode !== 224) &&
       (e.keyCode !== 17)
     ) {
       $(this).val(replaced_emoji_return($(this).val()));
-      checkReadyStatusText('#overlay_status_form');
+      checkReadyStatusText('#'+target+'_status_form');
     }
   });
-  $(document).on('click','#overlay_status_form .status_CW', function(e) {
-  $('#overlay_status_form .status_spoiler').toggleClass('invisible');
+  $(document).on('click','form[class*="status_form"] .status_CW', function(e) {
+    var target = $(this).attr('for').replace('_status_cw', '');
+    $('#'+target+'_status_form .status_spoiler').toggleClass('invisible');
   });
-  $(document).on('click','#overlay_status_form .expand_privacy_menu_button', function(e) {
-  $('#overlay_status_form .expand_privacy_menu').removeClass('invisible');
+  $(document).on('click','.expand_privacy_menu_button', function(e) {
+    var target = $(this).parents('form').attr('id').replace('_status_form', '');
+    $('#'+target+'_status_form .expand_privacy_menu').removeClass('invisible');
   });
-  $(document).on('click','#overlay_status_form .status_privacy.select_privacy', function(e) {
-  e.stopPropagation();
-  $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-  $('#overlay_status_form .expand_privacy_menu').addClass('invisible');
+  $(document).on('click','form[class*="status_form"] .status_privacy.select_privacy', function(e) {
+    var target = $(this).parents('form').attr('id').replace('_status_form', '');
+    e.stopPropagation();
+    $('#'+target+'_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
+    $('#'+target+'_status_form .expand_privacy_menu').addClass('invisible');
   });
-  $(document).on('change','#overlay_status_media_atta', function(e) {
-  $('#overlay_status_form .media_attachments_preview_area').empty();
-  $('#overlay_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-  for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-  let reader= new FileReader();
-  reader.readAsDataURL(f);
-  reader.onloadend = (function() {
-  return function (e) {
-  const html = (`<div class="media_attachments_preview">
-  <img src="${e.target.result}"/>
-  </div>`);
-  $(html).appendTo('#overlay_status_form .media_attachments_preview_area');
-  }
-  })(f);
-  }
+  $(document).on('change','form[class*="status_form"] input[type="file"]', function(e) {
+    var target = $(this).attr('id').replace('_status_media_atta', '');
+    $('#'+target+'_status_form .media_attachments_preview_area').empty();
+    $('#'+target+'_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
+    for ( let i = 0, f; f = e.target.files[i]; i++ ) {
+      let reader= new FileReader();
+      reader.readAsDataURL(f);
+      reader.onloadend = (function() {
+        return function (e) {
+          let html = '';
+          if ( e.target.result.match('^data:video\/mp4') ) {
+            html = (`<div class="media_attachments_preview"><video src="${e.target.result}" frameborder="0" playsinline autoplay loop muted" /></div>`);
+          }
+          else {
+            html = (`<div class="media_attachments_preview"><img src="${e.target.result}"/></div>`);
+          }
+          $(html).appendTo('#'+target+'_status_form .media_attachments_preview_area');
+        }
+      })(f);
+    }
   });
-  $(document).on('click','#overlay_status_form .status_NSFW', function(e) {
-  $('#overlay_status_form .media_attachments_preview_area').toggleClass('nsfw');
+  $(document).on('click','form[class*="status_form"] .status_NSFW', function(e) {
+    var target = $(this).attr('for').replace('_status_nsfw', '');
+    $('#'+target+'_status_form .media_attachments_preview_area').toggleClass('nsfw');
   });
   $(document).on('click','#overlay_status_form .submit_status_label', function(e) {
     $('#overlay_status_form').addClass('ready');
@@ -2095,26 +2105,6 @@ $(function() {
   autosize.destroy($('#header_status_form .status_textarea textarea'));
   }
   });
-  $(document).on('change keyup','#header_status_form textarea, #header_status_form .status_spoiler', function(e) {
-    if (
-      (e.keyCode !== 224) &&
-      (e.keyCode !== 17)
-    ) {
-      $(this).val(replaced_emoji_return($(this).val()));
-      checkReadyStatusText('#header_status_form');
-    }
-  });
-  $(document).on('click','#header_status_form .status_CW', function(e) {
-  $('#header_status_form .status_spoiler').toggleClass('invisible');
-  });
-  $(document).on('click','#header_status_form .expand_privacy_menu_button', function(e) {
-  $('#header_status_form .expand_privacy_menu').removeClass('invisible');
-  });
-  $(document).on('click','#header_status_form .status_privacy.select_privacy', function(e) {
-  e.stopPropagation();
-  $('#header_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-  $('#header_status_form .expand_privacy_menu').addClass('invisible');
-  });
   $(document).on('click','#header_status_form', function(e) {
   switch(localStorage.getItem("setting_post_privacy")) {
   case "public":picon="globe";break;
@@ -2132,25 +2122,7 @@ $(function() {
   $('#header_status_form .character_count').html(current_instance_charlimit);
   }
   });
-  $(document).on('change','#header_status_media_atta', function(e) {
-  $('#header_status_form .media_attachments_preview_area').empty();
-  $('#header_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-  for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-  let reader= new FileReader();
-  reader.readAsDataURL(f);
-  reader.onloadend = (function() {
-  return function (e) {
-  const html = (`<div class="media_attachments_preview">
-  <img src="${e.target.result}"/>
-  </div>`);
-  $(html).appendTo('#header_status_form .media_attachments_preview_area');
-  }
-  })(f);
-  }
-  });
-  $(document).on('click','#header_status_form .status_NSFW', function(e) {
-  $('#header_status_form .media_attachments_preview_area').toggleClass('nsfw');
-  });
+
   $(document).on('click','#header_status_form .submit_status_label', function(e) {
     $('#header_status_form').addClass('ready');
     $('#header_status_form .status_textarea').addClass('disallow_select');
@@ -2193,45 +2165,6 @@ $(function() {
   $('#reply_status_form textarea').val("@"+$('#reply_status_form').attr('username')+" ");
   $('#reply_status_form .character_count').html(current_instance_charlimit);
   }
-  });
-  $(document).on('change keyup','#reply_status_form textarea, #reply_status_form .status_spoiler', function(e) {
-    if (
-      (e.keyCode !== 224) &&
-      (e.keyCode !== 17)
-    ) {
-      $(this).val(replaced_emoji_return($(this).val()));
-      checkReadyStatusText('#reply_status_form');
-    }
-  });
-  $(document).on('click','#reply_status_form .status_CW', function(e) {
-  $('#reply_status_form .status_spoiler').toggleClass('invisible');
-  });
-  $(document).on('click','#reply_status_form .expand_privacy_menu_button', function(e) {
-  $('#reply_status_form .expand_privacy_menu').removeClass('invisible');
-  });
-  $(document).on('click','#reply_status_form .status_privacy.select_privacy', function(e) {
-  e.stopPropagation();
-  $('#reply_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-  $('#reply_status_form .expand_privacy_menu').addClass('invisible');
-  });
-  $(document).on('change','#reply_status_media_atta', function(e) {
-  $('#reply_status_form .media_attachments_preview_area').empty();
-  $('#reply_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-  for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-  let reader= new FileReader();
-  reader.readAsDataURL(f);
-  reader.onloadend = (function() {
-  return function (e) {
-  const html = (`<div class="media_attachments_preview">
-  <img src="${e.target.result}"/>
-  </div>`);
-  $(html).appendTo('#reply_status_form .media_attachments_preview_area');
-  }
-  })(f);
-  }
-  });
-  $(document).on('click','#reply_status_form .status_NSFW', function(e) {
-  $('#reply_status_form .media_attachments_preview_area').toggleClass('nsfw');
   });
   $(document).on('click','#reply_status_form .submit_status_label', function(e) {
     $('#reply_status_form').addClass('ready');
@@ -2297,45 +2230,6 @@ $(function() {
   replace_emoji();
   });
   return false;
-  });
-  $(document).on('change keyup','#single_reply_status_form textarea, #single_reply_status_form .status_spoiler', function(e) {
-    if (
-      (e.keyCode !== 224) &&
-      (e.keyCode !== 17)
-    ) {
-      $(this).val(replaced_emoji_return($(this).val()));
-      checkReadyStatusText('#single_reply_status_form');
-    }
-  });
-  $(document).on('click','#single_reply_status_form .status_CW', function(e) {
-  $('#single_reply_status_form .status_spoiler').toggleClass('invisible');
-  });
-  $(document).on('click','#single_reply_status_form .expand_privacy_menu_button', function(e) {
-  $('#single_reply_status_form .expand_privacy_menu').removeClass('invisible');
-  });
-  $(document).on('click','#single_reply_status_form .status_privacy.select_privacy', function(e) {
-  e.stopPropagation();
-  $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-  $('#single_reply_status_form .expand_privacy_menu').addClass('invisible');
-  });
-  $(document).on('change','#single_reply_status_media_atta', function(e) {
-  $('#single_reply_status_form .media_attachments_preview_area').empty();
-  $('#single_reply_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-  for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-  let reader= new FileReader();
-  reader.readAsDataURL(f);
-  reader.onloadend = (function() {
-  return function (e) {
-  const html = (`<div class="media_attachments_preview">
-  <img src="${e.target.result}"/>
-  </div>`);
-  $(html).appendTo('#single_reply_status_form .media_attachments_preview_area');
-  }
-  })(f);
-  }
-  });
-  $(document).on('click','#single_reply_status_form .status_NSFW', function(e) {
-  $('#single_reply_status_form .media_attachments_preview_area').toggleClass('nsfw');
   });
   $(document).on('click','#single_reply_status_form .submit_status_label', function(e) {
     $('#single_reply_status_form').addClass('ready');

@@ -232,7 +232,7 @@ transition: 0.13s;
 background-color: rgba(0, 0, 0, 0);
 transition: 0.13s;
 }
-.status_form .status_textarea .media_attachments_preview img {
+.status_form .status_textarea .media_attachments_preview img, .status_form .status_textarea .media_attachments_preview video {
 width: 100%;
 height: 100%;
 object-fit: cover;
