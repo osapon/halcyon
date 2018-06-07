@@ -255,50 +255,28 @@ function mediaattachments_template(status) {
 <span class="text2">${Pomo.getText('Click to view')}</span>
 </div>`;
   }
-  /*if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
-    let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
-    media_views += (`
-<div class="gif_mark"></div>
-<div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[0].id}">
-<video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>
-</div>`);
-  } else */{
-    if ( status.media_attachments.length <= 2 ) {
-      for ( let i in status.media_attachments ) {
+  if ( status.media_attachments.length <= 2 ) {
+    for ( let i in status.media_attachments ) {
+      if(status.media_attachments[i].remote_url != null) {
+        status.media_attachments[i].url = status.media_attachments[i].remote_url;
+      }
+      media_views += mediaattachments_template_object(status, i);
+    }
+  } else {
+    for ( let i in status.media_attachments ) {
+      if (Number(i) === 1) {
         if(status.media_attachments[i].remote_url != null) {
           status.media_attachments[i].url = status.media_attachments[i].remote_url;
         }
+        media_views += (`<div class="media_attachments_right">`);
         media_views += mediaattachments_template_object(status, i);
-        /*media_views += (`
-<div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
-<img src="${status.media_attachments[i].url}" window_view="enable" />
-</div>`);*/
+      } else {
+        media_views += mediaattachments_template_object(status, i);
       }
-    } else {
-      for ( let i in status.media_attachments ) {
-        if (Number(i) === 1) {
-          if(status.media_attachments[i].remote_url != null) {
-            status.media_attachments[i].url = status.media_attachments[i].remote_url;
-          }
-          media_views += (`<div class="media_attachments_right">`);
-          media_views += mediaattachments_template_object(status, i);
-          /*media_views += (`
-<div class="media_attachments_right">
-<div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
-<img src="${status.media_attachments[i].url}" window_view="enable"/>
-</div>`);*/
-        } else {
-          media_views += mediaattachments_template_object(status, i);
-          /*media_views += (`
-<div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
-<img src="${status.media_attachments[i].url}" window_view="enable"/>
-</div>`);*/
-        }
-      }
-      media_views += "</div>";
     }
     media_views += "</div>";
   }
+  media_views += "</div>";
   return media_views;
 }
 
