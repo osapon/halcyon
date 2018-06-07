@@ -213,6 +213,31 @@ $('.expand_menu').addClass('invisible');
 });
 });
 
+function mediaattachments_template_object(status, idx) {
+  var media_views = '';
+  if ( status.media_attachments[idx].type === "video" ) {
+    let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
+    media_views = (`
+<div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[idx].id}" url="${status.media_attachments[idx].url}" mediacount="${idx}">
+<video src="${status.media_attachments[idx].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>
+</div>`);
+  } else if ( status.media_attachments[idx].type === "gifv" ) {
+    let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
+    media_views = (`
+  <div class="gif_mark"></div>
+  <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[idx].id}" url="${status.media_attachments[idx].url}" mediacount="${idx}">
+  <video src="${status.media_attachments[idx].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted window_view="enable"></video>
+  </div>`);
+  } else {
+    media_views = (`
+<div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[idx].id}" url="${status.media_attachments[idx].url}" mediacount="${idx}">
+<img src="${status.media_attachments[idx].url}" window_view="enable" />
+</div>`);
+  }
+  return media_views;
+}
+
+
 function mediaattachments_template(status) {
   let media_views = "";
   if(status.media_attachments[0].remote_url != null) {
@@ -230,23 +255,24 @@ function mediaattachments_template(status) {
 <span class="text2">${Pomo.getText('Click to view')}</span>
 </div>`;
   }
-  if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
+  /*if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
     let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
     media_views += (`
 <div class="gif_mark"></div>
 <div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[0].id}">
 <video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>
 </div>`);
-  } else {
+  } else */{
     if ( status.media_attachments.length <= 2 ) {
       for ( let i in status.media_attachments ) {
         if(status.media_attachments[i].remote_url != null) {
           status.media_attachments[i].url = status.media_attachments[i].remote_url;
         }
-        media_views += (`
+        media_views += mediaattachments_template_object(status, i);
+        /*media_views += (`
 <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
 <img src="${status.media_attachments[i].url}" window_view="enable" />
-</div>`);
+</div>`);*/
       }
     } else {
       for ( let i in status.media_attachments ) {
@@ -254,16 +280,19 @@ function mediaattachments_template(status) {
           if(status.media_attachments[i].remote_url != null) {
             status.media_attachments[i].url = status.media_attachments[i].remote_url;
           }
-          media_views += (`
+          media_views += (`<div class="media_attachments_right">`);
+          media_views += mediaattachments_template_object(status, i);
+          /*media_views += (`
 <div class="media_attachments_right">
 <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
 <img src="${status.media_attachments[i].url}" window_view="enable"/>
-</div>`);
+</div>`);*/
         } else {
-          media_views += (`
+          media_views += mediaattachments_template_object(status, i);
+          /*media_views += (`
 <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
 <img src="${status.media_attachments[i].url}" window_view="enable"/>
-</div>`);
+</div>`);*/
         }
       }
       media_views += "</div>";
@@ -1154,15 +1183,20 @@ function media_template(status, mediaURL) {
 </div>`);
     return $(html)
   } else {
-    var multi_img=false;
+    let multi_img = false, setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
     if ((arguments.length==4) && (arguments[2].length>1)) {multi_img=true;}
-    const status_template = timeline_template(status).html(),
-    html = (`
+    const status_template = timeline_template(status).html();
+    let html = (`
 <div class="media_detail">
 ${multi_img?`<p id="slider_prev"></p><p id="slider_next"></p>`:''}
-<div class="media_box">
-<img src="${mediaURL}" />
-</div>
+<div class="media_box">`);
+    if ( mediaURL.match( /\.mp4$/ ) == '.mp4' ) {
+      html = html + (`<video src="${mediaURL}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>`);
+    }
+    else {
+      html = html + (`<img src="${mediaURL}" />`);
+    }
+    html = html + (`</div>
 <div class="toot_entry" sid="${status.id}">
 ${status_template}
 </div>
@@ -1924,12 +1958,12 @@ function setOverlayMedia(sid,urls,open_image_idx) {
     $("#slider_prev").on('click', function(){
       open_image_idx--;
       if ( open_image_idx < 0 ) open_image_idx = urls.length - 1;
-      $(".media_box > img").attr('src', urls[open_image_idx]);
+      $(".media_box > img,.media_box > video").attr('src', urls[open_image_idx]);
     });
     $("#slider_next").on('click', function(){
       open_image_idx++;
       if ( open_image_idx >= urls.length ) open_image_idx = 0;
-      $(".media_box > img").attr('src', urls[open_image_idx]);
+      $(".media_box > img,.media_box > video").attr('src', urls[open_image_idx]);
     });
   });
 }
@@ -1937,7 +1971,7 @@ function setOverlayMedia(sid,urls,open_image_idx) {
 $(function() {
   $(document).on('click','.media_attachment[otype="image"]', function(e) {
     e.stopPropagation();
-    var images=$(this).parents(".media_views").find("img"), urls=[], url = $(this).attr('url');
+    var images=$(this).parents(".media_views").find("img,video"), urls=[], url = $(this).attr('url');
     var open_image_idx = 0;
     for(idx=0,num=images.length;idx<num;idx++){
       var v = $(images[idx]).attr('src');
