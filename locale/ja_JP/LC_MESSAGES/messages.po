@@ -384,3 +384,18 @@ msgstr "国旗"
 msgctxt "Notifications"
 msgid "Direct"
 msgstr "ダイレクト"
+
+msgid "Your Toot has been deleted"
+msgstr "トゥートを削除しました"
+
+msgid "Your Toot was posted!"
+msgstr "トゥートが投稿されました！"
+
+msgid "Your Reply was posted!"
+msgstr "返信が投稿されました！"
+
+msgid "Reply to"
+msgstr "${val}への返信"
+
+msgid "Toot your reply"
+msgstr "あなたの返信トゥート"

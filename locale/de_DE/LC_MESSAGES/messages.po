@@ -383,3 +383,18 @@ msgstr "Flags"
 msgctxt "Notifications"
 msgid "Direct"
 msgstr "Direct"
+
+msgid "Your Toot has been deleted"
+msgstr "Your Toot has been deleted"
+
+msgid "Your Toot was posted!"
+msgstr "Your Toot was posted!"
+
+msgid "Your Reply was posted!"
+msgstr "Your Reply was posted!"
+
+msgid "Reply to"
+msgstr "Reply to ${val}"
+
+msgid "Toot your reply"
+msgstr "Toot your reply"

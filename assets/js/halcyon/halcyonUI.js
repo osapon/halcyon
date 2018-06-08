@@ -153,23 +153,23 @@ $(this).attr('favourited', "null");
 return false;
 });
 $(document).on('click','.delete_button', function(e) {
-const sid = $(this).attr('tid');
-api.delete("statuses/"+sid, function (data) {
-$('.toot_entry[sid="'+sid+'"]').remove();
-putMessage("Your Toot has been deleted");
-});
+  const sid = $(this).attr('tid');
+  api.delete("statuses/"+sid, function (data) {
+    $('.toot_entry[sid="'+sid+'"]').remove();
+    putMessage(Pomo.getText('Your Toot has been deleted'));
+  });
 });
 $(document).on('click','.cw_button', function(e) {
-e.stopPropagation();
-const article = $(this).parent();
-if ( article.hasClass('content_warning') ) {
-$(this).text(Pomo.getText('SHOW LESS'));
-article.removeClass('content_warning');
-} else {
-$(this).text(Pomo.getText('SHOW MORE'));
-article.addClass('content_warning');
-}
-return false;
+  e.stopPropagation();
+  const article = $(this).parent();
+  if ( article.hasClass('content_warning') ) {
+    $(this).text(Pomo.getText('SHOW LESS'));
+    article.removeClass('content_warning');
+  } else {
+    $(this).text(Pomo.getText('SHOW MORE'));
+    article.addClass('content_warning');
+  }
+  return false;
 });
 $(document).on('click','.sensitive_alart', function(e) {
   e.stopPropagation();
@@ -909,7 +909,7 @@ ${toot_reblog_button}
 </div>
 <!-- text area -->
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="Toot your reply"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="${Pomo.getText('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -961,7 +961,7 @@ ${current_instance_charlimit}
 <label for="reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>
-<span>Reply</span>
+<span>${Pomo.getText('Reply')}</span>
 </div>
 </label>
 </div>
@@ -1086,7 +1086,7 @@ ${media_views}
 </div>
 <!-- text area -->
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="Toot your reply"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="${Pomo.getText('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -1138,7 +1138,7 @@ ${current_instance_charlimit}
 <label for="reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>
-<span>Reply</span>
+<span>${Pomo.getText('Reply')}</span>
 </div>
 </label>
 </div>
@@ -2083,7 +2083,7 @@ $(function() {
       $('.overlay_status').addClass('invisible');
       $('#js-overlay_content_wrap').removeClass('view');
       $('#js-overlay_content_wrap').removeClass('black_05');
-      putMessage('Your Toot was posted!');
+      putMessage(Pomo.getText('Your Toot was posted!'));
     });
   });
 
@@ -2189,7 +2189,7 @@ $(function() {
       $('.reply_status .submit_status_label').removeClass('active_submit_button');
       context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
       replace_emoji();
-      putMessage('Your Toot was posted!');
+      putMessage(Pomo.getText('Your Toot was posted!'));
     });
   });
 })
@@ -2222,7 +2222,7 @@ $(function() {
   $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
   $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
   $('#single_reply_status_form').attr('tid',sid);
-  $('.single_reply_status .single_reply_status_header span').text("Reply to "+display_name);
+  $('.single_reply_status .single_reply_status_header span').text(Pomo.getText("Reply to").replace('${val}', display_name));
   $('#single_reply_status_form textarea').val(acct+" ");
   $('#single_reply_status_form .character_count').html(current_instance_charlimit);
   api.get('statuses/'+sid+'/', function(status) {
@@ -2256,7 +2256,7 @@ $(function() {
       $('#js-overlay_content_wrap').removeClass('view');
       $('#js-overlay_content_wrap').removeClass('black_05');
       $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
-      putMessage('Your Reply was posted!');
+      putMessage(Pomo.getText('Your Reply was posted!'));
     });
   });
 })

@@ -52,6 +52,10 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Notification tab is split(All / Reply / Follow / Boost & Fav / Direct).
 - Emoji input pad.
 
+## Translation
+ Accepting translations with [Weblate](https://weblate.osa-p.net/projects/halcyon/web/), but you need to make a pull request with Github in order to post a contributor a name.
+
+
 ## Requirement
 - Apache/Nginx/lighttpd
 - PHP
