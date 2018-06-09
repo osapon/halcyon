@@ -11,7 +11,7 @@ Follow or Mastodon account and never miss an important update: [@halcyon@social.
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
 - https://social.dev-wiki.de - 1.1.6
-- https://halcyon.toromino.de - 1.1.7
+- https://halcyon.toromino.de - 1.2.0
 - https://itter.photog.social - 1.1.7
 - https://halcyon.bka.li - 1.1.7
 - https://halcyon.tilde.team - 1.1.7
@@ -21,6 +21,8 @@ These instances are publicly accessible and usable by everyone, no matter which 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
+- Release of Version 1.2.0 - Bigger blog article with all changes and a future roadmap coming soon
+- Moved from Github to NotABug - Blog article coming soon
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
 - Release of Version 1.1.6 - Complete rewrite of the "who to follow" function using an API - Change of config.ini needed!
 - Release of Version 1.1.5 - Introduced the new Idempotency-Key Header and fixed an bug allowing XSS with the display name

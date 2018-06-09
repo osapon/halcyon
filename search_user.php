@@ -20,7 +20,7 @@ current_file = location.pathname+location.search;
 <?php if(isset($_GET['q'])): ?>
 const query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
 $('title').text(query+' - Halcyon Search');
-$('#js-search_title_box > h1').text(query);
+$('#js-header_title_box > h1').text(query);
 $('#js-search_nav_peoples').toggleClass('view');
 $('#js-search_nav_toots a ').attr('href','/search'+location.search);
 $('#js-search_nav_peoples a ').attr('href','/search/users'+location.search);

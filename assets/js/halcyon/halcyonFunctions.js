@@ -123,27 +123,27 @@ var posted_time_original = posted_time,
 posted_time = getConversionedDate(null, posted_time_original).getTime(),
 elapsedTime = Math.ceil((current_time-posted_time)/1000);
 if (elapsedTime < 60) {
-const datetime ="・" + elapsedTime + "s";
+const datetime ="ãƒ»" + elapsedTime + "s";
 return datetime;
 }
 else if (elapsedTime < 120) {
-const datetime ="・1m";
+const datetime ="ãƒ»1m";
 return datetime;
 }
 else if (elapsedTime < (60*60)) {
-const datetime ="・" + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
+const datetime ="ãƒ»" + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
 return datetime;
 }
 else if (elapsedTime < (120*60)) {
-const datetime ="・1h";
+const datetime ="ãƒ»1h";
 return datetime;
 }
 else if (elapsedTime < (24*60*60)) {
-const datetime ="・" + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
+const datetime ="ãƒ»" + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
 return datetime;
 }
 else {
-const datetime ="・" + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
+const datetime ="ãƒ»" + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
 return datetime;
 }
 }
@@ -173,19 +173,19 @@ api = new MastodonAPI({
 instance: 'https://'+current_instance,
 api_user_token: authtoken
 });
-api.get("accounts/verify_credentials", function(AccountObj) {
-localStorage.setItem("current_display_name", AccountObj["display_name"]);
-localStorage.setItem("current_acct", AccountObj["acct"]);
-localStorage.setItem("current_url", getRelativeURL(AccountObj["url"],AccountObj["id"]));
-localStorage.setItem("current_header", AccountObj["header"]);
-localStorage.setItem("current_avatar", AccountObj["avatar"]);
-localStorage.setItem("current_statuses_count", AccountObj["statuses_count"]);
-localStorage.setItem("current_following_count", AccountObj["following_count"]);
-localStorage.setItem("current_followers_count", AccountObj["followers_count"]);
-localStorage.setItem("current_statuses_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"]));
-localStorage.setItem("current_following_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/following'));
-localStorage.setItem("current_followers_count_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/followers'));
-localStorage.setItem("current_favourites_link", getRelativeURL(AccountObj["url"],AccountObj["id"],'/favourites'));
+api.get("accounts/verify_credentials",function(AccountObj) {
+localStorage.setItem("current_display_name",AccountObj["display_name"]);
+localStorage.setItem("current_acct",AccountObj["acct"]);
+localStorage.setItem("current_url",getRelativeURL(AccountObj["url"],AccountObj["id"]));
+localStorage.setItem("current_header",AccountObj["header"]);
+localStorage.setItem("current_avatar",AccountObj["avatar"]);
+localStorage.setItem("current_statuses_count",AccountObj["statuses_count"]);
+localStorage.setItem("current_following_count",AccountObj["following_count"]);
+localStorage.setItem("current_followers_count",AccountObj["followers_count"]);
+localStorage.setItem("current_statuses_count_link",getRelativeURL(AccountObj["url"],AccountObj["id"]));
+localStorage.setItem("current_following_count_link",getRelativeURL(AccountObj["url"],AccountObj["id"],'/following'));
+localStorage.setItem("current_followers_count_link",getRelativeURL(AccountObj["url"],AccountObj["id"],'/followers'));
+localStorage.setItem("current_favourites_link",getRelativeURL(AccountObj["url"],AccountObj["id"],'/favourites'));
 localStorage.setItem("current_follow_loaded","false");
 current_display_name = localStorage.getItem("current_display_name");
 current_acct = localStorage.getItem("current_acct");
@@ -260,23 +260,15 @@ $(".js_current_followers_count").text(current_followers_count);
 $(".current_toots_count_link").attr("href", current_statuses_count_link);
 $(".current_following_count_link").attr("href", current_following_count_link);
 $(".current_followers_count_link").attr("href", current_followers_count_link);
-if(localStorage.setting_link_previews == "true") {
-$("#setting_link_previews")[0].checked = true;
-}
-if(localStorage.setting_desktop_notifications == "true") {
-$("#setting_desktop_notifications")[0].checked = true;
 if (Notification.permission === 'default') {
 Notification.requestPermission(function(p) {
 if (p === 'denied') {
 localStorage.setItem("setting_desktop_notifications","false");
-$("#setting_desktop_notifications")[0].checked = false;
 }
 });
 }
 else if(Notification.permission == "denied") {
 localStorage.setItem("setting_desktop_notifications","false");
-$("#setting_desktop_notifications")[0].checked = false;
-}
 }
 if(localStorage.setting_who_to_follow == "true") {
 setWhoToFollow();

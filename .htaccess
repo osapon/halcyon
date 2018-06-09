@@ -31,6 +31,12 @@ RewriteBase /search
 RewriteRule ^search/?$ search_hash_tag\.php [NC,L,QSA]
 RewriteRule ^search/users/?$ search_user\.php [NC,L,QSA]
 
+# Settings
+RewriteBase /settings
+RewriteRule ^settings/?$ settings_general\.php [NC,L]
+RewriteRule ^settings/profile/?$ settings_profile\.php [NC,L]
+RewriteRule ^settings/appearance/?$ settings_appearance\.php [NC,L]
+
 # User
 RewriteBase /
 RewriteRule ^@(.+)@(.+)\.([a-z]+)/?$ user\.php?user=@$1@$2\.$3 [NC,L,QSA]
@@ -51,3 +57,4 @@ RewriteRule ^404/?$ 404\.php [NC,L,QSA]
 ErrorDocument 404 /404
 
 </IfModule>
+

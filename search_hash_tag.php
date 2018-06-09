@@ -3,7 +3,6 @@
 <?php include dirname(__FILE__).('/widgets/search_header.php'); ?>
 <div class="article_wrap">
 <aside class="left_column">
-<?php include dirname(__FILE__).('/widgets/side_load_options.php'); ?>
 <?php include dirname(__FILE__).('/widgets/side_who_to_follow.php'); ?>
 <?php include dirname(__FILE__).('/widgets/side_footer.php'); ?>
 </aside>
@@ -34,15 +33,16 @@ current_file = location.pathname+location.search;
 $(function() {
 const query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
 $('#main > .article_wrap > .center_column > .timeline_header > .header_items > .item').text("#"+query);
-$('#js-search_title_box > h1').text(query);
+$('#js-header_title_box > h1').text(query);
 $('title').text('#'+query+' - Halcyon Search');
 $('#js-search_nav_toots').toggleClass('view');
 $('#js-search_nav_toots a ').attr('href','/search'+location.search);
 $('#js-search_nav_peoples a ').attr('href','/search/users'+location.search)
-if ( localStorage.getItem("setting_search_filter") === "all" ) {
+if(localStorage.getItem("setting_search_filter") === "all") {
 setTimeline("timelines/tag/"+query);
-} else if ( localStorage.getItem("setting_search_filter") === "local" ) {
-setTimeline("timelines/tag/"+query, [{name:"local",data:"ture"}]);
+}
+else if(localStorage.getItem("setting_search_filter") === "local") {
+setTimeline("timelines/tag/"+query,[{name:"local",data:"true"}]);
 }
 replace_emoji();
 });

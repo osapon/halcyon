@@ -1,3 +1,7 @@
+<?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
+?>
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
@@ -15,19 +19,18 @@
 <script src="/assets/js/autosize/autosize.js"></script>
 <script src="/assets/js/shortcut.js"></script>
 <script src="/assets/js/replace_emoji.js"></script>
+<script src="/assets/js/halcyon/halcyonTemplates.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
 <script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
 <script>
-if (
-!localStorage.getItem("current_id") |
-!localStorage.getItem("current_instance") |
-!localStorage.getItem("current_authtoken")
-){
+if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
 location.href = "/login";
-} else {
-if( $.cookie("session") === "true" ) {
+}
+else {
+if($.cookie("session") === "true") {
 refreshApp();
-} else if ( $.cookie("session") === undefined ) {
+}
+else if($.cookie("session") === undefined) {
 resetApp();
 }
 }
@@ -104,7 +107,7 @@ resetApp();
 </ul>
 <ul>
 <li>
-<a class="header_settings_link" href="">Settings</a>
+<a href="/settings">Settings</a>
 </li>
 <li>
 <a href="/logout">Log out</a>

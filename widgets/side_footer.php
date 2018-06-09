@@ -13,7 +13,7 @@ Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a>
 <a href="https://github.com/tootsuite/documentation/blob/master/Using-Mastodon/Apps.md">Apps</a>
 </li>
 <li>
-<a href="https://github.com/halcyon-suite/halcyon">Source code</a>
+<a href="https://notabug.org/halcyon-suite/halcyon">Source code</a>
 </li>
 <li>
 <a href="http://instances.social">Other instances</a>
