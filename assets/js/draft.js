@@ -3,8 +3,8 @@ var draft = draft || {};
 draft.selector = function() {
   var self = this;
   this.active = false;
-  let draft_arr = JSON.parse(localStorage.getItem("draft"));
-  if ( typeof draft_arr != 'object' ) localStorage.setItem("draft", JSON.stringify(new Array()));
+  let draft = localStorage.getItem("draft");
+  if ( draft == null ) localStorage.setItem("draft", JSON.stringify(new Array()));
 
   $(document).on('click', '.draftSelecterIcon', function(e) {
     e.stopPropagation();
