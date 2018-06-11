@@ -126,6 +126,7 @@ location.href = "/";
 </p>
 <div class="image_wrap">
 <ul>
+<li><img src="/login/assets/images/preview3.png" alt="halcyon_screenshot"/></li>
 <li><img src="/login/assets/images/preview2.png" alt="halcyon_screenshot"/></li>
 <li><img src="/login/assets/images/preview1.png" alt="halcyon_screenshot"/></li>
 <li><img src="/login/assets/images/preview0.png" alt="halcyon_screenshot"/></li>
@@ -141,17 +142,18 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 <h2>このサーバのHalcyonは機能追加されています</h2>
 <p>
 <ul style="list-style:inside;">
-<li>多言語対応</li>
-<li>複数枚画像の投稿不具合修正</li>
-<li>複数枚画像の閲覧ビューワー</li>
-<li>WebUIと同様の検索処理</li>
-<li>画像の非表示化</li>
-<li>GIFアニメの再生停止機能（選択可）</li>
-<li>2カラム表示</li>
-<li>トゥートアドレスのクリップボードコピー機能</li>
-<li>タイムラインの自動スクロールによる誤操作を防止</li>
-<li>通知タブの分類分け</li>
-<li>カスタム絵文字を含む絵文字入力機能</li>
+<li>MultiLanguage(English / Japanese / Korean).（多言語対応）</li>
+<li>Emoji input pad.（カスタム絵文字を含む絵文字入力機能）</li>
+<li>Draft（下書き機能）</li>
+<li>Multi image/gifv viewer.（複数枚画像の閲覧ビューワー）</li>
+<li>Fix images are missing with multiple images toots.（複数枚画像の投稿不具合修正）</li>
+<li>Same search processing as WebUI.（WebUIと同様の検索処理）</li>
+<li>Sensitive image can switched for show / hide.（画像の非表示化）</li>
+<li>Auto-play animated GIFs(selectable stop or play).（GIFアニメの再生停止機能（選択可））</li>
+<li>2 column view.（2カラム表示）</li>
+<li>Toot URL copy to clipboard.（トゥートアドレスのクリップボードコピー機能）</li>
+<li>Timeline pause the auto scroll.（タイムラインの自動スクロールによる誤操作を防止）</li>
+<li>Notification tab is split(All / Reply / Follow / Boost &amp; Fav / Direct).（通知タブの分類分け）</li>
 </ul>
 </p>
 </article>

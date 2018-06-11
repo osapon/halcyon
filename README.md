@@ -6,6 +6,7 @@ An webclient for Mastodon and Pleroma which looks like Twitter
 <a href="https://halcyon.osa-p.net/login/assets/images/preview0.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview0.png" width="200px"></a>
 <a href="https://halcyon.osa-p.net/login/assets/images/preview1.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview1.png" width="200px"></a>
 <a href="https://halcyon.osa-p.net/login/assets/images/preview2.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview2.png" width="200px"></a>
+<a href="https://halcyon.osa-p.net/login/assets/images/preview3.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview3.png" width="200px"></a>
 
 ## Stay tuned
 Follow or Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
@@ -51,6 +52,7 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Timeline pause the auto scroll.
 - Notification tab is split(All / Reply / Follow / Boost & Fav / Direct).
 - Emoji input pad.
+- Draft
 
 ## Translation
  Accepting translations with [Weblate](https://weblate.osa-p.net/projects/halcyon/web/), but you need to make a pull request with Github in order to post a contributor a name.
