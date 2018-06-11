@@ -42,7 +42,7 @@ location.href = '/';
 }
 }
 ?>
-<script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="/assets/js/mastodon.js/mastodon.js"></script>
 </head>
 <body>

@@ -3460,8 +3460,8 @@ function replace_emoji( timelineonly ) {
     $(this).html($(this).html().replace("✅", "<img class='emoji' src='/assets/images/self_auth_min.png'>"));
     $(this).removeClass('emoji_poss');
   });
-  if ( timelineonly ) twemoji.parse(document.getElementById('js-timeline'),{base:(location.protocol==="https:"?"https:":"http:")+"//cdn.staticfile.org/twemoji/2.2.5/"});
-  else twemoji.parse(document.body,{base:(location.protocol==="https:"?"https:":"http:")+"//cdn.staticfile.org/twemoji/2.2.5/"});
+  if ( timelineonly ) twemoji.parse(document.getElementById('js-timeline'),{base:"https://twemoji.maxcdn.com/2/"});
+  else twemoji.parse(document.body,{base:"https://twemoji.maxcdn.com/2/"});
 }
 function replaced_emoji_return(original) {
 const emoji = original.match(/(:.+?:)/g);
