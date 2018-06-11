@@ -40,6 +40,7 @@ function filedate($filename){
 <script src="//cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
 <script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojipicker.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojis.js'); ?>"></script>
+<script src="<?php echo filedate('/assets/js/draft.js'); ?>"></script>
 <script>
 Pomo.domain = 'messages';
 Pomo.returnStrings = true;

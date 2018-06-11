@@ -399,3 +399,15 @@ msgstr "${val}への返信"
 
 msgid "Toot your reply"
 msgstr "あなたの返信トゥート"
+
+msgid "Copy to draft"
+msgstr "下書きへコピー"
+
+msgid "Move to draft"
+msgstr "下書きへ移動"
+
+msgid "Delete draft"
+msgstr "削除"
+
+msgid "Replace toot"
+msgstr "トゥート置換"

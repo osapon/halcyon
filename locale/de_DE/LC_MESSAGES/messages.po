@@ -398,3 +398,15 @@ msgstr "Reply to ${val}"
 
 msgid "Toot your reply"
 msgstr "Toot your reply"
+
+msgid "Copy to draft"
+msgstr "Copy to draft"
+
+msgid "Move to draft"
+msgstr "Move to draft"
+
+msgid "Delete draft"
+msgstr "Delete draft"
+
+msgid "Replace toot"
+msgstr "Replace toot"

@@ -2613,3 +2613,54 @@ background: #189EFC;
 #skinprefs em {
 	line-height: 1.4em;
 }
+
+.split {
+	border-left: 1px solid #189EFC;
+	height: 1.4em;
+	display: block;
+}
+
+#draftSelecter {
+	display: block;
+	position: absolute;
+	cursor: default;
+	background-color:#FFF;
+	width: 400px;
+	max-height: 250px;
+	overflow-x:hidden;
+	overflow-y:scroll;
+	padding: 18px;
+	font-size: 12px;
+	border-radius: 3px;
+	box-sizing: border-box;
+	box-shadow: 0.5px 0.5px 3px rgba(0,0,0,0.26);
+	z-index: 10;
+}
+
+#draftSelecter li {
+	white-space: nowrap;
+	color: rgb(101, 119, 134);
+	margin-bottom:2px;
+	cursor: pointer;
+}
+#draftSelecter li:last-child {
+	margin-bottom:0px;
+}
+#draftSelecter li:hover {
+	color: #189EFC;
+}
+#draftSelecter button{
+	border: 1px solid #189EFC;
+	color: #189EFC;
+	border-radius: 4px;
+}
+#draftSelecter button i.fa{
+	margin:0 2px;
+}
+#draftSelecter button:hover {
+	background-color: #189EFC;
+	color: #fff;
+}
+#draftSelecter .close {
+	float:right;
+}

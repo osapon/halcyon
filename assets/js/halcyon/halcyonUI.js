@@ -946,6 +946,10 @@ ${toot_reblog_button}
 </label>
 </div>
 </div>
+<div class="split"></div>
+<div class="draftSelecterIcon status_option_button">
+  <i class="fa fa-sticky-note" aria-hidden="true"></i>
+</div>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
@@ -1122,6 +1126,10 @@ ${media_views}
 <i class="fa fa-envelope" aria-hidden="true"></i>${Pomo.getText('Direct', {context: 'TootForm'})}
 </label>
 </div>
+</div>
+<div class="split"></div>
+<div class="draftSelecterIcon status_option_button">
+  <i class="fa fa-sticky-note" aria-hidden="true"></i>
 </div>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
@@ -1908,7 +1916,6 @@ function setOverlayStatus(sid) {
                 { name: 'flag', label: Pomo.getText('Flags') }
           ]
         });
-
       });
     });
   }
