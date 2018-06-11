@@ -23,11 +23,11 @@ function filedate($filename){
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="<?php echo filedate('/assets/css/style.css'); ?>" media="all">
-<link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.css'); ?>" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.tw2.css'); ?>" media="all">
 <link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/locale/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
-<script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonFunctions.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/mastodon.js/mastodon.js'); ?>"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
@@ -36,10 +36,11 @@ function filedate($filename){
 <script src="<?php echo filedate('/assets/js/replace_emoji.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
 <script src="/assets/js/pomo/src/dist/pomo.js"></script>
-<script src="//twemoji.maxcdn.com/2/twemoji.min.js?2.6"></script>
-<script src="//cdn.rawgit.com/zenorocha/clipboard.js/v2.0.0/dist/clipboard.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/twemoji@11.0.0/2/twemoji.min.js"></script>
+<script src="//cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
 <script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojipicker.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojis.js'); ?>"></script>
+<script src="<?php echo filedate('/assets/js/draft.js'); ?>"></script>
 <script>
 Pomo.domain = 'messages';
 Pomo.returnStrings = true;
