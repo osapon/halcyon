@@ -1,7 +1,7 @@
 # Halcyon for Mastodon and Pleroma
-An webclient for Mastodon and Pleroma which looks like Twitter
+A webclient for Mastodon and Pleroma which looks like Twitter
 
->The original author of this genius piece of software was inactive for a while and then shut down his demo instance and deleted this repository. I love Halcyon, it's the thing which makes Mastodon the best social network in the world. I took the Code from the Halcyon fork of cybre.space which still works but doesn't seem to get updates, too. I uploaded it here to make the original link work again and don't link into the big nothing. I'm working on much other stuff, too, what is why I won't use my whole free time to work on Halcyon but I try to do as much as possible here.
+>The original author of this genius piece of software was inactive for a while and then shut down his demo instance and deleted this repository. I love Halcyon, it's the thing which makes Mastodon the best social network in the world. I took the code from the Halcyon fork of cybre.space which still works but doesn't seem to get updates, too. I uploaded it here to make the original link work again and don't link into the big nothing. I'm working on much other stuff, too, therefore I won't use my whole free time to work on Halcyon. But I try to do as much as possible here.
 
 <a href="https://halcyon.osa-p.net/login/assets/images/preview0.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview0.png" width="200px"></a>
 <a href="https://halcyon.osa-p.net/login/assets/images/preview1.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview1.png" width="200px"></a>
@@ -9,22 +9,24 @@ An webclient for Mastodon and Pleroma which looks like Twitter
 <a href="https://halcyon.osa-p.net/login/assets/images/preview3.png"><img src="https://halcyon.osa-p.net/login/assets/images/preview3.png" width="200px"></a>
 
 ## Stay tuned
-Follow or Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
+Follow our Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
 - https://social.dev-wiki.de - 1.1.6
-- https://halcyon.toromino.de - 1.1.7
+- https://halcyon.toromino.de - 1.2.0
 - https://itter.photog.social - 1.1.7
 - https://halcyon.bka.li - 1.1.7
 - https://halcyon.tilde.team - 1.1.7
 - https://halcyon.distsn.org - 1.1.6
-- https://halcyon.osa-p.net - 1.1.7(MultiLanguage + other feature)
+- https://halcyon.osa-p.net - 1.2.0(MultiLanguage + other feature)
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
+- Release of Version 1.2.0 - Bigger blog article with all changes and a future roadmap coming soon
+- Moved from Github to NotABug - Blog article coming soon
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
 - Release of Version 1.1.6 - This repository uses [Followlink](https://followlink.osa-p.net/) as an aid to who to follow.
 - Release of Version 1.1.5 - Introduced the new Idempotency-Key Header and fixed an bug allowing XSS with the display name

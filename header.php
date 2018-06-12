@@ -1,4 +1,6 @@
 <?php
+ini_set('display_errors', 1);
+error_reporting(E_ALL);
 require_once('./lang.php');
 
 function filedate($filename){
@@ -34,6 +36,7 @@ function filedate($filename){
 <script src="/assets/js/autosize/autosize.js"></script>
 <script src="/assets/js/shortcut.js"></script>
 <script src="<?php echo filedate('/assets/js/replace_emoji.js'); ?>"></script>
+<script src="<?php echo filedate('/assets/js/halcyon/halcyonTemplates.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
 <script src="/assets/js/pomo/src/dist/pomo.js"></script>
 <script src="//cdn.jsdelivr.net/npm/twemoji@11.0.0/2/twemoji.min.js"></script>
@@ -52,16 +55,14 @@ var pomo_def = Pomo.load(null,
   translation_domain: 'messages'
 });
 
-if (
-  !localStorage.getItem("current_id") |
-  !localStorage.getItem("current_instance") |
-  !localStorage.getItem("current_authtoken")
-){
+if (!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")){
   location.href = "/login";
-} else {
-  if( $.cookie("session") === "true" ) {
+}
+else {
+  if($.cookie("session") === "true") {
     refreshApp();
-  } else if ( $.cookie("session") === undefined ) {
+  }
+  else if($.cookie("session") === undefined) {
     resetApp();
   }
 }
@@ -138,7 +139,7 @@ if (
 </ul>
 <ul>
 <li>
-<a class="header_settings_link" href=""><?=_('Settings')?></a>
+<a class="header_settings_link" href="/settings"><?=_('Settings')?></a>
 </li>
 <li>
 <a href="/logout"><?=_('Log out')?></a>

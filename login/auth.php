@@ -22,7 +22,8 @@ $api->selectInstance($URL);
 $response = $api->get_access_token($api->clientWebsite.'/auth?&host='.$domain, htmlspecialchars((string)filter_input(INPUT_GET, 'code'), ENT_QUOTES));
 if ($response['html']["access_token"]) {
 $access_token = $response['html']["access_token"];
-$account_id = $api->accounts_verify_credentials()['html']['id'];
+$profile = $api->accounts_verify_credentials()['html'];
+$account_id = $profile['id'];
 echo "
 <script>
 localStorage.setItem('current_id','$account_id');
@@ -36,6 +37,9 @@ localStorage.setItem('setting_autoplay_animated', 'yes');
 localStorage.setItem('setting_link_previews', 'true');
 localStorage.setItem('setting_desktop_notifications', 'true');
 localStorage.setItem('setting_who_to_follow', 'false');
+localStorage.setItem('setting_show_replies', 'true');
+localStorage.setItem('setting_post_privacy','".$profile["source"]["privacy"]."');
+localStorage.setItem('setting_post_sensitive','".$profile["source"]["sensitive"]."');
 location.href = '/';
 </script>
 ";

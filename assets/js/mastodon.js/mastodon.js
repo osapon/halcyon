@@ -249,6 +249,49 @@ location.href = "/logout";
 }
 });
 },
+patch: function (endpoint) {
+  var postData, callback;
+  if (typeof arguments[1] === "function") {
+    postData = {};
+    callback = arguments[1];
+  } else {
+    if(arguments[1].length) {
+      postData = new FormData();
+      for(var i=0, l=arguments[1].length; i<l; i++) {
+        postData.append( arguments[1][i].name, arguments[1][i].data );
+      }
+    }
+    else {
+      postData = arguments[1];
+    }
+    callback = arguments[2];
+  }
+  var requestHeaders = {"Authorization":"Bearer "+config.api_user_token};
+  $.ajax({
+    url: apiBase + endpoint,
+    type: "PATCH",
+    dataType:'json',
+    data: postData,
+    headers: requestHeaders,
+    contentType: false,
+    processData: false,
+    success: function(data, textStatus) {
+      console.log("Successful PATCH API request to " +apiBase+endpoint);
+      callback(data,textStatus)
+    },
+    error: function(xhr, textStatus, errorThrown) {
+      if(xhr.readyState == 0) {
+        api.patch(endpoint,postData,callback);
+      }
+      else {
+        putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
+        if ( xhr.status === 401 ) {
+          location.href = "/logout";
+        }
+      }
+    }
+  });
+},
 stream: function (streamType, onData) {
 var es = new WebSocket("wss://" + apiBase.substr(8) + "streaming?access_token=" + config.api_user_token + "&stream=" + streamType);
 var listener = function (event) {

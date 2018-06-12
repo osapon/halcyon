@@ -1,7 +1,7 @@
-<div class="side_widget what_to_follow">
+<div class="side_widget what_to_follow invisible">
   <h2>Who to follow</h2>
   <ul class="account_list">
-    <li class="account_box what_to_follow_0">
+    <li class="account_box what_to_follow_0 invisible">
       <div class="icon_box">
         <img src="">
       </div>
@@ -18,7 +18,7 @@
         </button>
       </div>
     </li>
-    <li class="account_box what_to_follow_1">
+    <li class="account_box what_to_follow_1 invisible">
       <div class="icon_box">
         <img src="">
       </div>
@@ -35,7 +35,7 @@
         </button>
       </div>
     </li>
-    <li class="account_box what_to_follow_2">
+    <li class="account_box what_to_follow_2 invisible">
       <div class="icon_box">
         <img src="">
       </div>

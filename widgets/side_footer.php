@@ -1,7 +1,7 @@
 <footer class="side_widgets_footer side_widget">
 <ul>
 <li>
-Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a>
+Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a> and <a href="https://git.pleroma.social/pleroma/pleroma">Pleroma</a>
 </li>
 <li>
 <a id="shortcut_guide"><?=_('Shortcut key')?></a>

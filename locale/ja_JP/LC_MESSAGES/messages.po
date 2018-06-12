@@ -12,7 +12,7 @@ msgstr ""
 "X-Generator: Weblate 3.0\n"
 
 msgid "Language"
-msgstr "Language"
+msgstr "言語(Language)"
 
 msgid "Language_de_DE"
 msgstr "Deutsch"
@@ -411,3 +411,60 @@ msgstr "削除"
 
 msgid "Replace toot"
 msgstr "トゥート置換"
+
+msgid "General settings"
+msgstr "全般の設定"
+
+msgid "Profile settings"
+msgstr "プロフィール設定"
+
+msgid "Appearance settings"
+msgstr "外観の設定"
+
+msgid "GENERAL"
+msgstr "全般"
+
+msgid "PROFILE"
+msgstr "プロフィール"
+
+msgid "APPEARANCE"
+msgstr "外観"
+
+msgid "Show replies"
+msgstr "返信の表示"
+
+msgid "Mark as NSFW by default"
+msgstr "メディアを常に閲覧注意としてマークする"
+
+msgid "Display name"
+msgstr "表示名"
+
+msgid "About me"
+msgstr "プロフィール"
+
+msgid "Avatar"
+msgstr "アイコン"
+
+msgid "Header"
+msgstr "ヘッダー"
+
+msgid "Lock account"
+msgstr "承認制アカウントにする"
+
+msgid "Select file and upload"
+msgstr "ファイルの選択と更新"
+
+msgid "Changed about me setting"
+msgstr "プロフィールを更新しました"
+
+msgid "Uploaded new avatar"
+msgstr "アイコンを更新しました"
+
+msgid "Uploaded new header"
+msgstr "ヘッダー画像を更新しました"
+
+msgid "Account locked"
+msgstr "フォローを承認制にしました"
+
+msgid "Account unlocked"
+msgstr "フォローの承認制を解除しました"

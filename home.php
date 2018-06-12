@@ -3,7 +3,6 @@
   <div class="article_wrap">
     <aside class="left_column">
       <?php include dirname(__FILE__).('/widgets/side_current_user.php'); ?>
-      <?php include dirname(__FILE__).('/widgets/side_load_options.php'); ?>
     </aside>
     <article class="center_column">
       <header class="timeline_header">

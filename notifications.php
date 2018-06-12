@@ -47,7 +47,7 @@ current_file = location.pathname;
 <?php
 $allow_target=['follow','reply','bf', 'dm'];
 $target = 'all';
-if (in_array( $_GET['target'], $allow_target )) $target = $_GET['target'];
+if (isset($_GET['target']) && in_array($_GET['target'], $allow_target)) $target = $_GET['target'];
 ?>
 $(".header_items > .<?=$target?>").addClass('view');
 $("#notifications_nav").addClass('view');

@@ -411,3 +411,60 @@ msgstr "Delete draft"
 
 msgid "Replace toot"
 msgstr "Replace toot"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Profile settings"
+msgstr "Profile settings"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "GENERAL"
+msgstr "GENERAL"
+
+msgid "PROFILE"
+msgstr "PROFILE"
+
+msgid "APPEARANCE"
+msgstr "APPEARANCE"
+
+msgid "Show replies"
+msgstr "Show replies"
+
+msgid "Mark as NSFW by default"
+msgstr "Mark as NSFW by default"
+
+msgid "Display name"
+msgstr "Display name"
+
+msgid "About me"
+msgstr "About me"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "Header"
+msgstr "Header"
+
+msgid "Lock account"
+msgstr "Lock account"
+
+msgid "Select file and upload"
+msgstr "Select file and upload"
+
+msgid "Changed about me setting"
+msgstr "Changed about me setting"
+
+msgid "Uploaded new avatar"
+msgstr "Uploaded new avatar"
+
+msgid "Uploaded new header"
+msgstr "Uploaded new header"
+
+msgid "Account locked"
+msgstr "Account locked"
+
+msgid "Account unlocked"
+msgstr "Account unlocked"
