@@ -33,7 +33,7 @@ localStorage.setItem('setting_post_stream', 'auto');
 localStorage.setItem('setting_post_privacy', 'public');
 localStorage.setItem('setting_local_instance', 'default');
 localStorage.setItem('setting_search_filter', 'all');
-localStorage.setItem('setting_autoplay_animated', 'yes');
+localStorage.setItem('setting_autoplay_animated', 'true');
 localStorage.setItem('setting_link_previews', 'true');
 localStorage.setItem('setting_desktop_notifications', 'true');
 localStorage.setItem('setting_who_to_follow', 'false');

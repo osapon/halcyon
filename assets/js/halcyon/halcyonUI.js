@@ -18,7 +18,7 @@ function htmlEscape(strings, ...values) {
 };
 function iconurl(url) {
   let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
-  if (( setting_autoplay_animated == 'no' ) && (url.match(/\.gif$/))) {
+  if (( setting_autoplay_animated == 'false' ) && (url.match(/\.gif$/))) {
     url = url.replace('/original/', '/static/').replace(/\.gif$/, '.png');
   }
   return url;

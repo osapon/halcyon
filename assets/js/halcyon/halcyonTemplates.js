@@ -4,14 +4,14 @@ function mediaattachments_template_object(status, idx) {
     let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
     media_views = (`
 <div class="media_attachment" otype="video/gifv" mediacount="0" oid="${status.media_attachments[idx].id}" url="${status.media_attachments[idx].url}" mediacount="${idx}">
-<video src="${status.media_attachments[idx].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>
+<video src="${status.media_attachments[idx].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='false'?'':'autoplay'} loop muted controls></video>
 </div>`);
   } else if ( status.media_attachments[idx].type === "gifv" ) {
     let setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
     media_views = (`
   <div class="gif_mark"></div>
   <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[idx].id}" url="${status.media_attachments[idx].url}" mediacount="${idx}">
-  <video src="${status.media_attachments[idx].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted window_view="enable"></video>
+  <video src="${status.media_attachments[idx].url}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='false'?'':'autoplay'} loop muted window_view="enable"></video>
   </div>`);
   } else {
     media_views = (`
@@ -961,7 +961,7 @@ function media_template(status, mediaURL) {
 ${multi_img?`<p id="slider_prev"></p><p id="slider_next"></p>`:''}
 <div class="media_box">`);
     if ( mediaURL.match( /\.mp4$/ ) == '.mp4' ) {
-      html = html + (`<video src="${mediaURL}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='no'?'':'autoplay'} loop muted controls></video>`);
+      html = html + (`<video src="${mediaURL}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='false'?'':'autoplay'} loop muted controls></video>`);
     }
     else {
       html = html + (`<img src="${mediaURL}" />`);

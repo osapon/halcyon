@@ -26,7 +26,6 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 
 ## Blog
 - Release of Version 1.2.0 - Bigger blog article with all changes and a future roadmap coming soon
-- Moved from Github to NotABug - Blog article coming soon
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
 - Release of Version 1.1.6 - This repository uses [Followlink](https://followlink.osa-p.net/) as an aid to who to follow.
 - Release of Version 1.1.5 - Introduced the new Idempotency-Key Header and fixed an bug allowing XSS with the display name
@@ -44,7 +43,10 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Twitter like UI, familiar interface.
 - Able to use on all instances.
 - No tracking, No ads.
+- Fix images are missing with multiple images toots.
 - MultiLanguage(English / Japanese / Korean).
+- Emoji input pad.
+- Draft
 - Multi image/gifv viewer.
 - Same search processing as WebUI.
 - Sensitive image can switched for show / hide.
@@ -53,8 +55,6 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Toot URL copy to clipboard.
 - Timeline pause the auto scroll.
 - Notification tab is split(All / Reply / Follow / Boost & Fav / Direct).
-- Emoji input pad.
-- Draft
 
 ## Translation
  Accepting translations with [Weblate](https://weblate.osa-p.net/projects/halcyon/web/), but you need to make a pull request with Github in order to post a contributor a name.
