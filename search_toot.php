@@ -3,7 +3,6 @@
 <?php include dirname(__FILE__).('/widgets/search_header.php'); ?>
 <div class="article_wrap">
 <aside class="left_column">
-<?php include dirname(__FILE__).('/widgets/side_load_options.php'); ?>
 <?php include dirname(__FILE__).('/widgets/side_who_to_follow.php'); ?>
 <?php include dirname(__FILE__).('/widgets/side_footer.php'); ?>
 </aside>
