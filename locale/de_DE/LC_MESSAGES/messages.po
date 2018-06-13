@@ -1,6 +1,7 @@
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-07 06:52+0000\n"
+"Report-Msgid-Bugs-To: osa@osa-p.net\n"
+"PO-Revision-Date: 2018-06-13 22:37+0000\n"
 "Last-Translator: Weblate Admin <osa@osa-p.net>\n"
 "Language-Team: German <https://weblate.osa-p.net/projects/halcyon/web/de/>\n"
 "Language: de_DE\n"
@@ -26,7 +27,7 @@ msgid "Language_ko_KR"
 msgstr "한국어"
 
 msgid "Login"
-msgstr "Login"
+msgstr "Anmelden"
 
 msgid "News"
 msgstr "News"
@@ -38,13 +39,13 @@ msgid "Terms"
 msgstr "Terms"
 
 msgid "Contact"
-msgstr "Contact"
+msgstr "Kontakt"
 
 msgid "Login to Halcyon"
 msgstr "Login to Halcyon"
 
 msgid "or"
-msgstr "or"
+msgstr "oder"
 
 msgid "create an account"
 msgstr "create an account"
@@ -59,7 +60,7 @@ msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it j
 msgstr "Halcyon is standard <span style='font-weight: bold'>Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
 
 msgid "Contact / Feedback"
-msgstr "Contact / Feedback"
+msgstr "Kontakt / Feedback"
 
 msgid "Halcyon Terms of Use"
 msgstr "Halcyon Terms of Use"
@@ -71,25 +72,25 @@ msgid "Home"
 msgstr "Home"
 
 msgid "Local"
-msgstr "Local"
+msgstr "lokale"
 
 msgid "Federated"
 msgstr "Federated"
 
 msgid "Notifications"
-msgstr "Notifications"
+msgstr "Benachrichtigungen"
 
 msgid "Search Mastodon"
-msgstr "Search Mastodon"
+msgstr "Suche Mastodon"
 
 msgid "View profile"
-msgstr "View profile"
+msgstr "Zeige Profil"
 
 msgid "Settings"
-msgstr "Settings"
+msgstr "Einstellungen"
 
 msgid "Log out"
-msgstr "Log out"
+msgstr "Abmelden"
 
 msgid "Toot"
 msgstr "Toot"
@@ -98,7 +99,7 @@ msgid "TOOTS"
 msgstr "TOOTS"
 
 msgid "FOLLOWING"
-msgstr "FOLLOWING"
+msgstr "FOLGELISTE"
 
 msgid "FOLLOWERS"
 msgstr "FOLLOWERS"
