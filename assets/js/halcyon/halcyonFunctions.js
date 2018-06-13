@@ -302,7 +302,7 @@ async function post(param) {
     }
     var params = {
       status : form.status_textarea.value,
-      sensitive: form.status_nsfw.checked,
+      sensitive: (form.status_nsfw.checked | (form.status_spoiler.value != '')),
       spoiler_text : form.status_spoiler.value,
       visibility : form.privacy_option.value
     }
