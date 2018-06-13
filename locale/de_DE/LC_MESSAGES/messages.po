@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Report-Msgid-Bugs-To: osa@osa-p.net\n"
-"PO-Revision-Date: 2018-06-13 22:37+0000\n"
+"PO-Revision-Date: 2018-06-14 01:08+0000\n"
 "Last-Translator: Weblate Admin <osa@osa-p.net>\n"
 "Language-Team: German <https://weblate.osa-p.net/projects/halcyon/web/de/>\n"
 "Language: de_DE\n"
@@ -93,7 +93,7 @@ msgid "Log out"
 msgstr "Abmelden"
 
 msgid "Toot"
-msgstr "Toot"
+msgstr "Tröt"
 
 msgid "TOOTS"
 msgstr "TOOTS"
@@ -105,7 +105,7 @@ msgid "FOLLOWERS"
 msgstr "FOLLOWERS"
 
 msgid "Preferences"
-msgstr "Preferences"
+msgstr "Einstellungen"
 
 msgid "SHOW"
 msgstr "SHOW"
@@ -129,32 +129,34 @@ msgid "HASHTAG"
 msgstr "HASHTAG"
 
 msgid "What's happening?"
-msgstr "What's happening?"
+msgstr "Worüber möchtest du schreiben?"
 
 msgid "Content warning"
-msgstr "Content warning"
+msgstr "Inhaltswarnung"
 
 msgctxt "TootForm"
 msgid "Public"
-msgstr "Public"
+msgstr "<abbr title='Beitrag an öffentliche Zeitl'>Öffentlich</abbr>"
 
 msgctxt "TootForm"
 msgid "Unlisted"
-msgstr "Unlisted"
+msgstr ""
+"<abbr title='Nicht in öffentlichen Zeitleisten anzeigen'>Nicht "
+"gelistet</abbr>"
 
 msgctxt "TootForm"
 msgid "Followers-only"
-msgstr "Followers-only"
+msgstr "<abbr title='Beitrag nur an Folgende'>Nur Folgende</abbr>"
 
 msgctxt "TootForm"
 msgid "Direct"
-msgstr "Direct"
+msgstr "<abbr title='Beitrag nur an erwähnte Profile'>Direkt</abbr>"
 
 msgid "View new Toots"
 msgstr "View <span></span> new Toots"
 
 msgid "About this instance"
-msgstr "About this instance"
+msgstr "Über diese Instanz"
 
 msgid "Terms this instance"
 msgstr "Terms this instance"
@@ -163,7 +165,7 @@ msgid "Other instances"
 msgstr "Other instances"
 
 msgid "Follow"
-msgstr "Follow"
+msgstr "Folgen"
 
 msgid "Auto update"
 msgstr "Auto update"
@@ -173,15 +175,17 @@ msgstr "Manual update"
 
 msgctxt "Option"
 msgid "Public"
-msgstr "Public"
+msgstr "Öffentlich:Für alle sichtbar"
 
 msgctxt "Option"
 msgid "Unlisted"
-msgstr "Unlisted"
+msgstr ""
+"Nicht gelistet:Für alle sichtbar, aber nicht in öffentlichen Zeitleisten "
+"aufgeli"
 
 msgctxt "Option"
 msgid "Followers-only"
-msgstr "Followers-only"
+msgstr "Nur Folgende:Nur für Folgende sichtbar"
 
 msgctxt "Option"
 msgid "Direct"
@@ -437,16 +441,16 @@ msgid "Mark as NSFW by default"
 msgstr "Mark as NSFW by default"
 
 msgid "Display name"
-msgstr "Display name"
+msgstr "Anzeigename"
 
 msgid "About me"
 msgstr "About me"
 
 msgid "Avatar"
-msgstr "Avatar"
+msgstr "Profilbild"
 
 msgid "Header"
-msgstr "Header"
+msgstr "Kopfbild"
 
 msgid "Lock account"
 msgstr "Lock account"
