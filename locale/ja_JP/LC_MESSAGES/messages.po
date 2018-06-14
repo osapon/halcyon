@@ -468,3 +468,9 @@ msgstr "フォローを承認制にしました"
 
 msgid "Account unlocked"
 msgstr "フォローの承認制を解除しました"
+
+msgid "Apps"
+msgstr "アプリ"
+
+msgid "Translation"
+msgstr "翻訳"

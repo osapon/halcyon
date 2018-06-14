@@ -13,10 +13,10 @@ Halcyon for <a href="https://github.com/tootsuite/mastodon">Mastodon</a> and <a 
 <a class="footer_widget_terms"><?=_('Terms this instance')?></a>
 </li>
 <li>
-<a href="https://github.com/tootsuite/documentation/blob/master/Using-Mastodon/Apps.md">Apps</a>
+<a href="https://github.com/tootsuite/documentation/blob/master/Using-Mastodon/Apps.md"><?=_('Apps')?></a>
 </li>
 <li>
-<a href="https://weblate.osa-p.net/projects/halcyon/web/" target="_blank">Translation</a>
+<a href="https://weblate.osa-p.net/projects/halcyon/web/" target="_blank"><?=_('Translation')?></a>
 </li>
 <li>
 <a href="<?=$config['App']['source_link']?>" target="_blank"><?=_('Source')?></a>

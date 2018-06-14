@@ -472,3 +472,9 @@ msgstr "Account locked"
 
 msgid "Account unlocked"
 msgstr "Account unlocked"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Translation"
+msgstr "Translation"
