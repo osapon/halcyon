@@ -523,12 +523,13 @@ return $(html);
 }
 
 function follows_template(AccountObj) {
-const array = AccountObj.url.split('/'),
-profile_link = '/'+array[array.length-1]+'@'+array[array.length-2]+'?mid='+AccountObj.id+'&';
-if(AccountObj.display_name.length == 0) {
-AccountObj.display_name = AccountObj.username;
-}
-const html = (`
+  let acct = AccountObj.acct;
+  if (acct.match('@')==null) acct = acct +'@'+ AccountObj.url.match(/^https:\/\/([0-9a-z\.\-:]+?):?[0-9]*?\//i)[1];
+  profile_link = '/@'+acct+'?mid='+AccountObj.id+'&';
+  if(AccountObj.display_name.length == 0) {
+    AccountObj.display_name = AccountObj.username;
+  }
+  const html = (`
 <div class="follows_profile_box" mid="${AccountObj.id}">
 <div class="follows_profile_header">
 <img class="js_follows_header_image" src="${AccountObj.header}"/>
@@ -547,7 +548,7 @@ const html = (`
 ${htmlEscape`${AccountObj.display_name}`}
 </h2>
 <span class="js_follows_profile_username">
-@${AccountObj.acct}
+@${acct}
 </span>
 </a>
 </div>
@@ -556,7 +557,7 @@ ${htmlEscape`${AccountObj.display_name}`}
 </div>
 </div>
 </div>`);
-return $(html)
+  return $(html)
 }
 
 function hashtag_template(hashtag) {

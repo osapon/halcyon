@@ -485,63 +485,49 @@ function setNotifications(load_options) {
   });
 }
 
-function setFollows(mid, param, load_options) {
-let isSyncing = true,
-followsList = [];
-api.get('accounts/'+mid+'/'+param, load_options, function(follows) {
+function setFollowsRelationships(follows) {
+  let followsList = [];
+  if (follows.length) {
+    for (let i in follows) {
+      follows_template(follows[i]).appendTo("#js-follows_profile");
+      followsList.unshift(follows[i].id);
+    };
+    api.getArray('accounts/relationships', [{name:'id', data:followsList}], function(RelationshipsObj) {
+      for ( let i in RelationshipsObj ) {
+        if ( RelationshipsObj[i].following ) {
+          const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
+          button.removeClass("follow_button");
+          button.addClass("following_button");
+          button.text(Pomo.getText('Following'));
+        }
+      }
+    });
+  }
+  links = getLinkFromXHRHeader(responce_headers);
+  replace_emoji();
+  return follows.length;
+}
 
-for (let i in follows) {
-follows_template(follows[i]).appendTo("#js-follows_profile");
-followsList.unshift(follows[i].id);
-};
-api.getArray('accounts/relationships', [{name:'id', data:followsList}], function(RelationshipsObj) {
-for ( let i in RelationshipsObj ) {
-if ( RelationshipsObj[i].following ) {
-const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
-button.removeClass("follow_button");
-button.addClass("following_button");
-button.text(Pomo.getText('Following'));
-}
-}
-});
-links = getLinkFromXHRHeader(responce_headers);
-replace_emoji();
-$("#js-follows_footer > i").css({"display":"none"});
-isSyncing = false;
-});
-$(window).scroll(function () {
-if ($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
-if( !isSyncing ){
-isSyncing = true;
-load_options.unshift( {name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]} );
-api.get('accounts/'+mid+'/'+param, load_options, function(follows) {
-let followsList = [];
-if (follows.length) {
-for(let i in follows) {
-follows_template(follows[i]).appendTo("#js-follows_profile");
-followsList.unshift(follows[i].id);
-};
-api.getArray('accounts/relationships', [{name:'id', data:followsList}], function(RelationshipsObj) {
-for ( let i in RelationshipsObj ) {
-if ( RelationshipsObj[i].following ) {
-const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
-button.removeClass("follow_button");
-button.addClass("following_button");
-button.text(Pomo.getText('Following'));
-}
-}
-});
-links = getLinkFromXHRHeader(responce_headers);
-replace_emoji();
-isSyncing = false;
-} else {
-isSyncing = true;
-}
-});
-load_options.shift();
-};
-};
-});
+function setFollows(mid, param, load_options) {
+  let isSyncing = true;
+  api.get('accounts/'+mid+'/'+param, load_options, function(follows) {
+    isSyncing = (setFollowsRelationships(follows) == 0);
+    $("#js-follows_footer > i").css({"display":"none"});
+  });
+  $(window).scroll(function () {
+    if ($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
+      if( !isSyncing ){
+        isSyncing = true;
+        if (links['next']) {
+          load_options.unshift( {name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]} );
+          api.get('accounts/'+mid+'/'+param, load_options, function(follows) {
+            isSyncing = (setFollowsRelationships(follows) == 0);
+          });
+          load_options.shift();
+        }
+      };
+    };
+  });
 };
 
 function setUserSearch(query) {
