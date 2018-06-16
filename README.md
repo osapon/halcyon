@@ -12,7 +12,7 @@ Follow or Mastodon account and never miss an important update: [@halcyon@social.
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
 - https://social.dev-wiki.de - 1.1.6
 - https://halcyon.toromino.de - 1.2.0
-- https://itter.photog.social - 1.1.7
+- https://itter.photog.social - 1.2.0
 - https://halcyon.bka.li - 1.1.7
 - https://halcyon.tilde.team - 1.1.7
 - https://halcyon.distsn.org - 1.1.6
@@ -21,8 +21,8 @@ These instances are publicly accessible and usable by everyone, no matter which 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
-- Release of Version 1.2.0 - Bigger blog article with all changes and a future roadmap coming soon
-- Moved from Github to NotABug - Blog article coming soon
+- [Release of Version 1.2.0 - The next big step and a view into future](https://nikisoft.myblog.de/nikisoft/art/11626391/Halcyon-1-2-0-The-next-big-step-and-a-view-into-future)
+- [Our move from Github to NotABug](https://nikisoft.myblog.de/nikisoft/art/11626163/Our-move-from-Github-to-NotABug)
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
 - Release of Version 1.1.6 - Complete rewrite of the "who to follow" function using an API - Change of config.ini needed!
 - Release of Version 1.1.5 - Introduced the new Idempotency-Key Header and fixed an bug allowing XSS with the display name
@@ -30,11 +30,11 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Release of Version 1.1.3 - New function link previews introduced and bug when replying an toot which already has replies below it fixed (reply to undefined)
 - Release of Version 1.1.2 - Privacy modes are now correctly displayed and used for replies,use username if display name doesn't exist,bugs on search page fixed
 - Release of Version 1.1.1 - Fixed error 404 when viewing profile of own instance,numbers below profile on the left do now change during session,added nginx config
-- [Release of Version 1.1.0 and upcoming features](http://nikisoft.myblog.de/nikisoft/art/11389499/Halcyon-What-we-did-and-what-we-will-do)
+- [Release of Version 1.1.0 and upcoming features](https://nikisoft.myblog.de/nikisoft/art/11389499/Halcyon-What-we-did-and-what-we-will-do)
 - Release of Version 1.0.3 - "Who to follow" doesn't show people you already follow anymore and design of preferences and search bar is now much better
 - Release of Version 1.0.2 - Fixed a Firefox-only bug and some wrong links, added version info and an annoying cookie notice (sorry, but that's EU law)
 - Release of Version 1.0.1 - Two bugfixes
-- [Release of Version 1.0.0](http://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
+- [Release of Version 1.0.0](https://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
 
 ## Features
 - Twitter like UI, familiar interface.
@@ -42,7 +42,7 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - No tracking, No ads.
 
 ## Requirement
-- Apache/Nginx/lighttpd
+- Apache/Nginx/Caddy/lighttpd
 - PHP
 - No database needed anymore!
 
