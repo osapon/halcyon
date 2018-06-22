@@ -475,3 +475,14 @@ msgstr "Apps"
 
 msgid "Translation"
 msgstr "Translation"
+
+msgid "Image size on timeline"
+msgstr "Image size on timeline"
+
+msgctxt "Option"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Option"
+msgid "Low"
+msgstr "Low"

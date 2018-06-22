@@ -915,6 +915,9 @@ position: relative;
 box-sizing: border-box;
 border: 1px solid #DCDFE1;
 }
+#main .media_views[data-height="Low"] {
+	height: 112px;
+}
 .media_views .media_attachment {
 overflow: hidden;
 width: 100%;
@@ -2187,6 +2190,17 @@ max-width: none;
 max-height: none;
 object-fit: cover;
 }
+#js_profile_bio img {
+	width:1em;
+	height:1em;
+}
+#js_profile_bio img:hover {
+	width:4em;
+	height:4em;
+	z-index: 2;
+	position: fixed;
+}
+
 #main .article_wrap .center_column {
 	width: 600px;
 	padding: 10px 5px;
@@ -2474,6 +2488,11 @@ color: #fff;
 }
 .toot_detail.main_status .toot_content .toot_article.content_warning .status_content {
 display: none;
+}
+.toot_detail img.emoji:hover {
+	width:4em;
+	height:4em;
+	position: fixed;
 }
 .toot_detail.main_status .toot_content a {
 color: #189EFC;

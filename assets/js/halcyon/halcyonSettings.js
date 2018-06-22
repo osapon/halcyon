@@ -12,8 +12,11 @@ if(window.location.pathname == "/settings") {
     }
   });
   $(document).on('change',".post_privacy_wrap input[name='post_privacy']:checked", function(e) {
-    localStorage.setItem("setting_post_privacy", $(this).val());
-    putMessage("Changed setting to "+$(this).val());
+    var val = $(this).val();
+    localStorage.setItem("setting_post_privacy", val);
+    if (val=='private')val='Followers-only';
+    else val = val.substr(0,1).toUpperCase() + val.substr(1);
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', Pomo.getText(val, {context:'Option'})));
   });
   $("#setting_post_sensitive").change(function() {
     if(this.checked) {
@@ -148,8 +151,11 @@ else if(window.location.pathname == "/settings/appearance") {
         $("#setting_desktop_notifications")[0].checked = false;
       }
     }
-    if(localStorage.getItem('setting_show_replies') == "true") {
-      $("#setting_show_replies")[0].checked = true;
+    if ( localStorage.getItem("image_size_tl") == null ) {
+      $(".image_size_tl_wrap input[name='image_size_tl'][value='Normal']")[0].checked = true;
+    }
+    else {
+      $(".image_size_tl_wrap input[name='image_size_tl'][value='"+localStorage.getItem("image_size_tl")+"']")[0].checked = true;
     }
   });
   $(document).on('change',".language_wrap select[name='language']", function(e) {
@@ -217,4 +223,9 @@ else if(window.location.pathname == "/settings/appearance") {
     localStorage.setItem("setting_show_replies",val);
     putMessage(Pomo.getText("Changed setting to").replace('${val}', Pomo.getText(val, {context:'Option'})));
   })
+  $(document).on('change',".image_size_tl_wrap input[name='image_size_tl']:checked", function(e) {
+    var val = $(this).val();
+    localStorage.setItem("image_size_tl", val);
+    putMessage(Pomo.getText("Changed setting to").replace('${val}', Pomo.getText(val, {context:'Option'})));
+  });
 }

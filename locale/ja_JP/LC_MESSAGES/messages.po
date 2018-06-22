@@ -474,3 +474,14 @@ msgstr "アプリ"
 
 msgid "Translation"
 msgstr "翻訳"
+
+msgid "Image size on timeline"
+msgstr "タイムラインでの画像の高さ"
+
+msgctxt "Option"
+msgid "Normal"
+msgstr "通常"
+
+msgctxt "Option"
+msgid "Low"
+msgstr "低い"

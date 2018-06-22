@@ -80,5 +80,5 @@
     </article>
   </div>
 </main>
-<script src="/assets/js/halcyon/halcyonSettings.js"></script>
+<script src="<?php echo filedate('/assets/js/halcyon/halcyonSettings.js'); ?>"></script>
 <?php include ('footer.php'); ?>

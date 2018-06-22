@@ -32,7 +32,7 @@ function mediaattachments_template(status) {
   } else {
     if (( !status.sensitive ) && ( isSpoilerImage( status.media_attachments[0].id ) )) status.sensitive = true;
     media_views = `
-<div class='media_views sensitive' media_length='${status.media_attachments.length}'>
+<div class='media_views sensitive' media_length='${status.media_attachments.length}' data-height="${localStorage.getItem("image_size_tl")}">
 <div class='spoiler_button ${status.sensitive?'invisible':''}'></div>
 <div class='sensitive_alart ${!status.sensitive?'invisible':''}'>
 <span class="text1">${Pomo.getText('Sensitive content')}</span>

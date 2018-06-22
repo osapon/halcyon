@@ -86,10 +86,23 @@
             </div>
           </div>
         </div>
+        <div style="float:left;width:35%;text-align:right;margin-top:16px">
+          <h3><?=_('Image size on timeline')?></h3>
+        </div>
+        <div class="image_size_tl_wrap" style="float:left;width:65%">
+          <div class="radiobox">
+            <input id="image-size-tl-1" name="image_size_tl" type="radio" value="Normal">
+            <label for="image-size-tl-1" class="radiotext"><?=pgettext('Option','Normal')?></label>
+          </div>
+          <div class="radiobox">
+            <input id="image-size-tl-2" name="image_size_tl" type="radio" value="Low">
+            <label for="image-size-tl-2" class="radiotext"><?=pgettext('Option','Low')?></label>
+          </div>
+        </div>
         <span style="visibility:hidden">-</span>
       </div>
     </article>
   </div>
 </main>
-<script src="/assets/js/halcyon/halcyonSettings.js"></script>
+<script src="<?php echo filedate('/assets/js/halcyon/halcyonSettings.js'); ?>"></script>
 <?php include ('footer.php'); ?>
