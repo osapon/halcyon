@@ -72,7 +72,7 @@ const account_id = <?= htmlspecialchars((string)filter_input(INPUT_GET, 'mid'), 
 api.get('accounts/'+account_id, function(AccountObj) {
 if ( AccountObj !== null ) {
 setAccount(AccountObj);
-setTimeline("accounts/"+AccountObj.id+"/statuses");
+setTimeline("accounts/"+AccountObj.id+"/statuses",undefined,"true");
 setRecentImages(AccountObj.id);
 } else {
 location.href = "/404.php";
@@ -92,7 +92,7 @@ if ( !search.accounts.length ) {
 location.href = "/404.php";
 } else if ("@"+search.accounts[0].acct === query || "@"+search.accounts[0].acct+"@"+localStorage.current_instance === query) {
 setAccount(search.accounts[0]);
-setTimeline("accounts/"+search.accounts[0].id+"/statuses");
+setTimeline("accounts/"+search.accounts[0].id+"/statuses",undefined,"true");
 setRecentImages(search.accounts[0].id);
 } else {
 location.href = "/404.php";

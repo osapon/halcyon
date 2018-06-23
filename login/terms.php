@@ -32,7 +32,7 @@
 <span><i class="fa fa-newspaper-o" aria-hidden="true"></i>News</span>
 </li>
 </a>
-<a href="https://github.com/halcyon-suite/halcyon" class="no-underline">
+<a href="https://notabug.org/halcyon-suite/halcyon" class="no-underline">
 <li>
 <span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
 </li>

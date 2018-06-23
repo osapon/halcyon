@@ -31,7 +31,14 @@ View <span></span> new Toots
 current_file = location.pathname+location.search;
 <?php if(isset($_GET['q'])) { ?>
 $(function() {
-const query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
+var query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
+if(query[0] == "@") {
+window.location.href = "/search/users/?q="+query.substr(1);
+}
+else {
+if(query[0] == "#") {
+query = query.substr(1);
+}
 $('#main > .article_wrap > .center_column > .timeline_header > .header_items > .item').text("#"+query);
 $('#js-header_title_box > h1').text(query);
 $('title').text('#'+query+' - Halcyon Search');
@@ -45,6 +52,7 @@ else if(localStorage.getItem("setting_search_filter") === "local") {
 setTimeline("timelines/tag/"+query,[{name:"local",data:"true"}]);
 }
 replace_emoji();
+}
 });
 <?php } else { ?>
 window.location.href = "/";

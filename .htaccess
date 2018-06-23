@@ -26,6 +26,10 @@ RewriteRule ^federated/?$ federated\.php [NC,L]
 RewriteBase /notifications
 RewriteRule ^notifications/?$ notifications\.php [NC,L]
 
+# Who to follow
+RewriteBase /whotofollow
+RewriteRule ^whotofollow/?$ who_to_follow\.php [NC,L]
+
 # Search
 RewriteBase /search
 RewriteRule ^search/?$ search_hash_tag\.php [NC,L,QSA]

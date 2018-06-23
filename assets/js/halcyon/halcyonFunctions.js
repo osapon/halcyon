@@ -123,27 +123,27 @@ var posted_time_original = posted_time,
 posted_time = getConversionedDate(null, posted_time_original).getTime(),
 elapsedTime = Math.ceil((current_time-posted_time)/1000);
 if (elapsedTime < 60) {
-const datetime ="ãƒ»" + elapsedTime + "s";
+const datetime ="・" + elapsedTime + "s";
 return datetime;
 }
 else if (elapsedTime < 120) {
-const datetime ="ãƒ»1m";
+const datetime ="・1m";
 return datetime;
 }
 else if (elapsedTime < (60*60)) {
-const datetime ="ãƒ»" + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
+const datetime ="・" + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
 return datetime;
 }
 else if (elapsedTime < (120*60)) {
-const datetime ="ãƒ»1h";
+const datetime ="・1h";
 return datetime;
 }
 else if (elapsedTime < (24*60*60)) {
-const datetime ="ãƒ»" + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
+const datetime ="・" + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
 return datetime;
 }
 else {
-const datetime ="ãƒ»" + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
+const datetime ="・" + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
 return datetime;
 }
 }

@@ -65,7 +65,7 @@ location.href = "/";
 <span><i class="fa fa-newspaper-o" aria-hidden="true"></i>News</span>
 </li>
 </a>
-<a href="https://github.com/halcyon-suite/halcyon" class="no-underline">
+<a href="https://notabug.org/halcyon-suite/halcyon" class="no-underline">
 <li>
 <span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
 </li>
@@ -112,7 +112,7 @@ or <a href="https://joinmastodon.org/">create an account</a>
 <label class="login_form_agree_check disallow_select pointer">
 <i class="fa fa-check-square-o" aria-hidden="true"></i>
 I agree with the <a href="/terms">Terms</a>
-<input id="agree" type="checkbox" required checked class="invisible"/>
+<input id="agree" type="checkbox" required checked class="invisible">
 </label>
 </div>
 </form>
@@ -121,26 +121,26 @@ I agree with the <a href="/terms">Terms</a>
 <article id="article">
 <h2>What is Halcyon</h2>
 <p>
-Halcyon is standard <span style="font-weight: bold">Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet.
+Halcyon is a webclient for <a href="https://joinmastodon.org">Mastodon</a> and <a href="https://pleroma.social">Pleroma</a> which aims to recreate the simple and beautiful user interface of Twitter while keeping all advantages of decentral networks in focus.
 </p>
 <div class="image_wrap">
 <ul>
-<li><img src="/login/assets/images/preview2.png" alt="halcyon_screenshot"/></li>
-<li><img src="/login/assets/images/preview1.png" alt="halcyon_screenshot"/></li>
-<li><img src="/login/assets/images/preview0.png" alt="halcyon_screenshot"/></li>
+<li><img src="/login/assets/images/preview2.png" alt="halcyon_screenshot"></li>
+<li><img src="/login/assets/images/preview1.png" alt="halcyon_screenshot"></li>
+<li><img src="/login/assets/images/preview0.png" alt="halcyon_screenshot"></li>
 </ul>
 <button class="prev_button switch_button"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
 <button class="next_button switch_button"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 </div>
 <h2>Contact / Feedback</h2>
 <p>
-Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">ï¼ halcyon@social.csswg.org</a><br />
-Email: <a href="http://www.nikisoft.one/contact.php" target="_blank">Use my contact form</a><br />
-Github: <a href="https://github.com/halcyon-suite/halcyon" target="_blank">halcyon-suite/halcyon</a>
+Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">＠halcyon@social.csswg.org</a><br/>
+Email: <a href="http://www.nikisoft.one/contact.php" target="_blank">Use my contact form</a><br/>
+Git repository: <a href="https://notabug.org/halcyon-suite/halcyon" target="_blank">halcyon-suite/halcyon</a>
 </p>
 <h2>Help us</h2>
 <p>
-Bitcoin: 1D6GThQqHQYnruKYrKyW9JC86ZGWxjt1hK<br />
+Bitcoin: 1D6GThQqHQYnruKYrKyW9JC86ZGWxjt1hK<br/>
 </p>
 </article>
 </main>
@@ -173,7 +173,7 @@ window.cookieconsent.initialise({
 <script>
 $(function() {
 var cause = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'cause'), ENT_QUOTES) ?>";
-if ( cause === "domain" ) {
+if(cause === "domain") {
 $('.login_form_main').addClass('error');
 $('.session_aleart').removeClass('invisible');
 $('.session_aleart > span').text('This instance does not exsist.');

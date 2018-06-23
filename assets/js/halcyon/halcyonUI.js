@@ -152,8 +152,10 @@ $('.header_my_account_nav').addClass('invisible');
 $('.expand_menu').addClass('invisible');
 });
 });
-function setTimeline(level,load_options) {
+function setTimeline(level,load_options,show_replies) {
+if(show_replies === undefined) {
 var show_replies = localStorage.setting_show_replies;
+}
 let isSyncing = true;
 if(load_options === undefined) {
 var load_options = [];

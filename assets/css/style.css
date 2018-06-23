@@ -1277,20 +1277,20 @@ color: #66757F;
 font-size: 16px;
 font-weight: 300;
 }
-.side_widget.stream_options .form_title{
+.side_widget.with_button .form_title{
 display: flex;
 align-items: baseline;
 }
-.side_widget.stream_options .form_title h2 {
-margin-bottom: 0;
+.side_widget.with_button .form_title h2 {
 flex-grow: 1;
 }
-.side_widget.stream_options .form_title button {
+.side_widget.with_button .form_title .headerbtn {
 cursor: pointer;
 flex-grow: 1;
 font-size: 12px;
 color: #189EFC;
 text-align: right;
+text-decoration:none;
 }
 .side_widget form.pulldown_form {
 overflow: hidden;

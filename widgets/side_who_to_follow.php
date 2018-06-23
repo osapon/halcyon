@@ -21,8 +21,11 @@ Halcyon needs to connect to an external server to get a list of users which have
 </center>
 <div style="height:100px"></div>
 </div>
-<div class="side_widget what_to_follow" style="display:none">
+<div class="side_widget with_button what_to_follow" style="display:none">
+<div class="form_title">
 <h2>Who to follow</h2>
+<a href="/whotofollow" class="headerbtn">MORE</a>
+</div>
 <ul class="account_list">
 <li class="account_box what_to_follow_0">
 <div class="icon_box">
