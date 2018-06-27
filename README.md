@@ -19,7 +19,7 @@ These instances are publicly accessible and usable by everyone, no matter which 
 - https://halcyon.bka.li - 1.1.7
 - https://halcyon.tilde.team - 1.1.7
 - https://halcyon.distsn.org - 1.1.6
-- https://halcyon.osa-p.net - 1.2.0(MultiLanguage + other feature)
+- https://halcyon.osa-p.net - 1.2.1(MultiLanguage + other feature)
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
