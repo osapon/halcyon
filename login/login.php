@@ -24,7 +24,7 @@ die();
 }
 ?>
 <!DOCTYPE HTML>
-<html lang="en">
+<html lang="<?=$lang?>">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -113,7 +113,7 @@ location.href = "/";
 <label class="login_form_agree_check disallow_select pointer">
 <i class="fa fa-check-square-o" aria-hidden="true"></i>
 <?=_('I agree with the Terms')?>
-<input id="agree" type="checkbox" required checked class="invisible"/>
+<input id="agree" type="checkbox" required checked class="invisible">
 </label>
 </div>
 </form>
@@ -187,7 +187,7 @@ window.cookieconsent.initialise({
 <script>
 $(function() {
 var cause = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'cause'), ENT_QUOTES) ?>";
-if ( cause === "domain" ) {
+if(cause === "domain") {
 $('.login_form_main').addClass('error');
 $('.session_aleart').removeClass('invisible');
 $('.session_aleart > span').text('This instance does not exsist.');

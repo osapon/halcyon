@@ -47,6 +47,10 @@ r ^/notifications/?$
 to /notifications.php
 }
 rewrite {
+r ^/whotofollow/?$
+to /who_to_follow.php
+}
+rewrite {
 r ^/search/?$
 to /search_hash_tag.php
 }
