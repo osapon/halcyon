@@ -21,7 +21,6 @@ badges_update();
 $('.footer_widget_about').attr('href','https://'+current_instance+'/about');
 $('.footer_widget_instance').attr('href','https://'+current_instance+'/about/more');
 $('.footer_widget_terms').attr('href','https://'+current_instance+'/terms');
-replace_emoji();
 </script>
 </body>
 </html>

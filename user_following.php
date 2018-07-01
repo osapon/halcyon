@@ -8,12 +8,12 @@
 </div>
 <section class="profile_section_wrap">
 <h1 class="profile_displayname">
-<a id="js_profile_displayname" class="emoji_poss" href="#"></a>
+<a id="js_profile_displayname" href="#"></a>
 </h1>
 <h2 class="profile_username">
 @<a id="js_profile_username" href="#"></a>
 </h2>
-<p id="js_profile_bio" class="profile_bio emoji_poss"></p>
+<p id="js_profile_bio" class="profile_bio"></p>
 <?php include dirname(__FILE__).('/widgets/user_recent_images.php'); ?>
 </section>
 <?php include dirname(__FILE__).('/widgets/side_who_to_follow.php'); ?>

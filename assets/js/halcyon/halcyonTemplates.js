@@ -312,7 +312,7 @@ const html = (`
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${htmlEscape(NotificationObj.account.display_name)}</span> favourited Your Toot
+<span class="emoji_poss">${htmlEscape(NotificationObj.account.display_name)}</span> favourited Your Toot
 </a>
 </div>
 <div class="notice_entry_body">
@@ -329,7 +329,7 @@ ${htmlEscape(NotificationObj.status.account.display_name)}
 </a>
 </div>
 </header>
-<article class="toot_article">
+<article class="toot_article emoji_poss">
 <p>${NotificationObj.status.content}</p>
 </article>
 <footer class="toot_footer"></footer>
@@ -369,7 +369,7 @@ ${htmlEscape(NotificationObj.status.account.display_name)}
 </a>
 </div>
 </header>
-<article class="toot_article">
+<article class="toot_article emoji_poss">
 <p>${NotificationObj.status.content}</p>
 </article>
 <footer class="toot_footer"></footer>
@@ -531,8 +531,8 @@ const html = (`
 <i class="fa fa-fw fa-user-plus"></i>
 <span>Follow</span>
 </button>
-<div class="follows_profile_name_box emoji_poss">
-<a class="js_follows_profile_link" href="${profile_link}">
+<div class="follows_profile_name_box">
+<a class="js_follows_profile_link emoji_poss" href="${profile_link}">
 <h2 class="js_follows_profile_displayname">
 ${htmlEscape(AccountObj.display_name)}
 </h2>
@@ -541,7 +541,7 @@ ${htmlEscape(AccountObj.display_name)}
 </span>
 </a>
 </div>
-<div class="follows_profile_bio" >
+<div class="follows_profile_bio emoji_poss">
 <p>${AccountObj.note}</p>
 </div>
 </div>
@@ -635,7 +635,7 @@ ${htmlEscape(status.account.display_name)}
 <section class="toot_content">
 <article class="toot_article ${article_option} emoji_poss">
 ${alart_text}
-<span class="status_content">
+<span class="status_content emoji_poss">
 ${status.content}
 </span>
 ${media_views}
@@ -712,6 +712,9 @@ ${toot_reblog_button}
 </label>
 </div>
 </div>
+<label for="reply_status_emoji" class="status_emoji status_option_button">
+<i class="fa fa-smile-o" aria-hidden="true"></i>
+</label>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
@@ -719,6 +722,7 @@ ${toot_reblog_button}
 <input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
 <input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio"${checked_private}>
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"${checked_direct}>
+<button id="reply_status_emoji" name="status_emoji" type="button"></button>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -809,7 +813,7 @@ ${htmlEscape(status.reblog.account.display_name)}
 <section class="toot_content">
 <article class="toot_article ${article_option} emoji_poss">
 ${alart_text}
-<span class="status_content">
+<span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
 ${media_views}
@@ -891,6 +895,9 @@ ${media_views}
 </label>
 </div>
 </div>
+<label for="single_reply_status_emoji" class="status_emoji status_option_button">
+<i class="fa fa-smile-o" aria-hidden="true"></i>
+</label>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
@@ -898,6 +905,7 @@ ${media_views}
 <input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
 <input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio">
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
+<button id="reply_status_emoji" name="status_emoji" type="button"></button>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -1025,7 +1033,7 @@ ${htmlEscape(status.account.display_name)}
 </header>
 <article class="toot_article ${article_option}">
 ${alart_text}
-<span class="status_content">
+<span class="status_content emoji_poss">
 ${status.content}
 </span>
 ${media_views}
@@ -1131,7 +1139,7 @@ ${htmlEscape(status.reblog.account.display_name)}
 </header>
 <article class="toot_article ${article_option}">
 ${alart_text}
-<span class="status_content">
+<span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
 ${media_views}

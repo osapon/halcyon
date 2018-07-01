@@ -10,18 +10,19 @@ Follow our Mastodon account and never miss an important update: [@halcyon@social
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://social.dev-wiki.de - 1.2.1
-- https://halcyon.toromino.de - 1.2.1
-- https://itter.photog.social - 1.2.1
+- https://itter.photog.social - 1.2.2
+- https://halcyon.distsn.org - 1.2.1
+- https://social.dev-wiki.de - 1.2.0
+- https://halcyon.toromino.de - 1.2.0
 - https://halcyon.bka.li - 1.1.7
 - https://halcyon.tilde.team - 1.1.7
-- https://halcyon.distsn.org - 1.1.6
 - https://halcyon.cybre.space - Outdated
 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
-- Release  of Version 1.2.1 - New who to follow page with more recommendations,bugfix at search,profiles now ignore "show replies" setting,small login page changes
+- Release of Version 1.2.2 - Added an emoji picker,improved performance (emoji rendering),desktop notifications on notifications page work now
+- Release of Version 1.2.1 - New who to follow page with more recommendations,bugfix at search,profiles now ignore "show replies" setting,small login page changes
 - [Release of Version 1.2.0 - The next big step and a view into future](https://nikisoft.myblog.de/nikisoft/art/11626391/Halcyon-1-2-0-The-next-big-step-and-a-view-into-future)
 - [Our move from Github to NotABug](https://nikisoft.myblog.de/nikisoft/art/11626163/Our-move-from-Github-to-NotABug)
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
@@ -54,3 +55,4 @@ Upload it, edit config.ini and have fun!
 - [Kirschn/mastodon.js](https://github.com/Kirschn/mastodon.js)
 - [yks118/Mastodon-api-php](https://github.com/yks118/Mastodon-api-php)
 - [distsn/vinayaka](https://github.com/distsn/vinayaka)
+- [LascauxSRL/lsx-emojipicker](https://github.com/LascauxSRL/lsx-emojipicker)

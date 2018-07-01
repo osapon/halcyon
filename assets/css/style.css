@@ -127,7 +127,8 @@ background-color: #E8F4FB;
 background-color: #F2FAFF!important;
 }
 .status_form.ready .status_bottom .status_media_attachment,
-.status_form.ready .status_bottom .status_privacy {
+.status_form.ready .status_bottom .status_privacy,
+.status_form.ready .status_bottom .status_emoji {
 color: #7ECEFF!important;
 }
 .status_form.ready .status_bottom .status_CW > span,
@@ -2051,6 +2052,7 @@ width: 628px;
 height: auto;
 margin: 56px auto;
 position: relative;
+margin-bottom: 300px;
 }
 #js-overlay_content_wrap #js-overlay_content .close_button {
 color: #fff;

@@ -12,6 +12,7 @@ error_reporting(E_ALL);
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="/assets/css/emojipicker.css" media="all">
 <script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
 <script src="/assets/js/halcyon/halcyonFunctions.js"></script>
 <script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
@@ -19,6 +20,8 @@ error_reporting(E_ALL);
 <script src="/assets/js/autosize/autosize.js"></script>
 <script src="/assets/js/shortcut.js"></script>
 <script src="/assets/js/replace_emoji.js"></script>
+<script src="/assets/js/emojipicker/emojidata.js"></script>
+<script src="/assets/js/emojipicker/emojipicker.js"></script>
 <script src="/assets/js/halcyon/halcyonTemplates.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
 <script src="//cdn.staticfile.org/twemoji/2.2.5/twemoji.min.js"></script>
@@ -93,7 +96,7 @@ resetApp();
 <li class="header_nav_item my_account_wrap">
 <button class="header_account_avatar">
 <div class="my_account">
-<img class="js_current_profile_image" />
+<img class="js_current_profile_image">
 </div>
 </button>
 <nav class="header_my_account_nav invisible">

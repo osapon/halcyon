@@ -34,7 +34,7 @@ Halcyon needs to connect to an external server to get a list of users which have
 <div class="label_box">
 <a href="">
 <h3>
-<span class="dn emoji_poss"></span>
+<span class="dn"></span>
 <span class="un"></span>
 </h3>
 </a>
@@ -51,7 +51,7 @@ Halcyon needs to connect to an external server to get a list of users which have
 <div class="label_box">
 <a href="">
 <h3>
-<span class="dn emoji_poss"></span>
+<span class="dn"></span>
 <span class="un"></span>
 </h3>
 </a>
@@ -68,7 +68,7 @@ Halcyon needs to connect to an external server to get a list of users which have
 <div class="label_box">
 <a href="">
 <h3>
-<span class="dn emoji_poss"></span>
+<span class="dn"></span>
 <span class="un"></span>
 </h3>
 </a>

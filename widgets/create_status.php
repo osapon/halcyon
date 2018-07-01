@@ -38,6 +38,9 @@
 </label>
 </div>
 </div>
+<label for="header_status_emoji" class="status_emoji status_option_button">
+<i class="fa fa-smile-o" aria-hidden="true"></i>
+</label>
 <input id="header_status_media_atta" name="files" type="file" multiple class="invisible">
 <input id="header_status_cw" name="status_cw" type="checkbox" class="invisible">
 <input id="header_status_nsfw" name="status_nsfw" type="checkbox" class="invisible">
@@ -45,6 +48,7 @@
 <input id="header_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio">
 <input id="header_status_fonly" name='privacy_option' value="private" class="invisible" type="radio">
 <input id="header_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
+<button id="header_status_emoji" name="status_emoji" type="button"></button>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 </span>

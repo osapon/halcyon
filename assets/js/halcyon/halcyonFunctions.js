@@ -222,6 +222,16 @@ localStorage.setItem("current_instance_charlimit",500);
 current_instance_charlimit = 500;
 }
 });
+api.get("custom_emojis",function(data) {
+var emojis = new Array();
+for(i=0;i<data.length;i++) {
+var emoji = new Object();
+emoji.code = data[i].shortcode;
+emoji.url = data[i].url;
+emojis.push(emoji);
+}
+localStorage.setItem("current_custom_emojis",JSON.stringify(emojis));
+});
 $.cookie("session","true",{path:'/'});
 }
 function refreshApp() {
@@ -321,6 +331,7 @@ if(follow_loaded == 3) {
 clearInterval(checkload);
 $(".follow_loading").hide();
 $(".what_to_follow").show();
+replace_emoji();
 }
 },100);
 }
@@ -358,10 +369,15 @@ search.accounts[0].display_name = search.accounts[0].username;
 }
 $('.what_to_follow_'+id+' > .icon_box img').attr('src',search.accounts[0].avatar);
 $('.what_to_follow_'+id+' .label_box > a').attr('href',getRelativeURL(search.accounts[0].url,search.accounts[0].id));
-$('.what_to_follow_'+id+' .label_box > a > h3 .dn').text(search.accounts[0].display_name);
+$('.what_to_follow_'+id+' .label_box > a > h3 .dn').addClass("emoji_poss").text(search.accounts[0].display_name);
 $('.what_to_follow_'+id+' .label_box > a > h3 .un').text('@'+search.accounts[0].username);
 $('.what_to_follow_'+id+' .label_box > .follow_button').attr('mid',search.accounts[0].id);
 $('.what_to_follow_'+id+' .label_box > .follow_button').attr('data',search.accounts[0].url);
 follow_loaded++;
 });
+}
+function checkEmojiSupport() {
+var ctx = document.createElement("canvas").getContext("2d");
+ctx.fillText("😗",-2,4);
+return ctx.getImageData(0,0,1,1).data[3] > 0;
 }
