@@ -158,6 +158,9 @@ else if(window.location.pathname == "/settings/appearance") {
       $(".image_size_tl_wrap input[name='image_size_tl'][value='"+localStorage.getItem("image_size_tl")+"']")[0].checked = true;
     }
   });
+  if(localStorage.getItem('setting_show_replies') == "true") {
+    $("#setting_show_replies")[0].checked = true;
+  }
   $(document).on('change',".language_wrap select[name='language']", function(e) {
     $.cookie("lang",$(this).val(),{path:'/',expires: 3650});
     location.reload(true);
