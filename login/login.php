@@ -1,7 +1,6 @@
 <?php
 require_once('../authorize/mastodon.php');
 use HalcyonSuite\HalcyonForMastodon\Mastodon;
-use Exception;
 if (isset($_POST['acct'])) {
 $domain = explode("@", mb_strtolower(htmlspecialchars((string)filter_input(INPUT_POST, 'acct'), ENT_QUOTES)))[2];
 $URL= 'https://'.$domain;

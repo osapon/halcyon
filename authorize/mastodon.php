@@ -1,7 +1,6 @@
 <?php
 namespace HalcyonSuite\HalcyonForMastodon;
 require_once('mastodon-api/mastodon.php');
-use Exception;
 class Mastodon extends \Mastodon_api {
 function __construct(){
 $appSettings = parse_ini_file('../config.ini',true);
