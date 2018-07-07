@@ -42,7 +42,6 @@ ul.lsx-emojipicker-tabs li:HOVER {
 border-bottom: 3px solid #189EFC;
 }
 .lsx-emojipicker-tabs img.emoji {
-width: 22px;
 margin: 5px 10px;
 cursor: pointer;
 }
