@@ -13,7 +13,6 @@ location.href = '/logout';
 <?php
 require_once('../authorize/mastodon.php');
 use HalcyonSuite\HalcyonForMastodon\Mastodon;
-use Exception;
 $api = new Mastodon();
 if ($_GET['code']) {
 $domain = htmlspecialchars((string)filter_input(INPUT_GET, 'host'), ENT_QUOTES);
