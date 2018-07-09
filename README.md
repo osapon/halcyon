@@ -25,6 +25,7 @@ These instances are publicly accessible and usable by everyone, no matter which 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
+- Version 1.2.2 This pictogram pad is already implemented in this repository, so skip it.
 - Release  of Version 1.2.1 - New who to follow page with more recommendations,bugfix at search,profiles now ignore "show replies" setting,small login page changes
 - [Release of Version 1.2.0 - The next big step and a view into future](https://nikisoft.myblog.de/nikisoft/art/11626391/Halcyon-1-2-0-The-next-big-step-and-a-view-into-future)
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
