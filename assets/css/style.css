@@ -54,7 +54,7 @@ white-space: nowrap;
 }
 h1, h2, h3, h4, h5, h6 {
 font-weight: normal;
-line-height: 1;
+line-height: normal;
 margin: 0;
 padding: 0;
 }
@@ -102,9 +102,9 @@ margin: auto;
 margin-left: 4px;
 }
 html {
-font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
-font-size : 100%;
-line-height : 1;
+font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+font-size: 100%;
+line-height: normal;
 color: #333;
 min-width: 100%;
 min-height: 100%;
@@ -683,7 +683,7 @@ font-size: 14px;
 padding-right: 16px;
 }
 .toot_entry .toot_entry_body .toot_content .toot_header .text_ellipsis a {
-line-height: 1;
+line-height: normal;
 height: 16.5px;
 margin-bottom: -4.5px;
 }
@@ -1947,7 +1947,7 @@ word-break: break-all;
 #main .article_wrap .left_column .profile_section_wrap > .profile_displayname {
 font-size: 22px;
 font-weight: 700;
-line-height: 1;
+line-height: normal;
 color: rgb(20, 23, 26);
 margin-bottom: 8px;
 }

@@ -50,7 +50,6 @@ cursor: pointer;
 opacity: 1;
 }
 .lsx-emojipicker-emoji span img.emoji {
-width: 25px;
 margin: 5px 4px;
 cursor: pointer;
 transition: all 0.1s ease-in-out;

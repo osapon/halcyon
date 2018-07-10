@@ -681,7 +681,7 @@ closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
 $('#overlay_status_form .status_textarea textarea').val($('#overlay_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
-$('#overlay_status_form .status_textarea textarea').trigger("change");
+$('#overlay_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
 $('#overlay_status_form .status_textarea textarea').focus();
 var textLen = $('#overlay_status_form .status_textarea textarea').val().length * 2;
 $('#overlay_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
@@ -705,7 +705,9 @@ $('#overlay_status_form').addClass('ready');
 $('#overlay_status_form .character_count').removeClass('red');
 $('#overlay_status_form').removeClass('ready');
 }
+if(e.key == ":") {
 $(this).val(replaced_emoji_return($(this).val()));
+}
 $('#overlay_status_form .character_count').text(textLen);
 }
 });
@@ -824,13 +826,15 @@ $('#header_status_emoji').lsxEmojiPicker("destroy");
 });
 $(document).on('change keyup','#header_status_form textarea, #header_status_form .status_spoiler', function(e) {
 if(e.keyCode !== 224 & e.keyCode !== 17) {
+if(e.key == ":") {
 $(this).val(replaced_emoji_return($(this).val()));
+}
 const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
 let textLen = ( current_instance_charlimit - textCount );
-if ( textLen <= -1 ) {
+if(textLen <= -1) {
 $('#header_status_form .character_count').addClass('red');
 $('#header_status_form').addClass('ready');
-} else if ( textLen === current_instance_charlimit ) {
+} else if(textLen === current_instance_charlimit) {
 $('#header_status_form').addClass('ready');
 } else {
 $('#header_status_form .character_count').removeClass('red');
@@ -870,7 +874,7 @@ closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
 $('#header_status_form .status_textarea textarea').val($('#header_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
-$('#header_status_form .status_textarea textarea').trigger("change");
+$('#header_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
 $('#header_status_form .status_textarea textarea').focus();
 var textLen = $('#header_status_form .status_textarea textarea').val().length * 2;
 $('#header_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
@@ -985,7 +989,7 @@ closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
 $('#reply_status_form .status_textarea textarea').val($('#reply_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
-$('#reply_status_form .status_textarea textarea').trigger("change");
+$('#reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
 $('#reply_status_form .status_textarea textarea').focus();
 var textLen = $('#reply_status_form .status_textarea textarea').val().length * 2;
 $('#reply_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
@@ -1010,7 +1014,9 @@ $('#reply_status_form').addClass('ready');
 $('#reply_status_form .character_count').removeClass('red');
 $('#reply_status_form').removeClass('ready');
 }
+if(e.key == ":") {
 $(this).val(replaced_emoji_return($(this).val()));
+}
 $('#reply_status_form .character_count').text(textLen);
 }
 });
@@ -1155,7 +1161,7 @@ closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
 $('#single_reply_status_form .status_textarea textarea').val($('#single_reply_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
-$('#single_reply_status_form .status_textarea textarea').trigger("change");
+$('#single_reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
 $('#single_reply_status_form .status_textarea textarea').focus();
 var textLen = $('#single_reply_status_form .status_textarea textarea').val().length * 2;
 $('#single_reply_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
@@ -1184,7 +1190,9 @@ $('#single_reply_status_form').addClass('ready');
 $('#single_reply_status_form .character_count').removeClass('red');
 $('#single_reply_status_form').removeClass('ready');
 }
+if(e.key == ":") {
 $(this).val(replaced_emoji_return($(this).val()));
+}
 $('#single_reply_status_form .character_count').text(textLen);
 }
 });
