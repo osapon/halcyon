@@ -1,6 +1,6 @@
 <div class="single_reply_status invisible">
 <header class="single_reply_status_header">
-<span class="emoji_poss">Reply to </span>
+<span>Reply to </span>
 </header>
 <div class="status_preview"></div>
 <form id="single_reply_status_form" name="single_reply_status_form" class="status_form">

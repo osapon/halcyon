@@ -115,6 +115,20 @@ $('.toot_entry[sid="'+sid+'"]').remove();
 putMessage("Your Toot has been deleted");
 });
 });
+$(document).on('click','.pin_button', function(e) {
+const sid = $(this).attr('tid');
+api.post("statuses/"+sid+"/pin", function (data) {
+$('.toot_entry[sid="'+sid+'"] .pin_button').removeClass("pin_button").addClass("unpin_button").text("Unpin Toot");
+putMessage("Your Toot has been pinned");
+});
+});
+$(document).on('click','.unpin_button', function(e) {
+const sid = $(this).attr('tid');
+api.post("statuses/"+sid+"/unpin", function (data) {
+$('.toot_entry[sid="'+sid+'"] .unpin_button').removeClass("unpin_button").addClass("pin_button").text("Pin Toot");
+putMessage("Your Toot has been unpinned");
+});
+});
 $(document).on('click','.cw_button', function(e) {
 e.stopPropagation();
 const article = $(this).parent();
@@ -484,14 +498,22 @@ replace_emoji();
 });
 };
 function setAccount(AccountObj) {
+if(AccountObj.display_name.length == 0) {
+AccountObj.display_name = AccountObj.username;
+}
+AccountObj.display_name = htmlEscape(AccountObj.display_name);
+for(i=0;i<AccountObj.emojis.length;i++) {
+AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+AccountObj.emojis[i].shortcode+":","g"),"<img src='"+AccountObj.emojis[i].url+"' class='emoji'>");
+}
 $("#js_header_image").attr('src', AccountObj.header);
 $("#js_profile_image").attr('src', AccountObj.avatar);
 $("#js_toots_count").text(AccountObj.statuses_count);
 $("#js_following_count").text(AccountObj.following_count);
 $("#js_followers_count").text(AccountObj.followers_count);
-$("#js_profile_displayname").addClass("emoji_poss").text(AccountObj.display_name);
+$("#js_profile_displayname").addClass("emoji_poss").html(AccountObj.display_name);
 $("#js_profile_username").text(AccountObj.acct);
 $("#js_profile_bio").addClass("emoji_poss").html(AccountObj.note);
+$("#js_profile_bio .emojione").removeClass("emojione").addClass("emoji");
 console.log(AccountObj.id);
 console.log(current_id);
 if( AccountObj.id == current_id ) {
@@ -1153,7 +1175,7 @@ autosize($('#single_reply_status_form .status_textarea textarea'));
 $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
-$('.single_reply_status .single_reply_status_header span').text("Reply to "+display_name);
+$('.single_reply_status .single_reply_status_header span').addClass("emoji_poss").html("Reply to "+display_name);
 $('#single_reply_status_form textarea').val(acct+" ");
 $('#single_reply_status_form .character_count').html(current_instance_charlimit);
 $('#single_reply_status_emoji').lsxEmojiPicker({
@@ -1171,6 +1193,7 @@ if(localStorage.setting_post_sensitive == "true") {
 $("#single_reply_status_nsfw")[0].checked = true;
 $('#single_reply_status_form .media_attachments_preview_area').addClass('nsfw');
 }
+replace_emoji();
 api.get('statuses/'+sid+'/', function(status) {
 timeline_template(status).appendTo(".single_reply_status .status_preview");
 replace_emoji();

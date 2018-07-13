@@ -639,6 +639,26 @@ border-radius: 2px;
 font-size: 10px;
 /*! height: 14px; */
 }
+.timeline .pinned_notice_box {
+margin-left: 46px;
+margin-bottom: -12px;
+padding: 8px 0;
+font-size: 12px;
+color: rgb(101, 119, 134);
+height: 14px;
+}
+.timeline .pinned_notice_box i {
+display: inline-block;
+width: 10px;
+height: 10px;
+padding: 2px;
+margin-right: 11px;
+color: #fff;
+background-color: #1DA1F2;
+border-radius: 2px;
+font-size: 10px;
+/*! height: 14px; */
+}
 .toot_entry {
 cursor: pointer;
 background-color: #fff;

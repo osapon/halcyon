@@ -364,12 +364,16 @@ setWhoToFollow();
 }
 function addFollowProfile(id,account) {
 api.get('search',[{name:'q',data:"@"+account},{name:'resolve',data:'true'}], function(search) {
+search.accounts[0].display_name = htmlEscape(search.accounts[0].display_name);
+for(i=0;i<search.accounts[0].emojis.length;i++) {
+search.accounts[0].display_name = search.accounts[0].display_name.replace(new RegExp(":"+search.accounts[0].emojis[i].shortcode+":","g"),"<img src='"+search.accounts[0].emojis[i].url+"' class='emoji'>");
+}
 if(search.accounts[0].display_name.length == 0) {
 search.accounts[0].display_name = search.accounts[0].username;
 }
 $('.what_to_follow_'+id+' > .icon_box img').attr('src',search.accounts[0].avatar);
 $('.what_to_follow_'+id+' .label_box > a').attr('href',getRelativeURL(search.accounts[0].url,search.accounts[0].id));
-$('.what_to_follow_'+id+' .label_box > a > h3 .dn').addClass("emoji_poss").text(search.accounts[0].display_name);
+$('.what_to_follow_'+id+' .label_box > a > h3 .dn').addClass("emoji_poss").html(search.accounts[0].display_name);
 $('.what_to_follow_'+id+' .label_box > a > h3 .un').text('@'+search.accounts[0].username);
 $('.what_to_follow_'+id+' .label_box > .follow_button').attr('mid',search.accounts[0].id);
 $('.what_to_follow_'+id+' .label_box > .follow_button').attr('data',search.accounts[0].url);

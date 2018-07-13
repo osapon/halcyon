@@ -58,7 +58,11 @@ return media_views;
 function timeline_template(status) {
 if (status.reblog === null) {
 for(i=0;i<status.emojis.length;i++) {
-status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
 const status_account_link= getRelativeURL(status.account.url, status.account.id),
 status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
@@ -103,6 +107,16 @@ else {
 toot_footer_width = "";
 toot_reblog_button = "";
 }
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+if(status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+}
+}
 const html=(`
 <li sid="${status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -116,7 +130,7 @@ const html=(`
 <div class="text_ellipsis">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(status.account.display_name)}
+${status.account.display_name}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -131,9 +145,9 @@ ${htmlEscape(status.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
 <li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
 <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${status.url}" target="_blank">View original</a></li>
@@ -150,7 +164,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape(status.account.display_name)}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -174,7 +188,15 @@ ${toot_reblog_button}
 return $(html)
 } else {
 for(i=0;i<status.reblog.emojis.length;i++) {
-status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+status.reblog.account.display_name = htmlEscape(status.reblog.account.display_name);
+for(i=0;i<status.reblog.account.emojis.length;i++) {
+status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
 status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
@@ -208,11 +230,21 @@ switch(status.reblog.visibility) {
 case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
 case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
 }
+var own_toot_buttons = "";
+if(status.reblog.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>`);
+if(status.reblog.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
+}
+}
 const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape(status.account.display_name)} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -226,7 +258,7 @@ const html = (`
 <div class="text_ellipsis">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(status.reblog.account.display_name)}
+${status.reblog.account.display_name}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -241,9 +273,9 @@ ${htmlEscape(status.reblog.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>
 <li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
 <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${status.reblog.url}" target="_blank">View original</a></li>
@@ -260,7 +292,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${htmlEscape(status.reblog.account.display_name)}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -289,10 +321,133 @@ ${media_views}
 return $(html)
 }
 }
+function timeline_pinned_template(status) {
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
+status_attr_datetime = getConversionedDate(null, status.created_at),
+status_account_link= getRelativeURL(status.account.url, status.account.id);
+let alart_text= "",
+article_option= "",
+toot_reblogs_count= "",
+toot_favourites_count = "",
+media_views = "";
+if(status.spoiler_text) {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+article_option = "content_warning";
+}
+if (status.reblogs_count) {
+toot_reblogs_count = status.reblogs_count;
+}
+if (status.favourites_count) {
+toot_favourites_count = status.favourites_count;
+}
+if ( status.media_attachments.length ) {
+media_views = mediaattachments_template(status);
+}
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+switch(status.visibility) {
+case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+}
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
+<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+}
+const html = (`
+<li sid="${status.id}" class="toot_entry">
+<div class="pinned_notice_box">
+<i class="fa fa-fw fa-thumb-tack"></i>Pinned toot</span>
+</div>
+<div class="toot_entry_body">
+<a href="${status_account_link}">
+<div class="icon_box">
+<img src="${status.account.avatar}">
+</div>
+</a>
+<section class="toot_content">
+<header class="toot_header">
+<div class="text_ellipsis">
+<a href="${status_account_link}">
+<span class="displayname emoji_poss">
+${status.account.display_name}
+</span>
+<span class="username">
+@${status.account.acct}
+</span>
+<time datetime="${status_attr_datetime}">${status_datetime}</time>
+</a>
+</div>
+<div class="expand_button_wrap">
+<button class="expand_button">
+<i class="fa fa-fw fa-chevron-down"></i>
+</button>
+<div class="expand_menu invisible disallow_select">
+<ul>
+<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
+<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+${own_toot_buttons}
+</ul>
+<ul>
+<li><a href="${status.url}" target="_blank">View original</a></li>
+</ul>
+</div>
+</div>
+</header>
+<article class="toot_article ${article_option}">
+${alart_text}
+<span class="status_content emoji_poss">
+${status.content}
+</span>
+${media_views}
+</article>
+<footer class="toot_footer" style="width:320px">
+<div class="toot_reaction">
+<button class="reply_button" tid="${status.id}"acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<i class="fa fa-fw fa-reply"></i>
+<span class="reaction_count reply_count"></span>
+</button>
+</div>
+<div class="toot_reaction">
+<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
+<i class="fa fa-fw fa-star"></i>
+<span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+</button>
+</div>
+</footer>
+</section>
+</div>
+</li>`);
+return $(html)
+}
 function notifications_template(NotificationObj) {
 const notice_author_link = getRelativeURL(NotificationObj.account.url, NotificationObj.account.id);
 if(NotificationObj.account.display_name.length == 0) {
 NotificationObj.account.display_name = NotificationObj.account.username;
+}
+NotificationObj.account.display_name = htmlEscape(NotificationObj.account.display_name);
+for(i=0;i<NotificationObj.account.emojis.length;i++) {
+NotificationObj.account.display_name = NotificationObj.account.display_name.replace(new RegExp(":"+NotificationObj.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.account.emojis[i].url+"' class='emoji'>");
 }
 if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
 const toot_author_link = getRelativeURL(NotificationObj.status.account.url, NotificationObj.status.account.id),
@@ -300,7 +455,11 @@ toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, Notific
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 if( NotificationObj.type=='favourite' ){
 for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
 const html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
@@ -312,7 +471,7 @@ const html = (`
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${htmlEscape(NotificationObj.account.display_name)}</span> favourited Your Toot
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> favourited Your Toot
 </a>
 </div>
 <div class="notice_entry_body">
@@ -321,7 +480,7 @@ const html = (`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(NotificationObj.status.account.display_name)}
+${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -339,7 +498,11 @@ ${htmlEscape(NotificationObj.status.account.display_name)}
 return $(html);
 } else if ( NotificationObj.type === 'reblog' ) {
 for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
 const sid= NotificationObj.status.id,
 html = (`
@@ -352,7 +515,7 @@ html = (`
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${htmlEscape(NotificationObj.account.display_name)}</span> boosted Your Toot
+<span class="emoji_poss" >${NotificationObj.account.display_name}</span> boosted Your Toot
 </a>
 </div>
 <blockquote class="notice_entry_body">
@@ -361,7 +524,7 @@ html = (`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(NotificationObj.status.account.display_name)}
+${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -388,7 +551,11 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].static_url+"' class='emoji'>");
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
 if (NotificationObj.status.spoiler_text) {
 alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
@@ -425,6 +592,16 @@ else {
 toot_footer_width = "";
 toot_reblog_button = "";
 }
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+if(status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+}
+}
 const html=(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -438,7 +615,7 @@ const html=(`
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(NotificationObj.status.account.display_name)}
+${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
 @${NotificationObj.status.account.acct}
@@ -453,9 +630,9 @@ ${htmlEscape(NotificationObj.status.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${NotificationObj.status.id}">Delete Toot</a></li>
 <li class="mute"><a>Mute @${NotificationObj.status.account.username}</a></li>
 <li class="block"><a>Block @${NotificationObj.status.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${NotificationObj.status.url}" target="_blank">View original</a></li>
@@ -472,7 +649,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${htmlEscape(NotificationObj.account.display_name)}" privacy="${NotificationObj.status.visibility}">
+<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -505,7 +682,7 @@ const html=(`
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${htmlEscape(NotificationObj.account.display_name)}</span> followed you
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> followed you
 </a>
 </div>
 </li>`);
@@ -513,12 +690,15 @@ return $(html);
 }
 }
 function follows_template(AccountObj) {
-const array = AccountObj.url.split('/'),
-profile_link = '/'+array[array.length-1]+'@'+array[array.length-2]+'?mid='+AccountObj.id+'&';
+const profile_link = getRelativeURL(AccountObj.url,AccountObj.id);
 if(AccountObj.display_name.length == 0) {
 AccountObj.display_name = AccountObj.username;
 }
-const html = (`
+AccountObj.display_name = htmlEscape(AccountObj.display_name);
+for(i=0;i<AccountObj.emojis.length;i++) {
+AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+AccountObj.emojis[i].shortcode+":","g"),"<img src='"+AccountObj.emojis[i].url+"' class='emoji'>");
+}
+var html = (`
 <div class="follows_profile_box" mid="${AccountObj.id}">
 <div class="follows_profile_header">
 <img class="js_follows_header_image" src="${AccountObj.header}"/>
@@ -534,7 +714,7 @@ const html = (`
 <div class="follows_profile_name_box">
 <a class="js_follows_profile_link emoji_poss" href="${profile_link}">
 <h2 class="js_follows_profile_displayname">
-${htmlEscape(AccountObj.display_name)}
+${AccountObj.display_name}
 </h2>
 <span class="js_follows_profile_username">
 @${AccountObj.acct}
@@ -546,7 +726,8 @@ ${htmlEscape(AccountObj.display_name)}
 </div>
 </div>
 </div>`);
-return $(html)
+html = html.replace(new RegExp('class="emojione"',"g"),'class=emoji');
+return $(html);
 }
 function status_template(status, class_options) {
 if ( status.reblog === null ) {
@@ -559,7 +740,11 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 for(i=0;i<status.emojis.length;i++) {
-status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
 if (status.spoiler_text) {
 alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
@@ -600,6 +785,16 @@ else {
 toot_footer_width = "";
 toot_reblog_button = "";
 }
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+if(status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+}
+}
 const html=(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -609,7 +804,7 @@ const html=(`
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(status.account.display_name)}
+${status.account.display_name}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -622,9 +817,9 @@ ${htmlEscape(status.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
 <li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
 <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${status.url}" target="_blank">View original</a></li>
@@ -644,7 +839,7 @@ ${media_views}
 </section>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape(status.account.display_name)}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -751,7 +946,15 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 for(i=0;i<status.reblog.emojis.length;i++) {
-status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+status.reblog.account.display_name = htmlEscape(status.reblog.account.display_name);
+for(i=0;i<status.reblog.account.emojis.length;i++) {
+status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
 if (status.spoiler_text) {
 alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
@@ -778,6 +981,16 @@ switch(status.reblog.visibility) {
 case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
 case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
 }
+var own_toot_buttons = "";
+if(status.reblog.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>`);
+if(status.reblog.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
+}
+}
 const html=(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -787,7 +1000,7 @@ const html=(`
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(status.reblog.account.display_name)}
+${status.reblog.account.display_name}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -800,9 +1013,9 @@ ${htmlEscape(status.reblog.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>
 <li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
 <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${status.reblog.url}" target="_blank">View original</a></li>
@@ -822,7 +1035,7 @@ ${media_views}
 </section>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape(status.reblog.account.display_name)}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -960,7 +1173,11 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 for(i=0;i<status.emojis.length;i++) {
-status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].static_url+"' class='emoji'>");
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
 if ( status.spoiler_text ) {
 alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
@@ -997,6 +1214,16 @@ else {
 toot_footer_width = "";
 toot_reblog_button = "";
 }
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+if(status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+}
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="toot_entry_body">
@@ -1007,7 +1234,7 @@ const html=(`
 <header class="toot_header">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(status.account.display_name)}
+${status.account.display_name}
 </span>
 <span class="username">
 @${status.account.acct}
@@ -1021,9 +1248,9 @@ ${htmlEscape(status.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
 <li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
 <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${status.url}" target="_blank">View original</a></li>
@@ -1040,7 +1267,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape(status.account.display_name)}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1073,7 +1300,15 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 for(i=0;i<status.reblog.emojis.length;i++) {
-status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].static_url+"' class='emoji'>");
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+status.reblog.account.display_name = htmlEscape(status.reblog.account.display_name);
+for(i=0;i<status.reblog.account.emojis.length;i++) {
+status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
 if ( status.spoiler_text ) {
 alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
@@ -1098,11 +1333,21 @@ switch(status.reblog.visibility) {
 case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
 case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
 }
+var own_toot_buttons = "";
+if(status.reblog.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>`);
+if(status.reblog.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpin Toot</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
+}
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape(status.account.display_name)} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -1113,7 +1358,7 @@ const html=(`
 <header class="toot_header">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape(status.reblog.account.display_name)}
+${status.reblog.account.display_name}
 </span>
 <span class="username">
 @${status.reblog.account.acct}
@@ -1127,9 +1372,9 @@ ${htmlEscape(status.reblog.account.display_name)}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="" >Copy link to Toot</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>
 <li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.id}">Mute @${status.reblog.account.username}</a></li>
 <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.id}">Block @${status.reblog.account.username}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
 <li><a href="${status.reblog.url}" target="_blank">View original</a></li>
@@ -1146,7 +1391,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape(status.reblog.account.display_name)}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
