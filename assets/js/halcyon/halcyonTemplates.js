@@ -593,13 +593,13 @@ toot_footer_width = "";
 toot_reblog_button = "";
 }
 var own_toot_buttons = "";
-if(NotificationsObj.status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationsObj.status.id}">Delete Toot</a></li>`);
-if(NotificationsObj.status.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationsObj.status.id}">Unpin Toot</a></li>`);
+if(NotificationObj.status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">Delete Toot</a></li>`);
+if(NotificationObj.status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">Unpin Toot</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationsObj.status.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">Pin Toot</a></li>`);
 }
 }
 const html=(`
