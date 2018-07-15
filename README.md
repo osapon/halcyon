@@ -57,4 +57,4 @@ Upload it, edit config.ini and have fun!
 - [Kirschn/mastodon.js](https://github.com/Kirschn/mastodon.js)
 - [yks118/Mastodon-api-php](https://github.com/yks118/Mastodon-api-php)
 - [distsn/vinayaka](https://github.com/distsn/vinayaka)
-- [LascauxSRL/lsx-emojipicker](https:// vogithub.com/LascauxSRL/lsx-emojipicker)
+- [LascauxSRL/lsx-emojipicker](https://github.com/LascauxSRL/lsx-emojipicker)
