@@ -10,7 +10,7 @@ Follow our Mastodon account and never miss an important update: [@halcyon@social
 
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://itter.photog.social - 1.2.4
+- https://itter.photog.social - 1.2.5
 - https://halcyon.uelfte.club - 1.2.4
 - https://social.dev-wiki.de - 1.2.2
 - https://halcyon.toromino.de - 1.2.2
@@ -21,6 +21,7 @@ These instances are publicly accessible and usable by everyone, no matter which 
 You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
 
 ## Blog
+- Release of Version 1.2.5 - Copy links with one click,emojicodes now always detected,streaming in hashtag search,delete event now supported
 - Release of Version 1.2.4 - Updated Twemoji,custom emojis in names and bios,links to profiles in pleroma now always work,pinned posts now supported
 - Release of Version 1.2.3 - All emojis do now work,fixed some bugs in the Nginx example config,fixed Windows-only design bug,improved text field performance
 - Release of Version 1.2.2 - Added an emoji picker,improved performance (emoji rendering),desktop notifications on notifications page work now

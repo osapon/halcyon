@@ -294,8 +294,10 @@ onData(event);
 }
 };
 es.onmessage = listener;
-es.onclose = function() {
+es.onclose = function(event) {
+if(event.target.readyState == 0) {
 api.stream(streamType,onData);
+}
 };
 }
 };

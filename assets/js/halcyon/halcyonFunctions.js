@@ -123,27 +123,27 @@ var posted_time_original = posted_time,
 posted_time = getConversionedDate(null, posted_time_original).getTime(),
 elapsedTime = Math.ceil((current_time-posted_time)/1000);
 if (elapsedTime < 60) {
-const datetime ="・" + elapsedTime + "s";
+const datetime ="ãƒ»" + elapsedTime + "s";
 return datetime;
 }
 else if (elapsedTime < 120) {
-const datetime ="・1m";
+const datetime ="ãƒ»1m";
 return datetime;
 }
 else if (elapsedTime < (60*60)) {
-const datetime ="・" + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
+const datetime ="ãƒ»" + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
 return datetime;
 }
 else if (elapsedTime < (120*60)) {
-const datetime ="・1h";
+const datetime ="ãƒ»1h";
 return datetime;
 }
 else if (elapsedTime < (24*60*60)) {
-const datetime ="・" + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
+const datetime ="ãƒ»" + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
 return datetime;
 }
 else {
-const datetime ="・" + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
+const datetime ="ãƒ»" + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
 return datetime;
 }
 }
@@ -382,6 +382,6 @@ follow_loaded++;
 }
 function checkEmojiSupport() {
 var ctx = document.createElement("canvas").getContext("2d");
-ctx.fillText("😗",-2,4);
+ctx.fillText("ðŸ˜—",-2,4);
 return ctx.getImageData(0,0,1,1).data[3] > 0;
 }

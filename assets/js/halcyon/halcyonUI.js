@@ -235,15 +235,21 @@ load_options.shift();
 };
 });
 $(function() {
-if ( level === "timelines/home" ) {
+if(level === "timelines/home") {
 var streamscope = "user",
 scope = "home";
-} else if ( level === "timelines/public" & load_options.length) {
+}
+else if(level === "timelines/public" & load_options.length) {
 var streamscope = "public:local",
 scope = "local";
-} else if ( level === "timelines/public" & !load_options.length) {
+}
+else if(level === "timelines/public" & !load_options.length) {
 var streamscope = "public",
 scope = "federated";
+}
+else if(level.indexOf("timelines/tag/") != -1) {
+var streamscope = "hashtag&tag="+level.substr(14),
+scope = "";
 }
 let statuses = [];
 const original_title = $('title').text();
@@ -259,6 +265,9 @@ statuses.unshift(userstream.payload);
 $('#js-stream_update > button > span').text(statuses.length);
 $('title').text("("+statuses.length+") "+original_title);
 $('#header .header_nav_list .'+scope+'_badge').removeClass('invisible');
+}
+else if(userstream.event === "delete") {
+
 }
 }
 }
@@ -1329,6 +1338,24 @@ media_array.unshift(postMedia.id);
 })
 $(function() {
 $(document).on('click','.copylink_button', function(e) {
+if(ClipboardJS.isSupported()) {
+var cbelem = $("<button>").attr("data-clipboard-text",$(this).attr("url"));
+var clipboard = new ClipboardJS(cbelem[0]);
+clipboard.on('success',function(e) {
+putMessage("Link successfully copied!");
+e.clearSelection();
+});
+clipboard.on('error',function(e) {
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_copy_link').removeClass('invisible');
+$('.overlay_copy_link_form input').val($(this).attr('url'));
+return false;
+});
+cbelem.click();
+}
+else {
 e.stopPropagation();
 $("#js-overlay_content_wrap .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
@@ -1336,6 +1363,7 @@ $('#js-overlay_content_wrap').addClass('black_08');
 $('.overlay_copy_link').removeClass('invisible');
 $('.overlay_copy_link_form input').val($(this).attr('url'));
 return false;
+}
 });
 })
 $(function() {

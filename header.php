@@ -25,6 +25,7 @@ error_reporting(E_ALL);
 <script src="/assets/js/halcyon/halcyonTemplates.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
 <script src="//cdn.staticfile.org/twemoji/11.0.0/2/twemoji.min.js"></script>
+<script src="//cdn.staticfile.org/clipboard.js/2.0.1/clipboard.min.js"></script>
 <script>
 if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
 location.href = "/login";

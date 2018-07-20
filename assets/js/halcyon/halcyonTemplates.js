@@ -144,7 +144,7 @@ ${status.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.url}">Copy link to Toot</a></li>
 <li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
 <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 ${own_toot_buttons}
