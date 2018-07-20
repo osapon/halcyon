@@ -1492,7 +1492,7 @@ const emoji_dict = {
 };
 function replace_emoji() {
 $('.emoji_poss').each(function(){
-const emojis = $(this).html().match(/(:[a-zA-Z_-]+?:)|✅/g);
+const emojis = $(this).html().match(/(:[a-zA-Z\d+_-]+?:)|✅/g);
 for(let i in emojis) {
 var emoji = emojis[i].replace(/-/g,"_");
 if(emoji_dict[emoji.substr(1,emoji.length-2)]) {
@@ -1505,7 +1505,7 @@ $(this).removeClass('emoji_poss');
 });
 }
 function replaced_emoji_return(original) {
-const emojis = original.match(/(:[a-zA-Z_-]+?:)/g);
+const emojis = original.match(/(:[a-zA-Z\d+_-]+?:)/g);
 for(let i in emojis) {
 var emoji = emojis[i].replace(/-/g,"_");
 if(emoji_dict[emoji.substr(1,emoji.length-2)]) {
