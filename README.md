@@ -11,8 +11,9 @@ Follow our Mastodon account and never miss an important update: [@halcyon@social
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
 - https://itter.photog.social - 1.2.5
-- https://halcyon.uelfte.club - 1.2.4
-- https://social.dev-wiki.de - 1.2.2
+- https://halcyon.uelfte.club - 1.2.5
+- https://social.dev-wiki.de - 1.2.5
+- https://halcyon.anoxinon.de - 1.2.5
 - https://halcyon.toromino.de - 1.2.2
 - https://halcyon.distsn.org - 1.2.1
 - https://halcyon.bka.li - 1.1.7
