@@ -147,6 +147,12 @@ $("#setting_desktop_notifications")[0].checked = false;
 if(localStorage.setting_show_replies == "true") {
 $("#setting_show_replies")[0].checked = true;
 }
+if(localStorage.setting_show_content_warning == "true") {
+$("#setting_show_content_warning")[0].checked = true;
+}
+if(localStorage.setting_show_nsfw == "true") {
+$("#setting_show_nsfw")[0].checked = true;
+}
 });
 $(document).on('change',".post_streaming_wrap input[name='post_streaming']:checked", function(e) {
 localStorage.setItem("setting_post_stream", $(this).val());
@@ -200,5 +206,25 @@ else {
 localStorage.setItem("setting_show_replies","false");
 putMessage("Replies hidden");
 }
-})
+});
+$("#setting_show_content_warning").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_show_content_warning","true");
+putMessage("CW content shown");
+}
+else {
+localStorage.setItem("setting_show_content_warning","false");
+putMessage("CW content hidden");
+}
+});
+$("#setting_show_nsfw").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_show_nsfw","true");
+putMessage("NSFW content shown");
+}
+else {
+localStorage.setItem("setting_show_nsfw","false");
+putMessage("NSFW content hidden");
+}
+});
 }

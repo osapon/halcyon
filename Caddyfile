@@ -35,6 +35,14 @@ r ^/terms/?$
 to /login/terms.php
 }
 rewrite {
+r ^/privacy/?$
+to /login/privacy.php
+}
+rewrite {
+r ^/imprint/?$
+to /login/imprint.php
+}
+rewrite {
 r ^/local/?$
 to /local.php
 }

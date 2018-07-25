@@ -36,6 +36,8 @@ localStorage.setItem('setting_link_previews', 'true');
 localStorage.setItem('setting_desktop_notifications', 'true');
 localStorage.setItem('setting_who_to_follow', 'false');
 localStorage.setItem('setting_show_replies', 'true');
+localStorage.setItem('setting_show_content_warning', 'false');
+localStorage.setItem('setting_show_nsfw', 'false');
 localStorage.setItem('setting_post_privacy','".$profile["source"]["privacy"]."');
 localStorage.setItem('setting_post_sensitive','".$profile["source"]["sensitive"]."');
 location.href = '/';

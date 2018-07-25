@@ -3,13 +3,14 @@ let media_views = "";
 if(status.media_attachments[0].remote_url != null) {
 status.media_attachments[0].url = status.media_attachments[0].remote_url;
 }
-if ( status.media_attachments[0].url === "/files/original/missing.png" ) {
+if(status.media_attachments[0].url === "/files/original/missing.png") {
 return "";
-} else if ( !status.sensitive ) {
+}
+else if(!status.sensitive || localStorage.setting_show_nsfw == "true") {
 media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'>`;
-} else {
-media_views = `
-<div class='media_views sensitive' media_length='${status.media_attachments.length}'>
+}
+else {
+media_views = `<div class='media_views sensitive' media_length='${status.media_attachments.length}'>
 <div class='sensitive_alart'>
 <span class="text1">Sensitive content</span>
 <span class="text2">Click to view</span>
@@ -72,9 +73,12 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-if ( status.spoiler_text ) {
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
 article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -117,6 +121,11 @@ else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
 }
 }
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+}
 const html=(`
 <li sid="${status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -145,8 +154,6 @@ ${status.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}">Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -207,9 +214,12 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-if ( status.reblog.spoiler_text ) {
+if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
 article_option = "content_warning";
+}
+else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -239,6 +249,11 @@ own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpi
 else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
 }
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">Report this Toot</a></li>`);
 }
 const html = (`
 <li sid="${status.id}" class="toot_entry">
@@ -273,8 +288,6 @@ ${status.reblog.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -337,9 +350,12 @@ article_option= "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-if(status.spoiler_text) {
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
 article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -361,6 +377,11 @@ var own_toot_buttons = "";
 if(status.account.acct == current_acct) {
 var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
 <li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
 }
 const html = (`
 <li sid="${status.id}" class="toot_entry">
@@ -393,8 +414,6 @@ ${status.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -557,9 +576,12 @@ NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.
 for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
-if (NotificationObj.status.spoiler_text) {
-alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
-article_option = 'content_warning';
+if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+article_option = "content_warning";
+}
+else if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (NotificationObj.status.reblogs_count) {
 toot_reblogs_count = NotificationObj.status.reblogs_count;
@@ -602,6 +624,11 @@ else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">Pin Toot</a></li>`);
 }
 }
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">Mute @${NotificationObj.status.account.username}</a></li>
+<li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">Block @${NotificationObj.status.account.username}</a></li>
+<li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">Report this Toot</a></li>`);
+}
 const html=(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -630,8 +657,6 @@ ${NotificationObj.status.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li class="mute"><a>Mute @${NotificationObj.status.account.username}</a></li>
-<li class="block"><a>Block @${NotificationObj.status.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -746,9 +771,12 @@ status.account.display_name = htmlEscape(status.account.display_name);
 for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
-if (status.spoiler_text) {
-alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
-article_option = 'content_warning';
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -795,6 +823,11 @@ else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
 }
 }
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+}
 const html=(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -817,8 +850,6 @@ ${status.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -956,9 +987,12 @@ status.reblog.account.display_name = htmlEscape(status.reblog.account.display_na
 for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
-if (status.spoiler_text) {
-alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
-article_option = 'content_warning';
+if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+article_option = "content_warning";
+}
+else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -991,6 +1025,11 @@ else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
 }
 }
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">Report this Toot</a></li>`);
+}
 const html=(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -1013,8 +1052,6 @@ ${status.reblog.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -1179,9 +1216,12 @@ status.account.display_name = htmlEscape(status.account.display_name);
 for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
-if ( status.spoiler_text ) {
-alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
-article_option = 'content_warning';
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -1224,6 +1264,11 @@ else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
 }
 }
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="toot_entry_body">
@@ -1248,8 +1293,6 @@ ${status.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="" >Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
@@ -1310,9 +1353,12 @@ status.reblog.account.display_name = htmlEscape(status.reblog.account.display_na
 for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
-if ( status.spoiler_text ) {
-alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">SHOW MORE</button>',
-article_option = 'content_warning';
+if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+article_option = "content_warning";
+}
+else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -1343,6 +1389,11 @@ else {
 own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
 }
 }
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">Report this Toot</a></li>`);
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
@@ -1372,8 +1423,6 @@ ${status.reblog.account.display_name}
 <div class="expand_menu invisible disallow_select">
 <ul>
 <li><a class="copylink_button" url="" >Copy link to Toot</a></li>
-<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.id}">Block @${status.reblog.account.username}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>

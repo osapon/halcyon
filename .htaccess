@@ -13,6 +13,8 @@ RewriteRule ^login/?$ login/login\.php [NC,L,QSA]
 RewriteRule ^auth/?$ login/auth\.php [NC,L,QSA]
 RewriteRule ^logout/?$ login/logout\.php [NC,L,QSA]
 RewriteRule ^terms/?$ login/terms\.php [NC,L,QSA]
+RewriteRule ^privacy/?$ login/privacy\.php [NC,L,QSA]
+RewriteRule ^imprint/?$ login/imprint\.php [NC,L,QSA]
 
 # LTL
 RewriteBase /local

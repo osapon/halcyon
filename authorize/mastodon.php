@@ -3,7 +3,7 @@ namespace HalcyonSuite\HalcyonForMastodon;
 require_once('mastodon-api/mastodon.php');
 class Mastodon extends \Mastodon_api {
 function __construct(){
-$appSettings = parse_ini_file('../config.ini',true);
+$appSettings = parse_ini_file('../config/config.ini',true);
 $this->datadir = "../data";
 $this->clientName = $appSettings["App"]["api_client_name"];
 $this->clientRedirectUris = $appSettings["App"]["api_client_website"].'/auth urn:ietf:wg:oauth:2.0:oob';

@@ -59,6 +59,28 @@
 </div>
 </div>
 </div>
+<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<h3>Show all CW content</h3>
+</div>
+<div class="show_content_warning_wrap" style="float:left;width:75%">
+<div class="switch">
+<input type="checkbox" id="setting_show_content_warning">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+</div>
+<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<h3>Show all NSFW content</h3>
+</div>
+<div class="show_nsfw_wrap" style="float:left;width:75%">
+<div class="switch">
+<input type="checkbox" id="setting_show_nsfw">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+</div>
 <span style="visibility:hidden">-</span>
 </div>
 </article>

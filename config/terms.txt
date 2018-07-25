@@ -11,7 +11,7 @@
 <ul>
 <li>actions violating the laws of countries</li>
 <li>actions contrary to public order and standards of decency</li>
-<li>violation of third party’s right to intellectual property, brand, privacy, etc.</li>
+<li>violation of third partyâ€™s right to intellectual property, brand, privacy, etc.</li>
 <li>acts of violence, sexual nature, of discrimination</li>
 <li>phishing or spamming</li>
 <li>actions causing problem to the network infrastructure of Halcyon</li>

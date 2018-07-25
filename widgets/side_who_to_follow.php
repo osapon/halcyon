@@ -1,5 +1,5 @@
 <?php
-$appSettings = parse_ini_file('config.ini',true);
+$appSettings = parse_ini_file('config/config.ini',true);
 echo "<span id='who-to-follow-provider' style='display:none'>".$appSettings["App"]["who_to_follow_provider"]."</span>";
 ?>
 <div class="side_widget follow_opt_in side_widgets_footer">

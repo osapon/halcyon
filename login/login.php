@@ -27,7 +27,7 @@ die();
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halcyon for Mastodon</title>
+<title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/login/assets/css/style.css" media="all">
 <link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
@@ -69,11 +69,23 @@ location.href = "/";
 <span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
 </li>
 </a>
-<a href="/terms/" class="no-underline">
+<a href="/terms" class="no-underline">
 <li>
 <span><i class="fa fa-balance-scale" aria-hidden="true"></i>Terms</span>
 </li>
 </a>
+<a href="/privacy" class="no-underline">
+<li>
+<span><i class="fa fa-shield" aria-hidden="true"></i>Privacy</span>
+</li>
+</a>
+<?php if(file_exists("../config/imprint.txt")) { ?>
+<a href="/imprint" class="no-underline">
+<li>
+<span><i class="fa fa-id-card-o" aria-hidden="true"></i>Imprint</span>
+</li>
+</a>
+<?php } ?>
 <a href="http://www.nikisoft.one/contact.php" class="no-underline">
 <li>
 <span><i class="fa fa-envelope" aria-hidden="true"></i>Contact</span>
@@ -133,7 +145,7 @@ Halcyon is a webclient for <a href="https://joinmastodon.org">Mastodon</a> and <
 </div>
 <h2>Contact / Feedback</h2>
 <p>
-Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">＠halcyon@social.csswg.org</a><br/>
+Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">ï¼ halcyon@social.csswg.org</a><br/>
 Email: <a href="http://www.nikisoft.one/contact.php" target="_blank">Use my contact form</a><br/>
 Git repository: <a href="https://notabug.org/halcyon-suite/halcyon" target="_blank">halcyon-suite/halcyon</a>
 </p>
@@ -151,6 +163,27 @@ Bitcoin: 1D6GThQqHQYnruKYrKyW9JC86ZGWxjt1hK<br/>
 </a>
 </div>
 <span>Photo by <a href="https://www.flickr.com/photos/95387826@N08/">Michio Morimoto on Flickr</a> (CC BY 2.0)</span><br/>
+<?php
+if(file_exists("../config/footerlinks.txt")) {
+$footerlinks = json_decode(file_get_contents("../config/footerlinks.txt"));
+$haslinks = false;
+for($i=0;$i<count($footerlinks);$i++) {
+if($footerlinks[$i]->logout == true) {
+if($haslinks == false) {
+$haslinks = true;
+echo "<span>";
+}
+else {
+echo " | ";
+}
+echo "<a href='".$footerlinks[$i]->link."'>".$footerlinks[$i]->title."</a>";
+}
+}
+if($haslinks == true) {
+echo "</span><br/>";
+}
+}
+?>
 <span>Halcyon version <?php echo file_get_contents("../version.txt") ?></span>
 </footer>
 </body>

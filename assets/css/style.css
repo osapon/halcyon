@@ -469,19 +469,12 @@ padding-right: 0;
 border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 }
-.single_reply_status {
+.single_reply_status,.report_status {
 width: 600px;
 margin: auto;
-/*! z-index: 1000; */
-/*! top: 25%; */
-/*! left: 0; */
-/*! height: 100%; */
-/*! position: absolute; */
-/*! right: 0; */
-/*! bottom: 0; */
 margin-top: 20%;
 }
-.single_reply_status_header {
+.single_reply_status_header,.report_status_header {
 width: 600px;
 padding: 16px;
 box-sizing: border-box;
@@ -494,17 +487,17 @@ color: #66757F;
 font-size: 18px;
 font-weight: 300;
 }
-.single_reply_status .status_preview {
+.single_reply_status .status_preview,.report_status .status_preview {
 border-top: 1px solid #E1E8ED;
 }
-.single_reply_status .status_preview .toot_entry .toot_footer {
+.single_reply_status .status_preview .toot_entry .toot_footer,.report_stauts .status_preview .toot_entry .toot_footer {
 display: none!important;
 }
-.single_reply_status .status_form .status_bottom {
+.single_reply_status .status_form .status_bottom,.report_status .status_form .status_bottom {
 width: 100%;
 margin-left: 0;
 }
-#single_reply_status_form.status_form {
+#single_reply_status_form.status_form,#report_status_form.status_form {
 width: 600px;
 padding: 16px;
 box-sizing: border-box;
@@ -513,7 +506,7 @@ border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 margin: auto;
 }
-#single_reply_status_form.status_form .status_bottom .submit_status_label .toot_button_label i {
+#single_reply_status_form.status_form .status_bottom .submit_status_label .toot_button_label i,#report_status_form.status_form .status_bottom .submit_status_label .toot_button_label i {
 font-size: 18px;
 margin-right: 8px;
 }

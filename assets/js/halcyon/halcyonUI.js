@@ -1335,7 +1335,80 @@ media_array.unshift(postMedia.id);
 }
 }
 });
-})
+});
+$(function() {
+$(document).on('click','report_status_header, #report_status_form', function(e) {
+e.stopPropagation();
+});
+$(document).on('click', '.report_button', function(e) {
+e.stopPropagation();
+const sid= $(this).attr('sid'),
+mid = $(this).attr('mid'),
+display_name = $(this).attr('display_name');
+$('.report_status').removeClass('invisible');
+$("#js-overlay_content_wrap .temporary_object").empty();
+$(".report_status .status_preview").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.report_status .submit_status_label').addClass('active_submit_button');
+$('#report_status_form .status_textarea textarea').addClass('focus');
+$('#report_status_form .status_textarea textarea').focus();
+autosize($('#single_reply_status_form .status_textarea textarea'));
+$('#report_status_form').attr('tid',sid);
+$('#report_status_form').attr('mid',mid);
+$('.report_status .report_status_header span').addClass("emoji_poss").html("Report a Toot of "+display_name);
+$('#report_status_form textarea').empty();
+$('#report_status_form .character_count').html("1000");
+replace_emoji();
+api.get('statuses/'+sid+'/', function(status) {
+timeline_template(status).appendTo(".report_status .status_preview");
+replace_emoji();
+});
+return false;
+});
+$(document).on('change keyup','#report_status_form textarea, #report_status_form .status_spoiler', function(e) {
+if(e.keyCode !== 224 & e.keyCode !== 17) {
+const textCount = $('#report_status_form textarea').val().length + $('#report_status_form .status_spoiler').val().length;
+let textLen = (1000 - textCount);
+if(textLen <= -1) {
+$('#report_status_form .character_count').addClass('red');
+$('#report_status_form').addClass('ready');
+}
+else if(textLen === 1000) {
+$('#report_status_form').addClass('ready');
+}
+else {
+$('#report_status_form .character_count').removeClass('red');
+$('#report_status_form').removeClass('ready');
+}
+$('#report_status_form .character_count').text(textLen);
+}
+});
+$(document).on('click','#report_status_form .submit_status_label',function(e) {
+$('#report_status_form').addClass('ready');
+$('#report_status_form .status_textarea').addClass('disallow_select');
+$('#report_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
+let form = document.forms.report_status_form;
+const params = {
+account_id:$('#report_status_form').attr('mid'),
+status_ids:$('#report_status_form').attr('tid'),
+comment:form.status_textarea.value,
+}
+api.post("reports",params,function(data) {
+form.reset();
+$('#report_status_form').removeClass('ready');
+$('#report_status_form .status_textarea').removeClass('disallow_select');
+$('#report_status_form .character_count').html("1000");
+$('.report_status .submit_status_label').removeClass('active_submit_button');
+$('.report_status').addClass('invisible');
+autosize.destroy($('#report_status_form .status_textarea textarea'));
+$('#js-overlay_content_wrap').removeClass('view');
+$('#js-overlay_content_wrap').removeClass('black_05');
+$("#js-overlay_content_wrap .report_status .status_preview").empty();
+putMessage('Toot reported successfully!');
+});
+});
+});
 $(function() {
 $(document).on('click','.copylink_button', function(e) {
 if(ClipboardJS.isSupported()) {
