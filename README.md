@@ -1,8 +1,8 @@
 # Halcyon for Mastodon and Pleroma
 A webclient for Mastodon and Pleroma which looks like Twitter
 
-##DO NOT USE THE CURRENT MASTER!
-The current version in master has been uploaded because an contributor offered help with working towards the next version.This is no complete version.Please get the latest stable release from the releases page.
+## DO NOT USE THE CURRENT MASTER!
+The current version in master has been uploaded because an contributor offered help with working towards the next version. This is no complete version. Please get the latest stable release from the releases page.
 
 >The original author of this genius piece of software was inactive for a while and then shut down his demo instance and deleted this repository. I love Halcyon, it's the thing which makes Mastodon the best social network in the world. I took the code from the Halcyon fork of cybre.space which still works but doesn't seem to get updates, too. I uploaded it here to make the original link work again and don't link into the big nothing. I'm working on much other stuff, too, therefore I won't use my whole free time to work on Halcyon. But I try to do as much as possible here.
 
@@ -14,9 +14,9 @@ Follow our Mastodon account and never miss an important update: [@halcyon@social
 ## Instances
 These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
 - https://itter.photog.social - 1.2.6
+- https://social.dev-wiki.de - 1.2.6
+- https://halcyon.anoxinon.de - 1.2.6
 - https://halcyon.uelfte.club - 1.2.5
-- https://social.dev-wiki.de - 1.2.5
-- https://halcyon.anoxinon.de - 1.2.5
 - https://halcyon.toromino.de - 1.2.2
 - https://halcyon.distsn.org - 1.2.1
 - https://halcyon.bka.li - 1.1.7
