@@ -20,6 +20,7 @@ die();
 }
 }
 }
+include("../language.php");
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -30,10 +31,10 @@ die();
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/login/assets/css/style.css" media="all">
-<link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
-<link rel="stylesheet" href="//cdn.staticfile.org/cookieconsent2/3.0.4/cookieconsent.min.css">
-<script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
-<script src="//cdn.staticfile.org/cookieconsent2/3.0.4/cookieconsent.min.js"></script>
+<link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
+<link rel="stylesheet" href="/assets/css/cookieconsent.min.css">
+<script src="/assets/js/jquery/jquery.min.js"></script>
+<script src="/assets/js/cookieconsent/cookieconsent.min.js"></script>
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/login/assets/js/halcyon_login.js"></script>
 <script>

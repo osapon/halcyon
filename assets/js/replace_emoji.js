@@ -1500,7 +1500,7 @@ $(this).html($(this).html().replace(emojis[i],emoji_dict[emoji.substr(1,emoji.le
 }
 }
 $(this).html($(this).html().replace(/✅/g, "<img class='emoji' src='/assets/images/self_auth_min.png'>"));
-twemoji.parse(this,{base:(location.protocol==="https:"?"https:":"http:")+"//cdn.staticfile.org/twemoji/11.0.0/2/"});
+twemoji.parse(this,{base:"https://"+current_instance,ext:".svg",folder:"/emoji"});
 $(this).removeClass('emoji_poss');
 });
 }

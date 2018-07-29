@@ -1,0 +1,487 @@
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-06-07 06:53+0000\n"
+"Last-Translator: Halcyon Project <support@nikisoft.one>\n"
+"Language-Team: English (United States) Halcyon Project"
+"halcyon/web/en_US/>\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Weblate 3.0\n"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Language_de_DE"
+msgstr "Deutsch"
+
+msgid "Language_en_US"
+msgstr "English(US)"
+
+msgid "Language_ja_JP"
+msgstr "&#26085;&#26412;&#35486;"
+
+msgid "Language_ko_KR"
+msgstr "&#54620;&#44397;&#50612;"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "News"
+msgstr "News"
+
+msgid "Source"
+msgstr "Source/Issue"
+
+msgid "Terms"
+msgstr "Terms"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Login to Halcyon"
+msgstr "Login to Halcyon"
+
+msgid "or"
+msgstr "or"
+
+msgid "create an account"
+msgstr "create an account"
+
+msgid "I agree with the Terms"
+msgstr "I agree with the <a href='/terms'>Terms</a>"
+
+msgid "What is Halcyon"
+msgstr "What is Halcyon"
+
+msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+msgstr "Halcyon is standard <span style='font-weight: bold'>Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+
+msgid "Contact / Feedback"
+msgstr "Contact / Feedback"
+
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon Terms of Use"
+
+msgid "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+msgstr "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Local"
+msgstr "Local"
+
+msgid "Federated"
+msgstr "Federated"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Search Mastodon"
+msgstr "Search Mastodon"
+
+msgid "View profile"
+msgstr "View profile"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "Toot"
+msgstr "Toot"
+
+msgid "TOOTS"
+msgstr "TOOTS"
+
+msgid "FOLLOWING"
+msgstr "FOLLOWING"
+
+msgid "FOLLOWERS"
+msgstr "FOLLOWERS"
+
+msgid "Preferences"
+msgstr "Preferences"
+
+msgid "SHOW"
+msgstr "SHOW"
+
+msgid "HIDE"
+msgstr "HIDE"
+
+msgid "New posts streaming"
+msgstr "New posts streaming"
+
+msgid "Default post privacy"
+msgstr "Default post privacy"
+
+msgid "Local instance"
+msgstr "Local instance"
+
+msgid "Hashtag search filter"
+msgstr "Hashtag search filter"
+
+msgid "HASHTAG"
+msgstr "HASHTAG"
+
+msgid "What's happening?"
+msgstr "What's happening?"
+
+msgid "Content warning"
+msgstr "Content warning"
+
+msgctxt "TootForm"
+msgid "Public"
+msgstr "Public"
+
+msgctxt "TootForm"
+msgid "Unlisted"
+msgstr "Unlisted"
+
+msgctxt "TootForm"
+msgid "Followers-only"
+msgstr "Followers-only"
+
+msgctxt "TootForm"
+msgid "Direct"
+msgstr "Direct"
+
+msgid "View new Toots"
+msgstr "View <span></span> new Toots"
+
+msgid "About this instance"
+msgstr "About this instance"
+
+msgid "Terms this instance"
+msgstr "Terms this instance"
+
+msgid "Other instances"
+msgstr "Other instances"
+
+msgid "Follow"
+msgstr "Follow"
+
+msgid "Auto update"
+msgstr "Auto update"
+
+msgid "Manual update"
+msgstr "Manual update"
+
+msgctxt "Option"
+msgid "Public"
+msgstr "Public"
+
+msgctxt "Option"
+msgid "Unlisted"
+msgstr "Unlisted"
+
+msgctxt "Option"
+msgid "Followers-only"
+msgstr "Followers-only"
+
+msgctxt "Option"
+msgid "Direct"
+msgstr "Direct"
+
+msgid "All instances"
+msgstr "All instances"
+
+msgid "Local only"
+msgstr "Local only"
+
+msgid "All"
+msgstr "All"
+
+msgid "View new notitification"
+msgstr "View <span></span> new notitification"
+
+msgid "boosted Your Toot"
+msgstr "boosted Your Toot"
+
+msgid "favourited Your Toot"
+msgstr "favourited Your Toot"
+
+msgid "followed you"
+msgstr "followed you"
+
+msgid "Boosted"
+msgstr "Boosted"
+
+msgid "SHOW MORE"
+msgstr "SHOW MORE"
+
+msgid "SHOW LESS"
+msgstr "SHOW LESS"
+
+msgid "Toots"
+msgstr "Toots"
+
+msgid "Toots &amp; replies"
+msgstr "Toots &amp; replies"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "FOLLOWS YOU"
+msgstr "FOLLOWS YOU"
+
+msgid "Photos and toots"
+msgstr "Photos and toots"
+
+msgid "Reply"
+msgstr "Reply"
+
+msgid "Edit profile"
+msgstr "Edit profile"
+
+msgid "Compose new Toot"
+msgstr "Compose new Toot"
+
+msgid "PEOPLE"
+msgstr "PEOPLE"
+
+msgid "FAVOURITES"
+msgstr "FAVOURITES"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Following"
+msgstr "Following"
+
+msgid "Shortcut key"
+msgstr "Shortcut key"
+
+msgid "Open the toot form"
+msgstr "Open the toot form"
+
+msgid "Move focus to search field"
+msgstr "Move focus to search field"
+
+msgid "Toot in toot form"
+msgstr "Toot in toot form"
+
+msgid "Switch to home time line"
+msgstr "Switch to home time line"
+
+msgid "Switch to local time line"
+msgstr "Switch to local time line"
+
+msgid "Switch to federated time line"
+msgstr "Switch to federated time line"
+
+msgid "Switch to notifications"
+msgstr "Switch to notifications"
+
+msgid "Switch to favourites"
+msgstr "Switch to favourites"
+
+msgid "Open this guide"
+msgstr "Open this guide"
+
+msgid "Copy link to Toot"
+msgstr "Copy link to Toot"
+
+msgid "Delete Toot"
+msgstr "Delete Toot"
+
+msgid "View original"
+msgstr "View original"
+
+msgid "Sensitive content"
+msgstr "Sensitive content"
+
+msgid "Click to view"
+msgstr "Click to view"
+
+msgid "Auto-play animated GIFs"
+msgstr "Auto-play animated GIFs"
+
+msgid "Yes"
+msgstr "Yes"
+
+msgid "No"
+msgstr "No"
+
+msgid "Changed setting to"
+msgstr "Changed setting to ${val}"
+
+msgid "Exist new Toot."
+msgstr "Exist new Toot."
+
+msgid "Boost & Favorite"
+msgstr "Boost & Favorite"
+
+msgid "Enable link previews"
+msgstr "Enable link previews"
+
+msgctxt "Option"
+msgid "true"
+msgstr "enabled"
+
+msgctxt "Option"
+msgid "false"
+msgstr "disabled"
+
+msgid "Desktop notifications"
+msgstr "Desktop notifications"
+
+msgid "You didn't allow notifications"
+msgstr "You didn't allow notifications"
+
+msgid "favourited your toot"
+msgstr "${name} favourited your toot"
+
+msgid "boosted your toot"
+msgstr "${name} boosted your toot"
+
+msgid "followed your account"
+msgstr "${name} followed you"
+
+msgid "mentioned you"
+msgstr "${name} mentioned you"
+
+msgid "Recently Used"
+msgstr "Recently Used"
+
+msgid "Search Results"
+msgstr "Search Results"
+
+msgid "Search..."
+msgstr "Search..."
+
+msgid "Custom"
+msgstr "Custom"
+
+msgid "People"
+msgstr "People"
+
+msgid "Nature"
+msgstr "Nature"
+
+msgid "Food"
+msgstr "Food"
+
+msgid "Activities"
+msgstr "Activities"
+
+msgid "Travel & Places"
+msgstr "Travel & Places"
+
+msgid "Objects"
+msgstr "Objects"
+
+msgid "Symbols"
+msgstr "Symbols"
+
+msgid "Flags"
+msgstr "Flags"
+
+msgctxt "Notifications"
+msgid "Direct"
+msgstr "Direct"
+
+msgid "Your Toot has been deleted"
+msgstr "Your Toot has been deleted"
+
+msgid "Your Toot was posted!"
+msgstr "Your Toot was posted!"
+
+msgid "Your Reply was posted!"
+msgstr "Your Reply was posted!"
+
+msgid "Reply to"
+msgstr "Reply to ${val}"
+
+msgid "Toot your reply"
+msgstr "Toot your reply"
+
+msgid "Copy to draft"
+msgstr "Copy to draft"
+
+msgid "Move to draft"
+msgstr "Move to draft"
+
+msgid "Delete draft"
+msgstr "Delete draft"
+
+msgid "Replace toot"
+msgstr "Replace toot"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Profile settings"
+msgstr "Profile settings"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "GENERAL"
+msgstr "GENERAL"
+
+msgid "PROFILE"
+msgstr "PROFILE"
+
+msgid "APPEARANCE"
+msgstr "APPEARANCE"
+
+msgid "Show replies"
+msgstr "Show replies"
+
+msgid "Mark as NSFW by default"
+msgstr "Mark as NSFW by default"
+
+msgid "Display name"
+msgstr "Display name"
+
+msgid "About me"
+msgstr "About me"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "Header"
+msgstr "Header"
+
+msgid "Lock account"
+msgstr "Lock account"
+
+msgid "Select file and upload"
+msgstr "Select file and upload"
+
+msgid "Changed about me setting"
+msgstr "Changed about me setting"
+
+msgid "Uploaded new avatar"
+msgstr "Uploaded new avatar"
+
+msgid "Uploaded new header"
+msgstr "Uploaded new header"
+
+msgid "Account locked"
+msgstr "Account locked"
+
+msgid "Account unlocked"
+msgstr "Account unlocked"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Translation"
+msgstr "Translation"
+
+msgid "Image size on timeline"
+msgstr "Image size on timeline"
+
+msgctxt "Option"
+msgid "Normal"
+msgstr "Normal"
+
+msgctxt "Option"
+msgid "Low"
+msgstr "Low"

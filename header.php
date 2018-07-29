@@ -1,6 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
+include("language.php");
 ?>
 <!DOCTYPE HTML>
 <html lang="en">
@@ -11,9 +12,9 @@ error_reporting(E_ALL);
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/assets/css/style.css" media="all">
-<link rel="stylesheet" href="//cdn.staticfile.org/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
 <link rel="stylesheet" href="/assets/css/emojipicker.css" media="all">
-<script src="//yastatic.net/jquery/3.2.1/jquery.min.js"></script>
+<script src="/assets/js/jquery/jquery.min.js"></script>
 <script src="/assets/js/halcyon/halcyonFunctions.js"></script>
 <script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
@@ -24,9 +25,18 @@ error_reporting(E_ALL);
 <script src="/assets/js/emojipicker/emojipicker.js"></script>
 <script src="/assets/js/halcyon/halcyonTemplates.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
-<script src="//cdn.staticfile.org/twemoji/11.0.0/2/twemoji.min.js"></script>
-<script src="//cdn.staticfile.org/clipboard.js/2.0.1/clipboard.min.js"></script>
+<script src="/assets/js/pomo/pomo.min.js"></script>
+<script src="/assets/js/twemoji/twemoji.min.js"></script>
+<script src="/assets/js/clipboard.js/clipboard.min.js"></script>
 <script>
+Pomo.domain = 'messages';
+Pomo.returnStrings = true;
+Pomo.unescapeStrings = true;
+var pomo_def = Pomo.load(null,{
+format:'po',
+mode:'link',
+translation_domain:'messages'
+});
 if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
 location.href = "/login";
 }
