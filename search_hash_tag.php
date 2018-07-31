@@ -15,7 +15,7 @@
 </header>
 <div id="js-stream_update">
 <button>
-View <span></span> new Toots
+<?=_('View ')?> <span></span><?=_(' new Toots')?>
 </button>
 </div>
 <ul id="js-timeline" class="timeline">

@@ -4,7 +4,7 @@ $config = parse_ini_file('../config.ini',true);
 ?>
 <main id="main">
 <article id="article">
-<h2>Imprint</h2>
+<h2><?=_('Imprint')?></h2>
 <?php
 if(file_exists("../config/imprint.txt")) {
 $imprint = explode("\n",file_get_contents("../config/imprint.txt"));
@@ -13,7 +13,7 @@ $imprint = implode("\n",$imprint);
 echo nl2br($imprint);
 }
 else {
-echo "Imprint not set!";
+echo _("Imprint not set!");
 }
 ?>
 </article>

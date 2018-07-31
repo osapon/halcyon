@@ -9,19 +9,19 @@
 <ul class="profile_nav_list">
 <li id="js-profile_nav_toots" class="profile_nav_item profile_toots">
 <a>
-<h2>TOOTS</h2>
+<h2><?=_('TOOTS')?></h2>
 <span id="js_toots_count"></span>
 </a>
 </li>
 <li id="js-profile_nav_following" class="profile_nav_item profile_following">
 <a>
-<h2>FOLLOWING</h2>
+<h2><?=_('FOLLOWING')?></h2>
 <span id="js_following_count"></span>
 </a>
 </li>
 <li id="js-profile_nav_followers" class="profile_nav_item profile_followers">
 <a>
-<h2>FOLLOWERS</h2>
+<h2><?=_('FOLLOWERS')?></h2>
 <span id="js_followers_count"></span>
 </a>
 </li>

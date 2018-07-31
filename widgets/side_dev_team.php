@@ -1,5 +1,5 @@
 <div class="side_widget what_to_follow">
-<h2>Interesting accounts of devs</h2>
+<h2><?=_('Interesting accounts of devs')?></h2>
 <ul class="account_list">
 <li class="account_box">
 <div class="icon_box">
@@ -14,7 +14,7 @@
 </a>
 <button class="follow_button action_button" data="@halcyon@social.csswg.org">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -31,7 +31,7 @@
 </a>
 <button class="follow_button" data="@nipos@social.netzkombinat.su">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -48,7 +48,7 @@
 </a>
 <button class="follow_button" data="@Mastodon@mastodon.social">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -65,7 +65,7 @@
 </a>
 <button class="follow_button" data="@Gargron@mastodon.social">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>

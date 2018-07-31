@@ -11,7 +11,7 @@
 <a id="js_profile_displayname" href="#"></a>
 </h1>
 <h2 class="profile_username">
-@<a id="js_profile_username" href="#"></a><span class="profile_followed_by invisible">FOLLOWS YOU</span>
+@<a id="js_profile_username" href="#"></a><span class="profile_followed_by invisible"><?=_('FOLLOWS YOU')?></span>
 </h2>
 <p id="js_profile_bio" class="profile_bio"></p>
 <?php include dirname(__FILE__).('/widgets/user_recent_images.php'); ?>
@@ -22,24 +22,25 @@
 <ul class="header_items">
 <li class="item toots view">
 <a id="toots_link">
-Toots
+<?=_('Toots')?>
 </a>
 </li>
 <li class="item wreplies">
 <a id="with_replies_link">
-Toots &amp; replies
+<?=_('Toots')?> &amp; <?=_('replies')?>
 </a>
 </li>
 <li class="item media">
 <a id="media_link">
-Media
+<?=_('Media')?>
 </a>
 </li>
 </ul>
 </header>
 <div id="js-stream_update">
 <button>
-View <span></span> new Toots
+<?=_('View ')?><span></span><?=_(' new Toots')?>
+
 </button>
 </div>
 <ul id="js-timeline" class="timeline">

@@ -7,12 +7,12 @@
 <ul class="header_nav_list">
 <li id="js-search_nav_toots" class="header_nav_item search_toots">
 <a>
-<h2>TOOTS</h2>
+<h2><?=_('TOOTS')?></h2>
 </a>
 </li>
 <li id="js-search_nav_peoples" class="header_nav_item search_following">
 <a>
-<h2>PEOPLE</h2>
+<h2><?=_('PEOPLE')?></h2>
 </a>
 </li>
 </ul>

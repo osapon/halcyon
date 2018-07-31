@@ -8,14 +8,14 @@
 <ul class="header_items">
 <li class="item toots view">
 <a href="#">
-All
+<?=_('All')?>
 </a>
 </li>
 </ul>
 </header>
 <div id="js-stream_update">
 <button>
-View <span></span> new notitification
+<?=_('View ')?><span></span><?=_(' new notitification')?>
 </button>
 </div>
 <ul id="js-timeline" class="timeline">

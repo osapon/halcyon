@@ -3,16 +3,16 @@ $appSettings = parse_ini_file('config/config.ini',true);
 echo "<span id='who-to-follow-provider' style='display:none'>".$appSettings["App"]["who_to_follow_provider"]."</span>";
 ?>
 <div class="side_widget follow_opt_in side_widgets_footer">
-<h2>Who to follow</h2>
-Halcyon needs to connect to an external server to get a list of users which have similar interests as you. If you want to use this feature, please opt-in.
+<h2><?=_('Who to follow')?></h2>
+<?=_('Halcyon needs to connect to an external server to get a list of users which have similar interests as you. If you want to use this feature, please opt-in.')?>
 <center><br/>
 <button class="halcyon_button" id="enable_follow">
-<span>Enable who to follow</span>
+<span><?=_('Enable who to follow')?></span>
 </button>
 </center>
 </div>
 <div class="side_widget follow_loading" style="display:none;color:#AAB8C2">
-<h2>Who to follow</h2>
+<h2><?=_('Who to follow')?></h2>
 <div style="height:100px"></div>
 <center>
 <span class="fa-stack fa-2x">
@@ -23,8 +23,8 @@ Halcyon needs to connect to an external server to get a list of users which have
 </div>
 <div class="side_widget with_button what_to_follow" style="display:none">
 <div class="form_title">
-<h2>Who to follow</h2>
-<a href="/whotofollow" class="headerbtn">MORE</a>
+<h2><?=_('Who to follow')?></h2>
+<a href="/whotofollow" class="headerbtn"><?=_('MORE')?></a>
 </div>
 <ul class="account_list">
 <li class="account_box what_to_follow_0">
@@ -40,7 +40,7 @@ Halcyon needs to connect to an external server to get a list of users which have
 </a>
 <button class="follow_button" mid="" data="">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -57,7 +57,7 @@ Halcyon needs to connect to an external server to get a list of users which have
 </a>
 <button class="follow_button" mid="" data="">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>
@@ -74,7 +74,7 @@ Halcyon needs to connect to an external server to get a list of users which have
 </a>
 <button class="follow_button" mid="" data="">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span><?=_('Follow')?></span>
 </button>
 </div>
 </li>

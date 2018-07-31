@@ -58,28 +58,28 @@ resetApp();
 <li id="header_nav_item_home" class="header_nav_item">
 <a href="/" id="home_nav">
 <i class="fa fa-fw fa-home"></i>
-<span>Home</span>
+<span><?=_('Home')?></span>
 </a>
 <div class="home_badge nav_badge invisible"></div>
 </li>
 <li id="header_nav_item_local" class="header_nav_item local_nav">
 <a href="/local" id="local_nav">
 <i class="fa fa-fw fa-users"></i>
-<span>Local</span>
+<span><?=_('Local')?></span>
 </a>
 <div class="local_badge nav_badge invisible"></div>
 </li>
 <li id="header_nav_item_federated" class="header_nav_item federated_nav">
 <a href="/federated" id="federated_nav">
 <i class="fa fa-fw fa-globe"></i>
-<span>Federated</span>
+<span><?=_('Federated')?></span>
 </a>
 <div class="federated_badge nav_badge invisible"></div>
 </li>
 <li id="header_nav_item_notifications" class="header_nav_item notifications_nav">
 <a href="/notifications" id="notifications_nav">
 <i class="fa fa-fw fa-bell"></i>
-<span>Notifications</span>
+<span><?=_('Notifications')?></span>
 </a>
 <div class="notification_badge nav_badge invisible"></div>
 </li>
@@ -96,7 +96,7 @@ resetApp();
 <ul class="header_nav_list">
 <li class="header_nav_item serch_form_wrap">
 <form class="search_form" action="/search" method="GET">
-<input id="search_form" class="search_form_input" placeholder="Search Mastodon" type="text" name="q" accesskey="/">
+<input id="search_form" class="search_form_input" placeholder="<?=_('Search Mastodon')?>" type="text" name="q" accesskey="/">
 <span class="search_form_submit">
 <button type="submit">
 <i class="fa fa-fw fa-search"></i>
@@ -115,16 +115,16 @@ resetApp();
 <li>
 <a class="js_current_profile_link emoji_poss">
 <span class="js_current_profile_displayname display_name"></span>
-<span>View profile</span>
+<span><?=_('View profile')?></span>
 </a>
 </li>
 </ul>
 <ul>
 <li>
-<a href="/settings">Settings</a>
+<a href="/settings"><?=_('Settings')?></a>
 </li>
 <li>
-<a href="/logout">Log out</a>
+<a href="/logout"><?=_('Log out')?></a>
 </li>
 </ul>
 </nav>
@@ -133,7 +133,7 @@ resetApp();
 <button id="creat_status" class="toot_button" accesskey="n">
 <div class="toot_button_label">
 <i class="fa fa-fw fa-pencil-square-o"></i>
-<span>Toot</span>
+<span><?=_('Toot')?></span>
 </div>
 </button>
 </li>

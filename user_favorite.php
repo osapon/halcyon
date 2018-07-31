@@ -22,14 +22,14 @@
 <ul class="header_items">
 <li class="item toots view">
 <a id="toots_link">
-Favourites
+<?=_('Favourites')?>
 </a>
 </li>
 </ul>
 </header>
 <div id="js-stream_update">
 <button>
-View <span></span> new Toots
+<?=_('View ')?><span></span><?=_(' new Toots')?>
 </button>
 </div>
 <ul id="js-timeline" class="timeline">

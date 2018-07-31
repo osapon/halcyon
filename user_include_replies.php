@@ -22,24 +22,24 @@
 <ul class="header_items">
 <li class="item toots">
 <a id="toots_link">
-Toots
+<?=_('Toots')?>
 </a>
 </li>
 <li class="item wreplies view">
 <a id="with_replies_link">
-Toots &amp; replies
+<?=_('Toots')?> &amp; <?=_('replies')?>
 </a>
 </li>
 <li class="item media">
 <a id="media_link">
-Media
+<?=_('Media')?>
 </a>
 </li>
 </ul>
 </header>
 <div id="js-stream_update">
 <button>
-View <span></span> new Toots
+<?=_('View ')?><span></span><?=_(' new Toots')?>
 </button>
 </div>
 <ul id="js-timeline" class="timeline">

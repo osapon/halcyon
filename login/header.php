@@ -30,39 +30,39 @@
 <ul>
 <a href="https://social.csswg.org/@halcyon" class="no-underline">
 <li>
-<span><i class="fa fa-newspaper-o" aria-hidden="true"></i>News</span>
+<span><i class="fa fa-newspaper-o" aria-hidden="true"></i><?=_('News')?></span>
 </li>
 </a>
 <a href="https://notabug.org/halcyon-suite/halcyon" class="no-underline">
 <li>
-<span><i class="fa fa-code" aria-hidden="true"></i>Source</span>
+<span><i class="fa fa-code" aria-hidden="true"></i><?=_('Source')?></span>
 </li>
 </a>
 <a href="/terms" class="no-underline">
 <li>
-<span><i class="fa fa-balance-scale" aria-hidden="true"></i>Terms</span>
+<span><i class="fa fa-balance-scale" aria-hidden="true"></i><?=_('Terms')?></span>
 </li>
 </a>
 <a href="/privacy" class="no-underline">
 <li>
-<span><i class="fa fa-shield" aria-hidden="true"></i>Privacy</span>
+<span><i class="fa fa-shield" aria-hidden="true"></i><?=_('Privacy')?></span>
 </li>
 </a>
 <?php if(file_exists("../config/imprint.txt")) { ?>
 <a href="/imprint" class="no-underline">
 <li>
-<span><i class="fa fa-id-card-o" aria-hidden="true"></i>Imprint</span>
+<span><i class="fa fa-id-card-o" aria-hidden="true"></i><?=_('Imprint')?></span>
 </li>
 </a>
 <?php } ?>
 <a href="http://www.nikisoft.one/contact.php" class="no-underline">
 <li>
-<span><i class="fa fa-envelope" aria-hidden="true"></i>Contact</span>
+<span><i class="fa fa-envelope" aria-hidden="true"></i><?=_('Contact')?></span>
 </li>
 </a>
 <a href="/login/#login_form_wrap" class="no-underline">
 <li>
-<span><i class="fa fa-user-circle-o" aria-hidden="true"></i>Login</span>
+<span><i class="fa fa-user-circle-o" aria-hidden="true"></i><?=_('Login')?></span>
 </li>
 </a>
 </ul>
