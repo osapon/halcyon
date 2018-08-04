@@ -13,10 +13,29 @@
 </ul>
 </header>
 <div class="timeline">
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
+<h3><?=_('Language')?></h3>
+</div>
+<div class="language_wrap" style="float:left;width:50%">
+<select name="language" class="selectbox">
+<?php
+$languages = scandir("locale");
+for($i=0;$i<count($languages);$i++) {
+if($languages[$i] != "." && $languages[$i] != "..") {
+$selected = "";
+if($languages[$i] == $locale) {
+$selected = " selected";
+}
+echo "<option value='".$languages[$i]."'".$selected.">"._('Language_'.$languages[$i])."</option>";
+}
+}
+?>
+</select>
+</div>
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Default post privacy')?></h3>
 </div>
-<div class="post_privacy_wrap" style="float:left;width:75%;margin-top:8px;margin-bottom:-8px">
+<div class="post_privacy_wrap" style="float:left;width:50%;margin-top:8px;margin-bottom:-8px">
 <div class="radiobox">
 <input id="privacy-1" name="post_privacy" type="radio" value="public">
 <label for="privacy-1" class="radiotext"><?=_('Public')?></label>
@@ -34,10 +53,10 @@
 <label for="privacy-4" class="radiotext"><?=_('Direct')?></label>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Mark as NSFW by default')?></h3>
 </div>
-<div class="post_sensitive_wrap" style="float:left;width:75%">
+<div class="post_sensitive_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_post_sensitive">
 <div class="switch-btn">
@@ -45,16 +64,16 @@
 </div>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Local instance')?></h3>
 </div>
-<div class="local_instance_wrap" style="float:left;width:75%">
+<div class="local_instance_wrap" style="float:left;width:50%">
 <input name="local_instance" placeholder="default" type="text" class="disallow_enter textfield" id="setting_local_instance">
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Hashtag search filter')?></h3>
 </div>
-<div class="search_filter_wrap" style="float:left;width:75%;margin-top:8px;margin-bottom:-8px">
+<div class="search_filter_wrap" style="float:left;width:50%;margin-top:8px;margin-bottom:-8px">
 <div class="radiobox">
 <input id="locinstance-1" name="search_filter" type="radio" value="all">
 <label for="locinstance-1" class="radiotext"><?=_('All instances')?></label>
@@ -64,10 +83,10 @@
 <label for="locinstance-2" class="radiotext"><?=_('Local only')?></label>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Who to follow')?></h3>
 </div>
-<div class="who_to_follow_wrap" style="float:left;width:75%">
+<div class="who_to_follow_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_who_to_follow">
 <div class="switch-btn">

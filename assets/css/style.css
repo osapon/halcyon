@@ -1322,7 +1322,7 @@ transition: 0.13s ease-out;
 .textfield {
 margin: 10px;
 padding-left:5px;
-width: 50%;
+width: 75%;
 font-size: 14px;
 color: #66757F;
 box-sizing: border-box;
@@ -2445,4 +2445,61 @@ background-color: #189EFC;
 box-shadow: inset 0 0 0 4px #ffffff;
 outline: none;
 border-color: #189EFC;
+}
+.uploadbtn:before {
+position:absolute;
+left:0;
+right:0;
+text-align:center;
+font-size:12px;
+font-weight:600;
+content:"Select file and upload";
+}
+.s-hidden {
+display:none;
+}
+.select {
+cursor:pointer;
+display:inline-block;
+position:relative;
+width:calc(75% - 2px);
+}
+.styledselect {
+width:100%;
+margin:10px;
+padding:0;
+height:28px;
+position:relative;
+text-align:center;
+font-weight:bold;
+}
+.styledselect.active {
+border-bottom-left-radius:0;
+border-bottom-right-radius:0;
+}
+.options {
+display:none;
+position:absolute;
+top:100%;
+right:0;
+left:0;
+z-index:999;
+margin:-10px -12px 0 10px !important;
+padding:0 0;
+list-style:none;
+border:1px solid #189EFC;
+border-top-width:0;
+background-color:white;
+border-bottom-left-radius:4px;
+border-bottom-right-radius:4px;
+}
+.options li {
+text-align:center;
+padding:5px;
+transition:0.15s ease-out;
+}
+.options li:hover {
+border:0 solid #189EFC;
+border-left-width:5px;
+border-right-width:5px;
 }

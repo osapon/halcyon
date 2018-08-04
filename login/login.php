@@ -146,7 +146,7 @@ location.href = "/";
 </div>
 <h2><?=_('Contact / Feedback')?></h2>
 <p>
-Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">ï¼ halcyon@social.csswg.org</a><br/>
+Mastodon: <a href="https://social.csswg.org/@halcyon" target="_blank">@halcyon@social.csswg.org</a><br/>
 Email: <a href="http://www.nikisoft.one/contact.php" target="_blank"><?=_('Use my contact form')?></a><br/>
 Git repository: <a href="https://notabug.org/halcyon-suite/halcyon" target="_blank">halcyon-suite/halcyon</a>
 </p>

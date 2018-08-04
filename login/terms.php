@@ -1,6 +1,6 @@
 <?php
 include("header.php");
-$config = parse_ini_file('../config.ini',true);
+$config = parse_ini_file('../config/config.ini',true);
 ?>
 <main id="main">
 <article id="article">

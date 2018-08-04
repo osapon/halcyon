@@ -12,8 +12,8 @@ media_views = `<div class='media_views' sid="${status.id}" media_length='${statu
 else {
 media_views = `<div class='media_views sensitive' media_length='${status.media_attachments.length}'>
 <div class='sensitive_alart'>
-<span class="text1">Sensitive content</span>
-<span class="text2">Click to view</span>
+<span class="text1">${__('Sensitive content')}</span>
+<span class="text2">${__('Click to view')}</span>
 </div>`;
 }
 if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
@@ -74,11 +74,11 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -93,10 +93,10 @@ if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
 }
 switch(status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
 }
 if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
 toot_footer_width = " style='width:320px'";
@@ -113,18 +113,18 @@ toot_reblog_button = "";
 }
 var own_toot_buttons = "";
 if(status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>`);
 if(status.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
-<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html=(`
 <li sid="${status.id}" class="toot_entry">
@@ -153,11 +153,11 @@ ${status.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}">Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.url}">${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">View original</a></li>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -215,11 +215,11 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -237,29 +237,29 @@ if(status.reblog.account.display_name.length == 0) {
 status.reblog.account.display_name = status.reblog.account.username;
 }
 switch(status.reblog.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
 }
 var own_toot_buttons = "";
 if(status.reblog.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">${__('Delete Toot')}</a></li>`);
 if(status.reblog.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
-<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Mute')} @${status.reblog.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Block')} @${status.reblog.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} ${__('Boosted')}</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -287,11 +287,11 @@ ${status.reblog.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.reblog.url}" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">View original</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -351,11 +351,11 @@ toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -370,23 +370,23 @@ if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
 }
 switch(status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
 }
 var own_toot_buttons = "";
 if(status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>
-<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>
+<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
-<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="pinned_notice_box">
-<i class="fa fa-fw fa-thumb-tack"></i>Pinned toot</span>
+<i class="fa fa-fw fa-thumb-tack"></i>${__('Pinned Toot')}</span>
 </div>
 <div class="toot_entry_body">
 <a href="${status_account_link}">
@@ -413,11 +413,11 @@ ${status.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.url}" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">View original</a></li>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -490,7 +490,7 @@ const html = (`
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> favourited Your Toot
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('favourited Your Toot')}
 </a>
 </div>
 <div class="notice_entry_body">
@@ -534,7 +534,7 @@ html = (`
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> boosted Your Toot
+<span class="emoji_poss" >${NotificationObj.account.display_name}</span> ${__('boosted Your Toot')}
 </a>
 </div>
 <blockquote class="notice_entry_body">
@@ -577,11 +577,11 @@ for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
 if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (NotificationObj.status.reblogs_count) {
 toot_reblogs_count = NotificationObj.status.reblogs_count;
@@ -596,10 +596,10 @@ if(NotificationObj.status.account.display_name.length == 0) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.username;
 }
 switch(NotificationObj.status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
 }
 if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
 toot_footer_width = " style='width:320px'";
@@ -616,18 +616,18 @@ toot_reblog_button = "";
 }
 var own_toot_buttons = "";
 if(NotificationObj.status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">${__('Delete Toot')}</a></li>`);
 if(NotificationObj.status.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">Mute @${NotificationObj.status.account.username}</a></li>
-<li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">Block @${NotificationObj.status.account.username}</a></li>
-<li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Mute')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Block')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html=(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
@@ -656,11 +656,11 @@ ${NotificationObj.status.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.url}" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${NotificationObj.status.url}" target="_blank">View original</a></li>
+<li><a href="${NotificationObj.status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -707,7 +707,7 @@ const html=(`
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> followed you
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('followed you')}
 </a>
 </div>
 </li>`);
@@ -734,7 +734,7 @@ var html = (`
 </div>
 <button class="follow_button action_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span>${__('Follow')}</span>
 </button>
 <div class="follows_profile_name_box">
 <a class="js_follows_profile_link emoji_poss" href="${profile_link}">
@@ -772,11 +772,11 @@ for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -795,10 +795,10 @@ checked_unlisted = "";
 checked_private = "";
 checked_direct = "";
 switch(status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";checked_private=" checked";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";checked_direct=" checked";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";checked_public=" checked";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";checked_private=" checked";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";checked_direct=" checked";break;
 }
 if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
 toot_footer_width = " style='width:320px'";
@@ -815,18 +815,18 @@ toot_reblog_button = "";
 }
 var own_toot_buttons = "";
 if(status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>`);
 if(status.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
-<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html=(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
@@ -849,11 +849,11 @@ ${status.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.url}" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">View original</a></li>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -892,7 +892,7 @@ ${toot_reblog_button}
 </div>
 <form id="reply_status_form" name="reply_status_form" class="status_form"sid="${status.id}" username="${status.account.acct}">
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="Content warning" type="text"/>
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
 </div>
 <div class="status_main">
 <!-- current avatar -->
@@ -901,7 +901,7 @@ ${toot_reblog_button}
 </div>
 <!-- text area -->
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="Toot your reply"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -925,16 +925,16 @@ ${toot_reblog_button}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>Public
+<i class="fa fa-globe" aria-hidden="true"></i>${__('Public')}
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>Unlisted
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>${__('Unlisted')}
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>Followers-only
+<i class="fa fa-lock" aria-hidden="true"></i>${__('Followers-only')}
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>Direct
+<i class="fa fa-envelope" aria-hidden="true"></i>${__('Direct')}
 </label>
 </div>
 </div>
@@ -957,7 +957,7 @@ ${current_instance_charlimit}
 <label for="reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>
-<span>Reply</span>
+<span>${__('Reply')}</span>
 </div>
 </label>
 </div>
@@ -988,11 +988,11 @@ for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
 if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -1012,23 +1012,23 @@ status.reblog.account.display_name = status.reblog.account.username;
 checked_public = "";
 checked_unlisted = "";
 switch(status.reblog.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";checked_public=" checked";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
 }
 var own_toot_buttons = "";
 if(status.reblog.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">${__('Delete Toot')}</a></li>`);
 if(status.reblog.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
-<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Mute')} @${status.reblog.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Block')} @${status.reblog.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html=(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
@@ -1051,11 +1051,11 @@ ${status.reblog.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.reblog.url}" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="${status.reblog.url}" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">View original</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -1099,7 +1099,7 @@ ${media_views}
 </div>
 <form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" username="${status.reblog.account.acct}">
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="Content warning" type="text"/>
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
 </div>
 <div class="status_main">
 <!-- current avatar -->
@@ -1108,7 +1108,7 @@ ${media_views}
 </div>
 <!-- text area -->
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="Toot your reply"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -1132,16 +1132,16 @@ ${media_views}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>Public
+<i class="fa fa-globe" aria-hidden="true"></i>${__('Public')}
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>Unlisted
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>${__('Unlisted')}
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>Followers-only
+<i class="fa fa-lock" aria-hidden="true"></i>${__('Followers-only')}
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>Direct
+<i class="fa fa-envelope" aria-hidden="true"></i>${__('Direct')}
 </label>
 </div>
 </div>
@@ -1164,7 +1164,7 @@ ${current_instance_charlimit}
 <label for="reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>
-<span>Reply</span>
+<span>${__('Reply')}</span>
 </div>
 </label>
 </div>
@@ -1217,11 +1217,11 @@ for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>${__('SHOW MORE')}</button>",
 article_option = "content_warning";
 }
 else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>${__('SHOW LESS')}</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -1236,10 +1236,10 @@ if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
 }
 switch(status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
 }
 if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
 toot_footer_width = " style='width:320px'";
@@ -1256,18 +1256,18 @@ toot_reblog_button = "";
 }
 var own_toot_buttons = "";
 if(status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>`);
 if(status.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
-<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
@@ -1292,11 +1292,11 @@ ${status.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">View original</a></li>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -1354,11 +1354,11 @@ for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
 if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW MORE</button>",
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>SHOW LESS</button>";
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -1376,29 +1376,29 @@ if(status.reblog.account.display_name.length == 0) {
 status.reblog.account.display_name = status.reblog.account.username;
 }
 switch(status.reblog.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
 }
 var own_toot_buttons = "";
 if(status.reblog.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">Delete Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">${__('Delete Toot')}</a></li>`);
 if(status.reblog.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">Unpin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">${__('Unpin Toot')}</a></li>`);
 }
 else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">Pin Toot</a></li>`);
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">${__('Pin Toot')}</a></li>`);
 }
 }
 else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.account.username}</a></li>
-<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">Report this Toot</a></li>`);
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} Boosted</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} ${__('Boosted')}</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -1422,11 +1422,11 @@ ${status.reblog.account.display_name}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="" >Copy link to Toot</a></li>
+<li><a class="copylink_button" url="" >${__('Copy link to Toot')}</a></li>
 ${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">View original</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>

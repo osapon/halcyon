@@ -13,10 +13,10 @@
 </ul>
 </header>
 <div class="timeline">
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('New posts streaming')?></h3>
 </div>
-<div class="post_streaming_wrap" style="float:left;width:75%;margin-top:8px;margin-bottom:-8px">
+<div class="post_streaming_wrap" style="float:left;width:50%;margin-top:8px;margin-bottom:-8px">
 <div class="radiobox">
 <input id="streaming-1" name="post_streaming" type="radio" value="auto">
 <label for="streaming-1" class="radiotext"><?=_('Auto update')?></label>
@@ -26,10 +26,10 @@
 <label for="streaming-2" class="radiotext"><?=_('Manual update')?></label>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Enable link previews')?></h3>
 </div>
-<div class="link_previews_wrap" style="float:left;width:75%">
+<div class="link_previews_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_link_previews">
 <div class="switch-btn">
@@ -37,10 +37,10 @@
 </div>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Desktop notifications')?></h3>
 </div>
-<div class="desktop_notifications_wrap" style="float:left;width:75%">
+<div class="desktop_notifications_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_desktop_notifications">
 <div class="switch-btn">
@@ -48,10 +48,10 @@
 </div>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Show replies')?></h3>
 </div>
-<div class="show_replies_wrap" style="float:left;width:75%">
+<div class="show_replies_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_show_replies">
 <div class="switch-btn">
@@ -59,10 +59,10 @@
 </div>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Show all CW content')?></h3>
 </div>
-<div class="show_content_warning_wrap" style="float:left;width:75%">
+<div class="show_content_warning_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_show_content_warning">
 <div class="switch-btn">
@@ -70,10 +70,10 @@
 </div>
 </div>
 </div>
-<div style="float:left;width:25%;text-align:right;margin-top:16px">
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Show all NSFW content')?></h3>
 </div>
-<div class="show_nsfw_wrap" style="float:left;width:75%">
+<div class="show_nsfw_wrap" style="float:left;width:50%">
 <div class="switch">
 <input type="checkbox" id="setting_show_nsfw">
 <div class="switch-btn">

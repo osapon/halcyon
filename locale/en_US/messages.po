@@ -1,0 +1,539 @@
+# Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2018-08-01 03:42+0000\n"
+"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"Language-Team: English\n"
+"Language: en\n"
+"X-Generator: Zanata 4.5.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "Language"
+msgstr "Language"
+
+msgid "Language_en_US"
+msgstr "English (US)"
+
+msgid "Language_de_DE"
+msgstr "German"
+
+msgid "Language_ja_JP"
+msgstr "Japanese"
+
+msgid "Language_ko_KR"
+msgstr "Korean"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
+
+msgid "Sensitive content"
+msgstr "Sensitive content"
+
+msgid "Click to view"
+msgstr "Click to view"
+
+msgid "SHOW MORE"
+msgstr "SHOW MORE"
+
+msgid "SHOW LESS"
+msgstr "SHOW LESS"
+
+msgid "Public"
+msgstr "Public"
+
+msgid "Unlisted"
+msgstr "Unlisted"
+
+msgid "Followers-only"
+msgstr "Followers-only"
+
+msgid "Direct"
+msgstr "Direct"
+
+msgid "Delete Toot"
+msgstr "Delete Toot"
+
+msgid "Unpin Toot"
+msgstr "Unpin Toot"
+
+msgid "Pin Toot"
+msgstr "Pin Toot"
+
+msgid "Mute"
+msgstr "Mute"
+
+msgid "Block"
+msgstr "Block"
+
+msgid "Report this Toot"
+msgstr "Report this Toot"
+
+msgid "Copy link to Toot"
+msgstr "Copy link to Toot"
+
+msgid "View original"
+msgstr "View original"
+
+msgid "Boosted"
+msgstr "Boosted"
+
+msgid "Pinned Toot"
+msgstr "Pinned Toot"
+
+msgid "favourited Your Toot"
+msgstr "favourited Your Toot"
+
+msgid "boosted Your Toot"
+msgstr "boosted Your Toot"
+
+msgid "followed you"
+msgstr "followed you"
+
+msgid "Follow"
+msgstr "Follow"
+
+msgid "Toot your reply"
+msgstr "Toot your reply"
+
+msgid "Reply"
+msgstr "Reply"
+
+msgid "Content warning"
+msgstr "Content warning"
+
+msgid "Jan"
+msgstr "Jan"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "May"
+msgstr "May"
+
+msgid "Jun"
+msgstr "Jun"
+
+msgid "Jul"
+msgstr "Jul"
+
+msgid "Aug"
+msgstr "Aug"
+
+msgid "Sep"
+msgstr "Sep"
+
+msgid "Oct"
+msgstr "Oct"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dec"
+
+msgid "Changed setting to"
+msgstr "Changed setting to"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "Mark as NSFW by default enabled"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "Mark as NSFW by default disabled"
+
+msgid "Who to follow enabled"
+msgstr "Who to follow enabled"
+
+msgid "Who to follow disabled"
+msgstr "Who to follow disabled"
+
+msgid "Changed about me setting"
+msgstr "Changed about me setting"
+
+msgid "Uploaded new avatar"
+msgstr "Uploaded new avatar"
+
+msgid "Uploaded new header"
+msgstr "Uploaded new header"
+
+msgid "Account locked"
+msgstr "Account locked"
+
+msgid "Account unlocked"
+msgstr "Account unlocked"
+
+msgid "Link previews enabled"
+msgstr "Link previews enabled"
+
+msgid "Link previews disabled"
+msgstr "Link previews disabled"
+
+msgid "You didn't allow notifications"
+msgstr "You didn't allow notifications"
+
+msgid "Desktop notifications enabled"
+msgstr "Desktop notifications enabled"
+
+msgid "Desktop notifications disabled"
+msgstr "Desktop notifications disabled"
+
+msgid "Replies shown"
+msgstr "Replies shown"
+
+msgid "Replies hidden"
+msgstr "Replies hidden"
+
+msgid "CW content shown"
+msgstr "CW content shown"
+
+msgid "CW content hidden"
+msgstr "CW content hidden"
+
+msgid "NSFW content shown"
+msgstr "NSFW content shown"
+
+msgid "NSFW content hidden"
+msgstr "NSFW content hidden"
+
+msgid "Reply to"
+msgstr "Reply to"
+
+msgid "Report"
+msgstr "Report"
+
+msgid "Report a Toot of"
+msgstr "Report a Toot of"
+
+msgid "What's happening?"
+msgstr "What's happening?"
+
+msgid "Toot"
+msgstr "Toot"
+
+msgid "Compose new Toot"
+msgstr "Compose new Toot"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "Please describe what the problem with the Toot is."
+
+msgid "TOOTS"
+msgstr "TOOTS"
+
+msgid "PEOPLE"
+msgstr "PEOPLE"
+
+msgid "Settings"
+msgstr "Settings"
+
+msgid "GENERAL"
+msgstr "GENERAL"
+
+msgid "PROFILE"
+msgstr "PROFILE"
+
+msgid "APPEARANCE"
+msgstr "APPEARANCE"
+
+msgid "Change instance"
+msgstr "Change instance"
+
+msgid "Blank for default"
+msgstr "Blank for default"
+
+msgid "FOLLOWING"
+msgstr "FOLLOWING"
+
+msgid "Interesting accounts of devs"
+msgstr "Interesting accounts of devs"
+
+msgid "Halcyon for"
+msgstr "Halcyon for"
+
+msgid "About"
+msgstr "About"
+
+msgid "Terms"
+msgstr "Terms"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Source code"
+msgstr "Source code"
+
+msgid "Other instances"
+msgstr "Other instances"
+
+msgid "Privacy policy"
+msgstr "Privacy policy"
+
+msgid "Version"
+msgstr "Version"
+
+msgid "Who to follow"
+msgstr "Who to follow"
+
+msgid "Enable who to follow"
+msgstr "Enable who to follow"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+
+msgid "MORE"
+msgstr "MORE"
+
+msgid "FOLLOWERS"
+msgstr "FOLLOWERS"
+
+msgid "Following"
+msgstr "Following"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "You'll no longer receive notifications from this user"
+
+msgid "Unmuted this user"
+msgstr "Unmuted this user"
+
+msgid "This user has been blocked"
+msgstr "This user has been blocked"
+
+msgid "Unblocked this user"
+msgstr "Unblocked this user"
+
+msgid "Your Toot has been deleted"
+msgstr "Your Toot has been deleted"
+
+msgid "Your Toot has been pinned"
+msgstr "Your Toot has been pinned"
+
+msgid "Your Toot has been unpinned"
+msgstr "Your Toot has been unpinned"
+
+msgid "Edit profile"
+msgstr "Edit profile"
+
+msgid "FAVOURITES"
+msgstr "FAVOURITES"
+
+msgid "Show"
+msgstr "Show"
+
+msgid "Blocking"
+msgstr "Blocking"
+
+msgid "Muting"
+msgstr "Muting"
+
+msgid "Requested"
+msgstr "Requested"
+
+msgid "Photos and toots"
+msgstr "Photos and toots"
+
+msgid "favourited your toot"
+msgstr "favourited your toot"
+
+msgid "boosted your toot"
+msgstr "boosted your toot"
+
+msgid "mentioned you"
+msgstr "mentioned you"
+
+msgid "Your Toot was posted!"
+msgstr "Your Toot was posted!"
+
+msgid "News"
+msgstr "News"
+
+msgid "Source"
+msgstr "Source"
+
+msgid "Privacy"
+msgstr "Privacy"
+
+msgid "Imprint"
+msgstr "Imprint"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Login"
+msgstr "Login"
+
+msgid "Login to Halcyon"
+msgstr "Login to Halcyon"
+
+msgid "create an account"
+msgstr "create an account"
+
+msgid "or"
+msgstr "or"
+
+msgid "I agree with the"
+msgstr "I agree with the"
+
+msgid "What is Halcyon"
+msgstr "What is Halcyon"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon is a webclient for"
+
+msgid "Contact / Feedback"
+msgstr "Contact / Feedback"
+
+msgid "Use my contact form"
+msgstr "Use my contact form"
+
+msgid "Help us"
+msgstr "Help us"
+
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon Terms of Use"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+
+msgid "Your Reply was posted!"
+msgstr "Your Reply was posted!"
+
+msgid "Toot reported successfully!"
+msgstr "Toot reported successfully!"
+
+msgid "Link successfully copied!"
+msgstr "Link successfully copied!"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Local"
+msgstr "Local"
+
+msgid "Federated"
+msgstr "Federated"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "Search Mastodon"
+msgstr "Search Mastodon"
+
+msgid "View profile"
+msgstr "View profile"
+
+msgid "Log out"
+msgstr "Log out"
+
+msgid "All"
+msgstr "All"
+
+msgid "new notitification"
+msgstr "new notitification"
+
+msgid "Show all NSFW content"
+msgstr "Show all NSFW content"
+
+msgid "Show all CW content"
+msgstr "Show all CW content"
+
+msgid "Show replies"
+msgstr "Show replies"
+
+msgid "Desktop notifications"
+msgstr "Desktop notifications"
+
+msgid "Enable link previews"
+msgstr "Enable link previews"
+
+msgid "Auto update"
+msgstr "Auto update"
+
+msgid "Manual update"
+msgstr "Manual update"
+
+msgid "Appearance settings"
+msgstr "Appearance settings"
+
+msgid "New posts streaming"
+msgstr "New posts streaming"
+
+msgid "replies"
+msgstr "replies"
+
+msgid "General settings"
+msgstr "General settings"
+
+msgid "Default post privacy"
+msgstr "Default post privacy"
+
+msgid "Mark as NSFW by default"
+msgstr "Mark as NSFW by default"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "FOLLOWS YOU"
+msgstr "FOLLOWS YOU"
+
+msgid "Local instance"
+msgstr "Local instance"
+
+msgid "Hashtag search filter"
+msgstr "Hashtag search filter"
+
+msgid "All instances"
+msgstr "All instances"
+
+msgid "Local only"
+msgstr "Local only"
+
+msgid "Lock account"
+msgstr "Lock account"
+
+msgid "Header"
+msgstr "Header"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "About me"
+msgstr "About me"
+
+msgid "Display name"
+msgstr "Display name"
+
+msgid "Profile settings"
+msgstr "Profile settings"
+
+msgid "Toots"
+msgstr "Toots"
+
+msgid "Favourites"
+msgstr "Favourites"
+

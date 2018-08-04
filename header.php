@@ -11,6 +11,7 @@ include("language.php");
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
+<link rel="gettext" type="text/x-gettext-translation" href="/locale/<?=$locale?>/LC_MESSAGES/messages.po">
 <link rel="stylesheet" href="/assets/css/style.css" media="all">
 <link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
 <link rel="stylesheet" href="/assets/css/emojipicker.css" media="all">
@@ -25,10 +26,14 @@ include("language.php");
 <script src="/assets/js/emojipicker/emojipicker.js"></script>
 <script src="/assets/js/halcyon/halcyonTemplates.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
-<script src="/assets/js/pomo/pomo.min.js"></script>
+<script src="/assets/js/pomo/pomo.js"></script>
 <script src="/assets/js/twemoji/twemoji.min.js"></script>
 <script src="/assets/js/clipboard.js/clipboard.min.js"></script>
 <script>
+if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
+location.href = "/login";
+}
+else {
 Pomo.domain = 'messages';
 Pomo.returnStrings = true;
 Pomo.unescapeStrings = true;
@@ -37,10 +42,15 @@ format:'po',
 mode:'link',
 translation_domain:'messages'
 });
-if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
-location.href = "/login";
+var __ = (function(){
+var _ = !!window.Pomo? window.Pomo : (!!window.__Pomo? window.__Pomo: false);
+var gettext_wrap = function(word, options){return _.getText(word, options)};
+gettext_wrap = !!_? gettext_wrap: false;
+if(!gettext_wrap){
+throw new "Pomo can't be found";
 }
-else {
+return gettext_wrap;
+})();
 if($.cookie("session") === "true") {
 refreshApp();
 }
@@ -85,13 +95,6 @@ resetApp();
 </li>
 </ul>
 </nav>
-<div class="header_center_box">
-<h1 class="header_nav_item mastodon_logo logo_box">
-<a href="/">
-<img src="/assets/images/mastodon.svg" alt="Halcyon for Mastodon">
-</a>
-</h1>
-</div>
 <nav class="header_right_box">
 <ul class="header_nav_list">
 <li class="header_nav_item serch_form_wrap">

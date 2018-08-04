@@ -118,7 +118,7 @@ return value;
 return new Date(value);
 }
 function getRelativeDatetime(current_time, posted_time) {
-const calendar = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+const calendar = [__("Jan"),__("Feb"),__("Mar"),__("Apr"),__("May"),__("Jun"),__("Jul"),__("Aug"),__("Sep"),__("Oct"),__("Nov"),__("Dec")];
 var posted_time_original = posted_time,
 posted_time = getConversionedDate(null, posted_time_original).getTime(),
 elapsedTime = Math.ceil((current_time-posted_time)/1000);

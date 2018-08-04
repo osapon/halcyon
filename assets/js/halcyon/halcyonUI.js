@@ -19,7 +19,7 @@ api.post("follows", {uri:$(this).attr('data')}, function (data) {
 }
 $(this).toggleClass('follow_button');
 $(this).toggleClass('following_button');
-$(this).html('<span>Following</span>');
+$(this).html('<span>'+__('Following')+'</span>');
 return false;
 });
 $(document).on('click','.following_button', function(e) {
@@ -30,7 +30,7 @@ api.post('accounts/'+$(this).attr('mid')+'/unfollow', function (data) {
 }
 $(this).toggleClass('following_button');
 $(this).toggleClass('follow_button');
-$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>Follow</span>');
+$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+__('Follow')+'</span>');
 return false;
 });
 $(document).on('click','.mute_button', function(e) {
@@ -38,7 +38,7 @@ if ($(this).attr('mid') !== null) {
 api.post('accounts/'+$(this).attr('mid')+'/mute', function (data) {
 });
 }
-putMessage("You'll no longer receive notifications from this user");
+putMessage(__("You'll no longer receive notifications from this user"));
 return false;
 });
 $(document).on('click','.muting_button', function(e) {
@@ -48,8 +48,8 @@ api.post('accounts/'+$(this).attr('mid')+'/unmute', function (data) {
 }
 $(this).toggleClass('muting_button');
 $(this).toggleClass('follow_button');
-$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>Follow</span>');
-putMessage("Unmuted this user");
+$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+__('Follow')+'</span>');
+putMessage(__("Unmuted this user"));
 return false;
 });
 $(document).on('click','.block_button', function(e) {
@@ -57,7 +57,7 @@ if ($(this).attr('mid') !== null) {
 api.post('accounts/'+$(this).attr('mid')+'/block', function (data) {
 });
 }
-putMessage("This user has been blocked");
+putMessage(__("This user has been blocked"));
 return false;
 });
 $(document).on('click','.blocking_button', function(e) {
@@ -68,8 +68,8 @@ api.post('accounts/'+$(this).attr('mid')+'/unblock', function (data) {
 }
 $(this).toggleClass('blocking_button');
 $(this).toggleClass('follow_button');
-$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>Follow</span>');
-putMessage("Unblocked this user");
+$(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+__('Follow')+'</span>');
+putMessage(__("Unblocked this user"));
 return false;
 });
 $(document).on('click','.boost_button', function(e) {
@@ -112,31 +112,31 @@ $(document).on('click','.delete_button', function(e) {
 const sid = $(this).attr('tid');
 api.delete("statuses/"+sid, function (data) {
 $('.toot_entry[sid="'+sid+'"]').remove();
-putMessage("Your Toot has been deleted");
+putMessage(__("Your Toot has been deleted"));
 });
 });
 $(document).on('click','.pin_button', function(e) {
 const sid = $(this).attr('tid');
 api.post("statuses/"+sid+"/pin", function (data) {
-$('.toot_entry[sid="'+sid+'"] .pin_button').removeClass("pin_button").addClass("unpin_button").text("Unpin Toot");
-putMessage("Your Toot has been pinned");
+$('.toot_entry[sid="'+sid+'"] .pin_button').removeClass("pin_button").addClass("unpin_button").text(__("Unpin Toot"));
+putMessage(__("Your Toot has been pinned"));
 });
 });
 $(document).on('click','.unpin_button', function(e) {
 const sid = $(this).attr('tid');
 api.post("statuses/"+sid+"/unpin", function (data) {
-$('.toot_entry[sid="'+sid+'"] .unpin_button').removeClass("unpin_button").addClass("pin_button").text("Pin Toot");
-putMessage("Your Toot has been unpinned");
+$('.toot_entry[sid="'+sid+'"] .unpin_button').removeClass("unpin_button").addClass("pin_button").text(__("Pin Toot"));
+putMessage(__("Your Toot has been unpinned"));
 });
 });
 $(document).on('click','.cw_button', function(e) {
 e.stopPropagation();
 const article = $(this).parent();
 if ( article.hasClass('content_warning') ) {
-$(this).text('SHOW LESS');
+$(this).text(__('SHOW LESS'));
 article.removeClass('content_warning');
 } else {
-$(this).text('SHOW MORE');
+$(this).text(__('SHOW MORE'));
 article.addClass('content_warning');
 }
 return false;
@@ -454,7 +454,7 @@ if ( RelationshipsObj[i].following ) {
 const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
 button.removeClass("follow_button");
 button.addClass("following_button");
-button.text('Following');
+button.text(__('Following'));
 }
 }
 });
@@ -481,7 +481,7 @@ if ( RelationshipsObj[i].following ) {
 const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
 button.removeClass("follow_button");
 button.addClass("following_button");
-button.text('Following');
+button.text(__('Following'));
 }
 }
 });
@@ -528,12 +528,12 @@ console.log(current_id);
 if( AccountObj.id == current_id ) {
 $(`<a href="/settings/profile">
 <button class="profile_edit_button relationship_button">
-<span>Edit profile</span>
+<span>${__('Edit profile')}</span>
 </button
 </a>`).appendTo('.profile_button_box');
 $(`<a href="${current_favourites_link}">
-<h2>FAVOURITES</h2>
-<span>Show</span>
+<h2>${__('FAVOURITES')}</h2>
+<span>${__('Show')}</span>
 </a>`).appendTo("#js-profile_nav_favourites");
 } else {
 api.get('accounts/relationships', [{name:'id', data:String(AccountObj.id)}], function(RelationshipObj) {
@@ -542,25 +542,25 @@ $('#main .profile_username .profile_followed_by').removeClass('invisible');
 }
 if (RelationshipObj[0].blocking) {
 $(`<button class="blocking_button relationship_button" mid="${AccountObj.id}">
-<span>Blocking</span>
+<span>${__('Blocking')}</span>
 </button>`).appendTo('.profile_button_box');
 } else if (RelationshipObj[0].muting) {
 $(`<button class="muting_button relationship_button" mid="${AccountObj.id}">
-<span>Muting</span>
+<span>${__('Muting')}</span>
 </button>`).appendTo('.profile_button_box');
 } else if (RelationshipObj[0].requested) {
 $(`<!-- wont work -->
 <button class="requested_button relationship_button" mid="${AccountObj.id}">
-<span>Requested</span>
+<span>${__('Requested')}</span>
 </button>`).appendTo('.profile_button_box');
 } else if(RelationshipObj[0].following){
 $(`<button class="following_button relationship_button" mid="${AccountObj.id}">
-<span>Following</span>
+<span>${__('Following')}</span>
 </button>`).appendTo('.profile_button_box');
 } else {
 $(`<button class="follow_button relationship_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>Follow</span>
+<span>${__('Follow')}</span>
 </button>`).appendTo('.profile_button_box');
 }
 });
@@ -570,7 +570,7 @@ replace_emoji();
 function setRecentImages(mid) {
 api.get("accounts/"+mid+"/statuses", [{name:'only_media',data:'true'},{name:'limit',data:'6'}], function(statuses) {
 if ( statuses.length ) {
-$('#js_profile_recent_images span').text(`${statuses[0].account.statuses_count} Photos and toots`);
+$('#js_profile_recent_images span').text(`${statuses[0].account.statuses_count} ${__('Photos and toots')}`);
 $('#js_profile_recent_images a').attr('href', $("#media_link").attr('href'));
 for ( i in statuses ) {
 $(`<div class="profile_recent_images_item media_attachment" otype="image" sid="${statuses[i].id}" url="${statuses[i].media_attachments[0].preview_url}">
@@ -603,10 +603,10 @@ if(userstream.payload.account.display_name.length == 0) {
 userstream.payload.account.display_name = userstream.payload.account.username;
 }
 switch(userstream.payload.type) {
-case "favourite":pushNotification("New favourite",userstream.payload.account.display_name+" favourited your toot");break;
-case "reblog":pushNotification("New boost",userstream.payload.account.display_name+" boosted your toot");break;
-case "follow":pushNotification("New follower",userstream.payload.account.display_name+" followed you");$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
-case "mention":pushNotification("New mention",userstream.payload.account.display_name+" mentioned you");break;
+case "favourite":pushNotification("New favourite",userstream.payload.account.display_name+" "+__("favourited your toot"));break;
+case "reblog":pushNotification("New boost",userstream.payload.account.display_name+" "+__("boosted your toot"));break;
+case "follow":pushNotification("New follower",userstream.payload.account.display_name+" "+__("followed you"));$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
+case "mention":pushNotification("New mention",userstream.payload.account.display_name+" "+__("mentioned you"));break;
 }
 }
 });
@@ -796,7 +796,7 @@ $('.overlay_status .submit_status_label').removeClass('active_submit_button');
 $('.overlay_status').addClass('invisible');
 $('#js-overlay_content_wrap').removeClass('view');
 $('#js-overlay_content_wrap').removeClass('black_05');
-putMessage('Your Toot was posted!');
+putMessage(__('Your Toot was posted!'));
 });
 } else {
 const dummy_form= $('<form></form>').append($('#overlay_status_media_atta')),
@@ -831,7 +831,7 @@ autosize.destroy($('#overlay_status_form .status_textarea textarea'));
 $('#overlay_status_emoji').lsxEmojiPicker("destroy");
 $('#js-overlay_content_wrap').removeClass('view');
 $('#js-overlay_content_wrap').removeClass('black_05');
-putMessage('Your Toot was posted!');
+putMessage(__('Your Toot was posted!'));
 });
 });
 break;
@@ -1105,7 +1105,7 @@ $('#reply_status_form .character_count').html(current_instance_charlimit);
 $('.reply_status .submit_status_label').removeClass('active_submit_button');
 context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
 replace_emoji();
-putMessage('Your Toot was posted!');
+putMessage(__('Your Toot was posted!'));
 });
 } else {
 const dummy_form = $('<form></form>').append($('#reply_status_media_atta')),
@@ -1138,7 +1138,7 @@ $('#reply_status_form .character_count').html(current_instance_charlimit);
 $('.reply_status .submit_status_label').removeClass('active_submit_button');
 context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
 replace_emoji();
-putMessage('Your Toot was posted!');
+putMessage(__('Your Toot was posted!'));
 });
 });
 break;
@@ -1184,7 +1184,7 @@ autosize($('#single_reply_status_form .status_textarea textarea'));
 $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
-$('.single_reply_status .single_reply_status_header span').addClass("emoji_poss").html("Reply to "+display_name);
+$('.single_reply_status .single_reply_status_header span').addClass("emoji_poss").html(__("Reply to")+" "+display_name);
 $('#single_reply_status_form textarea').val(acct+" ");
 $('#single_reply_status_form .character_count').html(current_instance_charlimit);
 $('#single_reply_status_emoji').lsxEmojiPicker({
@@ -1286,7 +1286,7 @@ $('#single_reply_status_emoji').lsxEmojiPicker("destroy");
 $('#js-overlay_content_wrap').removeClass('view');
 $('#js-overlay_content_wrap').removeClass('black_05');
 $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
-putMessage('Your Reply was posted!');
+putMessage(__('Your Reply was posted!'));
 });
 } else {
 const dummy_form= $('<form></form>').append($('#single_reply_status_media_atta')),
@@ -1323,7 +1323,7 @@ $('#single_reply_status_emoji').lsxEmojiPicker("destroy");
 $('#js-overlay_content_wrap').removeClass('view');
 $('#js-overlay_content_wrap').removeClass('black_05');
 $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
-putMessage('Your Reply to was posted!');
+putMessage(__('Your Reply was posted!'));
 });
 });
 break;
@@ -1356,7 +1356,7 @@ $('#report_status_form .status_textarea textarea').focus();
 autosize($('#single_reply_status_form .status_textarea textarea'));
 $('#report_status_form').attr('tid',sid);
 $('#report_status_form').attr('mid',mid);
-$('.report_status .report_status_header span').addClass("emoji_poss").html("Report a Toot of "+display_name);
+$('.report_status .report_status_header span').addClass("emoji_poss").html(__("Report a Toot of")+" "+display_name);
 $('#report_status_form textarea').empty();
 $('#report_status_form .character_count').html("1000");
 replace_emoji();
@@ -1405,7 +1405,7 @@ autosize.destroy($('#report_status_form .status_textarea textarea'));
 $('#js-overlay_content_wrap').removeClass('view');
 $('#js-overlay_content_wrap').removeClass('black_05');
 $("#js-overlay_content_wrap .report_status .status_preview").empty();
-putMessage('Toot reported successfully!');
+putMessage(__('Toot reported successfully!'));
 });
 });
 });
@@ -1415,7 +1415,7 @@ if(ClipboardJS.isSupported()) {
 var cbelem = $("<button>").attr("data-clipboard-text",$(this).attr("url"));
 var clipboard = new ClipboardJS(cbelem[0]);
 clipboard.on('success',function(e) {
-putMessage("Link successfully copied!");
+putMessage(__("Link successfully copied!"));
 e.clearSelection();
 });
 clipboard.on('error',function(e) {
