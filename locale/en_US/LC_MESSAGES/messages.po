@@ -31,6 +31,9 @@ msgstr "Korean"
 msgid "Language_pt_BR"
 msgstr "Portuguese (Brazil)"
 
+msgid "Language_pl_PL"
+msgstr "Polish"
+
 msgid "Sensitive content"
 msgstr "Sensitive content"
 

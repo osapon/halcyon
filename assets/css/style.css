@@ -6,7 +6,7 @@ font-size: 100%;
 }
 a {
 text-decoration: none;
-word-break: break-all;
+word-break: break-word;
 color: inherit;
 }
 a:hover {
@@ -1955,7 +1955,6 @@ border-radius: 8px;
 }
 #main .article_wrap .left_column .profile_section_wrap {
 padding: 36px 16px 0 15px;
-word-break: break-all;
 }
 #main .article_wrap .left_column .profile_section_wrap > .profile_displayname {
 font-size: 22px;

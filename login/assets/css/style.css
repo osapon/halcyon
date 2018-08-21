@@ -324,7 +324,7 @@ color: #fff;
 #main #login_form_wrap .login_form .login_form_agree {
 margin: 16px auto 0;
 }
-#main #login_form_wrap .login_form .login_form_agree i {
+#main #login_form_wrap .login_form .login_form_agree label:before {
 color: #fff;
 }
 #article {
@@ -449,3 +449,12 @@ margin: auto;
 display: block;
 text-align: center;
 }
+input[type=checkbox] {display:none}
+input[type=checkbox] + label:before {
+font-family: FontAwesome;
+display: inline-block;
+}
+input[type=checkbox] + label:before {content: "\f096"}
+input[type=checkbox] + label:before {letter-spacing: 3px}
+input[type=checkbox]:checked + label:before {content: "\f046"}
+input[type=checkbox]:checked + label:before {letter-spacing: 0}

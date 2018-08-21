@@ -39,9 +39,21 @@ $(".h-card > a").each(function(i) {
 $(this).attr('href',getRelativeURL($(this).attr('href')));
 });
 $(".toot_article a").each(function(i) {
-const tags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/(.+)\/?/);
-if (tags) {
-$(this).attr('href','/search?q='+tags[1]);
+const pltags = $(this).attr('href').match(/https:\/\/.+..+\/tag\/(.+)\/?/);
+if(pltags) {
+$(this).attr('href','/search?q='+pltags[1]);
+}
+const mstags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/(.+)\/?/);
+if(mstags) {
+$(this).attr('href','/search?q='+mstags[1]);
+}
+const plusers = $(this).attr('href').match(/https:\/\/.+..+\/users\/(.+)\/?/);
+if(plusers) {
+$(this).attr('href','/@'+plusers[1]+'@'+$(this).attr('href').split("/")[2]);
+}
+const msusers = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)\/?/);
+if(msusers && $(this).attr('href').split("/").length == 4) {
+$(this).attr('href','/@'+msusers[1]+'@'+$(this).attr('href').split("/")[2]);
 }
 if(localStorage.setting_link_previews == "true") {
 if(!window.cards) {

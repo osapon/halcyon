@@ -1,14 +1,4 @@
 $(function() {
-$(document).on('change','.login_form_agree #agree', function(e) {
-const icon = $(this).parent().find('i.fa');
-if ( $(this).prop('checked') ) {
-icon.addClass("fa-check-square-o");
-icon.removeClass("fa-square-o");
-} else if ( !$(this).prop('checked') ) {
-icon.addClass("fa-square-o");
-icon.removeClass("fa-check-square-o");
-}
-});
 $(document).on('focus', '#main #login_form_wrap .login_form .login_form_main input[name="acct"]', function(e) {
 $(this).parent().addClass('active')
 $(".login_form").addClass('expand');

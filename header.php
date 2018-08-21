@@ -12,14 +12,7 @@ include("language.php");
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="gettext" type="text/x-gettext-translation" href="/locale/<?=$locale?>/LC_MESSAGES/messages.po">
-<?php if(!isset($_COOKIE["theme"])) {
-setcookie('theme', 'light');
-} if($_COOKIE["theme"] == "light") {
-?>
 <link rel="stylesheet" href="/assets/css/style.css" media="all">
-<?php } else if($_COOKIE["theme"] == "dark") { ?>
-<link rel="stylesheet" href="/assets/css/dark.css" media="all">
-<?php } ?>
 <link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
 <link rel="stylesheet" href="/assets/css/emojipicker.css" media="all">
 <script src="/assets/js/jquery/jquery.min.js"></script>
@@ -36,11 +29,6 @@ setcookie('theme', 'light');
 <script src="/assets/js/pomo/pomo.js"></script>
 <script src="/assets/js/twemoji/twemoji.min.js"></script>
 <script src="/assets/js/clipboard.js/clipboard.min.js"></script>
-<script>
-function setCookie(cname, cvalue) {
-    document.cookie = cname + "=" + cvalue;
-}
-</script>
 <script>
 if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
 location.href = "/login";
@@ -135,14 +123,6 @@ resetApp();
 </li>
 </ul>
 <ul>
-<li>
-<?php
-if($_COOKIE["theme"] == "light") { ?>
-<a href="/" onClick="setCookie('theme', 'dark');"><?=_('Night mode')?></a>
-<?php } else if($_COOKIE["theme"] == "dark") { ?>
-<a href="/" onClick="setCookie('theme', 'light');"><?=_('Light mode')?></a>
-<?php } ?>
-</li>
 <li>
 <a href="/settings"><?=_('Settings')?></a>
 </li>

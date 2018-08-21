@@ -1009,11 +1009,18 @@ $('#reply_status_emoji').lsxEmojiPicker("destroy");
 });
 $(document).on('click','#reply_status_form', function(e) {
 if(!$('#reply_status_form .status_textarea textarea').hasClass('focus')) {
+var mentions = JSON.parse($('#reply_status_form').attr('mentions'));
+var replyto = "";
+for(var i=0;i < mentions.length;i++) {
+if(mentions[i].acct != current_acct) {
+replyto += "@"+mentions[i].acct+" ";
+}
+}
 $('#reply_status_form .status_textarea textarea').addClass('focus');
 autosize($('#reply_status_form .status_textarea textarea'));
 $('#reply_status_form .status_bottom').removeClass('invisible');
 $('#reply_status_form .submit_status_label').addClass('active_submit_button');
-$('#reply_status_form textarea').val("@"+$('#reply_status_form').attr('username')+" ");
+$('#reply_status_form textarea').val(replyto);
 $('#reply_status_form .character_count').html(current_instance_charlimit);
 $('#reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
@@ -1163,7 +1170,13 @@ e.stopPropagation();
 $(document).on('click', '.reply_button', function(e) {
 e.stopPropagation();
 const sid= $(this).attr('tid'),
-acct = $(this).attr('acct'),
+mentions = JSON.parse($(this).attr('mentions'));
+var replyto = "";
+for(var i=0;i < mentions.length;i++) {
+if(mentions[i].acct != current_acct) {
+replyto += "@"+mentions[i].acct+" ";
+}
+}
 display_name = $(this).attr('display_name');
 privacy_mode = $(this).attr("privacy");
 switch(privacy_mode) {
@@ -1185,7 +1198,7 @@ $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
 $('.single_reply_status .single_reply_status_header span').addClass("emoji_poss").html(__("Reply to")+" "+display_name);
-$('#single_reply_status_form textarea').val(acct+" ");
+$('#single_reply_status_form textarea').val(replyto);
 $('#single_reply_status_form .character_count').html(current_instance_charlimit);
 $('#single_reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
