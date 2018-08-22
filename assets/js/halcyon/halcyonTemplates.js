@@ -65,6 +65,12 @@ status.account.display_name = htmlEscape(status.account.display_name);
 for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
 const status_account_link= getRelativeURL(status.account.url, status.account.id),
 status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
 status_attr_datetime = getConversionedDate(null, status.created_at);
@@ -171,7 +177,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -205,6 +211,12 @@ status.reblog.account.display_name = htmlEscape(status.reblog.account.display_na
 for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.reblog.account.id;
+writtenby.username = status.reblog.account.username;
+writtenby.url = status.reblog.account.url;
+writtenby.acct = status.reblog.account.acct;
+status.reblog.mentions.push(writtenby);
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
 status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
 status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
@@ -305,7 +317,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}' display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -342,6 +354,12 @@ status.account.display_name = htmlEscape(status.account.display_name);
 for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
 status_attr_datetime = getConversionedDate(null, status.created_at),
 status_account_link= getRelativeURL(status.account.url, status.account.id);
@@ -431,7 +449,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}"acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -576,6 +594,12 @@ NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.
 for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = NotificationObj.status.account.id;
+writtenby.username = NotificationObj.status.account.username;
+writtenby.url = NotificationObj.status.account.url;
+writtenby.acct = NotificationObj.status.account.acct;
+NotificationObj.status.mentions.push(writtenby);
 if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -674,7 +698,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
+<button class="reply_button" tid="${NotificationObj.status.id}" mentions='${JSON.stringify(NotificationObj.status.mentions)}' display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -771,6 +795,12 @@ status.account.display_name = htmlEscape(status.account.display_name);
 for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -870,7 +900,7 @@ ${media_views}
 </section>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -890,7 +920,7 @@ ${toot_reblog_button}
 </footer>
 </div>
 </div>
-<form id="reply_status_form" name="reply_status_form" class="status_form"sid="${status.id}" username="${status.account.acct}">
+<form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.id}" mentions='${JSON.stringify(status.mentions)}'>
 <div class="status_top">
 <input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
 </div>
@@ -987,6 +1017,12 @@ status.reblog.account.display_name = htmlEscape(status.reblog.account.display_na
 for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.reblog.account.id;
+writtenby.username = status.reblog.account.username;
+writtenby.url = status.reblog.account.url;
+writtenby.acct = status.reblog.account.acct;
+status.reblog.mentions.push(writtenby);
 if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -1072,7 +1108,7 @@ ${media_views}
 </section>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}' display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1097,7 +1133,7 @@ ${media_views}
 </footer>
 </div>
 </div>
-<form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" username="${status.reblog.account.acct}">
+<form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}'>
 <div class="status_top">
 <input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
 </div>
@@ -1216,12 +1252,18 @@ status.account.display_name = htmlEscape(status.account.display_name);
 for(i=0;i<status.account.emojis.length;i++) {
 status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>${__('SHOW MORE')}</button>",
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
 }
 else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>${__('SHOW LESS')}</button>";
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -1310,7 +1352,7 @@ ${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${status.account.display_name}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>
@@ -1353,6 +1395,12 @@ status.reblog.account.display_name = htmlEscape(status.reblog.account.display_na
 for(i=0;i<status.reblog.account.emojis.length;i++) {
 status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
 }
+var writtenby = new Object();
+writtenby.id = status.reblog.account.id;
+writtenby.username = status.reblog.account.username;
+writtenby.url = status.reblog.account.url;
+writtenby.acct = status.reblog.account.acct;
+status.reblog.mentions.push(writtenby);
 if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -1440,7 +1488,7 @@ ${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}' display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
 <span class="reaction_count reply_count"></span>
 </button>

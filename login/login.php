@@ -121,10 +121,9 @@ location.href = "/";
 </label>
 </div>
 <div class="login_form_agree">
-<label class="login_form_agree_check disallow_select pointer">
-<i class="fa fa-check-square-o" aria-hidden="true"></i>
+<input id="agree" type="checkbox" required checked>
+<label for="agree" class="login_form_agree_check disallow_select pointer">
 <?=_('I agree with the')?> <a href="/terms"><?=_('Terms')?></a>
-<input id="agree" type="checkbox" required checked class="invisible">
 </label>
 </div>
 </form>

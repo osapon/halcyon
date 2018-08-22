@@ -9,23 +9,13 @@ A webclient for Mastodon and Pleroma which looks like Twitter
 Follow our Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
 
 ## Instances
-These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://social.dev-wiki.de - 2.0.0
-- https://social.userspage.net - 2.0.0
-- https://itter.photog.social - 2.0.0
-- https://halcyon.anoxinon.de - 2.0.0
-- https://halcyon.toromino.de - 1.2.6
-- https://halcyon.uelfte.club - 1.2.5
-- https://halcyon.distsn.org - 1.2.1
-- https://halcyon.bka.li - 1.1.7
-- https://halcyon.cybre.space - Outdated
-
-You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
+We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/halcyon/wiki/Instances
 
 ## Translate
 [Help us translating Halcyon into many languages](https://translate.zanata.org/project/view/halcyon)
 
 ## Blog
+- Release of Version 2.0.1 - Added the languages Polish,Japanese and Korean,fixed many bugs,automatically mention all participants of discussions
 - [Release of Version 2.0.0 - The biggest changes in detail](https://nikisoft.myblog.de/nikisoft/art/11636651/Halcyon-2-0-0-The-biggest-changes-in-detail)
 - Release of Version 1.2.6 - Report toots supported,disable CW and NFSW,add privacy policy and imprint,move config files,read release notes for more
 - Release of Version 1.2.5 - Copy links with one click,emojicodes now always detected,streaming in hashtag search,delete event now supported

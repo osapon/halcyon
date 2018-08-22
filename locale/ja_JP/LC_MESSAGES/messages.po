@@ -23,12 +23,17 @@ msgstr "English"
 msgid "Language_de_DE"
 msgstr "Germany"
 
-#, fuzzy
 msgid "Language_ja_JP"
 msgstr "日本語"
 
 msgid "Language_ko_KR"
 msgstr "Korean"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
+
+msgid "Language_pl_PL"
+msgstr "Polish"
 
 msgid "Sensitive content"
 msgstr "非表示のメディア"

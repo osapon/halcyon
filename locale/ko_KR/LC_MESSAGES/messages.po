@@ -1,0 +1,537 @@
+# Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2018-08-19 09:44+0000\n"
+"Last-Translator: Niklas Poslovski <ni.pos@yandex.com>\n"
+"Language-Team: Korean <https://weblate.osa-p.net/projects/halcyon/web/ko/>\n"
+"Language: ko\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Zanata 4.6.0\n"
+
+msgid "Language"
+msgstr "언어"
+
+msgid "Language_en_US"
+msgstr "영어"
+
+msgid "Language_de_DE"
+msgstr "독일어"
+
+msgid "Language_ja_JP"
+msgstr "일본어"
+
+msgid "Language_ko_KR"
+msgstr "한국어"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
+
+msgid "Language_pl_PL"
+msgstr "Polish"
+
+msgid "Sensitive content"
+msgstr "민감한 컨텐츠"
+
+msgid "Click to view"
+msgstr "클릭해서 보기"
+
+msgid "SHOW MORE"
+msgstr "더 보기"
+
+msgid "SHOW LESS"
+msgstr "감추기"
+
+msgid "Public"
+msgstr "공개"
+
+msgid "Unlisted"
+msgstr "공개 타임라인 비표시"
+
+msgid "Followers-only"
+msgstr "비공개"
+
+msgid "Direct"
+msgstr "다이렉트"
+
+msgid "Delete Toot"
+msgstr "툿 삭제"
+
+msgid "Unpin Toot"
+msgstr "핀 해제"
+
+msgid "Pin Toot"
+msgstr "툿 고정하기"
+
+msgid "Mute"
+msgstr "뮤트"
+
+msgid "Block"
+msgstr "차단"
+
+msgid "Report this Toot"
+msgstr "이 툿을 신고하기"
+
+msgid "Copy link to Toot"
+msgstr "툿 링크 복사"
+
+msgid "View original"
+msgstr "원본 보기"
+
+msgid "Boosted"
+msgstr "부스트됨"
+
+msgid "Pinned Toot"
+msgstr "고정된 툿"
+
+msgid "favourited Your Toot"
+msgstr "님이 마음에 들어했습니다"
+
+msgid "boosted Your Toot"
+msgstr "님이 부스트 했습니다"
+
+msgid "followed you"
+msgstr "님이 나를 팔로우 했습니다"
+
+msgid "Follow"
+msgstr "팔로우"
+
+msgid "Toot your reply"
+msgstr "답장을 툿"
+
+msgid "Reply"
+msgstr "답장"
+
+msgid "Content warning"
+msgstr "내용 경고"
+
+msgid "Jan"
+msgstr "1월"
+
+msgid "Feb"
+msgstr "2월"
+
+msgid "Mar"
+msgstr "3월"
+
+msgid "Apr"
+msgstr "4월"
+
+msgid "May"
+msgstr "5월"
+
+msgid "Jun"
+msgstr "6월"
+
+msgid "Jul"
+msgstr "7월"
+
+msgid "Aug"
+msgstr "8월"
+
+msgid "Sep"
+msgstr "9월"
+
+msgid "Oct"
+msgstr "10월"
+
+msgid "Nov"
+msgstr "11월"
+
+msgid "Dec"
+msgstr "12월"
+
+msgid "Changed setting to"
+msgstr "설정을 으로 변경했습니다"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "자동으로 모든 툿을 NSFW로 설정: 활성화"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "자동으로 모든 툿을 NSFW로 설정: 비활성화"
+
+msgid "Who to follow enabled"
+msgstr "팔로우 추천 설정됨"
+
+msgid "Who to follow disabled"
+msgstr "팔로우 추천 해제됨"
+
+msgid "Changed about me setting"
+msgstr "자기소개가 수정됨"
+
+msgid "Uploaded new avatar"
+msgstr "새 아바타가 업로드됨"
+
+msgid "Uploaded new header"
+msgstr "새 배경이 업로드됨"
+
+msgid "Account locked"
+msgstr "계정 잠금 설정됨"
+
+msgid "Account unlocked"
+msgstr "계정 잠금 해제됨"
+
+msgid "Link previews enabled"
+msgstr "링크 미리보기 설정됨"
+
+msgid "Link previews disabled"
+msgstr "링크 미리보기 해제됨"
+
+msgid "You didn't allow notifications"
+msgstr "알림이 허용되지 않았습니다"
+
+msgid "Desktop notifications enabled"
+msgstr "데스크톱 알림 설정됨"
+
+msgid "Desktop notifications disabled"
+msgstr "데스크톱 알림 해제됨"
+
+msgid "Replies shown"
+msgstr "답글 보임"
+
+msgid "Replies hidden"
+msgstr "답글 숨김"
+
+msgid "CW content shown"
+msgstr "민감한 컨텐츠 보임"
+
+msgid "CW content hidden"
+msgstr "민감한 컨텐츠 숨김"
+
+msgid "NSFW content shown"
+msgstr "NSFW 컨텐츠 보임"
+
+msgid "NSFW content hidden"
+msgstr "NSFW 컨텐츠 숨김"
+
+msgid "Reply to"
+msgstr "에게 답장"
+
+msgid "Report"
+msgstr "신고"
+
+msgid "Report a Toot of"
+msgstr "다음 툿 신고"
+
+msgid "What's happening?"
+msgstr "무슨 일이 일어나고 있나요?"
+
+msgid "Toot"
+msgstr "툿"
+
+msgid "Compose new Toot"
+msgstr "새 툿 작성"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "툿에 어떤 문제가 있는지 알려주세요"
+
+msgid "TOOTS"
+msgstr "툿"
+
+msgid "PEOPLE"
+msgstr "사람들"
+
+msgid "Settings"
+msgstr "설정"
+
+msgid "GENERAL"
+msgstr "일반"
+
+msgid "PROFILE"
+msgstr "프로필"
+
+msgid "APPEARANCE"
+msgstr "보기"
+
+msgid "Change instance"
+msgstr "인스턴스 변경"
+
+msgid "Blank for default"
+msgstr "빈칸은 기본값으로 설정됩니다"
+
+msgid "FOLLOWING"
+msgstr "팔로잉"
+
+msgid "Interesting accounts of devs"
+msgstr "Interesting accounts of devs"
+
+msgid "Halcyon for"
+msgstr "Halcyon for"
+
+msgid "About"
+msgstr "정보"
+
+msgid "Terms"
+msgstr "이용 약관"
+
+msgid "Apps"
+msgstr "앱"
+
+msgid "Source code"
+msgstr "소스 코드"
+
+msgid "Other instances"
+msgstr "다른 인스턴스"
+
+msgid "Privacy policy"
+msgstr "개인 정보 정책"
+
+msgid "Version"
+msgstr "버전"
+
+msgid "Who to follow"
+msgstr "팔로우 추천"
+
+msgid "Enable who to follow"
+msgstr "팔로우 추천 설정"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr "Halcyon은 외부 서버와 연결하여 팔로우 추천 리스트를 받아옵니다. 이 기능을 쓰기 원하시면 연동을 허가해주세요."
+
+msgid "MORE"
+msgstr "더 보기"
+
+msgid "FOLLOWERS"
+msgstr "팔로워"
+
+msgid "Following"
+msgstr "팔로잉"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "이 유저로부터 더 이상 알림을 받지 않습니다"
+
+msgid "Unmuted this user"
+msgstr "이 유저를 언뮤트했습니다"
+
+msgid "This user has been blocked"
+msgstr "이 유저는 차단되었습니다"
+
+msgid "Unblocked this user"
+msgstr "이 유저의 차단을 해제하였습니다"
+
+msgid "Your Toot has been deleted"
+msgstr "툿이 삭제되었습니다"
+
+msgid "Your Toot has been pinned"
+msgstr "툿이 고정되었습니다"
+
+msgid "Your Toot has been unpinned"
+msgstr "툿 고정이 해제되었습니다"
+
+msgid "Edit profile"
+msgstr "프로필 편집"
+
+msgid "FAVOURITES"
+msgstr "마음에 들어요"
+
+msgid "Show"
+msgstr "보기"
+
+msgid "Blocking"
+msgstr "차단중"
+
+msgid "Muting"
+msgstr "뮤트 중"
+
+msgid "Requested"
+msgstr "요청됨"
+
+msgid "Photos and toots"
+msgstr "사진과 툿"
+
+msgid "favourited your toot"
+msgstr "님이 마음에 들어했습니다"
+
+msgid "boosted your toot"
+msgstr "님이 부스트했습니다"
+
+msgid "mentioned you"
+msgstr "님이 멘션을 남기셨습니다"
+
+msgid "Your Toot was posted!"
+msgstr "툿이 게시되었습니다"
+
+msgid "News"
+msgstr "뉴스"
+
+msgid "Source"
+msgstr "출처"
+
+msgid "Privacy"
+msgstr "개인정보"
+
+msgid "Imprint"
+msgstr "개발"
+
+msgid "Contact"
+msgstr "연락처"
+
+msgid "Login"
+msgstr "로그인"
+
+msgid "Login to Halcyon"
+msgstr "Halcyon에 로그인"
+
+msgid "create an account"
+msgstr "새 계정 만들기"
+
+msgid "or"
+msgstr "하거나"
+
+msgid "I agree with the"
+msgstr "다음에 동의합니다:"
+
+msgid "What is Halcyon"
+msgstr "Halcyon이란"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr "에 적용하기 위한 웹 클라이언트입니다."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon은 트위터의 심플하고 아름다운 인터페이스를"
+
+msgid "Contact / Feedback"
+msgstr "문의 / 피드백"
+
+msgid "Use my contact form"
+msgstr "개발자에게 연락하세요"
+
+msgid "Help us"
+msgstr "도움 주기"
+
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon 이용 약관"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"이 이용 약관은 Halcyon for Mastodon and Pleroma (이하 'Halcyon') 서비스를 사용하는 유저들을 대상으로 "
+"합니다."
+
+msgid "Your Reply was posted!"
+msgstr "답장 성공!"
+
+msgid "Toot reported successfully!"
+msgstr "툿 신고 성공!"
+
+msgid "Link successfully copied!"
+msgstr "링크 복사 성공!"
+
+msgid "Home"
+msgstr "홈"
+
+msgid "Local"
+msgstr "로컬"
+
+msgid "Federated"
+msgstr "연합"
+
+msgid "Notifications"
+msgstr "알림"
+
+msgid "Search Mastodon"
+msgstr "마스토돈 검색"
+
+msgid "View profile"
+msgstr "프로필 보기"
+
+msgid "Log out"
+msgstr "로그아웃"
+
+msgid "All"
+msgstr "모두"
+
+msgid "new notitification"
+msgstr "새로운 알림"
+
+msgid "Show all NSFW content"
+msgstr "모든 NSFW 컨텐츠 보이기"
+
+msgid "Show all CW content"
+msgstr "모든 민감한 컨텐츠 보이기"
+
+msgid "Show replies"
+msgstr "답장 보이기"
+
+msgid "Desktop notifications"
+msgstr "데스크톱 알림"
+
+msgid "Enable link previews"
+msgstr "링크 미리보기 활성화"
+
+msgid "Auto update"
+msgstr "자동 업데이트"
+
+msgid "Manual update"
+msgstr "수동 업데이트"
+
+msgid "Appearance settings"
+msgstr "테마 설"
+
+msgid "New posts streaming"
+msgstr "새 글 스트리밍"
+
+msgid "replies"
+msgstr "답장"
+
+msgid "General settings"
+msgstr "일반 설정"
+
+msgid "Default post privacy"
+msgstr "기본 전송 정책"
+
+msgid "Mark as NSFW by default"
+msgstr "자동으로 모든 툿을 NSFW로 설정"
+
+msgid "Media"
+msgstr "미디어"
+
+msgid "FOLLOWS YOU"
+msgstr "나를 팔로우함"
+
+msgid "Local instance"
+msgstr "로컬 인스턴스"
+
+msgid "Hashtag search filter"
+msgstr "해시태그 검색 필터"
+
+msgid "All instances"
+msgstr "모든 인스턴스"
+
+msgid "Local only"
+msgstr "로컬만"
+
+msgid "Lock account"
+msgstr "계정 잠금"
+
+msgid "Header"
+msgstr "헤더"
+
+msgid "Avatar"
+msgstr "아바타"
+
+msgid "About me"
+msgstr "자기소개"
+
+msgid "Display name"
+msgstr "이름"
+
+msgid "Profile settings"
+msgstr "프로필 설정"
+
+msgid "Toots"
+msgstr "툿"
+
+msgid "Favourites"
+msgstr "마음에 들어요"
+

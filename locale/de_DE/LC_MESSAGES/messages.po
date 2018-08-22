@@ -6,11 +6,11 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2018-08-03 01:06+0000\n"
-"Last-Translator: YouDont Havetoknow <raizpapa@gmail.com>\n"
+"PO-Revision-Date: 2018-08-05 10:53+0000\n"
+"Last-Translator: Niklas Poslovski <ni.pos@yandex.com>\n"
 "Language-Team: German\n"
 "Language: de\n"
-"X-Generator: Zanata 4.5.0\n"
+"X-Generator: Zanata 4.6.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1)\n"
 
 msgid "Language"
@@ -30,6 +30,9 @@ msgstr "Koreanisch"
 
 msgid "Language_pt_BR"
 msgstr "Portugiesisch"
+
+msgid "Language_pl_PL"
+msgstr "Polnisch"
 
 msgid "Sensitive content"
 msgstr "Sensitiver Inhalt"
@@ -80,7 +83,7 @@ msgid "View original"
 msgstr "Original anzeigen"
 
 msgid "Boosted"
-msgstr "Geteilt"
+msgstr "teilte"
 
 msgid "Pinned Toot"
 msgstr "Angepinnter Toot"
@@ -263,7 +266,7 @@ msgid "About"
 msgstr "Über"
 
 msgid "Terms"
-msgstr "Benutzungsbedingungen"
+msgstr "Nutzungsbedingungen"
 
 msgid "Apps"
 msgstr "Apps"
