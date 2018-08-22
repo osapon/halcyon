@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "MIME-Version: 1.0\n"
-"PO-Revision-Date: 2018-08-20 09:18+0000\n"
+"PO-Revision-Date: 2018-08-22 12:28+0000\n"
 "Last-Translator: Hakaba Hitiyo <hakabahitoyo@yahoo.co.jp>\n"
 "Language-Team: Japanese <https://weblate.osa-p.net/projects/halcyon/web/ja/>\n"
 "Language: ja\n"
@@ -60,7 +60,7 @@ msgid "Direct"
 msgstr "ダイレクト"
 
 msgid "Delete Toot"
-msgstr "トゥート削除"
+msgstr "トゥートを削除"
 
 msgid "Unpin Toot"
 msgstr "プロフィールページから固定を解除する"
@@ -90,7 +90,7 @@ msgid "Pinned Toot"
 msgstr "固定されたトゥート"
 
 msgid "favourited Your Toot"
-msgstr "さんがあなたのトゥートをお気に入りに登録しました"
+msgstr "さんがあなたのトゥートをいいねしました"
 
 msgid "boosted Your Toot"
 msgstr "さんがあなたのトゥートをブーストしました"
@@ -147,7 +147,7 @@ msgid "Dec"
 msgstr "12月"
 
 msgid "Changed setting to"
-msgstr "に変更しました"
+msgstr "変更しました:"
 
 msgid "Mark as NSFW by default enabled"
 msgstr "デフォルトでNSFWをマークするようになりました"
@@ -210,16 +210,16 @@ msgid "NSFW content hidden"
 msgstr "NSFWが表示されていません"
 
 msgid "Reply to"
-msgstr "への返信"
+msgstr "返信:"
 
 msgid "Report"
 msgstr "報告"
 
 msgid "Report a Toot of"
-msgstr "のトゥートを報告"
+msgstr "トゥートを報告:"
 
 msgid "What's happening?"
-msgstr "今なにしてる？"
+msgstr "いまどうしてる？"
 
 msgid "Toot"
 msgstr "トゥート"
@@ -237,7 +237,7 @@ msgid "PEOPLE"
 msgstr "人々"
 
 msgid "Settings"
-msgstr "ユーザー設定"
+msgstr "設定"
 
 msgid "GENERAL"
 msgstr "全般"
@@ -264,7 +264,7 @@ msgid "Halcyon for"
 msgstr "Halcyon for"
 
 msgid "About"
-msgstr "Halcyonについて"
+msgstr "このインスタンスについて"
 
 msgid "Terms"
 msgstr "利用規約"
@@ -294,7 +294,7 @@ msgid ""
 "Halcyon needs to connect to an external server to get a list of users which "
 "have similar interests as you. If you want to use this feature, please opt-"
 "in."
-msgstr "あなたに興味・関心が似ているユーザーを表示するには、このボタンでオプトインしてください。外部のサーバーにあなたのデータが送信されます。"
+msgstr "あなたに興味・関心が似ているユーザーを表示するには、下のボタンでオプトインしてください。外部のサーバーにあなたのデータが送信されます。"
 
 msgid "MORE"
 msgstr "すべて見る"
@@ -330,7 +330,7 @@ msgid "Edit profile"
 msgstr "プロフィールを編集"
 
 msgid "FAVOURITES"
-msgstr "お気に入り"
+msgstr "いいね"
 
 msgid "Show"
 msgstr "見る"
@@ -348,10 +348,10 @@ msgid "Photos and toots"
 msgstr "の画像と投稿"
 
 msgid "favourited your toot"
-msgstr "さんがお気に入りに登録しました"
+msgstr "さんがあなたのトゥートをいいねしました"
 
 msgid "boosted your toot"
-msgstr "さんがブーストしました"
+msgstr "さんがあなたのトゥートをブーストしました"
 
 msgid "mentioned you"
 msgstr "さんがあなたに返信しました"
@@ -363,7 +363,7 @@ msgid "News"
 msgstr "ニュース"
 
 msgid "Source"
-msgstr "ソース/課題"
+msgstr "ソースコード"
 
 msgid "Privacy"
 msgstr "プライバシー"
@@ -387,7 +387,7 @@ msgid "or"
 msgstr "または"
 
 msgid "I agree with the"
-msgstr "同意します: "
+msgstr "同意します:"
 
 msgid "What is Halcyon"
 msgstr "Halcyonとは何ですか"
@@ -395,10 +395,10 @@ msgstr "Halcyonとは何ですか"
 msgid ""
 "which aims to recreate the simple and beautiful user interface of Twitter "
 "while keeping all advantages of decentral networks in focus."
-msgstr "ツイッターのシンプルで美しいユーザーインターフェイスと脱中央集権ネットワークの利点をともにもたらします"
+msgstr "のウェブクライアントです。ツイッターのシンプルで美しいユーザーインターフェイスと脱中央集権ネットワークの利点をともにもたらします。"
 
 msgid "Halcyon is a webclient for"
-msgstr "Halcyonはウェブクライアント for"
+msgstr "Halcyonは"
 
 msgid "Contact / Feedback"
 msgstr "連絡先 / フィードバック"
@@ -407,10 +407,10 @@ msgid "Use my contact form"
 msgstr "コンタクトフォーム"
 
 msgid "Help us"
-msgstr "開発を手伝う"
+msgstr "寄付のお願い"
 
 msgid "Halcyon Terms of Use"
-msgstr "Halcyon 利用規約"
+msgstr "Halcyon利用規約"
 
 msgid ""
 "This terms of use agreement is for the users of web service Halcyon for "
@@ -531,7 +531,7 @@ msgid "Profile settings"
 msgstr "プロフィール設定"
 
 msgid "Toots"
-msgstr "投稿"
+msgstr "トゥート"
 
 msgid "Favourites"
 msgstr "いいね"
