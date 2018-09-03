@@ -15,6 +15,7 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 [Help us translating Halcyon into many languages](https://translate.zanata.org/project/view/halcyon)
 
 ## Blog
+- Release of Version 2.0.2 - Added dark theme,improved Japanese translation,added Galician translation,links to posts open in Halcyon now,smaller screens supported
 - Release of Version 2.0.1 - Added the languages Polish,Japanese and Korean,fixed many bugs,automatically mention all participants of discussions
 - [Release of Version 2.0.0 - The biggest changes in detail](https://nikisoft.myblog.de/nikisoft/art/11636651/Halcyon-2-0-0-The-biggest-changes-in-detail)
 - Release of Version 1.2.6 - Report toots supported,disable CW and NFSW,add privacy policy and imprint,move config files,read release notes for more

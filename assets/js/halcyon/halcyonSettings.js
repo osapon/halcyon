@@ -58,7 +58,7 @@ $this.addClass('s-hidden');
 $this.wrap('<div class="select"></div>');
 $this.after('<div class="halcyon_button styledselect"></div>');
 var $styledSelect = $this.next('div.styledselect');
-var $selectText = $("<span>").css("margin","auto").text($this.children('option[selected]').eq(0).text()+" â·");
+var $selectText = $("<span>").css("margin","auto").text($this.children('option[selected]').eq(0).text()+" ⏷");
 $styledSelect.append($selectText);
 var $list = $('<ul/>',{'class':'options'}).insertAfter($styledSelect);
 for(var i=0;i<numberOfOptions;i++) {
@@ -77,7 +77,7 @@ $(this).addClass('active').next('ul.options').slideDown();
 });
 $listItems.click(function(e) {
 e.stopPropagation();
-$selectText.text($(this).text()+" â·");
+$selectText.text($(this).text()+" ⏷");
 $this.val($(this).attr('rel'));
 $this.change();
 $list.slideUp(function() {$styledSelect.removeClass('active')});
@@ -195,6 +195,18 @@ $("#setting_show_nsfw")[0].checked = true;
 $(document).on('change',".post_streaming_wrap input[name='post_streaming']:checked", function(e) {
 localStorage.setItem("setting_post_stream", $(this).val());
 putMessage(__("Changed setting to")+" "+$(this).val());
+});
+$("#setting_dark_theme").change(function() {
+if(this.checked) {
+$.cookie("darktheme","true",{path:'/',expires:3650});
+$(document.body).append($("<link>").attr("rel","stylesheet").attr("href","/assets/css/dark.css"));
+putMessage(__("Dark theme enabled"));
+}
+else {
+$.cookie("darktheme","false",{path:'/',expires:3650});
+$("link[href='/assets/css/dark.css']").remove();
+putMessage(__("Dark theme disabled"));
+}
 });
 $("#setting_link_previews").change(function() {
 if(this.checked) {

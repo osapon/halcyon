@@ -289,7 +289,9 @@ var listener = function (event) {
 console.log("Got Data from Stream " + streamType);
 if(event.data.length != 0) {
 event = JSON.parse(event.data);
+if(!Number.isInteger(JSON.parse(event.payload))) {
 event.payload = JSON.parse(event.payload);
+}
 onData(event);
 }
 };

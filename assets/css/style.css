@@ -126,15 +126,6 @@ background-color: #E8F4FB;
 .status_form.ready {
 background-color: #F2FAFF!important;
 }
-.status_form.ready .status_bottom .status_media_attachment,
-.status_form.ready .status_bottom .status_privacy,
-.status_form.ready .status_bottom .status_emoji {
-color: #7ECEFF!important;
-}
-.status_form.ready .status_bottom .status_CW > span,
-.status_form.ready .status_bottom .status_NSFW > span {
-background-color: #7ECEFF!important;
-}
 .status_form.ready .status_bottom .submit_status_label {
 background-color: #A3D8FF!important;
 pointer-events: none;
@@ -587,6 +578,10 @@ background-color: #fff;
 box-sizing: border-box;
 border: 1px solid #ECF1F4;
 border-bottom: none;
+border-top-right-radius: 5px;
+border-top-left-radius: 5px;
+}
+.timeline_header form {
 border-top-right-radius: 5px;
 border-top-left-radius: 5px;
 }
@@ -1453,7 +1448,6 @@ padding: 0 5px;
 #header .header_nav_wrap .header_left_box {
 display: flex;
 justify-content: flex-start;
-flex: 2;
 height: 100%;
 }
 #header .header_nav_wrap .header_left_box ul.header_nav_list {
@@ -2496,9 +2490,24 @@ border-bottom-right-radius:4px;
 text-align:center;
 padding:5px;
 transition:0.15s ease-out;
+border:0 solid #189EFC;
 }
 .options li:hover {
 border:0 solid #189EFC;
 border-left-width:5px;
 border-right-width:5px;
+}
+@media(max-width:1199px) {
+#main .profile_nav_wrap .profile_nav {
+width:900px;
+}
+#main .profile_nav_wrap .profile_nav .profile_nav_right {
+width:590px;
+}
+#js-follows_profile {
+width:600px;
+}
+#main .article_wrap {
+width:900px;
+}
 }

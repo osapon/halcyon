@@ -1,0 +1,545 @@
+# Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2018-09-03 02:50+0000\n"
+"Last-Translator: Xosé M. <correo@xmgz.eu>\n"
+"Language-Team: Galician\n"
+"Language: gl\n"
+"X-Generator: Zanata 4.6.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Language_en_US"
+msgstr "English"
+
+msgid "Language_de_DE"
+msgstr "German"
+
+msgid "Language_ja_JP"
+msgstr "Japanese"
+
+msgid "Language_ko_KR"
+msgstr "Korean"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
+
+msgid "Language_pl_PL"
+msgstr "Polish"
+
+msgid "Language_gl_ES"
+msgstr "Galician"
+
+msgid "Sensitive content"
+msgstr "Contido sensible"
+
+msgid "Click to view"
+msgstr "Pulse para ver"
+
+msgid "SHOW MORE"
+msgstr "MOSTRAR MÁIS"
+
+msgid "SHOW LESS"
+msgstr "MOSTRAR MENOS"
+
+msgid "Public"
+msgstr "Público"
+
+msgid "Unlisted"
+msgstr "Non listado"
+
+msgid "Followers-only"
+msgstr "Só seguidoras"
+
+msgid "Direct"
+msgstr "Directa"
+
+msgid "Delete Toot"
+msgstr "Eliminar Toot"
+
+msgid "Unpin Toot"
+msgstr "Despegar Toot"
+
+msgid "Pin Toot"
+msgstr "Fixar Toot"
+
+msgid "Mute"
+msgstr "Acalar"
+
+msgid "Block"
+msgstr "Bloquear"
+
+msgid "Report this Toot"
+msgstr "Informar sobre este Toot"
+
+msgid "Copy link to Toot"
+msgstr "Copiar ligazón ao Toot"
+
+msgid "View original"
+msgstr "Ver orixinal"
+
+msgid "Boosted"
+msgstr "Promocionado"
+
+msgid "Pinned Toot"
+msgstr "Toot fixado"
+
+msgid "favourited Your Toot"
+msgstr "favoreceu o seu Toot"
+
+msgid "boosted Your Toot"
+msgstr "promocionou o seu Toot"
+
+msgid "followed you"
+msgstr "Segueuna"
+
+msgid "Follow"
+msgstr "Seguir"
+
+msgid "Toot your reply"
+msgstr "Toot a súa resposta"
+
+msgid "Reply"
+msgstr "Resposta"
+
+msgid "Content warning"
+msgstr "Aviso de contido"
+
+msgid "Jan"
+msgstr "Xan"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Abr"
+
+msgid "May"
+msgstr "Mai"
+
+msgid "Jun"
+msgstr "Xun"
+
+msgid "Jul"
+msgstr "Xul"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "Sep"
+msgstr "Set"
+
+msgid "Oct"
+msgstr "Out"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Nad"
+
+msgid "Changed setting to"
+msgstr "Cambiou o axuste a"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "Marcar como NSFW activado por omisión"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "Marcar como NSFW desactivado por omisión"
+
+msgid "Who to follow enabled"
+msgstr "A quen seguir activado"
+
+msgid "Who to follow disabled"
+msgstr "A quen seguir desactivado"
+
+msgid "Changed about me setting"
+msgstr "O axuste Sobre min cambiou"
+
+msgid "Uploaded new avatar"
+msgstr "Novo avatar subido"
+
+msgid "Uploaded new header"
+msgstr "Nova cabeceira subida"
+
+msgid "Account locked"
+msgstr "Conta bloqueada"
+
+msgid "Account unlocked"
+msgstr "Conta desbloqueada"
+
+msgid "Link previews enabled"
+msgstr "Vista previa de ligazóns activada"
+
+msgid "Link previews disabled"
+msgstr "Vista previa de ligazóns desactivada"
+
+msgid "You didn't allow notifications"
+msgstr "Non permiteu as notificacións"
+
+msgid "Desktop notifications enabled"
+msgstr "Notificacións de escritorio activadas"
+
+msgid "Desktop notifications disabled"
+msgstr "Notificacións de escritorio desactivadas"
+
+msgid "Replies shown"
+msgstr "Respostas mostradas"
+
+msgid "Replies hidden"
+msgstr "Respostas ocultas"
+
+msgid "CW content shown"
+msgstr "Contido CW mostrado"
+
+msgid "CW content hidden"
+msgstr "Contido CW oculto"
+
+msgid "NSFW content shown"
+msgstr "Contido NSFW mostrado"
+
+msgid "NSFW content hidden"
+msgstr "Contido NSFW oculto"
+
+msgid "Reply to"
+msgstr "Respostar a"
+
+msgid "Report"
+msgstr "Informar"
+
+msgid "Report a Toot of"
+msgstr "Informar sobre un Toot de"
+
+msgid "What's happening?"
+msgstr "Qué acontece?"
+
+msgid "Toot"
+msgstr "Toot"
+
+msgid "Compose new Toot"
+msgstr "Escribir un novo Toot"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "Por favor, describa cal é o problema co Toot."
+
+msgid "TOOTS"
+msgstr "TOOTS"
+
+msgid "PEOPLE"
+msgstr "XENTE"
+
+msgid "Settings"
+msgstr "Axustes"
+
+msgid "GENERAL"
+msgstr "XERAL"
+
+msgid "PROFILE"
+msgstr "PERFIL"
+
+msgid "APPEARANCE"
+msgstr "ASPECTO"
+
+msgid "Change instance"
+msgstr "Cambiar de instancia"
+
+msgid "Blank for default"
+msgstr "Baldeiro por omisión"
+
+msgid "FOLLOWING"
+msgstr "SEGUINDO"
+
+msgid "Interesting accounts of devs"
+msgstr "Contas de devs interesantes"
+
+msgid "Halcyon for"
+msgstr "Halcyon para"
+
+msgid "About"
+msgstr "Acerca de"
+
+msgid "Terms"
+msgstr "Termos"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Source code"
+msgstr "Código fonte"
+
+msgid "Other instances"
+msgstr "Outras instancias"
+
+msgid "Privacy policy"
+msgstr "Política de intimidade"
+
+msgid "Version"
+msgstr "Versión"
+
+msgid "Who to follow"
+msgstr "A quen seguir"
+
+msgid "Enable who to follow"
+msgstr "Activar a quen seguir"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr ""
+"Halcyon precisa conectar con un servidor externo para obter un listado de "
+"usuarias que teñen intereses semellantes aos seus. Se quere utilizar esta "
+"característica, por favor indique a preferencia."
+
+msgid "MORE"
+msgstr "MÁIS"
+
+msgid "FOLLOWERS"
+msgstr "SEGUIDORAS"
+
+msgid "Following"
+msgstr "Seguindo"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "Non recibirá notificacións de esta usuaria"
+
+msgid "Unmuted this user"
+msgstr "Devolveulle a voz a esta usuaria"
+
+msgid "This user has been blocked"
+msgstr "Esta usuaria foi bloqueada"
+
+msgid "Unblocked this user"
+msgstr "Desbloqueou esta usuaria"
+
+msgid "Your Toot has been deleted"
+msgstr "O seu toot foi eliminado"
+
+msgid "Your Toot has been pinned"
+msgstr "O seu toot foi fixado"
+
+msgid "Your Toot has been unpinned"
+msgstr "O seu toot foi despegado"
+
+msgid "Edit profile"
+msgstr "Editar perfil"
+
+msgid "FAVOURITES"
+msgstr "FAVORITAS"
+
+msgid "Show"
+msgstr "Mostrar"
+
+msgid "Blocking"
+msgstr "Bloqueando"
+
+msgid "Muting"
+msgstr "Acalando"
+
+msgid "Requested"
+msgstr "Solicitado"
+
+msgid "Photos and toots"
+msgstr "Fotos e toots"
+
+msgid "favourited your toot"
+msgstr "favoreceron o seu toot"
+
+msgid "boosted your toot"
+msgstr "promocionaron o seu toot"
+
+msgid "mentioned you"
+msgstr "mencionárona"
+
+msgid "Your Toot was posted!"
+msgstr "O seu toot foi publicado!"
+
+msgid "News"
+msgstr "Novas"
+
+msgid "Source"
+msgstr "Fonte"
+
+msgid "Privacy"
+msgstr "Intimidade"
+
+msgid "Imprint"
+msgstr "Impresum"
+
+msgid "Contact"
+msgstr "Contacto"
+
+msgid "Login"
+msgstr "Conectar"
+
+msgid "Login to Halcyon"
+msgstr "Conectar a Halcyon"
+
+msgid "create an account"
+msgstr "crear unha conta"
+
+msgid "or"
+msgstr "ou"
+
+msgid "I agree with the"
+msgstr "Acepto as"
+
+msgid "What is Halcyon"
+msgstr "Que é Halcyon"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr ""
+"que pretende recrear a interface simple e bela de Twitter mentras mantén "
+"todas as vantaxes das redes descentralizadas."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon é un cliente web para"
+
+msgid "Contact / Feedback"
+msgstr "Contacto / Informe"
+
+msgid "Use my contact form"
+msgstr "Utilice o meu formulario de contacto"
+
+msgid "Help us"
+msgstr "Axúdenos"
+
+msgid "Halcyon Terms of Use"
+msgstr "Termos de Uso de Halcyon"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"Este acordo de termos de uso é para as usuarias do servizo web Halcyon para "
+"Mastodon e Pleroma (resumido Halcyon) aloxado en"
+
+msgid "Your Reply was posted!"
+msgstr "A súa Resposta foi publicada!"
+
+msgid "Toot reported successfully!"
+msgstr "Informou sobre o Toot correctamente!"
+
+msgid "Link successfully copied!"
+msgstr "Ligazón copiada correctamente!"
+
+msgid "Home"
+msgstr "Inicio"
+
+msgid "Local"
+msgstr "Local"
+
+msgid "Federated"
+msgstr "Federada"
+
+msgid "Notifications"
+msgstr "Notificacións"
+
+msgid "Search Mastodon"
+msgstr "Buscar en Mastodon"
+
+msgid "View profile"
+msgstr "Ver perfil"
+
+msgid "Log out"
+msgstr "Desconectar"
+
+msgid "All"
+msgstr "Todo"
+
+msgid "new notitification"
+msgstr "nova notificación"
+
+msgid "Show all NSFW content"
+msgstr "Mostrar todo o contido NSFW"
+
+msgid "Show all CW content"
+msgstr "Mostrar todo o contido CW"
+
+msgid "Show replies"
+msgstr "Mostrar respostas"
+
+msgid "Desktop notifications"
+msgstr "Notificacións de escritorio"
+
+msgid "Enable link previews"
+msgstr "Activar vista previa de ligazóns"
+
+msgid "Auto update"
+msgstr "Actualización automática"
+
+msgid "Manual update"
+msgstr "Actualización manual"
+
+msgid "Appearance settings"
+msgstr "Axustes do aspecto"
+
+msgid "New posts streaming"
+msgstr "Fluxo de novas publicacións"
+
+msgid "replies"
+msgstr "respostas"
+
+msgid "General settings"
+msgstr "Axustes xeráis"
+
+msgid "Default post privacy"
+msgstr "Intimidade por omisión das publicacións"
+
+msgid "Mark as NSFW by default"
+msgstr "Marcar como NSFW por omisión"
+
+msgid "Media"
+msgstr "Medios"
+
+msgid "FOLLOWS YOU"
+msgstr "SÉGUENA"
+
+msgid "Local instance"
+msgstr "Instancia local"
+
+msgid "Hashtag search filter"
+msgstr "Filtro de busca de etiquetas"
+
+msgid "All instances"
+msgstr "Todas as instancias"
+
+msgid "Local only"
+msgstr "Só local"
+
+msgid "Lock account"
+msgstr "Bloquear conta"
+
+msgid "Header"
+msgstr "Cabeceira"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "About me"
+msgstr "Sobre min"
+
+msgid "Display name"
+msgstr "Mostrar nome"
+
+msgid "Profile settings"
+msgstr "Axustes do perfil"
+
+msgid "Toots"
+msgstr "Toots"
+
+msgid "Favourites"
+msgstr "Favoritas"
+

@@ -25,6 +25,21 @@
 <input id="streaming-2" name="post_streaming" type="radio" value="manual">
 <label for="streaming-2" class="radiotext"><?=_('Manual update')?></label>
 </div>
+<div class="radiobox">
+<input id="streaming-3" name="post_streaming" type="radio" value="ontop">
+<label for="streaming-3" class="radiotext"><?=_('Only on top')?></label>
+</div>
+</div>
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
+<h3><?=_('Enable dark theme')?></h3>
+</div>
+<div class="dark_theme_wrap" style="float:left;width:50%">
+<div class="switch">
+<input type="checkbox" id="setting_dark_theme" <?php if($_COOKIE['darktheme'] == "true") echo "checked='checked'" ?>>
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
 </div>
 <div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Enable link previews')?></h3>

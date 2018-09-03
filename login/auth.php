@@ -10,6 +10,9 @@ localStorage.getItem('current_authtoken')
 location.href = '/logout';
 };
 </script>
+<script src="/assets/js/jquery/jquery.min.js"></script>
+<script src="/assets/js/mastodon.js/mastodon.js"></script>
+<script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <?php
 require_once('../authorize/mastodon.php');
 use HalcyonSuite\HalcyonForMastodon\Mastodon;
@@ -40,14 +43,13 @@ localStorage.setItem('setting_show_content_warning', 'false');
 localStorage.setItem('setting_show_nsfw', 'false');
 localStorage.setItem('setting_post_privacy','".$profile["source"]["privacy"]."');
 localStorage.setItem('setting_post_sensitive','".$profile["source"]["sensitive"]."');
+$.cookie('darktheme','false',{path:'/',expires:3650});
 location.href = '/';
 </script>
 ";
 }
 }
 ?>
-<script src="/assets/js/jquery/jquery.min.js"></script>
-<script src="/assets/js/mastodon.js/mastodon.js"></script>
 </head>
 <body>
 </body>

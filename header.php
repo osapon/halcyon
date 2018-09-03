@@ -13,6 +13,9 @@ include("language.php");
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="gettext" type="text/x-gettext-translation" href="/locale/<?=$locale?>/LC_MESSAGES/messages.po">
 <link rel="stylesheet" href="/assets/css/style.css" media="all">
+<?php if($_COOKIE['darktheme'] == "true")
+echo '<link rel="stylesheet" href="/assets/css/dark.css" media="all">';
+?>
 <link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
 <link rel="stylesheet" href="/assets/css/emojipicker.css" media="all">
 <script src="/assets/js/jquery/jquery.min.js"></script>
