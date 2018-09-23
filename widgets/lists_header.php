@@ -1,5 +1,5 @@
 <div id="js-header_title_box">
-<h1<? if(isset($_GET['id'])) {echo " id='header_listname'>";} else {echo ">"._('My Lists');} ?></h1>
+<h1<?php if(isset($_GET['id'])) {echo " id='header_listname'>";} else {echo ">"._('My Lists');} ?></h1>
 </div>
 <div class="header_nav_wrap">
 <div class="header_nav">
