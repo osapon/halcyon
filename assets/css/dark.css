@@ -82,17 +82,20 @@ color:#fff;
 .single_reply_status .status_preview,.report_status .status_preview {
 border-top:1px solid #000;
 }
-.overlay_copy_link_header {
-background-color:#fff;
-color:#66757F;
-border-bottom:1px solid #E6ECF0;
+.overlay_simple_header {
+background-color: #1B2836;
+color: #EEE;
+border-bottom: 1px solid #000;
 }
-.overlay_copy_link .overlay_copy_link_form {
-background-color:#fff;
+.overlay_simple .overlay_simple_body {
+background-color: #243447;
 }
-.overlay_copy_link .overlay_copy_link_form input {
-border:1px solid #E6ECF0;
-background-color:#F5F8FA;
+.overlay_addlist_item {
+border-bottom-color:#000000;
+}
+.copy_link_input {
+border: 1px solid #000;
+background-color: #132030;
 }
 .relationship_button {
 border:1px solid #189EFC;
@@ -214,7 +217,7 @@ background-color:#243447;
 color:#657786;
 }
 #js-follows_profile .follows_profile_box .follows_profile .follows_profile_bio {
-color:#66757f;
+color:#eee;
 }
 #js-follows_profile .follow_button {
 border:1px solid #189EFC;
@@ -413,10 +416,10 @@ color:#fff;
 #main .article_wrap .left_column .profile_section_wrap > .profile_username {
 color:#657786;
 }
-#js_profile_recent_images a {
+.profile_with_icon > a {
 color:#189EFC;
 }
-#js_profile_recent_images a i {
+.profile_with_icon i {
 color:#eee;
 }
 #js-overlay_content_wrap.view {
@@ -439,7 +442,7 @@ color:#999;
 background-color:#1B2836;
 }
 .toot_entry.ancestors_status .toot_entry_body::after,.toot_entry.descendants_status .toot_entry_body::after {
-border:2px solid #2A7E5C;
+border:2px solid #76BFEC;
 }
 .toot_entry.descendants_status:last-child .toot_entry_body::after {
 border:0 solid #76BFEC;

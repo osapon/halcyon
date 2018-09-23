@@ -10,6 +10,9 @@
 <?php include dirname(__FILE__).('/widgets/overlay_single_reply.php'); ?>
 <?php include dirname(__FILE__).('/widgets/overlay_report_status.php'); ?>
 <?php include dirname(__FILE__).('/widgets/overlay_copy_link.php'); ?>
+<?php include dirname(__FILE__).('/widgets/overlay_confirm.php'); ?>
+<?php include dirname(__FILE__).('/widgets/overlay_prompt.php'); ?>
+<?php include dirname(__FILE__).('/widgets/overlay_addlist.php'); ?>
 </div>
 <button class="close_button"><i class="fa fa-times" aria-hidden="true"></i></button>
 </div>

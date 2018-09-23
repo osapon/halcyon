@@ -96,6 +96,13 @@ resetApp();
 </a>
 <div class="notification_badge nav_badge invisible"></div>
 </li>
+<li id="header_nav_item_lists" class="header_nav_item lists_nav">
+<a href="/lists" id="lists_nav">
+<i class="fa fa-fw fa-list"></i>
+<span><?=_('Lists')?></span>
+</a>
+<div class="lists_badge nav_badge invisible"></div>
+</li>
 </ul>
 </nav>
 <nav class="header_right_box">
@@ -126,6 +133,9 @@ resetApp();
 </li>
 </ul>
 <ul>
+<li>
+<a href="/direct"><?=_('Direct')?></a>
+</li>
 <li>
 <a href="/settings"><?=_('Settings')?></a>
 </li>

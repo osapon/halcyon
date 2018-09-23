@@ -59,6 +59,22 @@ r ^/whotofollow/?$
 to /who_to_follow.php
 }
 rewrite {
+r ^/direct/?$
+to direct.php
+}
+rewrite {
+r ^/lists/?$
+to lists.php
+}
+rewrite{
+r ^/lists/(\d+)/?$
+to lists_view.php?id={1}
+}
+rewrite{
+r ^/lists/(\d+)/add/?$
+to lists_add.php?id={1}
+}
+rewrite {
 r ^/search/?$
 to /search_hash_tag.php
 }

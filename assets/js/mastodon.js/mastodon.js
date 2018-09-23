@@ -160,6 +160,11 @@ var idempotencykey = getRandom();
 }
 requestHeaders["Idempotency-Key"] = idempotencykey;
 }
+else {
+if(arguments.length == 4) {
+var errorback = arguments[3];
+}
+}
 $.ajax({
 url: apiBase + endpoint,
 type: "POST",
@@ -183,9 +188,16 @@ if(xhr.readyState == 0) {
 api.post(endpoint,postData,callback,idempotencykey);
 }
 else {
-putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
-if ( xhr.status === 401 ) {
+if(xhr.status === 401) {
 location.href = "/logout";
+}
+else {
+if(errorback) {
+errorback(xhr,textStatus,errorThrown);
+}
+else {
+putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
+}
 }
 }
 }
@@ -273,6 +285,38 @@ callback(data,textStatus)
 error: function(xhr, textStatus, errorThrown) {
 if(xhr.readyState == 0) {
 api.patch(endpoint,postData,callback);
+}
+else {
+putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
+if ( xhr.status === 401 ) {
+location.href = "/logout";
+}
+}
+}
+});
+},
+put: function (endpoint) {
+var postData, callback;
+if (typeof arguments[1] === "function") {
+postData = {};
+callback = arguments[1];
+} else {
+postData = arguments[1];
+callback = arguments[2];
+}
+var requestHeaders = {"Authorization":"Bearer "+config.api_user_token};
+$.ajax({
+url: apiBase + endpoint,
+type: "PUT",
+data: postData,
+headers: requestHeaders,
+success: function(data, textStatus) {
+console.log("Successful PUT API request to " +apiBase+endpoint);
+callback(data,textStatus)
+},
+error: function(xhr, textStatus, errorThrown) {
+if(xhr.readyState == 0) {
+api.put(endpoint,postData,callback);
 }
 else {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);

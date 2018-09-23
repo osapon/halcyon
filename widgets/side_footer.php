@@ -23,4 +23,3 @@ echo "<li><a href='".$footerlinks[$i]->link."'>".$footerlinks[$i]->title."</a></
 </ul>
 </footer>
 <img style="display:block;margin:16px auto;width: 30%;opacity: .3;" src="/assets/images/halcyon.png">
-

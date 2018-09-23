@@ -46,12 +46,20 @@ $(this).html('<i class="fa fa-fw fa-user-plus"></i><span>'+__('Follow')+'</span>
 return false;
 });
 $(document).on('click','.mute_button', function(e) {
-if ($(this).attr('mid') !== null) {
-api.post('accounts/'+$(this).attr('mid')+'/mute', function (data) {
-});
-}
+e.stopPropagation();
+const mid = $(this).attr('mid');
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_confirm').removeClass('invisible');
+$('.overlay_confirm_text').text(__("Are you sure that you want to mute this user?"));
+$('.overlay_confirm_yes').click(function() {
+$('.close_button').click();
+api.post('accounts/'+mid+'/mute', function (data) {
 putMessage(__("You'll no longer receive notifications from this user"));
 return false;
+});
+});
 });
 $(document).on('click','.muting_button', function(e) {
 if($(this).attr('mid')!=null) {
@@ -65,12 +73,20 @@ putMessage(__("Unmuted this user"));
 return false;
 });
 $(document).on('click','.block_button', function(e) {
-if ($(this).attr('mid') !== null) {
-api.post('accounts/'+$(this).attr('mid')+'/block', function (data) {
-});
-}
+e.stopPropagation();
+const mid = $(this).attr('mid');
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_confirm').removeClass('invisible');
+$('.overlay_confirm_text').text(__("Are you sure that you want to block this user?"));
+$('.overlay_confirm_yes').click(function() {
+$('.close_button').click();
+api.post('accounts/'+mid+'/block', function (data) {
 putMessage(__("This user has been blocked"));
 return false;
+});
+});
 });
 $(document).on('click','.blocking_button', function(e) {
 e.stopPropagation();
@@ -122,9 +138,18 @@ return false;
 });
 $(document).on('click','.delete_button', function(e) {
 const sid = $(this).attr('tid');
+e.stopPropagation();
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_confirm').removeClass('invisible');
+$('.overlay_confirm_text').text(__("Are you sure that you want to delete this toot?"));
+$('.overlay_confirm_yes').click(function() {
+$('.close_button').click();
 api.delete("statuses/"+sid, function (data) {
 $('.toot_entry[sid="'+sid+'"]').remove();
 putMessage(__("Your Toot has been deleted"));
+});
 });
 });
 $(document).on('click','.pin_button', function(e) {
@@ -139,6 +164,75 @@ const sid = $(this).attr('tid');
 api.post("statuses/"+sid+"/unpin", function (data) {
 $('.toot_entry[sid="'+sid+'"] .unpin_button').removeClass("unpin_button").addClass("pin_button").text(__("Pin Toot"));
 putMessage(__("Your Toot has been unpinned"));
+});
+});
+$(document).on('click','.addlist_button',function(e) {
+const mid = $(this).attr('mid');
+e.stopPropagation();
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_addlist').removeClass('invisible');
+$('.overlay_addlist .overlay_simple_header span').html(__('Add to list')+": "+$(this).attr('display_name'));
+replace_emoji();
+api.get("lists",function(data) {
+api.get("accounts/"+mid+"/lists",function(data2) {
+var inlists = new Array();
+if(typeof data2 == "object") {
+for(var i=0;i<data2.length;i++) {
+inlists.push(data2[i].id);
+}
+}
+for(var i=0;i<data.length;i++) {
+var list_id = data[i].id;
+(function(i,list_id) {
+if(inlists.indexOf(data[i].id) == -1) {
+$(".overlay_addlist_body").append(
+$("<div>").addClass("overlay_addlist_item").append(
+$("<span>").addClass("emoji_poss").text(data[i].title)).append(
+$("<button>").addClass("halcyon_button").append(
+$("<i>").addClass("fa").addClass("fa-fw").addClass("fa-user-plus")).append(
+$("<span>").text(__('Add'))).click(function(e) {
+api.post("lists/"+list_id+"/accounts?account_ids[]="+mid,"",function() {
+putMessage(__('Added this account to the list'));
+},function(xhr) {
+if(xhr.status == 422) {
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_confirm').removeClass('invisible');
+$('.overlay_confirm_text').text(__("You need to follow this user to add him/her to the list. Do you want to do that now?"));
+$('.overlay_confirm_yes').click(function() {
+$('.close_button').click();
+api.post('accounts/'+mid+'/follow',function(data) {
+putMessage(__("You successfully followed this user."));
+api.post("lists/"+list_id+"/accounts?account_ids[]="+mid,"",function() {
+putMessage(__('Added this account to the list'));
+});
+});
+});
+}
+});
+$(".close_button").click();
+})));
+}
+else {
+$(".overlay_addlist_body").append(
+$("<div>").addClass("overlay_addlist_item").append(
+$("<span>").addClass("emoji_poss").text(data[i].title)).append(
+$("<button>").addClass("halcyon_button").append(
+$("<i>").addClass("fa").addClass("fa-fw").addClass("fa-user-times")).append(
+$("<span>").text(__('Remove'))).click(function(e) {
+api.delete("lists/"+list_id+"/accounts?account_ids[]="+mid,function() {
+putMessage(__('Removed this account from the list'));
+});
+$(".close_button").click();
+})));
+}
+})(i,list_id);
+}
+replace_emoji();
+});
 });
 });
 $(document).on('click','.cw_button', function(e) {
@@ -189,7 +283,7 @@ var load_options = [];
 api.get(level, load_options, function(statuses) {
 let reply_sources = {};
 for(let i in statuses) {
-if(!(show_replies == "false" && statuses[i].in_reply_to_id)) {
+if(!(show_replies == "false" && statuses[i].in_reply_to_id) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id && level === "timelines/home" | level === "timelines/public") {
 if(!reply_sources[statuses[i].in_reply_to_id] & !$(".toot_entry[sid='"+statuses[i].in_reply_to_id+"']").length) {
@@ -219,7 +313,7 @@ api.get(level, load_options, function(statuses) {
 if (statuses.length) {
 let reply_sources = {};
 for(let i in statuses) {
-if(!(show_replies == "false" && statuses[i].in_reply_to_id)) {
+if(!(show_replies == "false" && statuses[i].in_reply_to_id) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id && level === "timelines/home" | level === "timelines/public") {
 if(!reply_sources[statuses[i].in_reply_to_id] & !$(".toot_entry[sid='"+statuses[i].in_reply_to_id+"']").length) {
@@ -259,9 +353,17 @@ else if(level === "timelines/public" & !load_options.length) {
 var streamscope = "public",
 scope = "federated";
 }
+else if(level === "timelines/direct") {
+var streamscope = "direct",
+scope = "direct";
+}
 else if(level.indexOf("timelines/tag/") != -1) {
 var streamscope = "hashtag&tag="+level.substr(14),
-scope = "";
+scope = "hashtag";
+}
+else if(level.indexOf("timelines/list/") != -1) {
+var streamscope = "list&list="+level.substr(15),
+scope = "lists";
 }
 let statuses = [];
 const original_title = $('title').text();
@@ -271,7 +373,7 @@ const streaming_option = localStorage.getItem("setting_post_stream");
 if(userstream.event === "update") {
 if(streaming_option === "manual") {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id)) {
+if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
 $('#js-stream_update').css({'display':'block','height':'auto','padding':'10px'});
 statuses.unshift(userstream.payload);
 $('#js-stream_update > button > span').text(statuses.length);
@@ -282,7 +384,7 @@ $('#header .header_nav_list .'+scope+'_badge').removeClass('invisible');
 }
 else if (streaming_option === "auto") {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id)) {
+if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
 timeline_template(userstream.payload).prependTo("#js-timeline");
 replaceInternalLink();
 replace_emoji();
@@ -303,7 +405,7 @@ else if(streaming_option == "ontop") {
 var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 if(scrollTop == 0) {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id)) {
+if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
 timeline_template(userstream.payload).prependTo("#js-timeline");
 replaceInternalLink();
 replace_emoji();
@@ -322,7 +424,7 @@ replace_emoji();
 }
 else {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id)) {
+if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
 statuses.unshift(userstream.payload);
 $('title').text("("+statuses.length+") "+original_title);
 }
@@ -547,7 +649,8 @@ if ( RelationshipsObj[i].following ) {
 const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
 button.removeClass("follow_button");
 button.addClass("following_button");
-button.text(__('Following'));
+button.children("span").text(__('Following'));
+button.children("i").removeClass("fa-user-plus").addClass("fa-user-times");
 }
 }
 });
@@ -574,7 +677,8 @@ if ( RelationshipsObj[i].following ) {
 const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[i].id+'"]');
 button.removeClass("follow_button");
 button.addClass("following_button");
-button.text(__('Following'));
+button.children("span").text(__('Following'));
+button.children("i").removeClass("fa-user-plus").addClass("fa-user-times");
 }
 }
 });
@@ -607,6 +711,9 @@ AccountObj.display_name = htmlEscape(AccountObj.display_name);
 for(i=0;i<AccountObj.emojis.length;i++) {
 AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+AccountObj.emojis[i].shortcode+":","g"),"<img src='"+AccountObj.emojis[i].url+"' class='emoji'>");
 }
+const calendar = [__("Jan"),__("Feb"),__("Mar"),__("Apr"),__("May"),__("Jun"),__("Jul"),__("Aug"),__("Sep"),__("Oct"),__("Nov"),__("Dec")];
+var creation_date = new Date(AccountObj.created_at);
+creation_date = calendar[creation_date.getUTCMonth()]+" "+creation_date.getUTCFullYear();
 $("#js_header_image").attr('src', AccountObj.header);
 $("#js_profile_image").attr('src', AccountObj.avatar);
 $("#js_toots_count").text(AccountObj.statuses_count);
@@ -616,8 +723,13 @@ $("#js_profile_displayname").addClass("emoji_poss").html(AccountObj.display_name
 $("#js_profile_username").text(AccountObj.acct);
 $("#js_profile_bio").addClass("emoji_poss").html(AccountObj.note);
 $("#js_profile_bio .emojione").removeClass("emojione").addClass("emoji");
+$('#js_profile_public_link a').attr('href',AccountObj.url);
+$('#js_profile_joined_date span span').text(__("Joined at ")+creation_date);
 console.log(AccountObj.id);
 console.log(current_id);
+if(AccountObj.acct.indexOf("@") != -1) {
+$('#js_profile_public_link').removeClass("invisible");
+}
 if( AccountObj.id == current_id ) {
 $(`<a href="/settings/profile">
 <button class="profile_edit_button relationship_button">
@@ -1533,7 +1645,7 @@ $("#js-overlay_content_wrap .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_08');
 $('.overlay_copy_link').removeClass('invisible');
-$('.overlay_copy_link_form input').val($(this).attr('url'));
+$('.overlay_copy_link input').val($(this).attr('url'));
 return false;
 });
 cbelem.click();
@@ -1544,7 +1656,7 @@ $("#js-overlay_content_wrap .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_08');
 $('.overlay_copy_link').removeClass('invisible');
-$('.overlay_copy_link_form input').val($(this).attr('url'));
+$('.overlay_copy_link input').val($(this).attr('url'));
 return false;
 }
 });
@@ -1559,7 +1671,11 @@ $("#js-overlay_content_wrap .temporary_object").empty();
 $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
 $('#js-overlay_content_wrap .overlay_status').addClass('invisible');
 $('#js-overlay_content_wrap .single_reply_status').addClass('invisible');
+$('#js-overlay_content_wrap .report_status').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_copy_link').addClass('invisible');
+$('#js-overlay_content_wrap .overlay_confirm').addClass('invisible');
+$('#js-overlay_content_wrap .overlay_prompt').addClass('invisible');
+$('#js-overlay_content_wrap .overlay_addlist').addClass('invisible');
 $('#js-overlay_content .temporary_object, #js-overlay_content .parmanent_object').removeClass('visible');
 $('#js-overlay_content_wrap .overlay_status.submit_status_label').removeClass('active_submit_button');
 $('#js-overlay_content_wrap .single_reply_status .submit_status_label').removeClass('active_submit_button');
@@ -1567,6 +1683,10 @@ $('#js-overlay_content_wrap #reply_status_form .submit_status_label').removeClas
 $('#js-overlay_content_wrap #header_status_form.submit_status_label').removeClass('active_submit_button');
 $('#js-overlay_content_wrap').removeClass('black_05');
 $('#js-overlay_content_wrap').removeClass('black_08');
+$('#js-overlay_content_wrap .overlay_confirm_yes').off('click');
+$('#js-overlay_content_wrap .overlay_prompt_ok').off('click');
+$('#js-overlay_content_wrap .overlay_prompt_text').val("");
+$('#js-overlay_content_wrap .overlay_addlist_body').empty();
 if ( current_file === "/user" ) {
 history.pushState(null, null, "/"+location.pathname.split("/")[1]+location.search);
 } else {

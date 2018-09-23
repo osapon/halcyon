@@ -14,6 +14,12 @@
 @<a id="js_profile_username" href="#"></a>
 </h2>
 <p id="js_profile_bio" class="profile_bio"></p>
+<div id="js_profile_public_link" class="profile_with_icon invisible" style="margin-bottom:5px">
+<a target="_blank"><i class="fa fa-fw fa-link" aria-hidden="true"></i><span>Open public profile</span></a>
+</div>
+<div id="js_profile_joined_date" class="profile_with_icon" style="margin-bottom:5px">
+<span><i class="fa fa-fw fa-calendar" aria-hidden="true"></i><span></span></span>
+</div>
 <?php include dirname(__FILE__).('/widgets/user_recent_images.php'); ?>
 </section>
 <?php include dirname(__FILE__).('/widgets/side_who_to_follow.php'); ?>

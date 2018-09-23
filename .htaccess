@@ -32,6 +32,16 @@ RewriteRule ^notifications/?$ notifications\.php [NC,L]
 RewriteBase /whotofollow
 RewriteRule ^whotofollow/?$ who_to_follow\.php [NC,L]
 
+# Direct
+RewriteBase /direct
+RewriteRule ^direct/?$ direct\.php [NC,L]
+
+# Lists
+RewriteBase /lists
+RewriteRule ^lists/?$ lists\.php [NC,L]
+RewriteRule ^lists/(\d+)/?$ lists_view\.php?id=$1 [NC,L,QSA]
+RewriteRule ^lists/(\d+)/add/?$ lists_add\.php?id=$1 [NC,L,QSA]
+
 # Search
 RewriteBase /search
 RewriteRule ^search/?$ search_hash_tag\.php [NC,L,QSA]
@@ -63,4 +73,3 @@ RewriteRule ^404/?$ 404\.php [NC,L,QSA]
 ErrorDocument 404 /404
 
 </IfModule>
-

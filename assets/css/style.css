@@ -501,12 +501,12 @@ margin: auto;
 font-size: 18px;
 margin-right: 8px;
 }
-.overlay_copy_link {
+.overlay_simple {
 width: 600px;
 margin: auto;
 margin-top: 20%;
 }
-.overlay_copy_link_header {
+.overlay_simple_header {
 width: 600px;
 padding: 16px;
 box-sizing: border-box;
@@ -520,7 +520,7 @@ font-size: 18px;
 font-weight: 300;
 border-bottom: 1px solid #E6ECF0;
 }
-.overlay_copy_link .overlay_copy_link_form {
+.overlay_simple .overlay_simple_body {
 width: 600px;
 padding: 16px;
 box-sizing: border-box;
@@ -529,7 +529,7 @@ border-bottom-left-radius: 5px;
 border-bottom-right-radius: 5px;
 margin: auto;
 }
-.overlay_copy_link .overlay_copy_link_form input {
+.copy_link_input {
 width: 100%;
 height: 36px;
 padding: 4px 16px;
@@ -538,6 +538,25 @@ background-color: #F5F8FA;
 box-sizing: border-box;
 font-size: 14px;
 border-radius: 3px;
+}
+.overlay_confirm_controls,.overlay_prompt_controls {
+height:31px;
+}
+.overlay_addlist_item {
+padding-top:10px;
+padding-bottom:10px;
+border-bottom:1px solid #E6ECF0;
+}
+.overlay_addlist_item:first-child {
+padding-top:0;
+}
+.overlay_addlist_item:last-child {
+padding-bottom:0;
+border-bottom-width:0;
+}
+.overlay_addlist_item > .halcyon_button {
+float:right;
+margin-top:-3px;
 }
 .relationship_button {
 display: flex;
@@ -790,8 +809,8 @@ font-size: 14px;
 line-height: 20px;
 margin-top: 4px;
 }
-.toot_entry .toot_entry_body .toot_content .toot_article a {
- color: #2588D0;
+.toot_entry .toot_entry_body .toot_content .toot_article a,.halcyon_link {
+color: #2588D0;
 }
 .toot_entry .toot_entry_body .toot_content .toot_article.content_warning .status_content {
 display: none;
@@ -1101,7 +1120,7 @@ height: auto;
 #js-follows_profile .follows_profile_box .follows_profile .follows_profile_bio p a {
 color: #189EFC
 }
-#js-follows_profile .follow_button {
+#js-follows_profile .halcyon_button {
 display: flex;
 flex-wrap: nowrap;
 align-items: center;
@@ -1114,31 +1133,21 @@ position: absolute;
 right: 16px;
 top: -32px;
 }
-#js-follows_profile .follow_button i {
+#js-follows_profile .halcyon_button i {
 color: #189EFC;
 margin-right: 4px;
 }
-#js-follows_profile .follow_button span {
+#js-follows_profile .halcyon_button span {
 font-weight: 600;
 }
-#js-follows_profile .follow_button:hover,
-#js-follows_profile .follow_button:hover i {
+#js-follows_profile .halcyon_button:hover,
+#js-follows_profile .halcyon_button:hover i {
 background-color: #189EFC;
 color: #fff!important;
 }
 #js-follows_profile .following_button {
-display: flex;
-flex-wrap: nowrap;
-align-items: center;
-font-size: 13px;
-padding: 6px 18px;
-margin-top: 4px;
-border-radius: 4px;
 border: 1px solid #2B94DA;
 background-color: #189EFC;
-position: absolute;
-right: 16px;
-top: -32px;
 }
 #js-follows_profile .following_button i {
 color: #fff;
@@ -1681,7 +1690,7 @@ background-color: #189EFC;
 text-decoration: none;
 color: #fff;
 }
-#header .header_nav_wrap .header_right_box .toot_button {
+.toot_button {
 width: 90px;
 height: 100%;
 border-radius: 4px;
@@ -1689,25 +1698,25 @@ color: #fff;
 background-color: #2588D0;
 transition: 0.15s ease-out;;
 }
-#header .header_nav_wrap .header_right_box .toot_button:hover {
+.toot_button:hover {
 background-color: #2571D0;
 transition: 0.15s ease-out;;
 }
-#header .header_nav_wrap .header_right_box .toot_button:active {
+.toot_button:active {
 background-color: #255ED0;
 transition: 0.15s ease-out;;
 }
-#header .header_nav_wrap .header_right_box .toot_button .toot_button_label {
+.toot_button .toot_button_label {
 display: flex;
 justify-content: center;
 align-items: center;
 }
-#header .header_nav_wrap .header_right_box .toot_button i {
+.toot_button i {
 display: inline-block;
 font-size: 21px;
 margin-right: 2px;
 }
-#header .header_nav_wrap .header_right_box .toot_button span {
+.toot_button span {
 font-size: 13px;
 font-weight: 500;
 }
@@ -1978,12 +1987,14 @@ word-wrap: break-word;
 #main .article_wrap .left_column .profile_section_wrap > .profile_bio a {
 color: #2588D0;
 }
-#js_profile_recent_images a {
-color: #2588D0;
+.profile_with_icon > a,.profile_with_icon > span {
 font-size: 13px;
 font-weight: 300;
 }
-#js_profile_recent_images a i {
+.profile_with_icon > a {
+color: #2588D0;
+}
+.profile_with_icon i {
 color: #657786;
 margin-right: 8px;
 font-size: 16px;

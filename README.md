@@ -14,7 +14,17 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 ## Translate
 [Help us translating Halcyon into many languages](https://translate.zanata.org/project/view/halcyon)
 
+## Features
+- Twitter like UI, familiar interface.
+- Able to use on all instances.
+- No tracking, No ads.
+- Supports multiple languages
+
+## Install
+Read our new wiki pages: https://notabug.org/halcyon-suite/halcyon/wiki
+
 ## Blog
+- Release of Version 2.1.0 - [Blog article coming soon]
 - Release of Version 2.0.2 - Added dark theme,improved Japanese translation,added Galician translation,links to posts open in Halcyon now,smaller screens supported
 - Release of Version 2.0.1 - Added the languages Polish,Japanese and Korean,fixed many bugs,automatically mention all participants of discussions
 - [Release of Version 2.0.0 - The biggest changes in detail](https://nikisoft.myblog.de/nikisoft/art/11636651/Halcyon-2-0-0-The-biggest-changes-in-detail)
@@ -38,20 +48,6 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 - Release of Version 1.0.2 - Fixed a Firefox-only bug and some wrong links, added version info and an annoying cookie notice (sorry, but that's EU law)
 - Release of Version 1.0.1 - Two bugfixes
 - [Release of Version 1.0.0](https://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
-
-## Features
-- Twitter like UI, familiar interface.
-- Able to use on all instances.
-- No tracking, No ads.
-- Supports multiple languages
-
-## Requirement
-- Apache/Nginx/Caddy/lighttpd
-- PHP
-- No database needed anymore!
-
-## Setup
-Upload it, edit config.ini and have fun!
 
 ## Credits
 - [Kirschn/mastodon.js](https://github.com/Kirschn/mastodon.js)
