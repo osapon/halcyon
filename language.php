@@ -4,7 +4,7 @@ $locale = '';
 if(isset($_COOKIE['language'])) $locale = $_COOKIE['language'];
 else if(isset($_SERVER['HTTP_ACCEPT_LANGUAGE'])) {
 $langcode = Locale::acceptFromHttp($_SERVER['HTTP_ACCEPT_LANGUAGE']);
-if(file_exists(__DIR__.'/locale/'.$langcode)) $locale = langcode;
+if(file_exists(__DIR__.'/locale/'.$langcode)) $locale = $langcode;
 else if(file_exists(__DIR__.'/locale/'.explode("_",$langcode)[0])) $locale = explode("_",$langcode)[0];
 else $locale = $config['App']['default_language'];
 }
