@@ -724,7 +724,7 @@ $("#js_profile_username").text(AccountObj.acct);
 $("#js_profile_bio").addClass("emoji_poss").html(AccountObj.note);
 $("#js_profile_bio .emojione").removeClass("emojione").addClass("emoji");
 $('#js_profile_public_link a').attr('href',AccountObj.url);
-$('#js_profile_joined_date span span').text(__("Joined at ")+creation_date);
+$('#js_profile_joined_date span span').text(__("Joined at")+" "+creation_date);
 console.log(AccountObj.id);
 console.log(current_id);
 if(AccountObj.acct.indexOf("@") != -1) {
@@ -912,6 +912,7 @@ autosize($('#overlay_status_form .status_textarea textarea'));
 $('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
 $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#overlay_status_form .character_count').html(current_instance_charlimit);
+$('label[for=overlay_status_emoji]').click(function(e) {$('#overlay_status_emoji').trigger('click',e)});
 $('#overlay_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
@@ -1105,6 +1106,7 @@ autosize($('#header_status_form .status_textarea textarea'));
 $('#header_status_form .status_bottom').removeClass('invisible');
 $('#header_status_form .submit_status_label').addClass('active_submit_button');
 $('#header_status_form .character_count').html(current_instance_charlimit);
+$('label[for=header_status_emoji]').click(function(e) {$('#header_status_emoji').trigger('click',e)});
 $('#header_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
@@ -1230,6 +1232,7 @@ $('#reply_status_form .status_bottom').removeClass('invisible');
 $('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val(replyto);
 $('#reply_status_form .character_count').html(current_instance_charlimit);
+$('label[for=reply_status_emoji]').click(function(e) {$('#reply_status_emoji').trigger('click',e)});
 $('#reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
@@ -1409,6 +1412,7 @@ $('#single_reply_status_form').attr('tid',sid);
 $('.single_reply_status .single_reply_status_header span').addClass("emoji_poss").html(__("Reply to")+" "+display_name);
 $('#single_reply_status_form textarea').val(replyto);
 $('#single_reply_status_form .character_count').html(current_instance_charlimit);
+$('label[for=single_reply_status_emoji]').click(function(e) {$('#single_reply_status_emoji').trigger('click',e)});
 $('#single_reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),

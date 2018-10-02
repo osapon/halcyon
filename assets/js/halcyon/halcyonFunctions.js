@@ -41,33 +41,33 @@ $(this).attr('href',getRelativeURL($(this).attr('href')));
 $(".toot_article a").each(function(i) {
 const pltags = $(this).attr('href').match(/https:\/\/.+..+\/tag\/(.+)\/?/);
 if(pltags) {
-$(this).attr('href','/search?q='+pltags[1]);
+$(this).attr('target','_self').attr('href','/search?q='+pltags[1]);
 }
 const mstags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/(.+)\/?/);
 if(mstags) {
-$(this).attr('href','/search?q='+mstags[1]);
+$(this).attr('target','_self').attr('href','/search?q='+mstags[1]);
 }
 const plusers = $(this).attr('href').match(/https:\/\/.+..+\/users\/([a-zA-Z\d_]+)(\/statuses\/\d+)?/);
 if(plusers && plusers[2] == undefined) {
-$(this).attr('href','/@'+plusers[1]+'@'+$(this).attr('href').split("/")[2]);
+$(this).attr('target','_self').attr('href','/@'+plusers[1]+'@'+$(this).attr('href').split("/")[2]);
 }
 else if(plusers && plusers[2] != undefined) {
-$(this).attr('href',"javascript:openStatus('"+plusers[0]+"')");
+$(this).attr('target','_self').attr('href',"javascript:openStatus('"+plusers[0]+"');void(0)");
 }
 const msusers = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)(\/\d+)?/);
 if(msusers && msusers[2] == undefined) {
-$(this).attr('href','/@'+msusers[1]+'@'+$(this).attr('href').split("/")[2]);
+$(this).attr('target','_self').attr('href','/@'+msusers[1]+'@'+$(this).attr('href').split("/")[2]);
 }
 else if(msusers && msusers[2] != undefined) {
-$(this).attr('href',"javascript:openStatus('"+msusers[0]+"')");
+$(this).attr('target','_self').attr('href',"javascript:openStatus('"+msusers[0]+"');void(0)");
 }
 const gsstatus = $(this).attr('href').match(/https:\/\/.+..+\/notice\/(\d+)?/);
 if(gsstatus) {
-$(this).attr('href',"javascript:openStatus('"+gsstatus[0]+"')");
+$(this).attr('target','_self').attr('href',"javascript:openStatus('"+gsstatus[0]+"');void(0)");
 }
 const plstatus = $(this).attr('href').match(/https:\/\/.+..+\/objects\/([\da-z]{8}-[\da-z]{4}-[\da-z]{4}-[\da-z]{4}-[\da-z]{12})?/);
 if(plstatus && plstatus[1] != undefined) {
-$(this).attr('href',"javascript:openStatus('"+plstatus[0]+"')");
+$(this).attr('target','_self').attr('href',"javascript:openStatus('"+plstatus[0]+"');void(0)");
 }
 if(localStorage.setting_link_previews == "true") {
 if(!window.cards) {

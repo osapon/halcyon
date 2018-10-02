@@ -983,7 +983,7 @@ ${toot_reblog_button}
 <input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
 <input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio"${checked_private}>
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"${checked_direct}>
-<button id="reply_status_emoji" name="status_emoji" type="button"></button>
+<div id="reply_status_emoji" name="status_emoji" type="button"></div>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -1197,7 +1197,7 @@ ${media_views}
 <input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
 <input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio">
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
-<button id="reply_status_emoji" name="status_emoji" type="button"></button>
+<div id="reply_status_emoji" name="status_emoji" type="button"></div>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}

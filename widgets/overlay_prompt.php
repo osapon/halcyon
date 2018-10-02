@@ -9,7 +9,7 @@
 </div>
 <div class="overlay_prompt_controls">
 <button class="overlay_prompt_yes toot_button" style="float:right"><div class="toot_button_label"><i class="fa fa-fw fa-check"></i><span><?=_('Ok')?></span></div></button>
-<a href="javascript:$('.close_button').click()" class="overlay_prompt_cancel halcyon_link" style="float:right;margin-top:5px;margin-right:10px"><i class="fa fa-times"></i> <?=_('Cancel')?></a>
+<a href="javascript:$('.close_button').click();void(0)" class="overlay_prompt_cancel halcyon_link" style="float:right;margin-top:5px;margin-right:10px"><i class="fa fa-times"></i> <?=_('Cancel')?></a>
 </div>
 </div>
 </div>

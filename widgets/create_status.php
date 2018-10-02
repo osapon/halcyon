@@ -48,7 +48,7 @@
 <input id="header_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio">
 <input id="header_status_fonly" name='privacy_option' value="private" class="invisible" type="radio">
 <input id="header_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
-<button id="header_status_emoji" name="status_emoji" type="button"></button>
+<div id="header_status_emoji" name="status_emoji" type="button"></div>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 </span>

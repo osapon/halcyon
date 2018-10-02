@@ -26,7 +26,7 @@ $("<a>").attr("href","/lists/"+lists[i].id).addClass("list-title").addClass("ite
 $("<a>").attr("href","/lists/"+lists[i].id+"/add").addClass("list-adduser").addClass("item").css("float","right").append(
 $("<i>").addClass("fa").addClass("fa-user-plus")
 )).append(
-$("<a>").attr("href","javascript:null").addClass("list-edit").addClass("item").css("float","right").append(
+$("<a>").attr("href","javascript:void(0)").addClass("list-edit").addClass("item").css("float","right").append(
 $("<i>").addClass("fa").addClass("fa-pencil")
 ).click(function() {
 const list_id = $(this).parent().parent().attr("list-id");
@@ -51,7 +51,7 @@ replace_emoji();
 }
 });
 })).append(
-$("<a>").attr("href","javascript:null").addClass("list-delete").addClass("item").css("float","right").append(
+$("<a>").attr("href","javascript:void(0)").addClass("list-delete").addClass("item").css("float","right").append(
 $("<i>").addClass("fa").addClass("fa-trash")
 ).click(function() {
 const list_id = $(this).parent().parent().attr("list-id");

@@ -106,16 +106,21 @@ $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass
 });
 $(document).on('change',".display_name_wrap input[name='display_name']", function(e) {
 $("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
-api.patch("accounts/update_credentials","display_name="+$(this).val(),function() {
-$.removeCookie("session");
+var formdata = new FormData();
+formdata.append('display_name',$(this).val());
+api.patch("accounts/update_credentials",formdata,function(data) {
+current_display_name = data.display_name;
+localStorage.current_display_name = current_display_name;
+$(".js_current_profile_displayname").text(current_display_name);
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
-putMessage(__("Changed setting to")+" "+$(this).val());
+putMessage(__("Changed setting to")+" "+data.display_name);
 });
 });
 $(document).on('change',".about_me_wrap textarea[name='about_me']", function(e) {
 $("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
-api.patch("accounts/update_credentials","note="+$(this).val(),function() {
-$.removeCookie("session");
+var formdata = new FormData();
+formdata.append('note',$(this).val());
+api.patch("accounts/update_credentials",formdata,function() {
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 putMessage(__("Changed about me setting"));
 });
@@ -125,8 +130,10 @@ if($('#setting_avatar').prop('files')[0]) {
 $("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
 var formdata = new FormData();
 formdata.append('avatar',$('#setting_avatar').prop('files')[0]);
-api.patch("accounts/update_credentials",formdata,function() {
-$.removeCookie("session");
+api.patch("accounts/update_credentials",formdata,function(data) {
+current_avatar = data.avatar;
+localStorage.current_avatar = current_avatar;
+$(".js_current_profile_image").attr("src",current_avatar);
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 putMessage(__("Uploaded new avatar"));
 })
@@ -137,8 +144,10 @@ if($('#setting_header').prop('files')[0]) {
 $("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
 var formdata = new FormData();
 formdata.append('header',$('#setting_header').prop('files')[0]);
-api.patch("accounts/update_credentials",formdata,function() {
-$.removeCookie("session");
+api.patch("accounts/update_credentials",formdata,function(data) {
+current_header = data.header;
+localStorage.current_header = current_header;
+$(".js_current_header_image").attr("src",current_header);
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 putMessage(__("Uploaded new header"));
 })
@@ -146,20 +155,19 @@ putMessage(__("Uploaded new header"));
 });
 $("#setting_lock_account").change(function() {
 $("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
+var formdata = new FormData();
 if(this.checked) {
-api.patch("accounts/update_credentials","locked=1",function() {
-$.removeCookie("session");
-$("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
-putMessage(__("Account locked"));
-});
+formdata.append('locked','1');
+var msgtext = "Account locked";
 }
 else {
-api.patch("accounts/update_credentials","locked=0",function() {
-$.removeCookie("session");
-$("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
-putMessage(__("Account unlocked"));
-});
+formdata.append('locked','0');
+var msgtext = "Account unlocked";
 }
+api.patch("accounts/update_credentials",formdata,function() {
+$("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
+putMessage(__(msgtext));
+});
 })
 }
 else if(window.location.pathname == "/settings/appearance") {
