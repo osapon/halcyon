@@ -714,13 +714,17 @@ AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+Account
 const calendar = [__("Jan"),__("Feb"),__("Mar"),__("Apr"),__("May"),__("Jun"),__("Jul"),__("Aug"),__("Sep"),__("Oct"),__("Nov"),__("Dec")];
 var creation_date = new Date(AccountObj.created_at);
 creation_date = calendar[creation_date.getUTCMonth()]+" "+creation_date.getUTCFullYear();
+var is_account_locked = "";
+if(AccountObj.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 $("#js_header_image").attr('src', AccountObj.header);
 $("#js_profile_image").attr('src', AccountObj.avatar);
 $("#js_toots_count").text(AccountObj.statuses_count);
 $("#js_following_count").text(AccountObj.following_count);
 $("#js_followers_count").text(AccountObj.followers_count);
 $("#js_profile_displayname").addClass("emoji_poss").html(AccountObj.display_name);
-$("#js_profile_username").text(AccountObj.acct);
+$("#js_profile_username").html(AccountObj.acct+is_account_locked);
 $("#js_profile_bio").addClass("emoji_poss").html(AccountObj.note);
 $("#js_profile_bio .emojione").removeClass("emojione").addClass("emoji");
 $('#js_profile_public_link a').attr('href',AccountObj.url);
@@ -741,6 +745,7 @@ $(`<a href="${current_favourites_link}">
 <span>${__('Show')}</span>
 </a>`).appendTo("#js-profile_nav_favourites");
 } else {
+$("#profile_toot_buttons").show();
 api.get('accounts/relationships', [{name:'id', data:String(AccountObj.id)}], function(RelationshipObj) {
 if (RelationshipObj[0].followed_by) {
 $('#main .profile_username .profile_followed_by').removeClass('invisible');
@@ -808,13 +813,34 @@ if(userstream.payload.account.display_name.length == 0) {
 userstream.payload.account.display_name = userstream.payload.account.username;
 }
 switch(userstream.payload.type) {
-case "favourite":pushNotification("New favourite",userstream.payload.account.display_name+" "+__("favourited your toot"));break;
-case "reblog":pushNotification("New boost",userstream.payload.account.display_name+" "+__("boosted your toot"));break;
-case "follow":pushNotification("New follower",userstream.payload.account.display_name+" "+__("followed you"));$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
-case "mention":pushNotification("New mention",userstream.payload.account.display_name+" "+__("mentioned you"));break;
+case "favourite":pushNotification(__("New favourite"),userstream.payload.account.display_name+" "+__("favourited your toot"));break;
+case "reblog":pushNotification(__("New boost"),userstream.payload.account.display_name+" "+__("boosted your toot"));break;
+case "follow":pushNotification(__("New follower"),userstream.payload.account.display_name+" "+__("followed you"));$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
+case "mention":pushNotification(__("New mention"),userstream.payload.account.display_name+" "+__("mentioned you"));break;
 }
 }
 });
+if(localStorage.setting_service_worker == "true") {
+if("serviceWorker" in navigator) {
+navigator.serviceWorker.register("/assets/js/halcyon/halcyonWorker.js").then(function(worker) {
+console.log("Service worker successfully registered",worker);
+if(worker.active) {
+var translation = new Object();
+translation["New favourite"] = __("New favourite");
+translation["New boost"] = __("New boost");
+translation["New follower"] = __("New follower");
+translation["New mention"] = __("New mention");
+translation["favourited your toot"] = __("favourited your toot");
+translation["boosted your toot"] = __("boosted your toot");
+translation["followed you"] = __("followed you");
+translation["mentioned you"] = __("mentioned you");
+worker.active.postMessage({instance:current_instance,authtoken:authtoken,translation:translation});
+}
+}).catch(function(error) {
+console.log("There was an error when registering the service worker",error);
+});
+}
+}
 }
 function setOverlayStatus(sid) {
 if ( !window.getSelection().toString() ) {
@@ -894,8 +920,10 @@ if(!$(e.target).closest('#creat_status').length && !$(e.target).closest('.overla
 $('#overlay_status_emoji').lsxEmojiPicker("destroy");
 }
 });
-$(document).on('click', '#creat_status', function(e) {
-switch(localStorage.getItem("setting_post_privacy")) {
+$(document).on('click', '#creat_status,.profile_sendto', function(e) {
+if($(this).attr("privacy")) privacy_mode = $(this).attr("privacy")
+else privacy_mode = localStorage.getItem("setting_post_privacy")
+switch(privacy_mode) {
 case "public":picon="globe";break;
 case "unlisted":picon="unlock-alt";break;
 case "private":picon="lock";break;
@@ -909,8 +937,12 @@ $('#overlay_status_form .status_textarea textarea').addClass('focus');
 $('.overlay_status .submit_status_label').addClass('active_submit_button');
 $('#overlay_status_form .status_textarea textarea').focus();
 autosize($('#overlay_status_form .status_textarea textarea'));
-$('#overlay_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
+$('#overlay_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
+if($(this).attr("display_name")) $('.overlay_status .overlay_status_header span').addClass("emoji_poss").html(__("Toot to")+" "+$(this).attr("display_name"));
+else $('.overlay_status .overlay_status_header span').html(__("Compose new Toot"));
+if($(this).attr("acct")) $('#overlay_status_form textarea').val($(this).attr("acct")+" ");
+else $('#overlay_status_form textarea').val("");
 $('#overlay_status_form .character_count').html(current_instance_charlimit);
 $('label[for=overlay_status_emoji]').click(function(e) {$('#overlay_status_emoji').trigger('click',e)});
 $('#overlay_status_emoji').lsxEmojiPicker({

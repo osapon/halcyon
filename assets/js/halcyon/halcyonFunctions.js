@@ -205,6 +205,7 @@ localStorage.setItem("current_acct",AccountObj["acct"]);
 localStorage.setItem("current_url",getRelativeURL(AccountObj["url"],AccountObj["id"]));
 localStorage.setItem("current_header",AccountObj["header"]);
 localStorage.setItem("current_avatar",AccountObj["avatar"]);
+localStorage.setItem("current_locked",AccountObj["locked"]);
 localStorage.setItem("current_statuses_count",AccountObj["statuses_count"]);
 localStorage.setItem("current_following_count",AccountObj["following_count"]);
 localStorage.setItem("current_followers_count",AccountObj["followers_count"]);
@@ -218,6 +219,7 @@ current_acct = localStorage.getItem("current_acct");
 current_url = localStorage.getItem("current_url");
 current_header = localStorage.getItem("current_header");
 current_avatar = localStorage.getItem("current_avatar");
+current_locked = localStorage.getItem("current_locked");
 current_statuses_count = localStorage.getItem("current_statuses_count");
 current_following_count = localStorage.getItem("current_following_count");
 current_followers_count = localStorage.getItem("current_followers_count");
@@ -228,8 +230,8 @@ current_favourites_link = localStorage.getItem("current_favourites_link");
 setCurrentProfile();
 });
 api.get("accounts/"+current_id+"/following",function(data) {
-followings = new Array();
-for(i=0;i<data.length;i++) {
+var followings = new Array();
+for(var i=0;i<data.length;i++) {
 if(data[i].acct.indexOf("@") == -1) {
 data[i].acct = data[i].acct+"@"+current_instance;
 }
@@ -237,6 +239,28 @@ followings.push(data[i].acct);
 }
 localStorage.setItem("current_following_accts",JSON.stringify(followings));
 current_following_accts = followings;
+});
+api.get("blocks",function(data) {
+var blocks = new Array();
+for(i=0;i<data.length;i++) {
+if(data[i].acct.indexOf("@") == -1) {
+data[i].acct = data[i].acct+"@"+current_instance;
+}
+blocks.push(data[i].acct);
+}
+localStorage.setItem("current_blocked_accts",JSON.stringify(blocks));
+current_blocked_accts = blocks;
+});
+api.get("mutes",function(data) {
+var mutes = new Array();
+for(i=0;i<data.length;i++) {
+if(data[i].acct.indexOf("@") == -1) {
+data[i].acct = data[i].acct+"@"+current_instance;
+}
+mutes.push(data[i].acct);
+}
+localStorage.setItem("current_muted_accts",JSON.stringify(mutes));
+current_muted_accts = mutes;
 });
 api.get("instance",function(data) {
 if(data.max_toot_chars) {
@@ -273,6 +297,7 @@ current_acct = localStorage.getItem("current_acct");
 current_url = localStorage.getItem("current_url");
 current_header = localStorage.getItem("current_header");
 current_avatar = localStorage.getItem("current_avatar");
+current_locked = localStorage.getItem("current_locked");
 current_statuses_count = localStorage.getItem("current_statuses_count");
 current_following_count = localStorage.getItem("current_following_count");
 current_followers_count = localStorage.getItem("current_followers_count");
@@ -282,11 +307,17 @@ current_followers_count_link = localStorage.getItem("current_followers_count_lin
 current_favourites_link = localStorage.getItem("current_favourites_link");
 current_following_accts = localStorage.getItem("current_following_accts");
 current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
+current_blocked_accts = localStorage.getItem("current_blocked_accts");
+current_muted_accts = localStorage.getItem("current_muted_accts");
 $(function() {setCurrentProfile()});
 }
 function setCurrentProfile() {
+var is_account_locked = "";
+if(current_locked == "true") {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 $(".js_current_profile_displayname").text(current_display_name);
-$(".js_current_profile_username").text(current_acct);
+$(".js_current_profile_username").html(current_acct+is_account_locked);
 $(".js_current_profile_link").attr("href", current_url);
 $(".js_current_header_image").attr("src", current_header);
 $(".js_current_profile_image").attr("src", current_avatar);
@@ -382,7 +413,7 @@ localStorage.current_follow_loaded = true;
 if(data.status == 200) {
 var wtflist = new Array();
 for(i=0;i<data.ids.length;i++) {
-if(current_following_accts.indexOf(data.ids[i].to_id) == -1) {
+if(current_following_accts.indexOf(data.ids[i].to_id) == -1 && current_blocked_accts.indexOf(data.ids[i].to_id) == -1 && current_muted_accts.indexOf(data.ids[i].to_id) == -1) {
 wtflist.push(data.ids[i].to_id);
 }
 }

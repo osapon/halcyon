@@ -133,6 +133,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 <li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
 <li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html=(`
 <li sid="${status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -149,7 +153,7 @@ const html=(`
 ${status.account.display_name}
 </span>
 <span class="username">
-@${status.account.acct}
+@${status.account.acct}${is_account_locked}
 </span>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </a>
@@ -269,6 +273,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account
 <li><a class="addlist_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Add to list')} @${status.reblog.account.username}</a></li>
 <li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.reblog.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
@@ -290,7 +298,7 @@ const html = (`
 ${status.reblog.account.display_name}
 </span>
 <span class="username">
-@${status.reblog.account.acct}
+@${status.reblog.account.acct}${is_account_locked}
 </span>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </a>
@@ -404,6 +412,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 <li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
 <li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html = (`
 <li sid="${status.id}" class="toot_entry">
 <div class="pinned_notice_box">
@@ -423,7 +435,7 @@ const html = (`
 ${status.account.display_name}
 </span>
 <span class="username">
-@${status.account.acct}
+@${status.account.acct}${is_account_locked}
 </span>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </a>
@@ -501,6 +513,10 @@ NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.
 for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
+var is_account_locked = "";
+if(NotificationObj.status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
 <div class="notice_author_box">
@@ -523,7 +539,7 @@ const html = (`
 ${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
-@${NotificationObj.status.account.acct}
+@${NotificationObj.status.account.acct}${is_account_locked}
 </span>
 </a>
 </div>
@@ -544,7 +560,11 @@ NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.
 for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
 }
-const sid= NotificationObj.status.id,
+const sid= NotificationObj.status.id;
+var is_account_locked = "";
+if(NotificationObj.status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
 <div class="notice_author_box">
@@ -567,7 +587,7 @@ html = (`
 ${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
-@${NotificationObj.status.account.acct}
+@${NotificationObj.status.account.acct}${is_account_locked}
 </span>
 </a>
 </div>
@@ -657,6 +677,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.statu
 <li><a class="addlist_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.status.account.display_name}">${__('Add to list')} @${NotificationObj.status.account.username}</a></li>
 <li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(NotificationObj.status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html=(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
 <div class="toot_entry_body">
@@ -673,7 +697,7 @@ const html=(`
 ${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
-@${NotificationObj.status.account.acct}
+@${NotificationObj.status.account.acct}${is_account_locked}
 </span>
 <time datetime="${toot_attr_datetime}">${toot_datetime}</time>
 </a>
@@ -751,6 +775,10 @@ AccountObj.display_name = htmlEscape(AccountObj.display_name);
 for(i=0;i<AccountObj.emojis.length;i++) {
 AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+AccountObj.emojis[i].shortcode+":","g"),"<img src='"+AccountObj.emojis[i].url+"' class='emoji'>");
 }
+var is_account_locked = "";
+if(AccountObj.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 var html = (`
 <div class="follows_profile_box" mid="${AccountObj.id}">
 <div class="follows_profile_header">
@@ -770,7 +798,7 @@ var html = (`
 ${AccountObj.display_name}
 </h2>
 <span class="js_follows_profile_username">
-@${AccountObj.acct}
+@${AccountObj.acct}${is_account_locked}
 </span>
 </a>
 </div>
@@ -863,6 +891,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 <li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
 <li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html=(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -875,7 +907,7 @@ const html=(`
 ${status.account.display_name}
 </span>
 <span class="username">
-@${status.account.acct}
+@${status.account.acct}${is_account_locked}
 </span>
 </a>
 <div class="expand_button_wrap">
@@ -1072,6 +1104,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account
 <li><a class="addlist_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Add to list')} @${status.reblog.account.username}</a></li>
 <li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.reblog.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html=(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
@@ -1084,7 +1120,7 @@ const html=(`
 ${status.reblog.account.display_name}
 </span>
 <span class="username">
-@${status.reblog.account.acct}
+@${status.reblog.account.acct}${is_account_locked}
 </span>
 </a>
 <div class="expand_button_wrap">
@@ -1318,6 +1354,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 <li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
 <li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="toot_entry_body">
@@ -1331,7 +1371,7 @@ const html=(`
 ${status.account.display_name}
 </span>
 <span class="username">
-@${status.account.acct}
+@${status.account.acct}${is_account_locked}
 </span>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </a>
@@ -1450,6 +1490,10 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account
 <li><a class="addlist_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Add to list')} @${status.reblog.account.username}</a></li>
 <li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
 }
+var is_account_locked = "";
+if(status.reblog.account.locked == true) {
+is_account_locked = " <i class='fa fa-lock'></i>";
+}
 const html=(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
@@ -1468,7 +1512,7 @@ const html=(`
 ${status.reblog.account.display_name}
 </span>
 <span class="username">
-@${status.reblog.account.acct}
+@${status.reblog.account.acct}${is_account_locked}
 </span>
 </a>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>

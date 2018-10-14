@@ -152,6 +152,7 @@ Git repository: <a href="https://notabug.org/halcyon-suite/halcyon" target="_bla
 <h2><?=_('Help us')?></h2>
 <p>
 Bitcoin: 1D6GThQqHQYnruKYrKyW9JC86ZGWxjt1hK<br/>
+Liberapay: <a href="https://liberapay.com/nipos">Donate to @nipos</a>
 </p>
 </article>
 </main>

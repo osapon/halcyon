@@ -24,6 +24,7 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 Read our new wiki pages: https://notabug.org/halcyon-suite/halcyon/wiki
 
 ## Blog
+- Release of Version 2.1.2 - Added toot to @someone button to profiles,remove blocked and muted people from who to follow,improved German translation
 - Release of Version 2.1.1 - Profile settings can be changed again,fixed various Firefox-only bugs,Removed error if browser sends no language
 - [Release of Version 2.1.0 - Introducing lists and more](https://nikisoft.myblog.de/nikisoft/art/11640527/Halcyon-2-1-0-Introducing-lists-and-more)
 - Release of Version 2.0.2 - Added dark theme,improved Japanese translation,added Galician translation,links to posts open in Halcyon now,smaller screens supported

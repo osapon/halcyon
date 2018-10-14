@@ -20,6 +20,10 @@
 <div id="js_profile_joined_date" class="profile_with_icon" style="margin-bottom:5px">
 <span><i class="fa fa-fw fa-calendar" aria-hidden="true"></i><span></span></span>
 </div>
+<div id="profile_toot_buttons" style="height:31px;margin-bottom:5px;display:none">
+<button class="toot_button profile_sendto" style="width:calc(50% - 3px)"><div class="toot_button_label"><i class="fa fa-fw fa-pencil-square-o"></i><span><?=_('Toot to')?></span></div></button>
+<button class="toot_button profile_sendto" style="width:calc(50% - 3px)" privacy="direct"><div class="toot_button_label"><i class="fa fa-fw fa-envelope"></i><span><?=_('Message')?></span></div></button>
+</div>
 <?php include dirname(__FILE__).('/widgets/user_recent_images.php'); ?>
 </section>
 </aside>

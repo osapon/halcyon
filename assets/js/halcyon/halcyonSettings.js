@@ -179,16 +179,24 @@ $("#setting_link_previews")[0].checked = true;
 }
 if(localStorage.setting_desktop_notifications == "true") {
 $("#setting_desktop_notifications")[0].checked = true;
+if("serviceWorker" in navigator) {
+$("#service_worker_box").show();
+}
 if (Notification.permission === 'default') {
 Notification.requestPermission(function(p) {
 if (p === 'denied') {
 $("#setting_desktop_notifications")[0].checked = false;
+$("#service_worker_box").hide();
 }
 });
 }
 else if(Notification.permission == "denied") {
 $("#setting_desktop_notifications")[0].checked = false;
+$("#service_worker_box").hide();
 }
+}
+if(localStorage.setting_service_worker == "true") {
+$("#setting_service_worker")[0].checked = true;
 }
 if(localStorage.setting_show_replies == "true") {
 $("#setting_show_replies")[0].checked = true;
@@ -237,6 +245,9 @@ $("#setting_desktop_notifications")[0].checked = false;
 putMessage(__("You didn't allow notifications"));
 }
 else {
+if("serviceWorker" in navigator) {
+$("#service_worker_box").show();
+}
 putMessage(__("Desktop notifications enabled"));
 }
 });
@@ -247,12 +258,42 @@ $("#setting_desktop_notifications")[0].checked = false;
 putMessage(__("You didn't allow notifications"));
 }
 else {
+if("serviceWorker" in navigator) {
+$("#service_worker_box").show();
+}
 putMessage(__("Desktop notifications enabled"));
 }
 }
 else {
 localStorage.setItem("setting_desktop_notifications","false");
+$("#service_worker_box").hide();
 putMessage(__("Desktop notifications disabled"));
+}
+});
+$("#setting_service_worker").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_service_worker","true");
+if("serviceWorker" in navigator) {
+navigator.serviceWorker.register("/assets/js/halcyon/halcyonWorker.js").then(function(worker) {
+console.log("Service worker successfully registered",worker);
+}).catch(function(error) {
+console.log("There was an error when registering the service worker",error);
+});
+}
+putMessage(__("Notifications when tab is closed enabled"));
+}
+else {
+if ('serviceWorker' in navigator) {
+navigator.serviceWorker.getRegistrations().then(function(registrations) {
+if(registrations.length) {
+for(let registration of registrations) {
+registration.unregister();
+}
+}
+});
+}
+localStorage.setItem("setting_service_worker","false");
+putMessage(__("Notifications when tab is closed disabled"));
 }
 });
 $("#setting_show_replies").change(function() {

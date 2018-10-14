@@ -23,9 +23,25 @@ $(".center_column").append(
 $("<header>").attr("list-id",lists[i].id).addClass("timeline_header").css("margin-bottom","10px").append(
 $("<div>").addClass("header_items").append(
 $("<a>").attr("href","/lists/"+lists[i].id).addClass("list-title").addClass("item").addClass("emoji_poss").text(lists[i].title)).append(
-$("<a>").attr("href","/lists/"+lists[i].id+"/add").addClass("list-adduser").addClass("item").css("float","right").append(
-$("<i>").addClass("fa").addClass("fa-user-plus")
-)).append(
+$("<a>").attr("href","javascript:void(0)").addClass("list-delete").addClass("item").css("float","right").append(
+$("<i>").addClass("fa").addClass("fa-trash")
+).click(function() {
+const list_id = $(this).parent().parent().attr("list-id");
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_confirm').removeClass('invisible');
+$('.overlay_confirm_text').text(__("Are you sure that you want to delete this list?"));
+$('.overlay_confirm_yes').click(function() {
+$('.close_button').click();
+api.delete("lists/"+list_id,function(data) {
+$('.header_nav_item[list-id="'+list_id+'"]').remove();
+$('.timeline_header[list-id="'+list_id+'"]').remove();
+$('#js-follows_profile[list-id="'+list_id+'"]').remove();
+putMessage(__("Your list has been deleted"));
+});
+});
+})).append(
 $("<a>").attr("href","javascript:void(0)").addClass("list-edit").addClass("item").css("float","right").append(
 $("<i>").addClass("fa").addClass("fa-pencil")
 ).click(function() {
@@ -51,25 +67,9 @@ replace_emoji();
 }
 });
 })).append(
-$("<a>").attr("href","javascript:void(0)").addClass("list-delete").addClass("item").css("float","right").append(
-$("<i>").addClass("fa").addClass("fa-trash")
-).click(function() {
-const list_id = $(this).parent().parent().attr("list-id");
-$("#js-overlay_content_wrap .temporary_object").empty();
-$('#js-overlay_content_wrap').addClass('view');
-$('#js-overlay_content_wrap').addClass('black_08');
-$('.overlay_confirm').removeClass('invisible');
-$('.overlay_confirm_text').text(__("Are you sure that you want to delete this list?"));
-$('.overlay_confirm_yes').click(function() {
-$('.close_button').click();
-api.delete("lists/"+list_id,function(data) {
-$('.header_nav_item[list-id="'+list_id+'"]').remove();
-$('.timeline_header[list-id="'+list_id+'"]').remove();
-$('#js-follows_profile[list-id="'+list_id+'"]').remove();
-putMessage(__("Your list has been deleted"));
-});
-});
-})))).append(
+$("<a>").attr("href","/lists/"+lists[i].id+"/add").addClass("list-adduser").addClass("item").css("float","right").append(
+$("<i>").addClass("fa").addClass("fa-user-plus")
+)))).append(
 $("<footer>").attr("id","js-follows_footer").attr("list-id",lists[i].id).append(
 $("<i>").addClass("fa").addClass("fa-spin").addClass("fa-circle-o-notch").attr("aria-hidden","true")));
 listAccounts(lists[i].id);
