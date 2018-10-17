@@ -35,7 +35,7 @@
 </div>
 <div class="dark_theme_wrap" style="float:left;width:50%">
 <div class="switch">
-<input type="checkbox" id="setting_dark_theme" <?php if($_COOKIE['darktheme'] == "true") echo "checked='checked'" ?>>
+<input type="checkbox" id="setting_dark_theme" <?php if(array_key_exists('darktheme', $_COOKIE) && $_COOKIE['darktheme'] == "true") echo "checked='checked'" ?>>
 <div class="switch-btn">
 <span></span>
 </div>
