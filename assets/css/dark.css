@@ -573,3 +573,21 @@ border-bottom:0 solid #189EFC;
 .lsx-emojipicker-container,.lsx-emojipicker-container:before {
 background-color:#243447 !important;
 }
+.dropDown {
+background-color:#243447;
+box-shadow:0.5px 0.5px 3px rgba(0,0,0,0.26);
+border:1px solid #000;
+}
+.dropDown li .un {
+color:#66757F;
+}
+.dropDown h3 {
+color:#FFF !important;
+}
+.hoverLi {
+background-color:#189EFC;
+color:#FFF;
+}
+.hoverLi h3,.hoverLi .un {
+color:#FFF !important;
+}

@@ -1341,38 +1341,38 @@ outline:0;
 border:1px solid #189EFC;
 background-color:transparent;
 }
-.side_widget .account_box {
+.account_box {
 display: flex;
 flex-wrap: nowrap;
 align-items: center;
 height: 100%;
 margin-bottom: 12px;
 }
-.side_widget .account_box .icon_box {
+.account_box .icon_box {
 width: 48px;
 height: 48px;
 overflow: hidden;
 margin-right: 8px;
 border-radius: 5px;
 }
-.side_widget .account_box .label_box {
+.account_box .label_box {
 width: 200px;
 }
-.side_widget .account_box .label_box h3 {
+.account_box .label_box h3 {
 overflow: hidden;
 white-space: nowrap;
 text-overflow: ellipsis;
 color: #333;
 }
-.side_widget .account_box .label_box h3 .dn {
+.account_box .label_box h3 .dn {
 font-size: 14px;
 font-weight: 700;
 }
-.side_widget .account_box .label_box h3 .un {
+.account_box .label_box h3 .un {
 font-size: 14px;
 color: #66757F;
 }
-.side_widget .account_box .label_box .follow_button {
+.account_box .label_box .follow_button {
 display: flex;
 flex-wrap: nowrap;
 align-items: center;
@@ -1381,15 +1381,15 @@ padding: 5px 16px;
 margin-top: 4px;
 border-radius: 4px;
 }
-.side_widget .account_box .label_box .follow_button i {
+.account_box .label_box .follow_button i {
 color: #189EFC;
 margin-right: 4px;
 }
-.side_widget .account_box .label_box .follow_button span {
+.account_box .label_box .follow_button span {
 font-weight: 600;
 }
-.side_widget .account_box .label_box .follow_button:hover,
-.side_widget .account_box .label_box .follow_button:hover i {
+.account_box .label_box .follow_button:hover,
+.account_box .label_box .follow_button:hover i {
 background-color: #189EFC;
 color: #fff!important;
 }
@@ -2521,4 +2521,45 @@ width:600px;
 #main .article_wrap {
 width:900px;
 }
+}
+.dropDown {
+display:inline;
+position:absolute;
+background-color:#FFF;
+list-style:none;
+padding:0;
+z-index:1000;
+box-shadow:0.5px 0.5px 3px rgba(0,0,0,0.26);
+box-sizing:border-box;
+cursor:pointer;
+border-radius:3px;
+}
+.dropDown li {
+margin:0;
+padding-top:5px;
+padding-bottom:5px;
+}
+.dropDown li .un {
+color:#66757F;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+display:block;
+}
+.dropDown .icon_box .emoji {
+margin:0;
+vertical-align:0;
+}
+.hoverLi {
+background-color:#189EFC;
+color:#FFF;
+}
+.hoverLi h3,.hoverLi .un {
+color:#FFF !important;
+}
+.showDropDown{
+display:inline;
+}
+.hideDropDown {
+display:none;
 }

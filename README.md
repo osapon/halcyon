@@ -24,6 +24,7 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 Read our new wiki pages: https://notabug.org/halcyon-suite/halcyon/wiki
 
 ## Blog
+- Release of Version 2.1.3 - Added a autocomplete feature for usernames,hashtags and emojis,fixed a bug in the emoji picker (didn't open sometimes)
 - Release of Version 2.1.2 - Added toot to @someone button to profiles,remove blocked and muted people from who to follow,improved German translation
 - Release of Version 2.1.1 - Profile settings can be changed again,fixed various Firefox-only bugs,Removed error if browser sends no language
 - [Release of Version 2.1.0 - Introducing lists and more](https://nikisoft.myblog.de/nikisoft/art/11640527/Halcyon-2-1-0-Introducing-lists-and-more)
@@ -57,3 +58,4 @@ Read our new wiki pages: https://notabug.org/halcyon-suite/halcyon/wiki
 - [distsn/vinayaka](https://github.com/distsn/vinayaka)
 - [LascauxSRL/lsx-emojipicker](https://github.com/LascauxSRL/lsx-emojipicker)
 - [osapon/Pomo](https://github.com/osapon/Pomo)
+- [Summer-Dong/auto-complete-for-text-input-box](https://github.com/Summer-Dong/auto-complete-for-text-input-box)

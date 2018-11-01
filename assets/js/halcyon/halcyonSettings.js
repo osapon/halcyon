@@ -7,6 +7,9 @@ $(".search_filter_wrap input[name='search_filter'][value='"+localStorage.getItem
 if(localStorage.setting_post_sensitive == "true") {
 $("#setting_post_sensitive")[0].checked = true;
 }
+if(localStorage.setting_compose_autocomplete == "true") {
+$("#setting_compose_autocomplete")[0].checked = true;
+}
 if(localStorage.setting_who_to_follow == "true") {
 $("#setting_who_to_follow")[0].checked = true;
 }
@@ -26,6 +29,16 @@ putMessage(__("Mark as NSFW by default enabled"));
 else {
 localStorage.setItem("setting_post_sensitive","false");
 putMessage(__("Mark as NSFW by default disabled"));
+}
+});
+$("#setting_compose_autocomplete").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_compose_autocomplete","true");
+putMessage(__("Autocomplete enabled"));
+}
+else {
+localStorage.setItem("setting_compose_autocomplete","false");
+putMessage(__("Autocomplete disabled"));
 }
 });
 $(document).on('change',".local_instance_wrap input[name='local_instance']", function(e) {

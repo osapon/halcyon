@@ -42,6 +42,7 @@ localStorage.setItem('setting_who_to_follow', 'false');
 localStorage.setItem('setting_show_replies', 'true');
 localStorage.setItem('setting_show_content_warning', 'false');
 localStorage.setItem('setting_show_nsfw', 'false');
+localStorage.setItem('setting_compose_autocomplete', 'true');
 localStorage.setItem('setting_post_privacy','".$profile["source"]["privacy"]."');
 localStorage.setItem('setting_post_sensitive','".$profile["source"]["sensitive"]."');
 $.cookie('darktheme','false',{path:'/',expires:3650});

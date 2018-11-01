@@ -65,6 +65,17 @@ echo "<option value='".$languages[$i]."'".$selected.">"._('Language_'.$languages
 </div>
 </div>
 <div style="float:left;width:50%;text-align:right;margin-top:16px">
+<h3><?=_('Autocomplete in compose field')?></h3>
+</div>
+<div class="compose_autocomplete_wrap" style="float:left;width:50%">
+<div class="switch">
+<input type="checkbox" id="setting_compose_autocomplete">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+</div>
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Local instance')?></h3>
 </div>
 <div class="local_instance_wrap" style="float:left;width:50%">
