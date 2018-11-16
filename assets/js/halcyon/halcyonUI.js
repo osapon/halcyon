@@ -729,6 +729,14 @@ $("#js_profile_bio").addClass("emoji_poss").html(AccountObj.note);
 $("#js_profile_bio .emojione").removeClass("emojione").addClass("emoji");
 $('#js_profile_public_link a').attr('href',AccountObj.url);
 $('#js_profile_joined_date span span').text(__("Joined at")+" "+creation_date);
+for(var i=0;i<AccountObj.fields.length;i++) {
+if(AccountObj.fields[i].verified_at != null) var verified = $("<i>").addClass("fa fa-check-circle").addClass("profile_field_verified");
+else var verified = "";
+$("#js_profile_fields").append(
+$("<div>").addClass("profile_field").append(
+$("<span>").addClass("profile_field_header").addClass("emoji_poss").text(AccountObj.fields[i].name).prepend(verified)).append($("<br>")).append(
+$("<span>").addClass("profile_field_value").addClass("emoji_poss").html(AccountObj.fields[i].value)));
+}
 console.log(AccountObj.id);
 console.log(current_id);
 if(AccountObj.acct.indexOf("@") != -1) {

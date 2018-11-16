@@ -114,6 +114,19 @@ $(".about_me_wrap textarea[name='about_me']").val(AccountObj["note"]);
 if(AccountObj["locked"] == true) {
 $("#setting_lock_account")[0].checked = true;
 }
+if(AccountObj.source && AccountObj.source.fields) {
+for(var i=0;i<AccountObj.source.fields.length;i++) {
+$("#setting_field_"+i+"_name").val(AccountObj.source.fields[i].name);
+$("#setting_field_"+i+"_value").val(AccountObj.source.fields[i].value);
+}
+}
+else {
+for(var i=0;i<AccountObj.fields.length;i++) {
+$("#setting_field_"+i+"_name").val(AccountObj.fields[i].name);
+$("#setting_field_"+i+"_value").val(AccountObj.fields[i].value);
+}
+}
+$("#verifylink").val('<a rel="me" href="'+AccountObj["url"]+'">Mastodon</a>');
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 });
 });
@@ -149,7 +162,7 @@ localStorage.current_avatar = current_avatar;
 $(".js_current_profile_image").attr("src",current_avatar);
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 putMessage(__("Uploaded new avatar"));
-})
+});
 }
 });
 $("#setting_header").change(function() {
@@ -181,7 +194,19 @@ api.patch("accounts/update_credentials",formdata,function() {
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 putMessage(__(msgtext));
 });
-})
+});
+$(document).on('change',".setting_field",function(e) {
+$("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
+var formdata = new FormData();
+for(var i=0;i<4;i++) {
+formdata.append('fields_attributes['+i+'][name]',$("#setting_field_"+i+"_name").val());
+formdata.append('fields_attributes['+i+'][value]',$("#setting_field_"+i+"_value").val());
+}
+api.patch("accounts/update_credentials",formdata,function() {
+$("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
+putMessage(__("Changed custom profile field"));
+});
+});
 }
 else if(window.location.pathname == "/settings/appearance") {
 $('#js-settings_nav_appearance').toggleClass('view');

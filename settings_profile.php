@@ -16,7 +16,7 @@
 <div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Display name')?></h3>
 </div>
-    <div class="display_name_wrap" style="float:left;width:50%">
+<div class="display_name_wrap" style="float:left;width:50%">
 <input name="display_name" type="text" class="disallow_enter textfield" id="setting_display_name" maxlength="30">
 </div>
 <div style="float:left;width:50%;text-align:right;margin-top:16px">
@@ -51,6 +51,42 @@
 <span></span>
 </div>
 </div>
+</div>
+<span style="visibility:hidden">-</span>
+</div>
+<header class="timeline_header" style="border-radius:0;border-top-width:0">
+<ul class="header_items">
+<li class="item toots view"><?=_('Custom profile fields')?></li>
+</ul>
+</header>
+<div class="timeline">
+<div style="float:left;width:50%;text-align:right">
+<input name="field_0_name" type="text" class="disallow_enter textfield setting_field" id="setting_field_0_name" placeholder="<?=('Name')?>">
+</div>
+<div class="field_0_wrap" style="float:left;width:50%">
+<input name="field_0_value" type="text" class="disallow_enter textfield setting_field" id="setting_field_0_value" placeholder="<?=('Value')?>">
+</div>
+<div style="float:left;width:50%;text-align:right">
+<input name="field_1_name" type="text" class="disallow_enter textfield setting_field" id="setting_field_1_name" placeholder="<?=('Name')?>">
+</div>
+<div class="field_1_wrap" style="float:left;width:50%">
+<input name="field_1_value" type="text" class="disallow_enter textfield setting_field" id="setting_field_1_value" placeholder="<?=('Value')?>">
+</div>
+<div style="float:left;width:50%;text-align:right">
+<input name="field_2_name" type="text" class="disallow_enter textfield setting_field" id="setting_field_2_name" placeholder="<?=('Name')?>">
+</div>
+<div class="field_2_wrap" style="float:left;width:50%">
+<input name="field_2_value" type="text" class="disallow_enter textfield setting_field" id="setting_field_2_value" placeholder="<?=('Value')?>">
+</div>
+<div style="float:left;width:50%;text-align:right">
+<input name="field_3_name" type="text" class="disallow_enter textfield setting_field" id="setting_field_3_name" placeholder="<?=('Name')?>">
+</div>
+<div class="field_3_wrap" style="float:left;width:50%">
+<input name="field_3_value" type="text" class="disallow_enter textfield setting_field" id="setting_field_3_value" placeholder="<?=('Value')?>">
+</div>
+<div style="width:75%;margin:auto">
+<p style="margin-bottom:5px">To verify that the links in your custom fields really belong to you, you can add the link below to your website. The link text can be changed to whatever you want.</p>
+<input class="copy_link_input" id="verifylink" type="text" value="" readonly>
 </div>
 <span style="visibility:hidden">-</span>
 </div>

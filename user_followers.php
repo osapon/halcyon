@@ -14,6 +14,7 @@
 @<a id="js_profile_username" href="#"></a>
 </h2>
 <p id="js_profile_bio" class="profile_bio"></p>
+<div id="js_profile_fields" class="profile_fields"></div>
 <div id="js_profile_public_link" class="profile_with_icon invisible" style="margin-bottom:5px">
 <a target="_blank"><i class="fa fa-fw fa-link" aria-hidden="true"></i><span><?=_('Open public profile')?></span></a>
 </div>

@@ -38,35 +38,37 @@ function replaceInternalLink(){
 $(".h-card > a").each(function(i) {
 $(this).attr('href',getRelativeURL($(this).attr('href')));
 });
-$(".toot_article a").each(function(i) {
-const pltags = $(this).attr('href').match(/https:\/\/.+..+\/tag\/(.+)\/?/);
+$(".toot_article a,.profile_bio,.follows_profile_bio").each(function(i) {
+const pltags = $(this).attr('href').match(/https:\/\/.+..+\/tag\/([a-zA-Z\d_%]+)\/?$/);
 if(pltags) {
 $(this).attr('target','_self').attr('href','/search?q='+pltags[1]);
 }
-const mstags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/(.+)\/?/);
+const mstags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/([a-zA-Z\d_%]+)\/?$/);
 if(mstags) {
 $(this).attr('target','_self').attr('href','/search?q='+mstags[1]);
 }
-const plusers = $(this).attr('href').match(/https:\/\/.+..+\/users\/([a-zA-Z\d_]+)(\/statuses\/\d+)?/);
-if(plusers && plusers[2] == undefined) {
+const plusers = $(this).attr('href').match(/https:\/\/.+..+\/users\/([a-zA-Z\d_]+)(\/statuses\/\d+)\/?$/);
+if(plusers) {
 $(this).attr('target','_self').attr('href','/@'+plusers[1]+'@'+$(this).attr('href').split("/")[2]);
 }
-else if(plusers && plusers[2] != undefined) {
-$(this).attr('target','_self').attr('href',"javascript:openStatus('"+plusers[0]+"');void(0)");
-}
-const msusers = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)(\/\d+)?/);
-if(msusers && msusers[2] == undefined) {
+const msusers = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)\/?$/);
+if(msusers) {
 $(this).attr('target','_self').attr('href','/@'+msusers[1]+'@'+$(this).attr('href').split("/")[2]);
 }
-else if(msusers && msusers[2] != undefined) {
-$(this).attr('target','_self').attr('href',"javascript:openStatus('"+msusers[0]+"');void(0)");
+const msstatus = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)(\/\d+)\/?$/);
+if(msstatus) {
+$(this).attr('target','_self').attr('href',"javascript:openStatus('"+msstatus[0]+"');void(0)");
 }
-const gsstatus = $(this).attr('href').match(/https:\/\/.+..+\/notice\/(\d+)?/);
+const msstatus2 = $(this).attr('href').match(/https:\/\/.+..+\/users\/([a-zA-Z\d_]+)\/?$/);
+if(msstatus2) {
+$(this).attr('target','_self').attr('href',"javascript:openStatus('"+msstatus2[0]+"');void(0)");
+}
+const gsstatus = $(this).attr('href').match(/https:\/\/.+..+\/notice\/(\d+)\/?$/);
 if(gsstatus) {
 $(this).attr('target','_self').attr('href',"javascript:openStatus('"+gsstatus[0]+"');void(0)");
 }
-const plstatus = $(this).attr('href').match(/https:\/\/.+..+\/objects\/([\da-z]{8}-[\da-z]{4}-[\da-z]{4}-[\da-z]{4}-[\da-z]{12})?/);
-if(plstatus && plstatus[1] != undefined) {
+const plstatus = $(this).attr('href').match(/https:\/\/.+..+\/objects\/([\da-z]{8}-[\da-z]{4}-[\da-z]{4}-[\da-z]{4}-[\da-z]{12})\/?$/);
+if(plstatus) {
 $(this).attr('target','_self').attr('href',"javascript:openStatus('"+plstatus[0]+"');void(0)");
 }
 if(localStorage.setting_link_previews == "true") {

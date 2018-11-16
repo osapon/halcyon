@@ -96,6 +96,7 @@ border-bottom-color:#000000;
 .copy_link_input {
 border: 1px solid #000;
 background-color: #132030;
+color:#FFFFFF;
 }
 .relationship_button {
 border:1px solid #189EFC;
@@ -416,6 +417,8 @@ color:#fff;
 #main .article_wrap .left_column .profile_section_wrap > .profile_username {
 color:#657786;
 }
+#main .article_wrap .left_column .profile_section_wrap > .profile_bio a,
+#main .article_wrap .left_column .profile_section_wrap .profile_field_value a,
 .profile_with_icon > a {
 color:#189EFC;
 }
