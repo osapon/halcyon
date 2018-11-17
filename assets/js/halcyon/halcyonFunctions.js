@@ -38,7 +38,7 @@ function replaceInternalLink(){
 $(".h-card > a").each(function(i) {
 $(this).attr('href',getRelativeURL($(this).attr('href')));
 });
-$(".toot_article a,.profile_bio,.follows_profile_bio").each(function(i) {
+$(".toot_article a,.profile_bio a,.follows_profile_bio a").each(function(i) {
 const pltags = $(this).attr('href').match(/https:\/\/.+..+\/tag\/([a-zA-Z\d_%]+)\/?$/);
 if(pltags) {
 $(this).attr('target','_self').attr('href','/search?q='+pltags[1]);
