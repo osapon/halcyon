@@ -145,33 +145,36 @@ value.search(/^\d{4}-\d{2}-\d{2}/g) === -1)
 return value;
 return new Date(value);
 }
-function getRelativeDatetime(current_time, posted_time) {
+function getRelativeDatetime(current_time,posted_time,withdot = true,future = false) {
 const calendar = [__("Jan"),__("Feb"),__("Mar"),__("Apr"),__("May"),__("Jun"),__("Jul"),__("Aug"),__("Sep"),__("Oct"),__("Nov"),__("Dec")];
 var posted_time_original = posted_time,
-posted_time = getConversionedDate(null, posted_time_original).getTime(),
-elapsedTime = Math.ceil((current_time-posted_time)/1000);
-if (elapsedTime < 60) {
-const datetime ="&middot; " + elapsedTime + "s";
+posted_time = getConversionedDate(null, posted_time_original).getTime();
+if(future) var elapsedTime = Math.ceil((posted_time-current_time)/1000);
+else var elapsedTime = Math.ceil((current_time-posted_time)/1000);
+var dot = "";
+if(withdot) dot = "&middot; ";
+if(elapsedTime < 60) {
+const datetime = dot + elapsedTime + "s";
 return datetime;
 }
 else if (elapsedTime < 120) {
-const datetime ="&middot; 1m";
+const datetime = dot+"1m";
 return datetime;
 }
 else if (elapsedTime < (60*60)) {
-const datetime ="&middot; " + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
+const datetime = dot + (Math.floor(elapsedTime / 60) < 10 ? " " : "") + Math.floor(elapsedTime / 60) + "m";
 return datetime;
 }
 else if (elapsedTime < (120*60)) {
-const datetime ="&middot; 1h";
+const datetime = dot+"1h";
 return datetime;
 }
 else if (elapsedTime < (24*60*60)) {
-const datetime ="&middot; " + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
+const datetime = dot + (Math.floor(elapsedTime / 3600) < 10 ? " " : "") + Math.floor(elapsedTime / 3600) + "h";
 return datetime;
 }
 else {
-const datetime ="&middot; " + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
+const datetime = dot + calendar[posted_time_original.getMonth()] + " " + posted_time_original.getDate();
 return datetime;
 }
 }
@@ -284,6 +287,10 @@ emojis.push(emoji);
 }
 localStorage.setItem("current_custom_emojis",JSON.stringify(emojis));
 });
+api.get("filters",function(data) {
+localStorage.setItem("current_filters",JSON.stringify(data));
+current_filters = data;
+});
 $.cookie("session","true",{path:'/'});
 }
 function refreshApp() {
@@ -311,6 +318,7 @@ current_following_accts = localStorage.getItem("current_following_accts");
 current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
 current_blocked_accts = localStorage.getItem("current_blocked_accts");
 current_muted_accts = localStorage.getItem("current_muted_accts");
+current_filters = JSON.parse(localStorage.getItem("current_filters"));
 $(function() {setCurrentProfile()});
 }
 function setCurrentProfile() {

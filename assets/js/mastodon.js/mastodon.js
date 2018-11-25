@@ -329,14 +329,22 @@ location.href = "/logout";
 },
 stream: function (streamType, onData) {
 var es = new WebSocket("wss://" + apiBase.substr(8) + "streaming?access_token=" + config.api_user_token + "&stream=" + streamType);
-var listener = function (event) {
+var listener = function(event) {
 console.log("Got Data from Stream " + streamType);
 if(event.data.length != 0) {
 event = JSON.parse(event.data);
+if(event.event == "filters_changed") {
+api.get("filters",function(data) {
+localStorage.setItem("current_filters",JSON.stringify(data));
+current_filters = data;
+});
+}
+else {
 if(!Number.isInteger(JSON.parse(event.payload))) {
 event.payload = JSON.parse(event.payload);
 }
 onData(event);
+}
 }
 };
 es.onmessage = listener;

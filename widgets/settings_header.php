@@ -20,6 +20,11 @@
 <h2><?=_('APPEARANCE')?></h2>
 </a>
 </li>
+<li id="js-settings_nav_filters" class="header_nav_item settings_filters">
+<a href="/settings/filters">
+<h2><?=_('FILTERS')?></h2>
+</a>
+</li>
 </ul>
 </div>
 </div>

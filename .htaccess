@@ -52,6 +52,7 @@ RewriteBase /settings
 RewriteRule ^settings/?$ settings_general\.php [NC,L]
 RewriteRule ^settings/profile/?$ settings_profile\.php [NC,L]
 RewriteRule ^settings/appearance/?$ settings_appearance\.php [NC,L]
+RewriteRule ^settings/filters/?$ settings_filters\.php [NC,L]
 
 # User
 RewriteBase /

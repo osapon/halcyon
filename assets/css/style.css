@@ -539,7 +539,7 @@ box-sizing: border-box;
 font-size: 14px;
 border-radius: 3px;
 }
-.overlay_confirm_controls,.overlay_prompt_controls {
+.overlay_simple_controls {
 height:31px;
 }
 .overlay_addlist_item {
@@ -2459,6 +2459,18 @@ box-shadow: inset 0 0 0 4px #ffffff;
 outline: none;
 border-color: #189EFC;
 }
+input.checkbox[type=checkbox] {display:none}
+input.checkbox[type=checkbox] + label:before {
+font-family: FontAwesome;
+display: inline-block;
+letter-spacing: 5px;
+color: #189EFC;
+font-size:30px;
+vertical-align:sub;
+margin-bottom:5px;
+}
+input.checkbox[type=checkbox] + label:before {content: "\f0c8"}
+input.checkbox[type=checkbox]:checked + label:before {content: "\f14a"}
 .uploadbtn:before {
 position:absolute;
 left:0;

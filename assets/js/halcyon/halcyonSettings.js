@@ -64,41 +64,7 @@ localStorage.setItem("setting_who_to_follow","false");
 putMessage(__("Who to follow disabled"));
 }
 });
-$('.selectbox').each(function() {
-var $this = $(this),
-numberOfOptions = $(this).children('option').length;
-$this.addClass('s-hidden');
-$this.wrap('<div class="select"></div>');
-$this.after('<div class="halcyon_button styledselect"></div>');
-var $styledSelect = $this.next('div.styledselect');
-var $selectText = $("<span>").css("margin","auto").text($this.children('option[selected]').eq(0).text()+" ⏷");
-$styledSelect.append($selectText);
-var $list = $('<ul/>',{'class':'options'}).insertAfter($styledSelect);
-for(var i=0;i<numberOfOptions;i++) {
-$('<li/>',{text:$this.children('option').eq(i).text(),rel:$this.children('option').eq(i).val()}).appendTo($list);
-}
-var $listItems = $list.children('li');
-$styledSelect.click(function(e) {
-e.stopPropagation();
-if($(this).hasClass("active")) {
-xthis = $(this);
-$(this).next('ul.options').slideUp(function() {xthis.removeClass('active')});
-}
-else {
-$(this).addClass('active').next('ul.options').slideDown();
-}
-});
-$listItems.click(function(e) {
-e.stopPropagation();
-$selectText.text($(this).text()+" ⏷");
-$this.val($(this).attr('rel'));
-$this.change();
-$list.slideUp(function() {$styledSelect.removeClass('active')});
-});
-$(document).click(function() {
-$list.slideUp(function() {$styledSelect.removeClass('active')});
-});
-});
+$('.selectbox').each(function() {selectbox(this)});
 }
 else if(window.location.pathname == "/settings/profile") {
 $('#js-settings_nav_profile').toggleClass('view');
@@ -236,9 +202,6 @@ $("#service_worker_box").hide();
 if(localStorage.setting_service_worker == "true") {
 $("#setting_service_worker")[0].checked = true;
 }
-if(localStorage.setting_show_replies == "true") {
-$("#setting_show_replies")[0].checked = true;
-}
 if(localStorage.setting_show_content_warning == "true") {
 $("#setting_show_content_warning")[0].checked = true;
 }
@@ -334,16 +297,6 @@ localStorage.setItem("setting_service_worker","false");
 putMessage(__("Notifications when tab is closed disabled"));
 }
 });
-$("#setting_show_replies").change(function() {
-if(this.checked) {
-localStorage.setItem("setting_show_replies","true");
-putMessage(__("Replies shown"));
-}
-else {
-localStorage.setItem("setting_show_replies","false");
-putMessage(__("Replies hidden"));
-}
-});
 $("#setting_show_content_warning").change(function() {
 if(this.checked) {
 localStorage.setItem("setting_show_content_warning","true");
@@ -363,5 +316,167 @@ else {
 localStorage.setItem("setting_show_nsfw","false");
 putMessage(__("NSFW content hidden"));
 }
+});
+}
+else if(window.location.pathname == "/settings/filters") {
+$('#js-settings_nav_filters').toggleClass('view');
+$(function() {
+if(localStorage.setting_show_replies == "true") {
+$("#setting_show_replies")[0].checked = true;
+}
+if(localStorage.setting_show_bots == "true") {
+$("#setting_show_bots")[0].checked = true;
+}
+});
+$("#setting_show_replies").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_show_replies","true");
+putMessage(__("Replies shown"));
+}
+else {
+localStorage.setItem("setting_show_replies","false");
+putMessage(__("Replies hidden"));
+}
+});
+$("#setting_show_bots").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_show_bots","true");
+putMessage(__("Toots of bots shown"));
+}
+else {
+localStorage.setItem("setting_show_bots","false");
+putMessage(__("Toots of bots hidden"));
+}
+});
+$(document).ready(function() {$('.selectbox').each(function() {selectbox(this)})});
+$("#setting_add_filter").click(function(e) {
+e.stopPropagation();
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_filter').removeClass('invisible');
+$('.overlay_filter_ok').off("click");
+$('.overlay_filter_ok').click(function() {
+var addwholeword = "";
+if($("#filter_whole_word")[0].checked == false) addwholeword = "&whole_word=0";
+api.post("filters",$("#addfilter").serialize()+addwholeword,function() {
+$('.close_button').click();
+putMessage(__("Filter created"));
+loadfilters();
+});
+});
+});
+$(document).ready(function() {
+loadfilters();
+});
+}
+function selectbox($this) {
+var $this = $($this);
+var numberOfOptions = $this.children('option').length;
+$this.addClass('s-hidden');
+$this.wrap('<div class="select"></div>');
+$this.after('<div class="halcyon_button styledselect"></div>');
+var $styledSelect = $this.next('div.styledselect');
+var $selectText = $("<span>").css("margin","auto").text($this.children('option[selected]').eq(0).text()+" ⏷");
+$styledSelect.append($selectText);
+var $list = $('<ul/>',{'class':'options'}).insertAfter($styledSelect);
+for(var i=0;i<numberOfOptions;i++) {
+$('<li/>',{text:$this.children('option').eq(i).text(),rel:$this.children('option').eq(i).val()}).appendTo($list);
+}
+$this.closest("form").on("reset",function(e) {
+$selectText.text($this.children('option[selected]').eq(0).text()+" ⏷");
+})
+var $listItems = $list.children('li');
+$styledSelect.click(function(e) {
+e.stopPropagation();
+if($(this).hasClass("active")) {
+xthis = $(this);
+$(this).next('ul.options').slideUp(function() {xthis.removeClass('active')});
+}
+else {
+$(this).addClass('active').next('ul.options').slideDown();
+}
+});
+$listItems.click(function(e) {
+e.stopPropagation();
+$this.val($(this).attr('rel'));
+$selectText.text($(this).text()+" ⏷");
+$this.change();
+$list.slideUp(function() {$styledSelect.removeClass('active')});
+});
+$(document).click(function() {
+$list.slideUp(function() {$styledSelect.removeClass('active')});
+});
+}
+function loadfilters() {
+$("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
+$("#filterlist").empty();
+api.get("filters",function(data) {
+for(var i=0;i<data.length;i++) {
+var scope = new Array();
+var expires_in = "";
+if(data[i].context.indexOf("home") != -1) scope.push(__("Home"));
+if(data[i].context.indexOf("notifications") != -1) scope.push(__("Notifications"));
+if(data[i].context.indexOf("public") != -1) scope.push(__("Public"));
+if(data[i].context.indexOf("thread") != -1) scope.push(__("Thread"));
+if(data[i].expires_at == null) expires_in = __("Never");
+else expires_in = getRelativeDatetime(new Date(),getConversionedDate(null,data[i].expires_at),false,true)
+$("#filterlist").append(
+$("<tr>").append(
+$("<td>").text(data[i].phrase)).append(
+$("<td>").css("border-left","1px solid #189EFC").css("border-right","1px solid #189EFC").text(scope)).append(
+$("<td>").text(expires_in)).append(
+$("<td>").css("border-left","1px solid #189EFC").css("padding-top","5px").css("padding-bottom","5px").append(
+$("<a>").attr("href","javascript:void(0)").css("color","#189EFC").css("margin-right","5px").data("id",data[i].id).append(
+$("<i>").addClass("fa").addClass("fa-lg").addClass("fa-pencil")).click(function(e) {
+e.stopPropagation();
+var fid = $(this).data("id");
+$("#savestate").removeClass("fa-check").addClass("fa-spin").addClass("fa-circle-o-notch");
+api.get("filters/"+fid,function(data) {
+var fid = data.id;
+$("#filtertext").val(data.phrase);
+if(data.context.indexOf("home") != -1) $("#checkbox_home")[0].checked = true;
+if(data.context.indexOf("notifications") != -1) $("#checkbox_notifications")[0].checked = true;
+if(data.context.indexOf("public") != -1) $("#checkbox_public")[0].checked = true;
+if(data.context.indexOf("thread") != -1) $("#checkbox_thread")[0].checked = true;
+if(data.irreversible) $("#filter_irreversible")[0].checked = true;
+if(data.whole_word) $("#filter_whole_word")[0].checked = true;
+$(".select span").text(__("Don't change")+" ⏷");
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_filter').removeClass('invisible');
+$("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
+$('.overlay_filter_ok').off("click");
+$('.overlay_filter_ok').click(function() {
+var addwholeword = "";
+if($("#filter_whole_word")[0].checked == false) addwholeword = "&whole_word=0";
+api.put("filters/"+fid,$("#addfilter").serialize()+addwholeword,function() {
+$('.close_button').click();
+putMessage(__("Filter updated"));
+loadfilters();
+});
+});
+});
+})).append(
+$("<a>").attr("href","javascript:void(0)").css("color","#189EFC").data("id",data[i].id).append(
+$("<i>").addClass("fa").addClass("fa-lg").addClass("fa-trash")).click(function(e) {
+e.stopPropagation();
+var fid = $(this).data("id");
+$("#js-overlay_content_wrap .temporary_object").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.overlay_confirm').removeClass('invisible');
+$('.overlay_confirm_text').text(__("Are you sure that you want to delete this filter?"));
+$('.overlay_confirm_yes').click(function() {
+$('.close_button').click();
+api.delete("filters/"+fid,function(data) {
+putMessage(__("Your filter has been deleted"));
+loadfilters();
+});
+});
+}))));
+}
+$("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 });
 }

@@ -283,14 +283,38 @@ var load_options = [];
 api.get(level, load_options, function(statuses) {
 let reply_sources = {};
 for(let i in statuses) {
-if(!(show_replies == "false" && statuses[i].in_reply_to_id) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(statuses[i].content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(statuses[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && statuses[i].in_reply_to_id) && !(localStorage.setting_show_bots == "false" && statuses[i].account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id && level === "timelines/home" | level === "timelines/public") {
 if(!reply_sources[statuses[i].in_reply_to_id] & !$(".toot_entry[sid='"+statuses[i].in_reply_to_id+"']").length) {
 reply_sources[statuses[i].in_reply_to_id] = statuses[i].id;
 api.get('statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_sources[in_reply_statuses.id]+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replace_emoji();
+}
 });
 }
 }
@@ -313,14 +337,38 @@ api.get(level, load_options, function(statuses) {
 if (statuses.length) {
 let reply_sources = {};
 for(let i in statuses) {
-if(!(show_replies == "false" && statuses[i].in_reply_to_id) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(statuses[i].content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(statuses[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && statuses[i].in_reply_to_id) && !(localStorage.setting_show_bots == "false" && statuses[i].account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id && level === "timelines/home" | level === "timelines/public") {
 if(!reply_sources[statuses[i].in_reply_to_id] & !$(".toot_entry[sid='"+statuses[i].in_reply_to_id+"']").length) {
 reply_sources[statuses[i].in_reply_to_id] = statuses[i].id;
 api.get('statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_sources[in_reply_statuses.id]+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replace_emoji();
+}
 });
 }
 }
@@ -373,7 +421,18 @@ const streaming_option = localStorage.getItem("setting_post_stream");
 if(userstream.event === "update") {
 if(streaming_option === "manual") {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(userstream.payload.content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(userstream.payload.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && userstream.payload.in_reply_to_id) && !(localStorage.setting_show_bots == "false" && userstream.payload.account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(userstream.payload.visibility == "direct" && level == "timelines/home")) {
 $('#js-stream_update').css({'display':'block','height':'auto','padding':'10px'});
 statuses.unshift(userstream.payload);
 $('#js-stream_update > button > span').text(statuses.length);
@@ -384,7 +443,18 @@ $('#header .header_nav_list .'+scope+'_badge').removeClass('invisible');
 }
 else if (streaming_option === "auto") {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(userstream.payload.content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(userstream.payload.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && userstream.payload.in_reply_to_id) && !(localStorage.setting_show_bots == "false" && userstream.payload.account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(userstream.payload.visibility == "direct" && level == "timelines/home")) {
 timeline_template(userstream.payload).prependTo("#js-timeline");
 replaceInternalLink();
 replace_emoji();
@@ -392,9 +462,22 @@ if(level === "timelines/home" | level === "timelines/public") {
 if(userstream.payload.in_reply_to_id & !$(".toot_entry[sid='"+userstream.in_reply_to_id+"']").length) {
 let reply_source = userstream.payload.id;
 api.get('statuses/'+userstream.payload.in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_source+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replaceInternalLink();
 replace_emoji();
+}
 });
 }
 }
@@ -405,7 +488,18 @@ else if(streaming_option == "ontop") {
 var scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 if(scrollTop == 0) {
 if(!$('.toot_entry[sid="'+userstream.payload.id+'"]').length) {
-if(!(show_replies == "false" && userstream.payload.in_reply_to_id) && !(userstream.payload.visibility == "direct" && scope == "home")) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(userstream.payload.content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(userstream.payload.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && userstream.payload.in_reply_to_id) && !(localStorage.setting_show_bots == "false" && userstream.payload.account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(userstream.payload.visibility == "direct" && level == "timelines/home")) {
 timeline_template(userstream.payload).prependTo("#js-timeline");
 replaceInternalLink();
 replace_emoji();
@@ -413,9 +507,22 @@ if(level === "timelines/home" | level === "timelines/public") {
 if(userstream.payload.in_reply_to_id & !$(".toot_entry[sid='"+userstream.in_reply_to_id+"']").length) {
 let reply_source = userstream.payload.id;
 api.get('statuses/'+userstream.payload.in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_source+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replaceInternalLink();
 replace_emoji();
+}
 });
 }
 }
@@ -499,8 +606,21 @@ if ( level === "timelines/home" | level === "timelines/public" ) {
 if (statuses[i].in_reply_to_id) {
 const reply_source = statuses[i].id;
 api.get('statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_source+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replace_emoji();
+}
 });
 }
 }
@@ -520,14 +640,38 @@ const loadstatus = instance + "timelines/public"
 api.getOther(loadstatus, load_options, function(statuses) {
 let reply_sources = {};
 for(let i in statuses) {
-if(!(show_replies == "false" && statuses[i].in_reply_to_id)) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(statuses[i].content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(statuses[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && statuses[i].in_reply_to_id) && !(localStorage.setting_show_bots == "false" && statuses[i].account.bot == true)) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id ) {
 if(!reply_sources[statuses[i].in_reply_to_id]) {
 reply_sources[statuses[i].in_reply_to_id] = statuses[i].id;
 api.getOther(instance + 'statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_sources[in_reply_statuses.id]+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replace_emoji();
+}
 });
 }
 }
@@ -551,14 +695,38 @@ api.getOther(loadstatus, load_options, function(statuses) {
 if(statuses.length) {
 let reply_sources = {};
 for(let i in statuses) {
-if(!(show_replies == "false" && statuses[i].in_reply_to_id)) {
+var filterstatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(((level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("home") != -1 && current_filters[a].irreversible == false) || (!(level == "timelines/home" || level.indexOf("timelines/list/") != -1) && current_filters[a].context.indexOf("public") != -1)) {
+if(current_filters[a].whole_word == false) {
+if(statuses[i].content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(statuses[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+if(filterstatus == false && !(show_replies == "false" && statuses[i].in_reply_to_id) && !(localStorage.setting_show_bots == "false" && statuses[i].account.bot == true)) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id ) {
 if(!reply_sources[statuses[i].in_reply_to_id]) {
 reply_sources[statuses[i].in_reply_to_id] = statuses[i].id;
 api.getOther(instance+'statuses/'+statuses[i].in_reply_to_id, function(in_reply_statuses) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(in_reply_statuses.content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(in_reply_statuses.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) {
 $("#js-timeline .toot_entry[sid='"+reply_sources[in_reply_statuses.id]+"']").before(context_template(in_reply_statuses, 'ancestors_status default_padding'));
 replace_emoji();
+}
 });
 }
 }
@@ -587,8 +755,21 @@ if (load_options === undefined) {
 var load_options = [];
 }
 api.get('notifications', load_options, function(NotificationObj) {
-for (let i in NotificationObj) {
-notifications_template(NotificationObj[i]).appendTo("#js-timeline");
+for(let i in NotificationObj) {
+var filterstatus = false;
+if(NotificationObj[i].type == "mention") {
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("notifications") != -1 && current_filters[a].irreversible == false) {
+if(current_filters[a].whole_word == false) {
+if(NotificationObj[i].status.content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(NotificationObj[i].status.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+}
+if(filterstatus == false) notifications_template(NotificationObj[i]).appendTo("#js-timeline");
 };
 links = getLinkFromXHRHeader(responce_headers);
 replaceInternalLink();
@@ -606,7 +787,20 @@ load_options.unshift( {name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1
 api.get('notifications', load_options, function(NotificationObj) {
 if (NotificationObj.length) {
 for (let i in NotificationObj) {
-notifications_template(NotificationObj[i]).appendTo("#js-timeline");
+var filterstatus = false;
+if(NotificationObj[i].type == "mention") {
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("notifications") != -1 && current_filters[a].irreversible == false) {
+if(current_filters[a].whole_word == false) {
+if(NotificationObj[i].status.content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(NotificationObj[i].status.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+}
+if(filterstatus == false) notifications_template(NotificationObj[i]).appendTo("#js-timeline");
 };
 links = getLinkFromXHRHeader(responce_headers);
 replaceInternalLink();
@@ -628,7 +822,20 @@ if (userstream.event === "notification") {
 const streaming_option = localStorage.getItem("setting_post_stream");
 if ( streaming_option === "manual" ) {
 } else if ( streaming_option === "auto" ) {
-notifications_template(userstream.payload).prependTo("#js-timeline");
+var filterstatus = false;
+if(userstream.payload.type == "mention") {
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("notifications") != -1 && current_filters[a].irreversible == false) {
+if(current_filters[a].whole_word == false) {
+if(userstream.payload.status.content.match(new RegExp(current_filters[a].phrase))) filterstatus = true;
+}
+else {
+if(userstream.payload.status.content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterstatus = true;
+}
+}
+}
+}
+if(filterstatus == false) notifications_template(userstream.payload).prependTo("#js-timeline");
 replaceInternalLink();
 replace_emoji();
 }
@@ -714,17 +921,16 @@ AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+Account
 const calendar = [__("Jan"),__("Feb"),__("Mar"),__("Apr"),__("May"),__("Jun"),__("Jul"),__("Aug"),__("Sep"),__("Oct"),__("Nov"),__("Dec")];
 var creation_date = new Date(AccountObj.created_at);
 creation_date = calendar[creation_date.getUTCMonth()]+" "+creation_date.getUTCFullYear();
-var is_account_locked = "";
-if(AccountObj.locked == true) {
-is_account_locked = " <i class='fa fa-lock'></i>";
-}
+var account_state_icons = "";
+if(AccountObj.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(AccountObj.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
 $("#js_header_image").attr('src', AccountObj.header);
 $("#js_profile_image").attr('src', AccountObj.avatar);
 $("#js_toots_count").text(AccountObj.statuses_count);
 $("#js_following_count").text(AccountObj.following_count);
 $("#js_followers_count").text(AccountObj.followers_count);
 $("#js_profile_displayname").addClass("emoji_poss").html(AccountObj.display_name);
-$("#js_profile_username").html(AccountObj.acct+is_account_locked);
+$("#js_profile_username").html(AccountObj.acct+account_state_icons);
 $("#js_profile_bio").addClass("emoji_poss").html(AccountObj.note);
 $("#js_profile_bio .emojione").removeClass("emojione").addClass("emoji");
 $('#js_profile_public_link a').attr('href',AccountObj.url);
@@ -863,13 +1069,35 @@ replace_emoji();
 api.get('statuses/'+sid+'/context', function(status) {
 if (status.ancestors.length) {
 status.ancestors.reverse();
-for ( let i in status.ancestors ) {
-context_template(status.ancestors[i], 'ancestors_status').prependTo("#js-overlay_content .temporary_object .toot_detail_wrap");
+for(let i in status.ancestors) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(status.ancestors[i].content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(status.ancestors[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
 }
 }
-if (status.descendants.length) {
-for ( let i in status.descendants) {
-context_template(status.descendants[i], 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
+}
+if(filterreplystatus == false) context_template(status.ancestors[i], 'ancestors_status').prependTo("#js-overlay_content .temporary_object .toot_detail_wrap");
+}
+}
+if(status.descendants.length) {
+for(let i in status.descendants) {
+var filterreplystatus = false;
+for(var a=0;a<current_filters.length;a++) {
+if(current_filters[a].context.indexOf("thread") != -1) {
+if(current_filters[a].whole_word == false) {
+if(status.descendants[i].content.match(new RegExp(current_filters[a].phrase))) filterreplystatus = true;
+}
+else {
+if(status.descendants[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase+"[^a-zA-Z1-9]"))) filterreplystatus = true;
+}
+}
+}
+if(filterreplystatus == false) context_template(status.descendants[i], 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
 }
 }
 replaceInternalLink();
@@ -1805,6 +2033,7 @@ $('#js-overlay_content_wrap .overlay_copy_link').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_confirm').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_prompt').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_addlist').addClass('invisible');
+$('#js-overlay_content_wrap .overlay_filter').addClass('invisible');
 $('#js-overlay_content .temporary_object, #js-overlay_content .parmanent_object').removeClass('visible');
 $('#js-overlay_content_wrap .overlay_status.submit_status_label').removeClass('active_submit_button');
 $('#js-overlay_content_wrap .single_reply_status .submit_status_label').removeClass('active_submit_button');
@@ -1816,10 +2045,13 @@ $('#js-overlay_content_wrap .overlay_confirm_yes').off('click');
 $('#js-overlay_content_wrap .overlay_prompt_ok').off('click');
 $('#js-overlay_content_wrap .overlay_prompt_text').val("");
 $('#js-overlay_content_wrap .overlay_addlist_body').empty();
-if ( current_file === "/user" ) {
+$('#js-overlay_content_wrap #addfilter').trigger("reset");
+if(window.current_file) {
+if(current_file === "/user") {
 history.pushState(null, null, "/"+location.pathname.split("/")[1]+location.search);
 } else {
 history.pushState(null, null, current_file);
+}
 }
 });
 })

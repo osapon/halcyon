@@ -95,6 +95,10 @@ r ^/settings/appearance/?$
 to /settings_appearance.php
 }
 rewrite {
+r ^/settings/filters/?$
+to /settings_filters.php
+}
+rewrite {
 r ^/@(.+)@(.+).([a-z]+)/?$
 to /user.php?user=@{1}@{2}.{3}
 }
