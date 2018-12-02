@@ -1004,6 +1004,29 @@ $(`<div class="profile_recent_images_item media_attachment" otype="image" sid="$
 }
 });
 };
+function setInstance() {
+api.get("instance",function(data) {
+$("#instance_title").html(data.title);
+$("#instance_description").html(data.description);
+$("#instance_thumbnail").attr("src",data.thumbnail);
+$("#js-follows_profile").append(follows_template(data.contact_account));
+api.get('accounts/relationships',[{name:'id',data:data.contact_account.id}],function(RelationshipsObj) {
+if(RelationshipsObj[0].following) {
+const button = $('#js-follows_profile .follow_button[mid="'+RelationshipsObj[0].id+'"]');
+button.removeClass("follow_button");
+button.addClass("following_button");
+button.children("span").text(__('Following'));
+button.children("i").removeClass("fa-user-plus").addClass("fa-user-times");
+}
+});
+$("#instance_users").text(data.stats.user_count);
+$("#instance_posts").text(data.stats.status_count);
+$("#instance_domains").text(data.stats.domain_count);
+$("#instance_version").text(data.version);
+$("#instance_contact").attr("href","mailto:"+data.email).text(data.email);
+$("#js-timeline_footer").remove();
+});
+}
 function badges_update(){
 let current_count = Number(localStorage.getItem("notification_count"));
 if ( current_count ) {
@@ -2054,18 +2077,31 @@ history.pushState(null, null, current_file);
 }
 }
 });
-})
+});
 $(function() {
 $("#enable_follow").click(function() {
 localStorage.setItem("setting_who_to_follow","true");
 setWhoToFollow(true);
 });
-})
-$(function() {
+$("#search_form").focus(function() {
+if($("#search_form").val() == "") searchlocalfill();
+else searchremotefill($("#search_form").val());
+$(".header_search_suggestions").removeClass("invisible");
+}).keyup(function() {
+if($("#search_form").val() == "") searchlocalfill();
+else searchremotefill($("#search_form").val());
+});
+$(document).click(function(e) {
+if(!$(e.target).closest('.header_search_suggestions').length && !$(e.target).closest('#search_form').length) $(".header_search_suggestions").addClass("invisible");
+});
+$(".search_form").submit(function(e) {
+e.preventDefault();
+searchredirect($("#search_form").val());
+});
 shortcut.add("n",function() {
 $("#creat_status").click();
 },{
- "disable_in_input":true,
+"disable_in_input":true,
 });
 shortcut.add("/",function() {
 $("#search_form").focus();

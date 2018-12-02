@@ -63,6 +63,10 @@ r ^/direct/?$
 to direct.php
 }
 rewrite {
+r ^/instance/?$
+to instance.php
+}
+rewrite {
 r ^/lists/?$
 to lists.php
 }

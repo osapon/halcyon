@@ -36,6 +36,10 @@ RewriteRule ^whotofollow/?$ who_to_follow\.php [NC,L]
 RewriteBase /direct
 RewriteRule ^direct/?$ direct\.php [NC,L]
 
+# Instance
+RewriteBase /instance
+RewriteRule ^instance/?$ instance\.php [NC,L]
+
 # Lists
 RewriteBase /lists
 RewriteRule ^lists/?$ lists\.php [NC,L]

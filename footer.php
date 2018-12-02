@@ -25,8 +25,6 @@ if($_SERVER["REQUEST_URI"] == "/settings/filters") include dirname(__FILE__).('/
 setOverlayStatus('<?php echo $_GET['status']; ?>');
 <?php endif; ?>
 badges_update();
-$('.footer_widget_about').attr('href','https://'+current_instance+'/about');
-$('.footer_widget_instance').attr('href','https://'+current_instance+'/about/more');
 $('.footer_widget_terms').attr('href','https://'+current_instance+'/terms');
 </script>
 </body>

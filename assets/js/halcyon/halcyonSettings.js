@@ -71,15 +71,10 @@ $('#js-settings_nav_profile').toggleClass('view');
 $(function() {
 api.get("accounts/verify_credentials",function(AccountObj) {
 $(".display_name_wrap input[name='display_name']").val(AccountObj["display_name"]);
-if(AccountObj["source"]["note"].length != 0) {
-$(".about_me_wrap textarea[name='about_me']").val(AccountObj["source"]["note"]);
-}
-else {
-$(".about_me_wrap textarea[name='about_me']").val(AccountObj["note"]);
-}
-if(AccountObj["locked"] == true) {
-$("#setting_lock_account")[0].checked = true;
-}
+if(AccountObj["source"]["note"].length != 0) $(".about_me_wrap textarea[name='about_me']").val(AccountObj["source"]["note"]);
+else if(AccountObj["note"] == "<p></p>") $(".about_me_wrap textarea[name='about_me']").val("");
+else $(".about_me_wrap textarea[name='about_me']").val(AccountObj["note"]);
+if(AccountObj["locked"] == true) $("#setting_lock_account")[0].checked = true;
 if(AccountObj.source && AccountObj.source.fields) {
 for(var i=0;i<AccountObj.source.fields.length;i++) {
 $("#setting_field_"+i+"_name").val(AccountObj.source.fields[i].name);

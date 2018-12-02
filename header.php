@@ -30,6 +30,7 @@ echo '<link rel="stylesheet" href="/assets/css/dark.css" media="all">';
 <script src="/assets/js/emojipicker/emojipicker.js"></script>
 <script src="/assets/js/halcyon/halcyonTemplates.js"></script>
 <script src="/assets/js/halcyon/halcyonUI.js"></script>
+<script src="/assets/js/autocomplete/search.js"></script>
 <script src="/assets/js/pomo/pomo.js"></script>
 <script src="/assets/js/twemoji/twemoji.min.js"></script>
 <script src="/assets/js/clipboard.js/clipboard.min.js"></script>
@@ -108,15 +109,16 @@ resetApp();
 </nav>
 <nav class="header_right_box">
 <ul class="header_nav_list">
-<li class="header_nav_item serch_form_wrap">
+<li class="header_nav_item search_form_wrap">
 <form class="search_form" action="/search" method="GET">
-<input id="search_form" class="search_form_input" placeholder="<?=_('Search Mastodon')?>" type="text" name="q" accesskey="/">
+<input id="search_form" class="search_form_input" placeholder="<?=_('Search Mastodon')?>" type="text" name="q" accesskey="/" autocomplete="off">
 <span class="search_form_submit">
 <button type="submit">
 <i class="fa fa-fw fa-search"></i>
 </button>
 </span>
 </form>
+<nav class="header_search_suggestions invisible"></nav>
 </li>
 <li class="header_nav_item my_account_wrap">
 <button class="header_account_avatar">

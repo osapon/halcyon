@@ -19,12 +19,17 @@
 current_file = location.pathname+location.search;
 <?php if(isset($_GET['q'])): ?>
 const query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
+if(query.length > 0) {
 $('title').text(query+' - Halcyon Search');
 $('#js-header_title_box > h1').text(query);
 $('#js-search_nav_peoples').toggleClass('view');
 $('#js-search_nav_toots a ').attr('href','/search'+location.search);
 $('#js-search_nav_peoples a ').attr('href','/search/users'+location.search);
 setUserSearch(query);
+}
+else {
+history.go(-2);
+}
 <?php endif; ?>
 </script>
 <?php include ('footer.php'); ?>

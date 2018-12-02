@@ -25,6 +25,7 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 or read our new wiki pages to install it manually: https://notabug.org/halcyon-suite/halcyon/wiki
 
 ## Blog
+- Release of Version 2.1.6 - Added search suggestions,fixed autocomplete bug,added instance info page,fixed small bug in profile settings,search for posts now supported
 - Release of Version 2.1.5 - Added support for filter,added possibility to filter all bots,it's now easier to detect bots
 - Release of Version 2.1.4 - Added custom profile fields,verified links,custom profile link settings and improved regular expressions for links
 - Release of Version 2.1.3 - Added a autocomplete feature for usernames,hashtags and emojis,fixed a bug in the emoji picker (didn't open sometimes)

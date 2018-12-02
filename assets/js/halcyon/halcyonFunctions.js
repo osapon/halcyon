@@ -232,6 +232,7 @@ current_statuses_count_link = localStorage.getItem("current_statuses_count_link"
 current_following_count_link = localStorage.getItem("current_following_count_link");
 current_followers_count_link = localStorage.getItem("current_followers_count_link");
 current_favourites_link = localStorage.getItem("current_favourites_link");
+current_search_history = JSON.parse(localStorage.getItem("current_search_history"));
 setCurrentProfile();
 });
 api.get("accounts/"+current_id+"/following",function(data) {
@@ -319,6 +320,7 @@ current_instance_charlimit = localStorage.getItem("current_instance_charlimit");
 current_blocked_accts = localStorage.getItem("current_blocked_accts");
 current_muted_accts = localStorage.getItem("current_muted_accts");
 current_filters = JSON.parse(localStorage.getItem("current_filters"));
+current_search_history = JSON.parse(localStorage.getItem("current_search_history"));
 $(function() {setCurrentProfile()});
 }
 function setCurrentProfile() {

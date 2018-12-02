@@ -358,6 +358,21 @@ color:#fff;
 color:#fff;
 background-color:#189EFC;
 }
+#header .header_nav_wrap .header_right_box .search_form_wrap .header_search_suggestions {
+background-color:#243447;
+box-shadow:.5px .5px 3px rgba(0,0,0,0.26);
+}
+#header .header_nav_wrap .header_right_box .search_form_wrap .header_search_suggestions::before {
+background-color:#243447;
+border:.5px solid rgba(0,0,0,.26);
+}
+#header .header_nav_wrap .header_right_box .search_form_wrap .header_search_suggestions ul li.account_box h3,
+#header .header_nav_wrap .header_right_box .search_form_wrap .header_search_suggestions ul li.account_box:hover .un {
+color:#FFFFFF !important;
+}
+#header .header_nav_wrap .header_right_box .search_form_wrap .header_search_suggestions ul li.account_box:hover .un {
+color:#66757F;
+}
 #main .profile_nav_wrap {
 background-color:#1b2836;
 box-shadow:0 1px 3px 0 rgba(0,0,0,0.25);
@@ -593,4 +608,7 @@ color:#FFF;
 }
 .hoverLi h3,.hoverLi .un {
 color:#FFF !important;
+}
+.instance_field {
+border:1px solid #000000;
 }
