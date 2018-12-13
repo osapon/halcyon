@@ -1,12 +1,13 @@
 # Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-30 09:53+0000\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2018-09-03 02:50+0000\n"
+"PO-Revision-Date: 2018-12-13 02:38+0000\n"
 "Last-Translator: Xosé M. <correo@xmgz.eu>\n"
 "Language-Team: Galician\n"
 "Language: gl\n"
@@ -28,11 +29,11 @@ msgstr "Japanese"
 msgid "Language_ko_KR"
 msgstr "Korean"
 
-msgid "Language_pt_BR"
-msgstr "Portuguese (Brazil)"
-
 msgid "Language_pl_PL"
 msgstr "Polish"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
 
 msgid "Language_gl_ES"
 msgstr "Galician"
@@ -542,4 +543,109 @@ msgstr "Toots"
 
 msgid "Favourites"
 msgstr "Favoritas"
+
+msgid "New favourite"
+msgstr "Novo favorito"
+
+msgid "New boost"
+msgstr "Nova promoción"
+
+msgid "New follower"
+msgstr "Nova seguidora"
+
+msgid "New mention"
+msgstr "Nova mención"
+
+msgid "Dark theme enabled"
+msgstr "Decorado escuro activado"
+
+msgid "Dark theme disabled"
+msgstr "Decorado escuro desactivado"
+
+msgid "Only on top"
+msgstr "Só enriba"
+
+msgid "Enable dark theme"
+msgstr "Activar decorado escuro"
+
+msgid "Please enter the new name for this list."
+msgstr "Por favor introduza o novo nome da lista"
+
+msgid "The name of your list can't be empty!"
+msgstr "O nome da lista non pode estar baldeiro!"
+
+msgid "Your list has been renamed"
+msgstr "Cambiou o nome da lista"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Está segura de querer eliminar a lista?"
+
+msgid "Your list has been deleted"
+msgstr "Eliminou a lista"
+
+msgid "Please enter the name of your new list."
+msgstr "Introduza o nome da nova lista."
+
+msgid "Add"
+msgstr "Engadir"
+
+msgid "Remove"
+msgstr "Eliminar"
+
+msgid "Add to list"
+msgstr "Engadir a lista"
+
+msgid "Are you sure that you want to mute this user?"
+msgstr "Segura de querer acalar esta usuaria?"
+
+msgid "Are you sure that you want to block this user?"
+msgstr "Segura de querer bloquear esta usuaria?"
+
+msgid "Are you sure that you want to delete this toot?"
+msgstr "Segura de querer eliminar este toot?"
+
+msgid "Added this account to the list"
+msgstr "Engadeu esta conta a lista"
+
+msgid ""
+"You need to follow this user to add him/her to the list. Do you want to do "
+"that now?"
+msgstr ""
+"Precisa seguir esta usuaria para engadila a lista. Quere facelo agora?"
+
+msgid "You successfully followed this user."
+msgstr "Sigueu con éxito esta usuaria."
+
+msgid "Removed this account from the list"
+msgstr "Eliminou esta conta da lista"
+
+msgid "Joined at"
+msgstr "Uneuse en"
+
+msgid "Direct messages"
+msgstr "Mensaxes directas"
+
+msgid "Lists"
+msgstr "Listas"
+
+msgid "Open public profile"
+msgstr "Abrir perfil público"
+
+msgid "My Lists"
+msgstr "As miñas listas"
+
+msgid "Confirmation"
+msgstr "Confirmación"
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "Cancel"
+msgstr "Cancelar"
+
+msgid "Prompt"
+msgstr "Avisar"
+
+msgid "Ok"
+msgstr "Ok"
 
