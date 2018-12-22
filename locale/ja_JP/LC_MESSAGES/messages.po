@@ -2,17 +2,18 @@
 # Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
 msgid ""
 msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-30 09:53+0000\n"
+"MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
-"POT-Creation-Date: \n"
-"MIME-Version: 1.0\n"
-"PO-Revision-Date: 2018-08-22 12:49+0000\n"
+"PO-Revision-Date: 2018-12-22 12:41+0000\n"
 "Last-Translator: Hakaba Hitiyo <hakabahitoyo@yahoo.co.jp>\n"
 "Language-Team: Japanese <https://weblate.osa-p.net/projects/halcyon/web/ja/>\n"
 "Language: ja\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Zanata 4.6.0\n"
+"X-Generator: Zanata 4.6.2\n"
 
 msgid "Language"
 msgstr "言語"
@@ -29,11 +30,14 @@ msgstr "日本語"
 msgid "Language_ko_KR"
 msgstr "Korean"
 
+msgid "Language_pl_PL"
+msgstr "Polish"
+
 msgid "Language_pt_BR"
 msgstr "Portuguese (Brazil)"
 
-msgid "Language_pl_PL"
-msgstr "Polish"
+msgid "Language_gl_ES"
+msgstr "Galician"
 
 msgid "Sensitive content"
 msgstr "非表示のメディア"
@@ -535,4 +539,108 @@ msgstr "トゥート"
 
 msgid "Favourites"
 msgstr "いいね"
+
+msgid "New favourite"
+msgstr "新しいいいね"
+
+msgid "New boost"
+msgstr "新しいブースト"
+
+msgid "New follower"
+msgstr "新しいフォロワー"
+
+msgid "New mention"
+msgstr "新しいメンション"
+
+msgid "Dark theme enabled"
+msgstr "ダークテーマが有効になりました"
+
+msgid "Dark theme disabled"
+msgstr "ダークテーマが無効になりました"
+
+msgid "Only on top"
+msgstr "先頭を表示していれば自動更新"
+
+msgid "Enable dark theme"
+msgstr "ダークテーマ"
+
+msgid "Please enter the new name for this list."
+msgstr "新しいリストの名称を入力してください。"
+
+msgid "The name of your list can't be empty!"
+msgstr "リストの名称は空にできません。"
+
+msgid "Your list has been renamed"
+msgstr "リストの名称を変更しました"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "リストを削除してもよろしいですか？"
+
+msgid "Your list has been deleted"
+msgstr "リストを削除しました"
+
+msgid "Please enter the name of your new list."
+msgstr "リストの新しい名称を入力してください。"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Add to list"
+msgstr "リストに追加"
+
+msgid "Are you sure that you want to mute this user?"
+msgstr "このユーザーをミュートしてもよろしいですか？"
+
+msgid "Are you sure that you want to block this user?"
+msgstr "このユーザーをブロックしてもよろしいですか？"
+
+msgid "Are you sure that you want to delete this toot?"
+msgstr "このトゥートを削除してもよろしいですか？"
+
+msgid "Added this account to the list"
+msgstr "このユーザーをリストに追加しました"
+
+msgid ""
+"You need to follow this user to add him/her to the list. Do you want to do "
+"that now?"
+msgstr "このユーザーをリストに追加するには、まずフォローする必要があります。フォローしますか？"
+
+msgid "You successfully followed this user."
+msgstr "このユーザーをフォローしました"
+
+msgid "Removed this account from the list"
+msgstr "このユーザーをリストから削除しました"
+
+msgid "Joined at"
+msgstr "参加しました:"
+
+msgid "Direct messages"
+msgstr "ダイレクトメッセージ"
+
+msgid "Lists"
+msgstr "リスト"
+
+msgid "Open public profile"
+msgstr "公開プロフィールを開く"
+
+msgid "My Lists"
+msgstr "リスト"
+
+msgid "Confirmation"
+msgstr "確認"
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Prompt"
+msgstr "プロンプト"
+
+msgid "Ok"
+msgstr "Ok"
 
