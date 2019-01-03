@@ -258,7 +258,7 @@ msgid "Blank for default"
 msgstr "Leer lassen für Standardeinstellung"
 
 msgid "FOLLOWING"
-msgstr "FOLGT"
+msgstr "FOLGE"
 
 msgid "Interesting accounts of devs"
 msgstr "Interessante Accounts von Entwickler_innen"
@@ -309,7 +309,7 @@ msgid "FOLLOWERS"
 msgstr "FOLGENDE"
 
 msgid "Following"
-msgstr "Folgt"
+msgstr "Folge"
 
 msgid "You'll no longer receive notifications from this user"
 msgstr "Du wirst von diesem Account keine Benachrichtigungen mehr erhalten."
