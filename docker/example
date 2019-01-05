@@ -1,0 +1,2 @@
+docker build -t halcyon/halcyon:latest .
+docker run --rm -it -p 9081:80 -v ${PWD}/config:/var/www/html/config test/halcyon:latest
