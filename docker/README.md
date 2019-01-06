@@ -15,7 +15,7 @@ docker build -t halcyon/halcyon:latest .
 
 # Configuration
 
-The container has the official example configs stored at ```/var/www/html/config``` inside the image. You can copy the examples from the container to the server via a temporary container and volume.
+The container has the official example configs stored at ```/var/www/html/config.example``` inside the image. You can copy the examples from the container to the server via a temporary container and volume.
 
 The configs must be adjusted ahead of running the container for production use.
 
