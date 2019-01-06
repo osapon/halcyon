@@ -26,28 +26,17 @@ RUN apt-get install -y --no-install-recommends \
     && apt-get autoremove -y --purge
 
 # Halcyon
+WORKDIR /opt/halcyon
 RUN apt-get install -y --no-install-recommends git \
-    && git clone https://notabug.org/halcyon-suite/halcyon.git /var/www/html/ \
+    && git clone https://notabug.org/halcyon-suite/halcyon.git /opt/halcyon/ \
     && git checkout `git describe --tags` \
-    && cp -r /var/www/html/config /var/www/html/config.example \
-    && chown -R www-data: /var/www
+    && cp -r /opt/halcyon/config /opt/halcyon/config.example \
+    && chown -R www-data: /opt/halcyon
 
-# PHP-fpm + nginx
-RUN apt-get install -y --no-install-recommends nginx \
-# Remove (some of the) default nginx config
-    && rm -f /etc/nginx.conf \
-    && rm -f /etc/nginx/conf.d/default.conf \
-    && rm -rf /etc/nginx/sites-* \
-    && rm -rf /var/log/nginx \
-# Ensure nginx logs, even if the config has errors, are written to stderr
-    && mkdir -p /var/log/nginx \
-    && chown www-data: /var/log/nginx \
-    && ln -s /dev/stderr /var/log/nginx/error.log \
-# Create folder where the user hook into our default configs
-    && mkdir -p /etc/nginx/server.d/ \
-    && mkdir -p /etc/nginx/location.d/ \
+# PHP-fpm
+RUN \
 # Bring php-fpm configs into a more controallable state
-    && rm /usr/local/etc/php-fpm.d/www.conf.default \
+    rm /usr/local/etc/php-fpm.d/www.conf.default \
     && mv /usr/local/etc/php-fpm.d/docker.conf /usr/local/etc/php-fpm.d/00-docker.conf \
     && mv /usr/local/etc/php-fpm.d/www.conf /usr/local/etc/php-fpm.d/10-www.conf \
     && mv /usr/local/etc/php-fpm.d/zz-docker.conf /usr/local/etc/php-fpm.d/20-docker.conf
@@ -56,7 +45,7 @@ RUN apt-get install -y --no-install-recommends nginx \
 ADD etc/ /etc/
 ADD usr/ /usr/
 
-EXPOSE 80
+EXPOSE 9000
 
 ENTRYPOINT ["/usr/bin/supervisord","-c","/etc/supervisord.conf"]
 
