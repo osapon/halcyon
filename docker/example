@@ -1,0 +1,12 @@
+docker build -t halcyon/halcyon:latest .
+docker run --rm -it -p 9081:80 -v ${PWD}/config:/var/www/html/config test/halcyon:latest
+docker run \
+    --name halcyon \
+    --restart unless-stopped \
+    --net docker-private \
+    --ip 172.30.12.13 \
+    -e TZ=UTC \
+    -e DEBUG=1 \
+    -v /opt/halcyon/config:/var/www/html/config \
+    test/halcyon:latest
+
