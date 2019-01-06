@@ -15,7 +15,7 @@ docker build -t halcyon/halcyon:latest .
 
 # Configuration
 
-The container has the official example configs stored at ```/var/www/html/config.example``` inside the image. You can copy the examples from the container to the server via a temporary container and volume.
+The container has the official example configs stored at ```/opt/halcyon/config.example``` inside the image. You can copy the examples from the container to the server via a temporary container and volume.
 
 The configs must be adjusted ahead of running the container for production use.
 
@@ -29,9 +29,9 @@ cd /opt/halcyon
 mkdir config
 docker run --rm -it \
     --entrypoint /bin/sh \
-    -v /opt/halcyon/config:/var/www/html/config \
+    -v /opt/halcyon/config:/opt/halcyon/config \
     halcyon/halcyon:latest
-cp /var/www/html/config.example/* /var/www/html/config/
+cp /opt/halcyon/config.example/* /opt/halcyon/config/
 exit
 
 ```
@@ -49,7 +49,7 @@ docker run \
     --ip 172.30.12.13 \
     -e TZ=UTC \
     -e DEBUG=1 \
-    -v /opt/halcyon/config:/var/www/html/config \
+    -v /opt/halcyon/config:/opt/halcyon/config \
     halcyon/halcyon:latest
 
 ```
