@@ -25,7 +25,7 @@ function filedate($filename){
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="<?php echo filedate('/assets/css/style.css'); ?>" media="all">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" media="all">
+<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.css'); ?>" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.tw2.css'); ?>" media="all">
 <link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/locale/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
