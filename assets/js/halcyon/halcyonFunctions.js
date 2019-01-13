@@ -39,39 +39,39 @@ $(".h-card > a").each(function(i) {
 $(this).attr('href',getRelativeURL($(this).attr('href')));
 });
 $(".toot_article a,.profile_bio a,.follows_profile_bio a").each(function(i) {
-const pltags = $(this).attr('href').match(/https:\/\/.+..+\/tag\/([a-zA-Z\d_%]+)\/?$/);
-if(pltags) {
-$(this).attr('target','_self').attr('href','/search?q='+pltags[1]);
-}
-const mstags = $(this).attr('href').match(/https:\/\/.+..+\/tags\/([a-zA-Z\d_%]+)\/?$/);
-if(mstags) {
-$(this).attr('target','_self').attr('href','/search?q='+mstags[1]);
-}
-const plusers = $(this).attr('href').match(/https:\/\/.+..+\/users\/([a-zA-Z\d_]+)(\/statuses\/\d+)\/?$/);
-if(plusers) {
-$(this).attr('target','_self').attr('href','/@'+plusers[1]+'@'+$(this).attr('href').split("/")[2]);
-}
-const msusers = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)\/?$/);
-if(msusers) {
-$(this).attr('target','_self').attr('href','/@'+msusers[1]+'@'+$(this).attr('href').split("/")[2]);
-}
-const msstatus = $(this).attr('href').match(/https:\/\/.+..+\/@([a-zA-Z\d_]+)(\/\d+)\/?$/);
-if(msstatus) {
-$(this).attr('target','_self').attr('href',"javascript:openStatus('"+msstatus[0]+"');void(0)");
-}
-const msstatus2 = $(this).attr('href').match(/https:\/\/.+..+\/users\/([a-zA-Z\d_]+)\/?$/);
-if(msstatus2) {
-$(this).attr('target','_self').attr('href',"javascript:openStatus('"+msstatus2[0]+"');void(0)");
-}
-const gsstatus = $(this).attr('href').match(/https:\/\/.+..+\/notice\/(\d+)\/?$/);
-if(gsstatus) {
-$(this).attr('target','_self').attr('href',"javascript:openStatus('"+gsstatus[0]+"');void(0)");
-}
-const plstatus = $(this).attr('href').match(/https:\/\/.+..+\/objects\/([\da-z]{8}-[\da-z]{4}-[\da-z]{4}-[\da-z]{4}-[\da-z]{12})\/?$/);
-if(plstatus) {
-$(this).attr('target','_self').attr('href',"javascript:openStatus('"+plstatus[0]+"');void(0)");
-}
-if(localStorage.setting_link_previews == "true") {
+const pltags = $(this).attr('href').match(/https?:\/\/.+..+\/tag\/([a-zA-Z\d_%]+)\/?$/);
+if(pltags) $(this).attr('target','_self').attr('href','/search?q='+pltags[1]);
+const mstags = $(this).attr('href').match(/https?:\/\/.+..+\/tags\/([a-zA-Z\d_%]+)\/?$/);
+if(mstags) $(this).attr('target','_self').attr('href','/search?q='+mstags[1]);
+const plusers = $(this).attr('href').match(/https?:\/\/.+..+\/users\/([a-zA-Z\d_]+)(\/statuses\/\d+)\/?$/);
+if(plusers) $(this).attr('target','_self').attr('href','/@'+plusers[1]+'@'+$(this).attr('href').split("/")[2]);
+const msusers = $(this).attr('href').match(/https?:\/\/.+..+\/@([a-zA-Z\d_]+)\/?$/);
+if(msusers) $(this).attr('target','_self').attr('href','/@'+msusers[1]+'@'+$(this).attr('href').split("/")[2]);
+const msstatus = $(this).attr('href').match(/https?:\/\/.+..+\/@([a-zA-Z\d_]+)(\/\d+)\/?$/);
+if(msstatus) $(this).attr('target','_self').attr('href',"javascript:openStatus('"+msstatus[0]+"');void(0)");
+const msstatus2 = $(this).attr('href').match(/https?:\/\/.+..+\/users\/([a-zA-Z\d_]+)\/?$/);
+if(msstatus2) $(this).attr('target','_self').attr('href',"javascript:openStatus('"+msstatus2[0]+"');void(0)");
+const gsstatus = $(this).attr('href').match(/https?:\/\/.+..+\/notice\/(\d+)\/?$/);
+if(gsstatus) $(this).attr('target','_self').attr('href',"javascript:openStatus('"+gsstatus[0]+"');void(0)");
+const plstatus = $(this).attr('href').match(/https?:\/\/.+..+\/objects\/([\da-z]{8}-[\da-z]{4}-[\da-z]{4}-[\da-z]{4}-[\da-z]{12})\/?$/);
+if(plstatus) $(this).attr('target','_self').attr('href',"javascript:openStatus('"+plstatus[0]+"');void(0)");
+});
+$(".toot_article a").each(function(i) {
+const ytcom = $(this).attr('href').match(/https?:\/\/(www\.)?youtube\.com\/watch\?v=([a-zA-Z\d_-]+)/);
+const htcom = $(this).attr('href').match(/https?:\/\/(www\.)?hooktube\.com\/watch\?v=([a-zA-Z\d_-]+)/);
+const ivcom = $(this).attr('href').match(/https?:\/\/(www\.)?invidio\.us\/watch\?v=([a-zA-Z\d_-]+)/);
+const ytbe = $(this).attr('href').match(/https?:\/\/(www\.)?youtu\.be\/([a-zA-Z\d_-]+)/);
+const htbe = $(this).attr('href').match(/https?:\/\/(www\.)?hooktube\.com\/([a-zA-Z\d_-]+)/);
+const vimeo = $(this).attr('href').match(/https?:\/\/(www\.)?vimeo\.com\/([\d]+)/);
+const peertube = $(this).attr('href').match(/https?:\/\/.+..+\/videos\/watch\/([\da-z]{8}-[\da-z]{4}-[\da-z]{4}-[\da-z]{4}-[\da-z]{12})\/?$/);
+if(ytcom) embedMedia("youtube",$(this).closest(".toot_article"),ytcom[2]);
+else if(htcom) embedMedia("youtube",$(this).closest(".toot_article"),htcom[2]);
+else if(ivcom) embedMedia("youtube",$(this).closest(".toot_article"),ivcom[2]);
+else if(ytbe) embedMedia("youtube",$(this).closest(".toot_article"),ytbe[2]);
+else if(htbe) embedMedia("youtube",$(this).closest(".toot_article"),htbe[2]);
+else if(vimeo) embedMedia("vimeo",$(this).closest(".toot_article"),vimeo[2]);
+else if(peertube) embedMedia("peertube",$(this).closest(".toot_article"),peertube[0].replace("/watch/","/embed/"));
+else if(localStorage.setting_link_previews == "true") {
 if(!window.cards) {
 cards = new Array();
 }
@@ -475,4 +475,35 @@ else {
 window.location.href = "/404";
 }
 });
+}
+function embedMedia(source,element,watchid) {
+if(element.children(".media_views").length == 0) {
+let media_views = `<div class='media_views' sid="${element.parent().parent().parent().attr("sid")}" media_length='1' style="border:0;border-radius:0">`;
+if(source == "youtube" && server_setting_youplay == true && localStorage.setting_play_youplay == "true") {
+media_views += (`
+<div class="media_attachment" otype="video/gifv" mediacount="0">
+<iframe src="/media/youplay.php?id=${watchid}" frameborder="0" allowfullscreen></iframe>
+</div>`);
+}
+else if( source == "youtube" && localStorage.setting_play_invidious == "true") {
+media_views += (`
+<div class="media_attachment" otype="video/gifv" mediacount="0">
+<iframe src="https://www.invidio.us/embed/${watchid}" frameborder="0" allowfullscreen></iframe>
+</div>`);
+}
+else if(source == "vimeo" && server_setting_vimeo == true && localStorage.setting_play_vimeo == "true") {
+media_views += (`
+<div class="media_attachment" otype="video/gifv" mediacount="0">
+<iframe src="/media/vimeo.php?id=${watchid}" frameborder="0" allowfullscreen></iframe>
+</div>`);
+}
+else if(source == "peertube" && localStorage.setting_play_peertube == "true") {
+media_views += (`
+<div class="media_attachment" otype="video/gifv" mediacount="0">
+<iframe src="${watchid}" frameborder="0" allowfullscreen></iframe>
+</div>`);
+}
+media_views += "</div>";
+if($(media_views).children().length != 0) element.append(media_views);
+}
 }

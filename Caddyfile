@@ -125,6 +125,10 @@ halcyon.domain.tld {
     r ^/settings/filters/?$
     to /settings_filters.php
   }
+  rewrite {
+    r ^/settings/media/?$
+    to /settings_media.php
+  }
   # End settings
 
   # Begin user

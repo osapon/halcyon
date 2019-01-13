@@ -612,3 +612,22 @@ color:#FFF !important;
 .instance_field {
 border:1px solid #000000;
 }
+.player {
+border: 1px solid #000000;
+color: #FFF;
+}
+.player .progress {
+background: rgb(101, 119, 134);
+}
+.player .loaded {
+background: #76BFEC;
+}
+.player .progress .pointer {
+background: #189EFC;
+}
+.player .volume {
+background: rgb(101, 119, 134);
+}
+.player .volume .pointer {
+background: #189EFC;
+}

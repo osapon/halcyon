@@ -1,26 +1,46 @@
 function mediaattachments_template(status) {
 let media_views = "";
+var border = "";
 if(status.media_attachments[0].remote_url != null) {
 status.media_attachments[0].url = status.media_attachments[0].remote_url;
 }
+if(status.media_attachments[0].type === "video" && localStorage.setting_play_video != "false") border = ' style="border:0;border-radius:0"';
 if(status.media_attachments[0].url === "/files/original/missing.png") {
 return "";
 }
 else if(!status.sensitive || localStorage.setting_show_nsfw == "true") {
-media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'>`;
+media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'${border}>`;
 }
 else {
-media_views = `<div class='media_views sensitive' media_length='${status.media_attachments.length}'>
+media_views = `<div class='media_views sensitive' media_length='${status.media_attachments.length}'${border}>
 <div class='sensitive_alart'>
 <span class="text1">${__('Sensitive content')}</span>
 <span class="text2">${__('Click to view')}</span>
 </div>`;
 }
-if ( status.media_attachments[0].type === "video" | status.media_attachments[0].type === "gifv" ) {
+if((status.media_attachments[0].type === "video" && localStorage.setting_play_video == "false") || (status.media_attachments[0].type === "gifv" && localStorage.setting_play_gif == "false")) {
+media_views += (`
+<div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[0].id}" url="${status.media_attachments[0].preview_url}" mediacount="0">
+<img src="${status.media_attachments[0].preview_url}" window_view="enable" />
+</div>`);
+} else if(status.media_attachments[0].type === "video") {
 media_views += (`
 <div class="media_attachment" otype="video/gifv" mediacount="0">
-<video src="${status.media_attachments[0].url}" frameborder="0" allowfullscreen autoplay loop muted></video>
+<iframe src="/media/video.php?url=${encodeURIComponent(status.media_attachments[0].url)}&preview=${encodeURIComponent(status.media_attachments[0].preview_url)}" frameborder="0" allowfullscreen></iframe>
 </div>`);
+} else if(status.media_attachments[0].type === "gifv") {
+media_views += (`
+<div class="media_attachment" otype="video/gifv" mediacount="0">
+<video frameborder="0" autoplay loop muted>
+<source src="${status.media_attachments[0].url}">
+<img src="${status.media_attachments[0].preview_url}">
+</video>
+</div>`);
+} else if(status.media_attachments[0].type === "audio" || (status.media_attachments[0].type === "unknown" && status.media_attachments[0].url.substring(status.media_attachments[0].url.length-4) == ".mp3")) {
+if(localStorage.setting_play_audio != "false") {
+media_views = $("<div>").addClass("player");
+media_views.player(status.media_attachments[0].url);
+}
 } else {
 if ( status.media_attachments.length <= 2 ) {
 for ( let i in status.media_attachments ) {
@@ -136,7 +156,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 var account_state_icons = "";
 if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=(`
+const html=$(`
 <li sid="${status.id}" class="toot_entry">
 <div class="toot_entry_body">
 <a href="${status_account_link}">
@@ -177,7 +197,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
@@ -202,7 +221,8 @@ ${toot_reblog_button}
 </section>
 </div>
 </li>`);
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 } else {
 for(i=0;i<status.reblog.emojis.length;i++) {
 status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
@@ -275,7 +295,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account
 var account_state_icons = "";
 if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html = (`
+const html = $(`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
@@ -321,7 +341,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
@@ -351,7 +370,8 @@ ${media_views}
 </section>
 </div>
 </li>`);
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 }
 }
 function timeline_pinned_template(status) {
@@ -413,7 +433,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 var account_state_icons = "";
 if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html = (`
+const html = $(`
 <li sid="${status.id}" class="toot_entry">
 <div class="pinned_notice_box">
 <i class="fa fa-fw fa-thumb-tack"></i>${__('Pinned Toot')}</span>
@@ -457,7 +477,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
@@ -487,7 +506,8 @@ ${media_views}
 </section>
 </div>
 </li>`);
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 }
 function notifications_template(NotificationObj) {
 const notice_author_link = getRelativeURL(NotificationObj.account.url, NotificationObj.account.id);
@@ -675,7 +695,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.statu
 var account_state_icons = "";
 if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=(`
+const html=$(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
 <div class="toot_entry_body">
 <a href="${toot_author_link}">
@@ -716,7 +736,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${NotificationObj.status.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
@@ -741,7 +760,8 @@ ${toot_reblog_button}
 </section>
 </div>
 </li>`);
-return $(html);
+html.find(".toot_article").append(media_views);
+return html
 } else {
 const html=(`
 <li sid="${NotificationObj.id}" class="notice_entry fol">
@@ -887,7 +907,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 var account_state_icons = "";
 if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=(`
+const html=$(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
 <header class="toot_header">
@@ -923,7 +943,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.content}
 </span>
-${media_views}
 </article>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </section>
@@ -1024,7 +1043,8 @@ ${current_instance_charlimit}
 </div>
 </form>`);
 history.pushState(null, null, getRelativeURL(status.account.url, status.account.id, '/status/'+status.id));
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 } else {
 const status_datetime= getConversionedDate(null, status.reblog.created_at),
 status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
@@ -1099,7 +1119,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account
 var account_state_icons = "";
 if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=(`
+const html=$(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
 <header class="toot_header">
@@ -1135,7 +1155,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
-${media_views}
 </article>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </section>
@@ -1242,7 +1261,8 @@ ${current_instance_charlimit}
 </form>
 `);
 history.pushState(null, null, getRelativeURL(status.reblog.account.url, status.reblog.id, '/status/'+status.reblog.id));
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 }
 }
 function media_template(status, mediaURL) {
@@ -1348,7 +1368,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" s
 var account_state_icons = "";
 if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=(`
+const html=$(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="toot_entry_body">
 <div class="icon_box">
@@ -1385,7 +1405,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
@@ -1410,7 +1429,8 @@ ${toot_reblog_button}
 </section>
 </div>
 </div>`);
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 } else {
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
 status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
@@ -1483,7 +1503,7 @@ var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account
 var account_state_icons = "";
 if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
 if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=(`
+const html=$(`
 <div sid="${status.id}" class="toot_entry ${class_options}">
 <div class="boost_author_box">
 <a href="${status_account_link}">
@@ -1525,7 +1545,6 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
@@ -1555,6 +1574,7 @@ ${media_views}
 </section>
 </div>
 </div>`);
-return $(html)
+html.find(".toot_article").append(media_views);
+return html
 }
 }

@@ -365,6 +365,102 @@ $(document).ready(function() {
 loadfilters();
 });
 }
+else if(window.location.pathname == "/settings/media") {
+$('#js-settings_nav_media').toggleClass('view');
+$(function() {
+if(localStorage.setting_play_gif == "true") {
+$("#setting_play_gif")[0].checked = true;
+}
+if(localStorage.setting_play_video == "true") {
+$("#setting_play_video")[0].checked = true;
+}
+if(localStorage.setting_play_audio == "true") {
+$("#setting_play_audio")[0].checked = true;
+}
+if(localStorage.setting_play_peertube == "true") {
+$("#setting_play_peertube")[0].checked = true;
+}
+if(localStorage.setting_play_youplay == "true" && $("#settings_play_youplay").length == 1) {
+$("#setting_play_youplay")[0].checked = true;
+}
+if(localStorage.setting_play_invidious == "true" && $("#settings_play_invidious").length == 1) {
+$("#setting_play_invidious")[0].checked = true;
+}
+if(localStorage.setting_play_vimeo == "true" && $("#settings_play_vimeo").length == 1) {
+$("#setting_play_vimeo")[0].checked = true;
+}
+});
+$("#setting_play_gif").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_gif","true");
+putMessage(__("Gif animations enabled"));
+}
+else {
+localStorage.setItem("setting_play_gif","false");
+putMessage(__("Gif animations disabled"));
+}
+});
+$("#setting_play_video").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_video","true");
+putMessage(__("Video player enabled"));
+}
+else {
+localStorage.setItem("setting_play_video","false");
+putMessage(__("Video player disabled"));
+}
+});
+$("#setting_play_audio").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_audio","true");
+putMessage(__("Audio player enabled"));
+}
+else {
+localStorage.setItem("setting_play_audio","false");
+putMessage(__("Audio player disabled"));
+}
+});
+$("#setting_play_peertube").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_peertube","true");
+putMessage(__("PeerTube embeds enabled"));
+}
+else {
+localStorage.setItem("setting_play_peertube","false");
+putMessage(__("PeerTube embeds disabled"));
+}
+});
+$("#setting_play_youplay").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_youplay","true");
+putMessage(__("YouPlay embeds enabled"));
+}
+else {
+localStorage.setItem("setting_play_youplay","false");
+putMessage(__("YouPlay embeds disabled"));
+}
+});
+$("#setting_play_invidious").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_invidious","true");
+putMessage(__("Invidio.us embeds enabled"));
+}
+else {
+localStorage.setItem("setting_play_invidious","false");
+putMessage(__("Invidio.us embeds disabled"));
+}
+});
+$("#setting_play_vimeo").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_play_vimeo","true");
+putMessage(__("Vimeo embeds enabled"));
+}
+else {
+localStorage.setItem("setting_play_vimeo","false");
+putMessage(__("Vimeo embeds disabled"));
+}
+});
+}
 function selectbox($this) {
 var $this = $($this);
 var numberOfOptions = $this.children('option').length;

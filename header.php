@@ -34,6 +34,8 @@ echo '<link rel="stylesheet" href="/assets/css/dark.css" media="all">';
 <script src="/assets/js/pomo/pomo.js"></script>
 <script src="/assets/js/twemoji/twemoji.min.js"></script>
 <script src="/assets/js/clipboard.js/clipboard.min.js"></script>
+<script src="/assets/js/player/soundmanager.js"></script>
+<script src="/assets/js/player/audio.js"></script>
 <script>
 if(!localStorage.getItem("current_id") | !localStorage.getItem("current_instance") | !localStorage.getItem("current_authtoken")) {
 location.href = "/login";
@@ -63,6 +65,8 @@ else if($.cookie("session") === undefined) {
 resetApp();
 }
 }
+server_setting_youplay = <?=$config["Media"]["youplay"] ? "true" : "false"?>;
+server_setting_vimeo = <?=$config["Media"]["vimeo"] ? "true" : "false"?>;
 </script>
 </head>
 <body>
@@ -111,7 +115,7 @@ resetApp();
 <ul class="header_nav_list">
 <li class="header_nav_item search_form_wrap">
 <form class="search_form" action="/search" method="GET">
-<input id="search_form" class="search_form_input" placeholder="<?=_('Search Mastodon')?>" type="text" name="q" accesskey="/" autocomplete="off">
+<input id="search_form" class="search_form_input" placeholder="<?=_('Search Mastodon')?>" type="text" name="q" accesskey="/">
 <span class="search_form_submit">
 <button type="submit">
 <i class="fa fa-fw fa-search"></i>

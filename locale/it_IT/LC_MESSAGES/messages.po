@@ -1,0 +1,652 @@
+# Sylke Vicious <silkevicious@tuta.io>, 2018. #zanata
+# Niklas Poslovski <ni.pos@yandex.com>, 2019. #zanata
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2018-09-30 09:53+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2019-01-13 02:37+0000\n"
+"Last-Translator: Sylke Vicious <silkevicious@tuta.io>\n"
+"Language-Team: Italian\n"
+"Language: it\n"
+"X-Generator: Zanata 4.6.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+
+msgid "Language"
+msgstr "Lingua"
+
+msgid "Language_en_US"
+msgstr "English"
+
+msgid "Language_de_DE"
+msgstr "German"
+
+msgid "Language_ja_JP"
+msgstr "Japanese"
+
+msgid "Language_ko_KR"
+msgstr "Korean"
+
+msgid "Language_pl_PL"
+msgstr "Polish"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
+
+msgid "Language_gl_ES"
+msgstr "Galician"
+
+msgid "Sensitive content"
+msgstr "Contenuto sensibile"
+
+msgid "Click to view"
+msgstr "Clicca per vedere"
+
+msgid "SHOW MORE"
+msgstr "MOSTRA DI PIÙ"
+
+msgid "SHOW LESS"
+msgstr "MOSTRA DI MENO"
+
+msgid "Public"
+msgstr "Pubblico"
+
+msgid "Unlisted"
+msgstr "Non elencato"
+
+msgid "Followers-only"
+msgstr "Solo seguaci"
+
+msgid "Direct"
+msgstr "Diretto"
+
+msgid "Delete Toot"
+msgstr "Elimina Toot"
+
+msgid "Unpin Toot"
+msgstr "Non fissare più questo Toot"
+
+msgid "Pin Toot"
+msgstr "Fissa Toot in alto"
+
+msgid "Mute"
+msgstr "Silenzia"
+
+msgid "Block"
+msgstr "Blocca"
+
+msgid "Report this Toot"
+msgstr "Segnala questo Toot"
+
+msgid "Copy link to Toot"
+msgstr "Copia il collegamento del Toot"
+
+msgid "View original"
+msgstr "Vedi originale"
+
+msgid "Boosted"
+msgstr "Boostato"
+
+msgid "Pinned Toot"
+msgstr "Toot Fissato"
+
+msgid "favourited Your Toot"
+msgstr "ha messo il tuo Toot nei preferiti"
+
+msgid "boosted Your Toot"
+msgstr "ha condiviso il tuo Toot"
+
+msgid "followed you"
+msgstr "ti segue"
+
+msgid "Follow"
+msgstr "Segui"
+
+msgid "Toot your reply"
+msgstr "Toota la tua risposta"
+
+msgid "Reply"
+msgstr "Rispondi"
+
+msgid "Content warning"
+msgstr "Contenuto sensibile"
+
+msgid "Jan"
+msgstr "Gen"
+
+msgid "Feb"
+msgstr "Feb"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Apr"
+
+msgid "May"
+msgstr "Mag"
+
+msgid "Jun"
+msgstr "Giu"
+
+msgid "Jul"
+msgstr "Lug"
+
+msgid "Aug"
+msgstr "Ago"
+
+msgid "Sep"
+msgstr "Set"
+
+msgid "Oct"
+msgstr "Ott"
+
+msgid "Nov"
+msgstr "Nov"
+
+msgid "Dec"
+msgstr "Dic"
+
+msgid "Changed setting to"
+msgstr "Cambiate impostazioni in"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "Segna come NSFW come predefinito abilitato"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "Segna come NSFW come predefinito disabilitato"
+
+msgid "Who to follow enabled"
+msgstr "Chi seguire abilitato"
+
+msgid "Who to follow disabled"
+msgstr "Chi seguire disabilitato"
+
+msgid "Changed about me setting"
+msgstr "Cambiate impostazioni Su di me"
+
+msgid "Uploaded new avatar"
+msgstr "Caricata una nuova immagine di profilo"
+
+msgid "Uploaded new header"
+msgstr "Caricata una nuova immagine di copertina"
+
+msgid "Account locked"
+msgstr "Account bloccato"
+
+msgid "Account unlocked"
+msgstr "Account sbloccato"
+
+msgid "Link previews enabled"
+msgstr "Anteprime dei collegamenti abilitate"
+
+msgid "Link previews disabled"
+msgstr "Anteprime dei collegamenti disabilitate"
+
+msgid "You didn't allow notifications"
+msgstr "Non hai consentito le notifiche"
+
+msgid "Desktop notifications enabled"
+msgstr "Notifiche desktop abilitate"
+
+msgid "Desktop notifications disabled"
+msgstr "Notifiche desktop disabilitate"
+
+msgid "Replies shown"
+msgstr "Risposte mostrate"
+
+msgid "Replies hidden"
+msgstr "Risposte nascoste"
+
+msgid "CW content shown"
+msgstr "Contenuto sensibile mostrato"
+
+msgid "CW content hidden"
+msgstr "Contenuto sensibile nascosto"
+
+msgid "NSFW content shown"
+msgstr "Contenuto NSFW mostrato"
+
+msgid "NSFW content hidden"
+msgstr "Contenuto NSFW nascosto"
+
+msgid "Reply to"
+msgstr "Rispondi a"
+
+msgid "Report"
+msgstr "Segnala"
+
+msgid "Report a Toot of"
+msgstr "Segnala Toot di"
+
+msgid "What's happening?"
+msgstr "Cosa succede?"
+
+msgid "Toot"
+msgstr "Toot"
+
+msgid "Compose new Toot"
+msgstr "Componi un nuovo Toot"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "Per favore descrivi qual è il problema di questo Toot"
+
+msgid "TOOTS"
+msgstr "TOOTS"
+
+msgid "PEOPLE"
+msgstr "PERSONE"
+
+msgid "Settings"
+msgstr "Impostazioni"
+
+msgid "GENERAL"
+msgstr "GENERALE"
+
+msgid "PROFILE"
+msgstr "PROFILO"
+
+msgid "APPEARANCE"
+msgstr "INTERFACCIA"
+
+msgid "Change instance"
+msgstr "Cambia istanza"
+
+msgid "Blank for default"
+msgstr "Predefinito vuoto"
+
+msgid "FOLLOWING"
+msgstr "SEGUI"
+
+msgid "Interesting accounts of devs"
+msgstr "Account interessanti degli sviluppatori"
+
+msgid "Halcyon for"
+msgstr "Halcyon per"
+
+msgid "About"
+msgstr "A proposito di"
+
+msgid "Terms"
+msgstr "Termini"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Source code"
+msgstr "Codice sorgente"
+
+msgid "Other instances"
+msgstr "Altre istanze"
+
+msgid "Privacy policy"
+msgstr "Regole sulla Privacy"
+
+msgid "Version"
+msgstr "Versione"
+
+msgid "Who to follow"
+msgstr "Chi seguire"
+
+msgid "Enable who to follow"
+msgstr "Abilita Chi seguire"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr ""
+"Halcyon deve connettersi ad un server esterno per ottenere una lista di "
+"utenti che hanno interessi simili a te. Se vuoi utilizzare questa funzione, "
+"per favore abilitala."
+
+msgid "MORE"
+msgstr "DI PIÙ"
+
+msgid "FOLLOWERS"
+msgstr "SEGUACI"
+
+msgid "Following"
+msgstr "Seguendo"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "Non riceverai più notifiche da questo utente"
+
+msgid "Unmuted this user"
+msgstr "Non silenziare più questo utente"
+
+msgid "This user has been blocked"
+msgstr "Questo utente è stato bloccato"
+
+msgid "Unblocked this user"
+msgstr "Utente sbloccato"
+
+msgid "Your Toot has been deleted"
+msgstr "Il tuo Toot è stato eliminato"
+
+msgid "Your Toot has been pinned"
+msgstr "Il tuo Toot è stato fissato in alto"
+
+msgid "Your Toot has been unpinned"
+msgstr "Il tuo Toot non è più fissato in alto"
+
+msgid "Edit profile"
+msgstr "Modifica profilo"
+
+msgid "FAVOURITES"
+msgstr "PREFERITI"
+
+msgid "Show"
+msgstr "Mostra"
+
+msgid "Blocking"
+msgstr "Bloccati"
+
+msgid "Muting"
+msgstr "Silenziati"
+
+msgid "Requested"
+msgstr "Richieste"
+
+msgid "Photos and toots"
+msgstr "Foto e toot"
+
+msgid "favourited your toot"
+msgstr "ha messo nei preferiti il tuo toot"
+
+msgid "boosted your toot"
+msgstr "ha boostato il tuo toot"
+
+msgid "mentioned you"
+msgstr "ti ha menzionato"
+
+msgid "Your Toot was posted!"
+msgstr "Il tuo Toot è stato pubblicato!"
+
+msgid "News"
+msgstr "Novità"
+
+msgid "Source"
+msgstr "Codice Sorgente"
+
+msgid "Privacy"
+msgstr "Privacy"
+
+msgid "Imprint"
+msgstr "Imprint"
+
+msgid "Contact"
+msgstr "Contatti"
+
+msgid "Login"
+msgstr "Accedi"
+
+msgid "Login to Halcyon"
+msgstr "Accedi ad Halcyon"
+
+msgid "create an account"
+msgstr "crea un account"
+
+msgid "or"
+msgstr "o"
+
+msgid "I agree with the"
+msgstr "Sono d'accordo con"
+
+msgid "What is Halcyon"
+msgstr "Cos'è Halcyon"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr ""
+"che ha l'obbiettivo di ricreare l'interfaccia utente semplice e carina di "
+"Twitter mantenendo tutti i vantaggi delle reti decentralizzate."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon è un client web per"
+
+msgid "Contact / Feedback"
+msgstr "Contattaci / Dacci la tua opinione"
+
+msgid "Use my contact form"
+msgstr "Usa il mio modulo di contatto"
+
+msgid "Help us"
+msgstr "Aiutaci"
+
+msgid "Halcyon Terms of Use"
+msgstr "Termini di utilizzo di Halcyon"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"Questi termini di utilizzo riguardano gli utenti del servizio web Halcyon "
+"per Mastodon e Pleroma (abbreviato Halcyon) ospitato su"
+
+msgid "Your Reply was posted!"
+msgstr "La tua risposta è stata pubblicata!"
+
+msgid "Toot reported successfully!"
+msgstr "Toot segnalato con successo!"
+
+msgid "Link successfully copied!"
+msgstr "Collegamento copiato con successo!"
+
+msgid "Home"
+msgstr "Home"
+
+msgid "Local"
+msgstr "Locale"
+
+msgid "Federated"
+msgstr "Federata"
+
+msgid "Notifications"
+msgstr "Notifiche"
+
+msgid "Search Mastodon"
+msgstr "Cerca Mastodon"
+
+msgid "View profile"
+msgstr "Vedi profilo"
+
+msgid "Log out"
+msgstr "Disconnettiti"
+
+msgid "All"
+msgstr "Tutto"
+
+msgid "new notitification"
+msgstr "nuova notifica"
+
+msgid "Show all NSFW content"
+msgstr "Mostra tutto il contenuto NSFW"
+
+msgid "Show all CW content"
+msgstr "Mostra tutto il contenuto CW"
+
+msgid "Show replies"
+msgstr "Mostra risposte"
+
+msgid "Desktop notifications"
+msgstr "Notifiche desktop"
+
+msgid "Enable link previews"
+msgstr "Abilita anteprime dei collegamenti"
+
+msgid "Auto update"
+msgstr "Auto aggiorna"
+
+msgid "Manual update"
+msgstr "Aggiornamento manuale"
+
+msgid "Appearance settings"
+msgstr "Impostazioni di visualizzazione"
+
+msgid "New posts streaming"
+msgstr "Streaming dei nuovi post"
+
+msgid "replies"
+msgstr "risposte"
+
+msgid "General settings"
+msgstr "Impostazioni generali"
+
+msgid "Default post privacy"
+msgstr "Privacy predefinita dei post"
+
+msgid "Mark as NSFW by default"
+msgstr "Segna come NSFW in modo predefinito"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "FOLLOWS YOU"
+msgstr "TI SEGUONO"
+
+msgid "Local instance"
+msgstr "Istanza locale"
+
+msgid "Hashtag search filter"
+msgstr "Filtri di ricerca per hashtag"
+
+msgid "All instances"
+msgstr "Tutte le istanze"
+
+msgid "Local only"
+msgstr "Solo in locale"
+
+msgid "Lock account"
+msgstr "Blocca account"
+
+msgid "Header"
+msgstr "Immagine di copertina"
+
+msgid "Avatar"
+msgstr "Immagine di profilo"
+
+msgid "About me"
+msgstr "Su di me"
+
+msgid "Display name"
+msgstr "Nome visualizzato"
+
+msgid "Profile settings"
+msgstr "Impostazioni del profilo"
+
+msgid "Toots"
+msgstr "Toot"
+
+msgid "Favourites"
+msgstr "Preferiti"
+
+msgid "New favourite"
+msgstr "Nuovo preferito"
+
+msgid "New boost"
+msgstr "Nuovo boost"
+
+msgid "New follower"
+msgstr "Nuovo seguace"
+
+msgid "New mention"
+msgstr "Nuova menzione"
+
+msgid "Dark theme enabled"
+msgstr "Tema scuro abilitato"
+
+msgid "Dark theme disabled"
+msgstr "Tema scuro disabilitato"
+
+msgid "Only on top"
+msgstr "Solo in cima"
+
+msgid "Enable dark theme"
+msgstr "Abilita tema scuro"
+
+msgid "Please enter the new name for this list."
+msgstr "Per favore inserisci il nuovo nome per questa lista."
+
+msgid "The name of your list can't be empty!"
+msgstr "Il nome della tua lista non può essere vuoto!"
+
+msgid "Your list has been renamed"
+msgstr "La tua lista è stata rinominata"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Sei sicuro di voler eliminare questa lista?"
+
+msgid "Your list has been deleted"
+msgstr "La tua lista è stata eliminata"
+
+msgid "Please enter the name of your new list."
+msgstr "Per favore inserisci il nome della tua nuova lista."
+
+msgid "Add"
+msgstr "Aggiungi"
+
+msgid "Remove"
+msgstr "Rimuovi"
+
+msgid "Add to list"
+msgstr "Aggiungi alla lista"
+
+msgid "Are you sure that you want to mute this user?"
+msgstr "Sei sicuro di voler silenziare questo utente?"
+
+msgid "Are you sure that you want to block this user?"
+msgstr "Sei sicuro di voler bloccare questo utente?"
+
+msgid "Are you sure that you want to delete this toot?"
+msgstr "Sei sicuro di voler eliminare questo toot?"
+
+msgid "Added this account to the list"
+msgstr "Questo account è stato aggiunto alla lista"
+
+msgid ""
+"You need to follow this user to add him/her to the list. Do you want to do "
+"that now?"
+msgstr ""
+"Devi seguire questo utente per aggiungerlo/a alla lista. Vuoi farlo ora?"
+
+msgid "You successfully followed this user."
+msgstr "Hai iniziato a seguire questo utente."
+
+msgid "Removed this account from the list"
+msgstr "Hai rimosso questo account dalla lista"
+
+msgid "Joined at"
+msgstr "Iscritto a"
+
+msgid "Direct messages"
+msgstr "Messaggi diretti"
+
+msgid "Lists"
+msgstr "Liste"
+
+msgid "Open public profile"
+msgstr "Apri profilo pubblico"
+
+msgid "My Lists"
+msgstr "Le mie liste"
+
+msgid "Confirmation"
+msgstr "Conferma"
+
+msgid "Yes"
+msgstr "Si"
+
+msgid "Cancel"
+msgstr "Annulla"
+
+msgid "Prompt"
+msgstr "Chiedi"
+
+msgid "Ok"
+msgstr "Ok"
+

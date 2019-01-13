@@ -25,6 +25,11 @@
 <h2><?=_('FILTERS')?></h2>
 </a>
 </li>
+<li id="js-settings_nav_media" class="header_nav_item settings_media">
+<a href="/settings/media">
+<h2><?=_('MEDIA')?></h2>
+</a>
+</li>
 </ul>
 </div>
 </div>

@@ -18,13 +18,15 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 - Twitter like UI, familiar interface.
 - Able to use on all instances.
 - No tracking, No ads.
-- Supports multiple languages
+- Supports multiple languages.
+- Privacy-friendly video embeds.
 
 ## Install
 [![Install Halcyon with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=halcyon)  
 or read our new wiki pages to install it manually: https://notabug.org/halcyon-suite/halcyon/wiki
 
 ## Blog
+- Release of Version 2.2.0 - Blog article coming soon
 - Release of Version 2.1.6 - Added search suggestions,fixed autocomplete bug,added instance info page,fixed small bug in profile settings,search for posts now supported
 - Release of Version 2.1.5 - Added support for filter,added possibility to filter all bots,it's now easier to detect bots
 - Release of Version 2.1.4 - Added custom profile fields,verified links,custom profile link settings and improved regular expressions for links
@@ -63,3 +65,5 @@ or read our new wiki pages to install it manually: https://notabug.org/halcyon-s
 - [LascauxSRL/lsx-emojipicker](https://github.com/LascauxSRL/lsx-emojipicker)
 - [osapon/Pomo](https://github.com/osapon/Pomo)
 - [Summer-Dong/auto-complete-for-text-input-box](https://github.com/Summer-Dong/auto-complete-for-text-input-box)
+- [youplay/yp-player](https://notabug.org/youplay/yp-player)
+- [speranskydanil/Simple-Audio-Player](https://github.com/speranskydanil/Simple-Audio-Player)

@@ -1133,6 +1133,9 @@ $(function() {
 $(document).on('click','.toot_entry.ancestors_status, .toot_entry.descendants_status', function(e) {
 $("#js-overlay_content .temporary_object").empty();
 });
+$(document).on('click','.player',function(e) {
+e.stopPropagation();
+});
 $(document).on('click','.toot_entry', function(e) {
 setOverlayStatus($(this).attr('sid'));
 });
