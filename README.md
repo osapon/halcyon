@@ -26,7 +26,7 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 or read our new wiki pages to install it manually: https://notabug.org/halcyon-suite/halcyon/wiki
 
 ## Blog
-- Release of Version 2.2.0 - Blog article coming soon
+- [Release of Version 2.2.0 - Privacy-focused media streaming and more](https://nikisoft.myblog.de/nikisoft/art/11644403/Privacy-focused-media-streaming-and-more-The-new-Halcyon-2-2-0)
 - Release of Version 2.1.6 - Added search suggestions,fixed autocomplete bug,added instance info page,fixed small bug in profile settings,search for posts now supported
 - Release of Version 2.1.5 - Added support for filter,added possibility to filter all bots,it's now easier to detect bots
 - Release of Version 2.1.4 - Added custom profile fields,verified links,custom profile link settings and improved regular expressions for links
