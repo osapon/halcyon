@@ -91,8 +91,10 @@ writtenby.username = status.account.username;
 writtenby.url = status.account.url;
 writtenby.acct = status.account.acct;
 status.mentions.push(writtenby);
-const status_account_link= getRelativeURL(status.account.url, status.account.id),
-status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
 status_attr_datetime = getConversionedDate(null, status.created_at);
 let alart_text= "",
 article_option= "",
@@ -242,9 +244,12 @@ writtenby.url = status.reblog.account.url;
 writtenby.acct = status.reblog.account.acct;
 status.reblog.mentions.push(writtenby);
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
-status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
-status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
-status_account_link= getRelativeURL(status.account.url, status.account.id);
+status_attr_datetime = getConversionedDate(null, status.reblog.created_at);
+var status_reblog_account_link,status_account_link;
+if(status.reblog.account.acct.indexOf("@") == -1)  status_reblog_account_link = "/@"+status.reblog.account.acct+"@"+current_instance+"?mid="+status.reblog.account.id;
+else status_reblog_account_link = "/@"+status.reblog.account.acct+"?mid="+status.reblog.account.id;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
 let alart_text= "",
 article_option= "",
 toot_reblogs_count= "",
@@ -388,9 +393,11 @@ writtenby.username = status.account.username;
 writtenby.url = status.account.url;
 writtenby.acct = status.account.acct;
 status.mentions.push(writtenby);
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
-status_attr_datetime = getConversionedDate(null, status.created_at),
-status_account_link= getRelativeURL(status.account.url, status.account.id);
+status_attr_datetime = getConversionedDate(null, status.created_at);
 let alart_text= "",
 article_option= "",
 toot_reblogs_count= "",
@@ -510,7 +517,9 @@ html.find(".toot_article").append(media_views);
 return html
 }
 function notifications_template(NotificationObj) {
-const notice_author_link = getRelativeURL(NotificationObj.account.url, NotificationObj.account.id);
+var notice_author_link;
+if(NotificationObj.account.acct.indexOf("@") == -1)  notice_author_link = "/@"+NotificationObj.account.acct+"@"+current_instance+"?mid="+NotificationObj.account.id;
+else notice_author_link = "/@"+NotificationObj.account.acct+"?mid="+NotificationObj.account.id;
 if(NotificationObj.account.display_name.length == 0) {
 NotificationObj.account.display_name = NotificationObj.account.username;
 }
@@ -519,8 +528,10 @@ for(i=0;i<NotificationObj.account.emojis.length;i++) {
 NotificationObj.account.display_name = NotificationObj.account.display_name.replace(new RegExp(":"+NotificationObj.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.account.emojis[i].url+"' class='emoji'>");
 }
 if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
-const toot_author_link = getRelativeURL(NotificationObj.status.account.url, NotificationObj.status.account.id),
-toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+var toot_author_link;
+if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 if( NotificationObj.type=='favourite' ){
 for(i=0;i<NotificationObj.status.emojis.length;i++) {
@@ -617,8 +628,10 @@ ${NotificationObj.status.account.display_name}
 return $(html);
 }
 } else if ( NotificationObj.type === 'mention' ) {
-const toot_author_link = getRelativeURL(NotificationObj.status.account.url, NotificationObj.status.account.id),
-toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+var toot_author_link;
+if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 let alart_text= "",
 article_option= "",
@@ -781,7 +794,9 @@ return $(html);
 }
 }
 function follows_template(AccountObj) {
-const profile_link = getRelativeURL(AccountObj.url,AccountObj.id);
+var profile_link;
+if(AccountObj.acct.indexOf("@") == -1) profile_link = "/@"+AccountObj.acct+"@"+current_instance+"?mid="+AccountObj.id;
+else profile_link = "/@"+AccountObj.acct+"?mid="+AccountObj.id;
 if(AccountObj.display_name.length == 0) {
 AccountObj.display_name = AccountObj.username;
 }
@@ -825,8 +840,10 @@ return $(html);
 }
 function status_template(status, class_options) {
 if ( status.reblog === null ) {
-const status_account_link= getRelativeURL(status.account.url, status.account.id),
-status_datetime= getConversionedDate(null, status.created_at),
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+const status_datetime= getConversionedDate(null, status.created_at),
 status_attr_datetime = getConversionedDate(null, status.created_at);
 let alart_text= "",
 article_option= "",
@@ -1047,9 +1064,12 @@ html.find(".toot_article").append(media_views);
 return html
 } else {
 const status_datetime= getConversionedDate(null, status.reblog.created_at),
-status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
-status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
-status_account_link= getRelativeURL(status.reblog.account.url, status.reblog.account.id);
+status_attr_datetime = getConversionedDate(null, status.reblog.created_at);
+var status_reblog_account_link,status_account_link;
+if(status.reblog.account.acct.indexOf("@") == -1)  status_reblog_account_link = "/@"+status.reblog.account.acct+"@"+current_instance+"?mid="+status.reblog.account.id;
+else status_reblog_account_link = "/@"+status.reblog.account.acct+"?mid="+status.reblog.account.id;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
 let alart_text= "",
 article_option= "",
 toot_reblogs_count= "",
@@ -1290,8 +1310,10 @@ return $(html)
 }
 function context_template(status, class_options) {
 if ( status.reblog === null ) {
-const status_account_link= getRelativeURL(status.account.url, status.account.id),
-status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
 status_attr_datetime = getConversionedDate(null, status.created_at);
 let alart_text= "",
 article_option= "",
@@ -1433,9 +1455,12 @@ html.find(".toot_article").append(media_views);
 return html
 } else {
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
-status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
-status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
-status_account_link= getRelativeURL(status.account.url, status.account.id);
+status_attr_datetime = getConversionedDate(null, status.reblog.created_at);
+var status_reblog_account_link,status_account_link;
+if(status.reblog.account.acct.indexOf("@") == -1)  status_reblog_account_link = "/@"+status.reblog.account.acct+"@"+current_instance+"?mid="+status.reblog.account.id;
+else status_reblog_account_link = "/@"+status.reblog.account.acct+"?mid="+status.reblog.account.id;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
 let alart_text= "",
 article_option= "",
 toot_reblogs_count= "",

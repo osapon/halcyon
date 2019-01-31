@@ -36,7 +36,10 @@ if(data.accounts[i].display_name == "") data.accounts[i].display_name = data.acc
 for(var a=0;a<data.accounts[i].emojis.length;a++) {
 data.accounts[i].display_name = data.accounts[i].display_name.replace(new RegExp(":"+data.accounts[i].emojis[a].shortcode+":","g"),"<img src='"+data.accounts[i].emojis[a].url+"' class='emoji'>");
 }
-dropdown.append($("<li>").data("value",getRelativeURL(data.accounts[i].url,data.accounts[i].id)).addClass("account_box").append($("<div>").addClass("icon_box").append($("<img>").attr("src",data.accounts[i].avatar).css("float","left")))
+var account_link;
+if(data.accounts[i].acct.indexOf("@") == -1) account_link = "/@"+data.accounts[i].acct+"@"+current_instance+"?mid="+data.accounts[i].id;
+else account_link = "/@"+data.accounts[i].acct+"?mid="+data.accounts[i].id;
+dropdown.append($("<li>").data("value",account_link).addClass("account_box").append($("<div>").addClass("icon_box").append($("<img>").attr("src",data.accounts[i].avatar).css("float","left")))
 .append($("<div>").addClass("label_box").css("width","unset").append($("<span>").addClass("dn").append($("<h3>").html(data.accounts[i].display_name).addClass("emoji_poss"))).append($("<span>").addClass("un").html(data.accounts[i].acct))).click(function() {
 window.location.href = $(this).data("value");
 }));

@@ -62,7 +62,7 @@ $("#js-profile_nav_followers > a").attr('href', 'followers'+location.search);
 $("#js-profile_nav_favourites > a").attr('href', 'favourites'+location.search);
 <?php if (isset($_GET['mid'])): ?>
 $(function() {
-const account_id = <?php echo $_GET['mid']; ?>;
+const account_id = "<?php echo $_GET['mid']; ?>";
 api.get('accounts/'+account_id, function(AccountObj) {
 if ( AccountObj !== null ) {
 setAccount(AccountObj);

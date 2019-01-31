@@ -13,6 +13,7 @@ if ( array.length >= 4 ) {
 if ( !options ) {
 var options = ""
 };
+if(array[array.length-1] == "") array[array.length-1] = "blog";
 if (id) {
 if (array[array.length-1].substr(0,1) === '@') {
 const link= '/'+array[array.length-1]+'@'+array[2]+options+'?mid='+id+'&';
@@ -205,6 +206,10 @@ instance: 'https://'+current_instance,
 api_user_token: authtoken
 });
 api.get("accounts/verify_credentials",function(AccountObj) {
+AccountObj.display_name = htmlEscape(AccountObj.display_name);
+for(var i=0;i<AccountObj.emojis.length;i++) {
+AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+AccountObj.emojis[i].shortcode+":","g"),"<img src='"+AccountObj.emojis[i].url+"' class='emoji'>");
+}
 localStorage.setItem("current_display_name",AccountObj["display_name"]);
 localStorage.setItem("current_acct",AccountObj["acct"]);
 localStorage.setItem("current_url",getRelativeURL(AccountObj["url"],AccountObj["id"]));
@@ -328,7 +333,7 @@ var is_account_locked = "";
 if(current_locked == "true") {
 is_account_locked = " <i class='fa fa-lock'></i>";
 }
-$(".js_current_profile_displayname").text(current_display_name);
+$(".js_current_profile_displayname").html(current_display_name);
 $(".js_current_profile_username").html(current_acct+is_account_locked);
 $(".js_current_profile_link").attr("href", current_url);
 $(".js_current_header_image").attr("src", current_header);
@@ -448,8 +453,11 @@ search.accounts[0].display_name = search.accounts[0].display_name.replace(new Re
 if(search.accounts[0].display_name.length == 0) {
 search.accounts[0].display_name = search.accounts[0].username;
 }
+var wtf_account_link;
+if(search.accounts[0].acct.indexOf("@") == -1) wtf_account_link = "/@"+search.accounts[0].acct+"@"+current_instance+"?mid="+search.accounts[0].id;
+else wtf_account_link = "/@"+search.accounts[0].acct+"?mid="+search.accounts[0].id;
 $('.what_to_follow_'+id+' > .icon_box img').attr('src',search.accounts[0].avatar);
-$('.what_to_follow_'+id+' .label_box > a').attr('href',getRelativeURL(search.accounts[0].url,search.accounts[0].id));
+$('.what_to_follow_'+id+' .label_box > a').attr('href',wtf_account_link);
 $('.what_to_follow_'+id+' .label_box > a > h3 .dn').addClass("emoji_poss").html(search.accounts[0].display_name);
 $('.what_to_follow_'+id+' .label_box > a > h3 .un').text('@'+search.accounts[0].username);
 $('.what_to_follow_'+id+' .label_box > .follow_button').attr('mid',search.accounts[0].id);

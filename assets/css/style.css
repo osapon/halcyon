@@ -1018,6 +1018,9 @@ font-weight: 600;
 .timeline .notice_entry .toot_content .toot_header a .username {
 color: #66757F;
 }
+.timeline .toot_entry .toot_content .toot_article .status_content p:not(:last-child) {
+margin-bottom:20px;
+}
 .timeline_footer {
 padding: 24px;
 background-color: #fff;
@@ -2396,6 +2399,9 @@ color: #fff;
 }
 .toot_detail.main_status .toot_content .toot_article.content_warning .status_content {
 display: none;
+}
+.toot_detail.main_status .toot_content .toot_article .status_content p:not(:last-child) {
+margin-bottom:30px;
 }
 .toot_detail.main_status .toot_content a {
 color: #189EFC;

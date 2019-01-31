@@ -80,7 +80,7 @@ $("#js-profile_nav_followers > a").attr('href', location.pathname+'/followers'+l
 $("#js-profile_nav_favourites > a").attr('href', location.pathname+'/favourites'+location.search);
 $(function() {
 <?php if(isset($_GET['mid'])) { ?>
-const account_id = <?= htmlspecialchars((string)filter_input(INPUT_GET,'mid'),ENT_QUOTES) ?>;
+const account_id = "<?= htmlspecialchars((string)filter_input(INPUT_GET,'mid'),ENT_QUOTES) ?>";
 api.get('accounts/'+account_id, function(userprofile) {
 if(userprofile !== null) {
 <?php } else if(isset($_GET['user'])) {

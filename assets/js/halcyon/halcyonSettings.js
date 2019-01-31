@@ -380,13 +380,13 @@ $("#setting_play_audio")[0].checked = true;
 if(localStorage.setting_play_peertube == "true") {
 $("#setting_play_peertube")[0].checked = true;
 }
-if(localStorage.setting_play_youplay == "true" && $("#settings_play_youplay").length == 1) {
+if(localStorage.setting_play_youplay == "true" && $("#setting_play_youplay").length == 1) {
 $("#setting_play_youplay")[0].checked = true;
 }
-if(localStorage.setting_play_invidious == "true" && $("#settings_play_invidious").length == 1) {
+if(localStorage.setting_play_invidious == "true" && $("#setting_play_invidious").length == 1) {
 $("#setting_play_invidious")[0].checked = true;
 }
-if(localStorage.setting_play_vimeo == "true" && $("#settings_play_vimeo").length == 1) {
+if(localStorage.setting_play_vimeo == "true" && $("#setting_play_vimeo").length == 1) {
 $("#setting_play_vimeo")[0].checked = true;
 }
 });
