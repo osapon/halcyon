@@ -1274,11 +1274,9 @@ $('#overlay_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#overlay_status_form .status_textarea textarea').val($('#overlay_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
+$('#overlay_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
 $('#overlay_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-$('#overlay_status_form .status_textarea textarea').focus();
 var textLen = $('#overlay_status_form .status_textarea textarea').val().length * 2;
-$('#overlay_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1300,7 +1298,7 @@ $('#overlay_status_form .character_count').removeClass('red');
 $('#overlay_status_form').removeClass('ready');
 }
 if(e.key == ":") {
-$(this).val(replaced_emoji_return($(this).val()));
+replace_emoji_textarea(this);
 }
 $('#overlay_status_form .character_count').text(textLen);
 }
@@ -1422,7 +1420,7 @@ $('#header_status_form .status_textarea textarea').autoCompleteToken("destroy");
 $(document).on('change keyup','#header_status_form textarea, #header_status_form .status_spoiler', function(e) {
 if(e.keyCode !== 224 & e.keyCode !== 17) {
 if(e.key == ":") {
-$(this).val(replaced_emoji_return($(this).val()));
+replace_emoji_textarea(this);
 }
 const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
 let textLen = ( current_instance_charlimit - textCount );
@@ -1476,11 +1474,9 @@ $('#header_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#header_status_form .status_textarea textarea').val($('#header_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
+$('#header_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
 $('#header_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-$('#header_status_form .status_textarea textarea').focus();
 var textLen = $('#header_status_form .status_textarea textarea').val().length * 2;
-$('#header_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1609,11 +1605,9 @@ $('#reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#reply_status_form .status_textarea textarea').val($('#reply_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
+$('#reply_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
 $('#reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-$('#reply_status_form .status_textarea textarea').focus();
 var textLen = $('#reply_status_form .status_textarea textarea').val().length * 2;
-$('#reply_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1636,7 +1630,7 @@ $('#reply_status_form .character_count').removeClass('red');
 $('#reply_status_form').removeClass('ready');
 }
 if(e.key == ":") {
-$(this).val(replaced_emoji_return($(this).val()));
+replace_emoji_textarea(this);
 }
 $('#reply_status_form .character_count').text(textLen);
 }
@@ -1796,11 +1790,9 @@ $('#single_reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#single_reply_status_form .status_textarea textarea').val($('#single_reply_status_form .status_textarea textarea').val()+":"+emoji.name+": ");
+$('#single_reply_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
 $('#single_reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-$('#single_reply_status_form .status_textarea textarea').focus();
 var textLen = $('#single_reply_status_form .status_textarea textarea').val().length * 2;
-$('#single_reply_status_form .status_textarea textarea')[0].setSelectionRange(textLen,textLen);
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1828,7 +1820,7 @@ $('#single_reply_status_form .character_count').removeClass('red');
 $('#single_reply_status_form').removeClass('ready');
 }
 if(e.key == ":") {
-$(this).val(replaced_emoji_return($(this).val()));
+replace_emoji_textarea(this);
 }
 $('#single_reply_status_form .character_count').text(textLen);
 }
@@ -2048,8 +2040,34 @@ $(function() {
 $(document).on('click','.temporary_object > *, .parmanent_object > *', function(e) {
 e.stopPropagation();
 });
-$(document).on('click','#js-overlay_content_wrap', function(e) {
-$(this).removeClass('view');
+$(document).on('click','#js-overlay_content_wrap',function(e) {
+if((!$('#js-overlay_content_wrap .overlay_status').hasClass("invisible") && $('#js-overlay_content_wrap .overlay_status textarea').val().length > 0)
+|| (!$('#js-overlay_content_wrap .single_reply_status').hasClass("invisible") && $('#js-overlay_content_wrap .single_reply_status textarea').val().length > 0)
+|| (!$('#js-overlay_content_wrap .report_status').hasClass("invisible") && $('#js-overlay_content_wrap .report_status textarea').val().length > 0)
+|| ($('#js-overlay_content_wrap #reply_status_form').length == 1 && $('#js-overlay_content_wrap #reply_status_form textarea').val().length > 0)) {
+$(document.body).append($(`<div id="overlay_close_warning" style="position:fixed;z-index:1001;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.8)">
+<div class="overlay_simple overlay_close">
+<header class="overlay_simple_header">
+<span class="emoji_poss">${__('Confirmation')}</span>
+</header>
+<div class="overlay_simple_body">
+<div class="overlay_close_text" style="margin-bottom:10px">${__("If you close the overlay, your text will get deleted! Are you sure you want to close it?")}</div>
+<div class="overlay_simple_controls">
+<button class="overlay_confirm_yes toot_button" style="float:right"><div class="toot_button_label"><i class="fa fa-fw fa-check"></i><span>${__('Yes')}</span></div></button>
+<a href="javascript:$('#overlay_close_warning').remove();void(0)" class="overlay_confirm_cancel halcyon_link" style="float:right;margin-top:5px;margin-right:10px"><i class="fa fa-times"></i> ${__('Cancel')}</a>
+</div>
+</div>
+</div>
+</div>`));
+$(".overlay_close .overlay_confirm_yes").click(function() {
+$('#overlay_close_warning').remove();
+closeOverlay();
+});
+}
+else closeOverlay();
+});
+function closeOverlay() {
+$("#js-overlay_content_wrap").removeClass('view');
 $("#js-overlay_content_wrap .temporary_object").empty();
 $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
 $('#js-overlay_content_wrap .overlay_status').addClass('invisible');
@@ -2079,7 +2097,7 @@ history.pushState(null, null, "/"+location.pathname.split("/")[1]+location.searc
 history.pushState(null, null, current_file);
 }
 }
-});
+}
 });
 $(function() {
 $("#enable_follow").click(function() {
@@ -2100,6 +2118,11 @@ if(!$(e.target).closest('.header_search_suggestions').length && !$(e.target).clo
 $(".search_form").submit(function(e) {
 e.preventDefault();
 searchredirect($("#search_form").val());
+});
+if($("#js-overlay_content_wrap").hasClass("view")) $(document.body).css("overflow-y","hidden");
+$("#js-overlay_content_wrap").attrchange(function(attr) {
+if(attr == "class" && $("#js-overlay_content_wrap").hasClass("view")) $(document.body).css("overflow-y","hidden");
+else $(document.body).css("overflow-y","auto");
 });
 shortcut.add("n",function() {
 $("#creat_status").click();

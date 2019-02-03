@@ -1504,13 +1504,23 @@ twemoji.parse(this,{base:"https://"+current_instance,ext:".svg",folder:"/emoji"}
 $(this).removeClass('emoji_poss');
 });
 }
-function replaced_emoji_return(original) {
-const emojis = original.match(/(:[a-zA-Z\d+_-]+?:)/g);
+function replace_emoji_textarea(element) {
+var txt = $(element);
+var cursorPos = txt.prop('selectionStart');
+var v = txt.val();
+const emojis = v.match(/(:[a-zA-Z\d+_-]+?:)/g);
 for(let i in emojis) {
 var emoji = emojis[i].replace(/-/g,"_");
 if(emoji_dict[emoji.substr(1,emoji.length-2)]) {
-original = original.replace(emojis[i],emoji_dict[emoji.substr(1,emoji.length-2)]);
+var indices = indicesOf(v,emojis[i]);
+v = v.replace(emojis[i],emoji_dict[emoji.substr(1,emoji.length-2)]);
+for(var a=0;a<indices.length;a++) {
+if(indices[a] < cursorPos) cursorPos = cursorPos - emojis[i].length + emoji_dict[emoji.substr(1,emoji.length-2)].length;
 }
 }
-return original;
+}
+txt.val(v);
+txt.prop('selectionStart',cursorPos);
+txt.prop('selectionEnd',cursorPos);
+txt.focus();
 }

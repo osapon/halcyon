@@ -304,8 +304,7 @@ cal.simulator.append(before).append(focus).append(after);
 var focusOffset = focus.offset(), simulatorOffset = cal.simulator.offset();
 // alert(focusOffset.left+ ',' +simulatorOffset.left + ',' + element.scrollLeft);
 return {
-top: focusOffset.top - simulatorOffset.top - element.scrollTop
-+ (navigator.userAgent.indexOf("Firefox") != -1 ? 0 : parseInt(self.getComputedStyle("fontSize"))),
+top: focusOffset.top - simulatorOffset.top - element.scrollTop + parseInt(self.getComputedStyle("fontSize")),
 left: focus[0].offsetLeft -cal.simulator[0].offsetLeft - element.scrollLeft
 };
 }
@@ -315,9 +314,7 @@ getComputedStyle:function(styleName) {
 if(this.length == 0) return;
 var thiz = this[0];
 var result = this.css(styleName);
-result = result || ($.browser.msie ?
-thiz.currentStyle[styleName]:
-document.defaultView.getComputedStyle(thiz, null)[styleName]);
+result = result || document.defaultView.getComputedStyle(thiz, null)[styleName];
 return result;
 },
 cloneStyle:function(target, styleName) {

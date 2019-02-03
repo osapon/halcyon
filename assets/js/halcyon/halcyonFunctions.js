@@ -1,3 +1,50 @@
+$(function() {
+(function($) {
+var MutationObserver = window.MutationObserver || window.WebKitMutationObserver || window.MozMutationObserver;
+$.fn.attrchange = function(callback) {
+if(MutationObserver) {
+var options = {
+subtree: false,
+attributes: true
+};
+var observer = new MutationObserver(function(mutations) {
+mutations.forEach(function(e) {
+callback.call(e.target,e.attributeName);
+});
+});
+return this.each(function() {
+observer.observe(this,options);
+});
+}
+}
+})(jQuery);
+(function($) {
+$.fn.insertText = function(textToInsert) {
+return this.each(function() {
+var txt = $(this);
+var cursorPosStart = txt.prop('selectionStart');
+var cursorPosEnd = txt.prop('selectionEnd');
+var v = txt.val();
+var textBefore = v.substring(0,cursorPosStart);
+var textAfter = v.substring(cursorPosEnd,v.length);
+txt.val(textBefore + textToInsert + textAfter);
+txt.prop('selectionStart',cursorPosStart + textToInsert.length);
+txt.prop('selectionEnd',cursorPosStart + textToInsert.length);
+txt.focus();
+});
+}
+})(jQuery);
+});
+function indicesOf(input,value) {
+var indices = new Array();
+var index = 0;
+while(index != -1) {
+index = input.indexOf(value,index);
+if(index != -1)
+indices.push(index++);
+}
+return indices;
+}
 function getLinkFromXHRHeader(xhrheaderstring) {
 const re = xhrheaderstring.match(/link: <.+api\/v1\/(.+?)>; rel="(.+?)", <.+api\/v1\/(.+?)>; rel="(.+?)"/i);
 let di = new Object();
