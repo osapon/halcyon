@@ -2574,6 +2574,9 @@ border-bottom: none;
 .media_detail .toot_entry .media_views {
 display: none;
 }
+.media_box img {
+image-orientation: from-image;
+}
 #what_to_follow_footer {
 	color: rgb(101, 119, 134);
 	font-size: 12px;
