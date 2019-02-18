@@ -57,7 +57,7 @@ msgid "What is Halcyon"
 msgstr "Halcyonとは何ですか"
 
 msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
-msgstr "Halcyon はマストドン用の<span style='font-weight: bold'>Twitterに似せたクライアント</span>です。あなたが所属するインスタンスにログインして使うことができます。ツイートのようにトゥートしてみましょう。"
+msgstr "Halcyon はマストドン用の<span style='font-weight: bold'>Twitterに似せたクライアント</span>です。あなたが所属するサーバーにログインして使うことができます。ツイートのようにトゥートしてみましょう。"
 
 msgid "Contact / Feedback"
 msgstr "連絡先 / フィードバック"
@@ -120,7 +120,7 @@ msgid "Default post privacy"
 msgstr "投稿の公開範囲"
 
 msgid "Local instance"
-msgstr "ローカルに表示するインスタンス"
+msgstr "ローカルに表示するサーバー"
 
 msgid "Hashtag search filter"
 msgstr "ハッシュタグ検索フィルター"
@@ -154,13 +154,13 @@ msgid "View new Toots"
 msgstr "<span></span> 件の新着トゥート"
 
 msgid "About this instance"
-msgstr "このインスタンスについて"
+msgstr "このサーバーについて"
 
 msgid "Terms this instance"
-msgstr "このインスタンスの利用規約"
+msgstr "このサーバーの利用規約"
 
 msgid "Other instances"
-msgstr "他のインスタンス"
+msgstr "他のサーバー"
 
 msgid "Follow"
 msgstr "フォロー"
@@ -188,10 +188,10 @@ msgid "Direct"
 msgstr "ダイレクト：メンションしたユーザーだけに公開"
 
 msgid "All instances"
-msgstr "全てのインスタンス"
+msgstr "全てのサーバー"
 
 msgid "Local only"
-msgstr "ログインしているインスタンスだけ"
+msgstr "ログインしているサーバーだけ"
 
 msgid "All"
 msgstr "全て"

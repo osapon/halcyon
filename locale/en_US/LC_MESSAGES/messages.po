@@ -57,7 +57,7 @@ msgid "What is Halcyon"
 msgstr "What is Halcyon"
 
 msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
-msgstr "Halcyon is standard <span style='font-weight: bold'>Twitter like client</span> of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
+msgstr "Halcyon is standard <span style='font-weight: bold'>Twitter like client</span> of Mastodon, And you can use it just by login to your server. Let's Toot like a tweet."
 
 msgid "Contact / Feedback"
 msgstr "Contact / Feedback"
@@ -120,7 +120,7 @@ msgid "Default post privacy"
 msgstr "Default post privacy"
 
 msgid "Local instance"
-msgstr "Local instance"
+msgstr "Local server"
 
 msgid "Hashtag search filter"
 msgstr "Hashtag search filter"
@@ -154,13 +154,13 @@ msgid "View new Toots"
 msgstr "View <span></span> new Toots"
 
 msgid "About this instance"
-msgstr "About this instance"
+msgstr "About this server"
 
 msgid "Terms this instance"
-msgstr "Terms this instance"
+msgstr "Terms this server"
 
 msgid "Other instances"
-msgstr "Other instances"
+msgstr "Other servers"
 
 msgid "Follow"
 msgstr "Follow"
@@ -188,7 +188,7 @@ msgid "Direct"
 msgstr "Direct"
 
 msgid "All instances"
-msgstr "All instances"
+msgstr "All servers"
 
 msgid "Local only"
 msgstr "Local only"
