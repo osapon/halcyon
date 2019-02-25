@@ -54,7 +54,7 @@ localStorage.setItem('setting_play_invidious','false');
 localStorage.setItem('setting_play_vimeo','false');
 localStorage.setItem('setting_post_privacy','".$profile["source"]["privacy"]."');
 localStorage.setItem('setting_post_sensitive','".$profile["source"]["sensitive"]."');
-$.cookie('darktheme','false',{path:'/',expires:3650});
+$.cookie('darktheme','unset',{path:'/',expires:3650});
 location.href = '/';
 </script>
 ";

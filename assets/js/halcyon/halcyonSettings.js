@@ -173,6 +173,10 @@ else if(window.location.pathname == "/settings/appearance") {
 $('#js-settings_nav_appearance').toggleClass('view');
 $(function() {
 $(".post_streaming_wrap input[name='post_streaming'][value='"+localStorage.getItem("setting_post_stream")+"']")[0].checked = true;
+if($("#setting_dark_theme").attr("default") == "default") {
+$("#setting_dark_theme_reset").hide();
+if(window.matchMedia("prefers-color-scheme:dark").matches) $("#setting_dark_theme")[0].checked = true;
+}
 if(localStorage.setting_link_previews == "true") {
 $("#setting_link_previews")[0].checked = true;
 }
@@ -209,6 +213,7 @@ localStorage.setItem("setting_post_stream", $(this).val());
 putMessage(__("Changed setting to")+" "+$(this).val());
 });
 $("#setting_dark_theme").change(function() {
+$("#setting_dark_theme_reset").fadeIn();
 if(this.checked) {
 $.cookie("darktheme","true",{path:'/',expires:3650});
 $(document.body).append($("<link>").attr("rel","stylesheet").attr("href","/assets/css/dark.css"));
@@ -219,6 +224,19 @@ $.cookie("darktheme","false",{path:'/',expires:3650});
 $("link[href='/assets/css/dark.css']").remove();
 putMessage(__("Dark theme disabled"));
 }
+});
+$("#setting_dark_theme_reset").click(function() {
+$.cookie("darktheme","unset",{path:'/',expires:3650});
+$("#setting_dark_theme_reset").fadeOut();
+if(window.matchMedia("prefers-color-scheme:dark").matches) {
+$("#setting_dark_theme")[0].checked = true;
+if($("link[href='/assets/css/dark.css']").length == 0) $(document.body).append($("<link>").attr("rel","stylesheet").attr("href","/assets/css/dark.css"));
+}
+else {
+$("#setting_dark_theme")[0].checked = false;
+$("link[href='/assets/css/dark.css']").remove();
+}
+putMessage(__("Dark theme reset to standard"));
 });
 $("#setting_link_previews").change(function() {
 if(this.checked) {

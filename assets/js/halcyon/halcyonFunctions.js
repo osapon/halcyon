@@ -271,6 +271,7 @@ localStorage.setItem("current_following_count_link",getRelativeURL(AccountObj["u
 localStorage.setItem("current_followers_count_link",getRelativeURL(AccountObj["url"],AccountObj["id"],'/followers'));
 localStorage.setItem("current_favourites_link",getRelativeURL(AccountObj["url"],AccountObj["id"],'/favourites'));
 localStorage.setItem("current_follow_loaded","false");
+localStorage.setItem("current_filters","[]");
 current_display_name = localStorage.getItem("current_display_name");
 current_acct = localStorage.getItem("current_acct");
 current_url = localStorage.getItem("current_url");
@@ -284,6 +285,7 @@ current_statuses_count_link = localStorage.getItem("current_statuses_count_link"
 current_following_count_link = localStorage.getItem("current_following_count_link");
 current_followers_count_link = localStorage.getItem("current_followers_count_link");
 current_favourites_link = localStorage.getItem("current_favourites_link");
+current_filters = JSON.parse(localStorage.getItem("current_filters"));
 current_search_history = JSON.parse(localStorage.getItem("current_search_history"));
 setCurrentProfile();
 });
@@ -339,6 +341,7 @@ emoji.url = data[i].url;
 emojis.push(emoji);
 }
 localStorage.setItem("current_custom_emojis",JSON.stringify(emojis));
+$(document).trigger("emojiready");
 });
 api.get("filters",function(data) {
 localStorage.setItem("current_filters",JSON.stringify(data));
@@ -373,6 +376,7 @@ current_blocked_accts = localStorage.getItem("current_blocked_accts");
 current_muted_accts = localStorage.getItem("current_muted_accts");
 current_filters = JSON.parse(localStorage.getItem("current_filters"));
 current_search_history = JSON.parse(localStorage.getItem("current_search_history"));
+$(document).trigger("emojiready");
 $(function() {setCurrentProfile()});
 }
 function setCurrentProfile() {

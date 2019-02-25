@@ -28,6 +28,11 @@
 <div id="header_menu_wrap" class="header_box header_left_box">
 <nav class="header_box_child nav_box">
 <ul>
+<a href="https://www.halcyon.social" class="no-underline">
+<li>
+<span><i class="fa fa-home" aria-hidden="true"></i><?=_('Website')?></span>
+</li>
+</a>
 <a href="https://social.csswg.org/@halcyon" class="no-underline">
 <li>
 <span><i class="fa fa-newspaper-o" aria-hidden="true"></i><?=_('News')?></span>
@@ -55,7 +60,7 @@
 </li>
 </a>
 <?php } ?>
-<a href="http://www.nikisoft.one/contact.php" class="no-underline">
+<a href="https://www.nikisoft.one/contact.php" class="no-underline">
 <li>
 <span><i class="fa fa-envelope" aria-hidden="true"></i><?=_('Contact')?></span>
 </li>

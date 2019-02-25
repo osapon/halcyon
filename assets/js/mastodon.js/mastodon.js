@@ -50,9 +50,11 @@ if(xhr.readyState == 0) {
 api.get(endpoint,queryStringAppend,callback);
 }
 else {
+if(xhr.responseText.length > 0) {
 putMessage(`[${xhr.status}] ${xhr.responseJSON['error']}`);
 if ( xhr.status === 401 ) {
 location.href = "/logout";
+}
 }
 }
 }

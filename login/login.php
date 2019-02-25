@@ -11,7 +11,7 @@ die();
 } else {
 try {
 $client_id = $api->getInstance($URL)["client_id"];
-$authorizeURL= $URL.'/oauth/authorize?client_id='.$client_id.'&response_type=code&scope=read+write+follow&website='.$api->clientWebsite.'&redirect_uri='.urlencode($api->clientWebsite.'/auth?&host='.$domain);
+$authorizeURL= $URL.'/oauth/authorize?client_id='.$client_id.'&response_type=code&scope=read+write+follow&redirect_uri='.urlencode($api->clientWebsite.'/auth?&host='.$domain);
 header("Location: {$authorizeURL}", true, 303);
 die();
 } catch (Exception $e) {

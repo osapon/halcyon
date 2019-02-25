@@ -34,12 +34,15 @@
 <h3><?=_('Enable dark theme')?></h3>
 </div>
 <div class="dark_theme_wrap" style="float:left;width:50%">
-<div class="switch">
-<input type="checkbox" id="setting_dark_theme" <?php if(array_key_exists('darktheme', $_COOKIE) && $_COOKIE['darktheme'] == "true") echo "checked='checked'" ?>>
+<div class="switch" style="float:left">
+<input type="checkbox" id="setting_dark_theme" <?php if(array_key_exists('darktheme',$_COOKIE)) {if($_COOKIE['darktheme'] == "true") echo "checked='checked'"; else if($_COOKIE['darktheme'] == "unset") echo "default='default'";} ?>>
 <div class="switch-btn">
 <span></span>
 </div>
 </div>
+<a href="javascript:void(0)" id="setting_dark_theme_reset" style="float:left">
+<i class="fa fa-2x fa-times" style="margin-top:8px"></i>
+</a>
 </div>
 <div style="float:left;width:50%;text-align:right;margin-top:16px">
 <h3><?=_('Enable link previews')?></h3>

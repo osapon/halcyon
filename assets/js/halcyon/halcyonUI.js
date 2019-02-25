@@ -1219,6 +1219,7 @@ emoji.name = lsxEmojiData.symbols[i].name;
 emoji.value = lsxEmojiData.symbols[i].value;
 actEmojiData.push(emoji);
 }
+$(document).on("emojiready",function() {
 var customemojis = JSON.parse(localStorage.current_custom_emojis);
 for(var i=0;i<customemojis.length;i++) {
 var emoji = new Object();
@@ -1226,6 +1227,7 @@ emoji.name = customemojis[i].code;
 emoji.url = customemojis[i].url;
 actEmojiData.push(emoji);
 }
+});
 $(function() {
 $(document).on('click','img[mediaaccess="true"]', function(e) {
 e.stopPropagation();

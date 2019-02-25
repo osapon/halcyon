@@ -23,9 +23,11 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 
 ## Install
 [![Install Halcyon with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=halcyon)  
-or read our new wiki pages to install it manually: https://notabug.org/halcyon-suite/halcyon/wiki
+or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install
 
 ## Blog
+- Release of Version 2.2.3 - Fixed login with Pleroma,fixed compatibility with Pawoo (older Mastodon),added support for prefers-color-scheme,some more fixes
+- Our new information website [halcyon.social](https://www.halcyon.social) came online
 - Release of Version 2.2.2 - Fix autocomplete,fix double scrollbars in overlay,add emojis at cursor position,confirm when closing compose window,add czech translation
 - Release of Version 2.2.1 - Many small bugfixes (details see release notes) and improved compatibility to the new Pleroma API
 - [Release of Version 2.2.0 - Privacy-focused media streaming and more](https://nikisoft.myblog.de/nikisoft/art/11644403/Privacy-focused-media-streaming-and-more-The-new-Halcyon-2-2-0)
