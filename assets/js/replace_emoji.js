@@ -1504,6 +1504,16 @@ twemoji.parse(this,{base:"https://"+current_instance,ext:".svg",folder:"/emoji"}
 $(this).removeClass('emoji_poss');
 });
 }
+function replaced_emoji_return(original) {
+const emojis = original.match(/(:[a-zA-Z\d+_-]+?:)/g);
+for(let i in emojis) {
+var emoji = emojis[i].replace(/-/g,"_");
+if(emoji_dict[emoji.substr(1,emoji.length-2)]) {
+original = original.replace(emojis[i],emoji_dict[emoji.substr(1,emoji.length-2)]);
+}
+}
+return original;
+}
 function replace_emoji_textarea(element) {
 var txt = $(element);
 var cursorPos = txt.prop('selectionStart');
