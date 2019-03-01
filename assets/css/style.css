@@ -872,6 +872,10 @@ position: relative;
 box-sizing: border-box;
 border: 1px solid #DCDFE1;
 }
+.media_views.media_full_height {
+height:auto;
+min-height:336px;
+}
 .media_views .media_attachment {
 overflow: hidden;
 width: 100%;
@@ -954,6 +958,21 @@ height: calc( 100% / 3 );
 }
 .media_views[media_length="4"] .media_attachments_right .media_attachment[mediacount="3"] {
 padding-bottom: 0;
+}
+.media_backward,.media_forward {
+color:#CCCCCC;
+position:absolute;
+top:50%;
+cursor:pointer;
+}
+.media_backward {
+left:-50px;
+}
+.media_forward {
+right:-50px;
+}
+.media_backward:hover,.media_forward:hover {
+color:#FFFFFF;
 }
 .timeline .notice_entry {
 padding: 10px 12px 10px 70px;
@@ -2258,13 +2277,16 @@ padding: 12px;
 .toot_entry.descendants_status .toot_entry_body::after {
 content: "";
 display: block;
-border: 2px solid #76BFEC;
 position: absolute;
 border-radius: 2px;
 position: absolute;
 left: 62px;
 height: calc(100% - 57px);
 top: 68px;
+}
+.toot_entry.ancestors_status .toot_entry_body::after,
+.toot_entry.descendants_status.direct_answer .toot_entry_body::after {
+border: 2px solid #76BFEC;
 }
 .toot_entry.ancestors_status.default_padding .toot_entry_body::after,
 .toot_entry.descendants_status.default_padding .toot_entry_body::after {

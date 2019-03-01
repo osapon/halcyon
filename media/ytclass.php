@@ -59,7 +59,7 @@ private $itag_ext = array(
 function __construct(){
 $this->cache_dir = dirname(__FILE__).'/.cache';
 $this->cookie_dir = sys_get_temp_dir();
-if(!file_exists($this->cache_dir)) {
+if(!file_exists($this->cache_dir) && is_writeable(dirname(__FILE__))) {
 mkdir($this->cache_dir,0755);
 }
 }
@@ -95,7 +95,7 @@ $vInfo['ChannelName'] = $videoData['author'];
 $vInfo['ChannelId'] = $videoData['ucid'];
 $vInfo['Thumbnail'] = str_replace('default', 'maxresdefault', $videoData['thumbnail_url']);
 $vInfo['Duration'] = $videoData['length_seconds'];
-$vInfo['Rating'] = $videoData['avg_rating'];
+//$vInfo['Rating'] = $videoData['avg_rating'];
 }
 if (isset($videoData['url_encoded_fmt_stream_map']) && isset($videoData['adaptive_fmts'])) {
 $draft1 = explode(',',$videoData['url_encoded_fmt_stream_map']);
@@ -177,6 +177,7 @@ return unserialize(file_get_contents($cache_player));
 $js_code = $this->curlGet($playerLink);
 $instructions = $this->sig_js_decode($js_code);
 if($instructions){
+if(file_exists($this->cache_dir) && is_writeable($this->cache_dir))
 file_put_contents($cache_player, serialize($instructions));
 return $instructions;
 }

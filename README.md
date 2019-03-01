@@ -26,6 +26,7 @@ We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/ha
 or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install
 
 ## Blog
+- Release of Version 2.2.4 - Easily switch between pictures in overlay,show pictures in full height in timeline,duplicated threads removed,many smaller bugfixes
 - Release of Version 2.2.3 - Fixed login with Pleroma,fixed compatibility with Pawoo (older Mastodon),added support for prefers-color-scheme,some more fixes
 - Our new information website [halcyon.social](https://www.halcyon.social) came online
 - Release of Version 2.2.2 - Fix autocomplete,fix double scrollbars in overlay,add emojis at cursor position,confirm when closing compose window,add czech translation

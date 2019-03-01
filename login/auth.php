@@ -44,6 +44,8 @@ localStorage.setItem('setting_show_replies', 'true');
 localStorage.setItem('setting_show_bots', 'true');
 localStorage.setItem('setting_show_content_warning', 'false');
 localStorage.setItem('setting_show_nsfw', 'false');
+localStorage.setItem('setting_full_height', 'false');
+localStorage.setItem('setting_thread_view', 'true');
 localStorage.setItem('setting_compose_autocomplete', 'true');
 localStorage.setItem('setting_play_gif','true');
 localStorage.setItem('setting_play_video','true');

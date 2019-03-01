@@ -209,7 +209,7 @@ var cause = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'cause'), ENT_
 if(cause === "domain") {
 $('.login_form_main').addClass('error');
 $('.session_aleart').removeClass('invisible');
-$('.session_aleart > span').text('This instance does not exsist.');
+$('.session_aleart > span').text('This instance does not exist.');
 }
 });
 $(document).on('click','.login_form_main', function(e) {

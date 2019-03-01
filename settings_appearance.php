@@ -101,6 +101,28 @@
 </div>
 </div>
 </div>
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
+<h3><?=_('Show pictures in full height')?></h3>
+</div>
+<div class="full_height_wrap" style="float:left;width:50%">
+<div class="switch">
+<input type="checkbox" id="setting_full_height">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+</div>
+<div style="float:left;width:50%;text-align:right;margin-top:16px">
+<h3><?=_('Show threads in thread view in timeline')?></h3>
+</div>
+<div class="thread_view_wrap" style="float:left;width:50%">
+<div class="switch">
+<input type="checkbox" id="setting_thread_view">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+</div>
 <span style="visibility:hidden">-</span>
 </div>
 </article>

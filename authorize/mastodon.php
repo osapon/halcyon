@@ -19,7 +19,8 @@ $this->instances[$domain] = $res['html'];
 file_put_contents($this->datadir."/".substr($domain,8).".txt",json_encode(array("client_id" => $res['html']['client_id'],"client_secret" => $res['html']['client_secret'])));
 }
 else {
-throw new Exception("Invalid instance");
+header("Location: /login/?cause=domain");
+die();
 }
 }
 public function selectInstance($domain) {

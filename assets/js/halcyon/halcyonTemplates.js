@@ -1,18 +1,24 @@
 function mediaattachments_template(status) {
 let media_views = "";
 var border = "";
+var mvfullheight = "";
+var dsplength = status.media_attachments.length;
 if(status.media_attachments[0].remote_url != null) {
 status.media_attachments[0].url = status.media_attachments[0].remote_url;
 }
 if(status.media_attachments[0].type === "video" && localStorage.setting_play_video != "false") border = ' style="border:0;border-radius:0"';
+if(localStorage.setting_full_height == "true") {
+mvfullheight = " media_full_height";
+dsplength = "1";
+}
 if(status.media_attachments[0].url === "/files/original/missing.png") {
 return "";
 }
 else if(!status.sensitive || localStorage.setting_show_nsfw == "true") {
-media_views = `<div class='media_views' sid="${status.id}" media_length='${status.media_attachments.length}'${border}>`;
+media_views = `<div class='media_views${mvfullheight}' sid="${status.id}" media_length='${dsplength}'${border}>`;
 }
 else {
-media_views = `<div class='media_views sensitive' media_length='${status.media_attachments.length}'${border}>
+media_views = `<div class='media_views sensitive${mvfullheight}' media_length='${dsplength}'${border}>
 <div class='sensitive_alart'>
 <span class="text1">${__('Sensitive content')}</span>
 <span class="text2">${__('Click to view')}</span>
@@ -1202,7 +1208,7 @@ const html=$(`
 <div class="icon_box">
 <img src="${status.reblog.account.avatar}">
 </div>
-<a href="${status_account_link}">
+<a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
 ${status.reblog.account.display_name}
 </span>
@@ -1341,21 +1347,34 @@ html.find(".toot_article").append(media_views);
 return html
 }
 }
-function media_template(status, mediaURL) {
-if ( !status ) {
+function media_template(status,media) {
+if(!status) {
 const html = (`
 <div class="media_detail">
 <div class="media_box">
-<img src="${mediaURL}" />
+<img src="${media}">
 </div>
 </div>`);
 return $(html)
-} else {
+}
+else {
+var pictures = new Array;
+var hidebackward = "";
+var hideforward ="";
+for(var i=0;i<status.media_attachments.length;i++) {
+if(status.media_attachments[i].remote_url != null) {
+status.media_attachments[i].url = status.media_attachments[i].remote_url;
+pictures.push(status.media_attachments[i].url);
+}
+}
+if(media == 0) hidebackward = " style='display:none'";
+if(media == status.media_attachments.length-1) hideforward = " style='display:none'";
 const status_template = timeline_template(status).html(),
-html = (`
-<div class="media_detail">
+html = (`<div class="media_detail" pictures='${JSON.stringify(pictures)}' cid="${media}">
 <div class="media_box">
-<img src="${mediaURL}" />
+<span class="media_backward"${hidebackward}><i class="fa fa-2x fa-chevron-left"></i></span>
+<img src="${status.media_attachments[media].url}">
+<span class="media_forward"${hideforward}><i class="fa fa-2x fa-chevron-right"></i></span>
 </div>
 <div class="toot_entry" sid="${status.id}">
 ${status_template}

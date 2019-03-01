@@ -207,6 +207,12 @@ $("#setting_show_content_warning")[0].checked = true;
 if(localStorage.setting_show_nsfw == "true") {
 $("#setting_show_nsfw")[0].checked = true;
 }
+if(localStorage.setting_full_height == "true") {
+$("#setting_full_height")[0].checked = true;
+}
+if(localStorage.setting_thread_view == "true") {
+$("#setting_thread_view")[0].checked = true;
+}
 });
 $(document).on('change',".post_streaming_wrap input[name='post_streaming']:checked", function(e) {
 localStorage.setItem("setting_post_stream", $(this).val());
@@ -328,6 +334,26 @@ putMessage(__("NSFW content shown"));
 else {
 localStorage.setItem("setting_show_nsfw","false");
 putMessage(__("NSFW content hidden"));
+}
+});
+$("#setting_full_height").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_full_height","true");
+putMessage(__("Pictures shown in full height"));
+}
+else {
+localStorage.setItem("setting_full_height","false");
+putMessage(__("Pictures shown in default height"));
+}
+});
+$("#setting_thread_view").change(function() {
+if(this.checked) {
+localStorage.setItem("setting_thread_view","true");
+putMessage(__("Threads shown in thread view"));
+}
+else {
+localStorage.setItem("setting_thread_view","false");
+putMessage(__("Threads shown in chronological order"));
 }
 });
 }
