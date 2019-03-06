@@ -1,9 +1,9 @@
 importScripts("/assets/js/mastodon.js/mastodon.js");
-function pushNotification(title,message) {
-self.registration.showNotification(title, {
-body: message,
-icon: '/assets/images/halcyon_logo.png'  
-});
+function pushNotification(param) {
+  self.registration.showNotification(param.title, {
+    body: param.message,
+    icon: (param.icon?param.icon:'/assets/images/halcyon_logo.png')
+  });
 }
 function __(msg) {return translation[msg]}
 onmessage = function(msg) {
@@ -18,10 +18,39 @@ if(userstream.payload.account.display_name.length == 0) {
 userstream.payload.account.display_name = userstream.payload.account.username;
 }
 switch(userstream.payload.type) {
-case "favourite":pushNotification(__("New favourite"),userstream.payload.account.display_name+" "+__("favourited your toot"));break;
-case "reblog":pushNotification(__("New boost"),userstream.payload.account.display_name+" "+__("boosted your toot"));break;
-case "follow":pushNotification(__("New follower"),userstream.payload.account.display_name+" "+__("followed you"));break;
-case "mention":pushNotification(__("New mention"),userstream.payload.account.display_name+" "+__("mentioned you"));break;
+  case "favourite":
+    title = Pomo.getText('favourited your toot').replace('${name}', userstream.payload.account.display_name);
+    pushNotification({
+      title: title,
+      message: $('<p>').html(userstream.payload.status.content).text(),
+      icon: userstream.payload.account.avatar_static
+    });
+    break;
+  case "reblog":
+    title = Pomo.getText('boosted your toot').replace('${name}', userstream.payload.account.display_name);
+    pushNotification({
+      title: title,
+      message: $('<p>').html(userstream.payload.status.content).text(),
+      icon: userstream.payload.account.avatar_static
+    });
+    break;
+  case "follow":
+    title = Pomo.getText('followed your account').replace('${name}', userstream.payload.account.display_name);
+    pushNotification({
+      title: title,
+      message: '',
+      icon: userstream.payload.account.avatar_static
+    });
+    $(".js_current_followers_count").html(++localStorage.current_followers_count);
+    break;
+  case "mention":
+    title = Pomo.getText('mentioned you').replace('${name}', userstream.payload.account.display_name);
+    pushNotification({
+      title: title,
+      message: $('<p>').html(userstream.payload.status.content).text(),
+      icon: userstream.payload.account.avatar_static
+    });
+    break;
 }
 }
 });

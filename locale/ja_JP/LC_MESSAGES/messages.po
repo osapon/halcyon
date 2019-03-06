@@ -378,13 +378,16 @@ msgid "Photos and toots"
 msgstr "の画像と投稿"
 
 msgid "favourited your toot"
-msgstr "さんがあなたのトゥートをいいねしました"
+msgstr "${name}さんがあなたのトゥートをいいねしました"
 
 msgid "boosted your toot"
-msgstr "さんがあなたのトゥートをブーストしました"
+msgstr "${name}さんがあなたのトゥートをブーストしました"
+
+msgid "followed your account"
+msgstr "${name}さんにフォローされました"
 
 msgid "mentioned you"
-msgstr "さんがあなたに返信しました"
+msgstr "${name}さんがあなたに返信しました"
 
 msgid "Your Toot was posted!"
 msgstr "トゥートが投稿されました！"

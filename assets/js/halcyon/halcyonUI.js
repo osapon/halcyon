@@ -1073,10 +1073,39 @@ function badges_update(){
         userstream.payload.account.display_name = userstream.payload.account.username;
       }
       switch(userstream.payload.type) {
-        case "favourite":pushNotification(__("New favourite"),userstream.payload.account.display_name+" "+__("favourited your toot"));break;
-        case "reblog":pushNotification(__("New boost"),userstream.payload.account.display_name+" "+__("boosted your toot"));break;
-        case "follow":pushNotification(__("New follower"),userstream.payload.account.display_name+" "+__("followed you"));$(".js_current_followers_count").html(++localStorage.current_followers_count);break;
-        case "mention":pushNotification(__("New mention"),userstream.payload.account.display_name+" "+__("mentioned you"));break;
+        case "favourite":
+          title = Pomo.getText('favourited your toot').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: $('<p>').html(userstream.payload.status.content).text(),
+            icon: userstream.payload.account.avatar_static
+          });
+          break;
+        case "reblog":
+          title = Pomo.getText('boosted your toot').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: $('<p>').html(userstream.payload.status.content).text(),
+            icon: userstream.payload.account.avatar_static
+          });
+          break;
+        case "follow":
+          title = Pomo.getText('followed your account').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: '',
+            icon: userstream.payload.account.avatar_static
+          });
+          $(".js_current_followers_count").html(++localStorage.current_followers_count);
+          break;
+        case "mention":
+          title = Pomo.getText('mentioned you').replace('${name}', userstream.payload.account.display_name);
+          pushNotification({
+            title: title,
+            message: $('<p>').html(userstream.payload.status.content).text(),
+            icon: userstream.payload.account.avatar_static
+          });
+          break;
       }
     }
   });
