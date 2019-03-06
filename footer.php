@@ -6,10 +6,17 @@
 <div class="temporary_object">
 </div>
 <div class="parmanent_object">
-<?php include dirname(__FILE__).('/widgets/overlay_create_status.php'); ?>
-<?php include dirname(__FILE__).('/widgets/overlay_single_reply.php'); ?>
-<?php include dirname(__FILE__).('/widgets/overlay_copy_link.php'); ?>
-<?php include dirname(__FILE__).('/widgets/overlay_shortcut_guide.php'); ?>
+<?php
+include dirname(__FILE__).('/widgets/overlay_create_status.php');
+include dirname(__FILE__).('/widgets/overlay_single_reply.php');
+include dirname(__FILE__).('/widgets/overlay_report_status.php');
+include dirname(__FILE__).('/widgets/overlay_copy_link.php');
+include dirname(__FILE__).('/widgets/overlay_confirm.php');
+include dirname(__FILE__).('/widgets/overlay_prompt.php');
+include dirname(__FILE__).('/widgets/overlay_addlist.php');
+include dirname(__FILE__).('/widgets/overlay_shortcut_guide.php');
+if($_SERVER["REQUEST_URI"] == "/settings/filters") include dirname(__FILE__).('/widgets/overlay_filter.php');
+?>
 </div>
 <button class="close_button"><i class="fa fa-times" aria-hidden="true"></i></button>
 </div>
@@ -19,10 +26,7 @@
 setOverlayStatus('<?php echo $_GET['status']; ?>');
 <?php endif; ?>
 badges_update();
-$('.footer_widget_about').attr('href','https://'+current_instance+'/about');
-$('.footer_widget_instance').attr('href','https://'+current_instance+'/about/more');
 $('.footer_widget_terms').attr('href','https://'+current_instance+'/terms');
-replace_emoji();
 </script>
 </body>
 </html>

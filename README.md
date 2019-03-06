@@ -12,21 +12,45 @@ A webclient for Mastodon and Pleroma which looks like Twitter
 Follow our Mastodon account and never miss an important update: [@halcyon@social.csswg.org](https://social.csswg.org/@halcyon)
 
 ## Instances
-These instances are publicly accessible and usable by everyone, no matter which Mastodon instance you use.
-- https://social.dev-wiki.de - 1.2.1
-- https://halcyon.toromino.de - 1.2.1
-- https://itter.photog.social - 1.2.1
-- https://halcyon.bka.li - 1.1.7
-- https://halcyon.tilde.team - 1.1.7
-- https://halcyon.distsn.org - 1.1.6
-- https://halcyon.osa-p.net - 1.2.1(MultiLanguage + other feature)
-- https://halcyon.cybre.space - Outdated
+We moved our instances list to a wiki page: https://notabug.org/halcyon-suite/halcyon/wiki/Instances
 
-You have your own Halcyon instance and want it to be listed here? Create an issue with the link and we will add it to the list.
+## Translate
+[Help us translating Halcyon into many languages](https://translate.zanata.org/project/view/halcyon)
+
+## Features
+- Twitter like UI, familiar interface.
+- Able to use on all instances.
+- No tracking, No ads.
+- Supports multiple languages.
+- Privacy-friendly video embeds.
+
+## Install
+[![Install Halcyon with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=halcyon)  
+or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install
 
 ## Blog
-- Version 1.2.2 This pictogram pad is already implemented in this repository, so skip it.
-- Release  of Version 1.2.1 - New who to follow page with more recommendations,bugfix at search,profiles now ignore "show replies" setting,small login page changes
+- Release of Version 2.2.4 - Easily switch between pictures in overlay,show pictures in full height in timeline,duplicated threads removed,many smaller bugfixes
+- Release of Version 2.2.3 - Fixed login with Pleroma,fixed compatibility with Pawoo (older Mastodon),added support for prefers-color-scheme,some more fixes
+- Our new information website [halcyon.social](https://www.halcyon.social) came online
+- Release of Version 2.2.2 - Fix autocomplete,fix double scrollbars in overlay,add emojis at cursor position,confirm when closing compose window,add czech translation
+- Release of Version 2.2.1 - Many small bugfixes (details see release notes) and improved compatibility to the new Pleroma API
+- [Release of Version 2.2.0 - Privacy-focused media streaming and more](https://nikisoft.myblog.de/nikisoft/art/11644403/Privacy-focused-media-streaming-and-more-The-new-Halcyon-2-2-0)
+- Release of Version 2.1.6 - Added search suggestions,fixed autocomplete bug,added instance info page,fixed small bug in profile settings,search for posts now supported
+- Release of Version 2.1.5 - Added support for filter,added possibility to filter all bots,it's now easier to detect bots
+- Release of Version 2.1.4 - Added custom profile fields,verified links,custom profile link settings and improved regular expressions for links
+- Release of Version 2.1.3 - Added a autocomplete feature for usernames,hashtags and emojis,fixed a bug in the emoji picker (didn't open sometimes)
+- Release of Version 2.1.2 - Added toot to @someone button to profiles,remove blocked and muted people from who to follow,improved German translation
+- Release of Version 2.1.1 - Profile settings can be changed again,fixed various Firefox-only bugs,Removed error if browser sends no language
+- [Release of Version 2.1.0 - Introducing lists and more](https://nikisoft.myblog.de/nikisoft/art/11640527/Halcyon-2-1-0-Introducing-lists-and-more)
+- Release of Version 2.0.2 - Added dark theme,improved Japanese translation,added Galician translation,links to posts open in Halcyon now,smaller screens supported
+- Release of Version 2.0.1 - Added the languages Polish,Japanese and Korean,fixed many bugs,automatically mention all participants of discussions
+- [Release of Version 2.0.0 - The biggest changes in detail](https://nikisoft.myblog.de/nikisoft/art/11636651/Halcyon-2-0-0-The-biggest-changes-in-detail)
+- Release of Version 1.2.6 - Report toots supported,disable CW and NFSW,add privacy policy and imprint,move config files,read release notes for more
+- Release of Version 1.2.5 - Copy links with one click,emojicodes now always detected,streaming in hashtag search,delete event now supported
+- Release of Version 1.2.4 - Updated Twemoji,custom emojis in names and bios,links to profiles in pleroma now always work,pinned posts now supported
+- Release of Version 1.2.3 - All emojis do now work,fixed some bugs in the Nginx example config,fixed Windows-only design bug,improved text field performance
+- Release of Version 1.2.2 - Added an emoji picker,improved performance (emoji rendering),desktop notifications on notifications page work now
+- Release of Version 1.2.1 - New who to follow page with more recommendations,bugfix at search,profiles now ignore "show replies" setting,small login page changes
 - [Release of Version 1.2.0 - The next big step and a view into future](https://nikisoft.myblog.de/nikisoft/art/11626391/Halcyon-1-2-0-The-next-big-step-and-a-view-into-future)
 - Release of Version 1.1.7 - Fixed some bugs in compatibility with Pleroma,text fields now autoresizable,stopped undefined socket tries on profile pages
 - Release of Version 1.1.6 - This repository uses [Followlink](https://followlink.osa-p.net/) as an aid to who to follow.
@@ -41,36 +65,12 @@ You have your own Halcyon instance and want it to be listed here? Create an issu
 - Release of Version 1.0.1 - Two bugfixes
 - [Release of Version 1.0.0](https://nikisoft.myblog.de/nikisoft/art/11264555/The-first-new-Halcyon-release-is-on-Github)
 
-## Features
-- Twitter like UI, familiar interface.
-- Able to use on all instances.
-- No tracking, No ads.
-- Fix images are missing with multiple images toots.
-- MultiLanguage(English / Japanese / Korean).
-- Emoji input pad.
-- Draft
-- Multi image/gifv viewer.
-- Same search processing as WebUI.
-- Sensitive image can switched for show / hide.
-- Auto-play animated GIFs(selectable stop or play).
-- 2 column view.
-- Toot URL copy to clipboard.
-- Timeline pause the auto scroll.
-- Notification tab is split(All / Reply / Follow / Boost & Fav / Direct).
-
-## Translation
- Accepting translations with [Weblate](https://weblate.osa-p.net/projects/halcyon/web/), but you need to make a pull request with Github in order to post a contributor a name.
-
-
-## Requirement
-- Apache/Nginx/Caddy/lighttpd
-- PHP
-- No database needed anymore!
-
-## Setup
-Upload it, edit config.ini and have fun!
-
 ## Credits
 - [Kirschn/mastodon.js](https://github.com/Kirschn/mastodon.js)
 - [yks118/Mastodon-api-php](https://github.com/yks118/Mastodon-api-php)
-- [cfv1984/Pomo](https://github.com/cfv1984/Pomo)
+- [distsn/vinayaka](https://github.com/distsn/vinayaka)
+- [LascauxSRL/lsx-emojipicker](https://github.com/LascauxSRL/lsx-emojipicker)
+- [osapon/Pomo](https://github.com/osapon/Pomo)
+- [Summer-Dong/auto-complete-for-text-input-box](https://github.com/Summer-Dong/auto-complete-for-text-input-box)
+- [youplay/yp-player](https://notabug.org/youplay/yp-player)
+- [speranskydanil/Simple-Audio-Player](https://github.com/speranskydanil/Simple-Audio-Player)

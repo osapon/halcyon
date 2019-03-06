@@ -8,12 +8,23 @@
 </div>
 <section class="profile_section_wrap">
 <h1 class="profile_displayname">
-<a id="js_profile_displayname" class="emoji_poss" href="#"></a>
+<a id="js_profile_displayname" href="#"></a>
 </h1>
 <h2 class="profile_username">
 @<a id="js_profile_username" href="#"></a>
 </h2>
-<p id="js_profile_bio" class="profile_bio emoji_poss"></p>
+<p id="js_profile_bio" class="profile_bio"></p>
+<div id="js_profile_fields" class="profile_fields"></div>
+<div id="js_profile_public_link" class="profile_with_icon invisible" style="margin-bottom:5px">
+<a target="_blank"><i class="fa fa-fw fa-link" aria-hidden="true"></i><span><?=_('Open public profile')?></span></a>
+</div>
+<div id="js_profile_joined_date" class="profile_with_icon" style="margin-bottom:5px">
+<span><i class="fa fa-fw fa-calendar" aria-hidden="true"></i><span></span></span>
+</div>
+<div id="profile_toot_buttons" style="height:31px;margin-bottom:5px;display:none">
+<button class="toot_button profile_sendto" style="width:calc(50% - 3px)"><div class="toot_button_label"><i class="fa fa-fw fa-pencil-square-o"></i><span><?=_('Toot to')?></span></div></button>
+<button class="toot_button profile_sendto" style="width:calc(50% - 3px)" privacy="direct"><div class="toot_button_label"><i class="fa fa-fw fa-envelope"></i><span><?=_('Message')?></span></div></button>
+</div>
 <?php include dirname(__FILE__).('/widgets/user_recent_images.php'); ?>
 </section>
 </aside>
@@ -22,24 +33,24 @@
 <ul class="header_items">
 <li class="item toots">
 <a id="toots_link">
-Toots
+<?=_('Toots')?>
 </a>
 </li>
 <li class="item wreplies">
 <a id="with_replies_link">
-Toots &amp; replies
+<?=_('Toots')?> &amp; <?=_('replies')?>
 </a>
 </li>
 <li class="item media view">
 <a id="media_link">
-Media
+<?=_('Media')?>
 </a>
 </li>
 </ul>
 </header>
 <div id="js-stream_update">
 <button>
-View <span></span> new Toots
+<?=_('View ')?><span></span><?=_(' new Toots')?>
 </button>
 </div>
 <ul id="js-timeline" class="timeline">
@@ -68,7 +79,7 @@ $("#js-profile_nav_followers > a").attr('href', './followers'+location.search);
 $("#js-profile_nav_favourites > a").attr('href', './favourites'+location.search);
 <?php if (isset($_GET['mid'])): ?>
 $(function() {
-const account_id = <?= htmlspecialchars((string)filter_input(INPUT_GET, 'mid'), ENT_QUOTES) ?>;
+const account_id = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'mid'), ENT_QUOTES) ?>";
 api.get('accounts/'+account_id, function(AccountObj) {
 if ( AccountObj !== null ) {
 setAccount(AccountObj);

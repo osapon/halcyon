@@ -1,0 +1,543 @@
+# Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: \n"
+"POT-Creation-Date: \n"
+"MIME-Version: 1.0\n"
+"PO-Revision-Date: 2018-08-05 05:58+0000\n"
+"Last-Translator: Marcin Mikołajczak <me@m4sk.in>\n"
+"Language-Team: Polish\n"
+"Language: pl\n"
+"X-Generator: Zanata 4.6.0\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
+"|| n%100>=20) ? 1 : 2)\n"
+
+msgid "Language"
+msgstr "Język"
+
+msgid "Language_en_US"
+msgstr "Angielski"
+
+msgid "Language_de_DE"
+msgstr "Niemiecki"
+
+msgid "Language_ja_JP"
+msgstr "Japoński"
+
+msgid "Language_ko_KR"
+msgstr "Koreański"
+
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
+
+msgid "Language_pl_PL"
+msgstr "Polish"
+
+msgid "Sensitive content"
+msgstr "Zawartość wrażliwa"
+
+msgid "Click to view"
+msgstr "Naciśnij aby wyświetlić"
+
+msgid "SHOW MORE"
+msgstr "ROZWIŃ"
+
+msgid "SHOW LESS"
+msgstr "ZWIŃ"
+
+msgid "Public"
+msgstr "Publiczny"
+
+msgid "Unlisted"
+msgstr "Niewidoczny"
+
+msgid "Followers-only"
+msgstr "Tylko dla śledzących"
+
+msgid "Direct"
+msgstr "Bezpośrednio"
+
+msgid "Delete Toot"
+msgstr "Usuń wpis"
+
+msgid "Unpin Toot"
+msgstr "Odepnij wpis"
+
+msgid "Pin Toot"
+msgstr "Przypnij wpis"
+
+msgid "Mute"
+msgstr "Wycisz"
+
+msgid "Block"
+msgstr "Zablokuj"
+
+msgid "Report this Toot"
+msgstr "Zgłoś ten wpis"
+
+msgid "Copy link to Toot"
+msgstr "Skopiuj link do wpisu"
+
+msgid "View original"
+msgstr "Wyświetl oryginalny wpis"
+
+msgid "Boosted"
+msgstr "Podbił(a)"
+
+msgid "Pinned Toot"
+msgstr "Przypięty wpis"
+
+msgid "favourited Your Toot"
+msgstr "dodał(a) Twój wpis do ulubionych"
+
+msgid "boosted Your Toot"
+msgstr "podbił(a) Twój wpis"
+
+msgid "followed you"
+msgstr "zaczął(-ęła) Cię śledzić"
+
+msgid "Follow"
+msgstr "Śledź"
+
+msgid "Toot your reply"
+msgstr "Napisz odpowiedź"
+
+msgid "Reply"
+msgstr "Odpowiedz"
+
+msgid "Content warning"
+msgstr "Ostrzeżenie o zawartości"
+
+msgid "Jan"
+msgstr "Sty"
+
+msgid "Feb"
+msgstr "Lut"
+
+msgid "Mar"
+msgstr "Mar"
+
+msgid "Apr"
+msgstr "Kwi"
+
+msgid "May"
+msgstr "Maj"
+
+msgid "Jun"
+msgstr "Cze"
+
+msgid "Jul"
+msgstr "Lip"
+
+msgid "Aug"
+msgstr "Sie"
+
+msgid "Sep"
+msgstr "Wrz"
+
+msgid "Oct"
+msgstr "Paź"
+
+msgid "Nov"
+msgstr "Lis"
+
+msgid "Dec"
+msgstr "Gru"
+
+msgid "Changed setting to"
+msgstr "Zmieniono ustawienie na"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "Domyślnie oznaczaj zawartość multimedialną jako wrażliwą"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "Nie oznaczaj domyślnie zawartości multimedialnej jako wrażliwą"
+
+msgid "Who to follow enabled"
+msgstr "Wyświetlaj sugestie profili do śledzenia"
+
+msgid "Who to follow disabled"
+msgstr "Nie wyświetlaj sugestii profili do śledzenia"
+
+msgid "Changed about me setting"
+msgstr "Zmieniono opis profilu"
+
+msgid "Uploaded new avatar"
+msgstr "Zmieniono awatar"
+
+msgid "Uploaded new header"
+msgstr "Zmieniono nagłówek"
+
+msgid "Account locked"
+msgstr "Zablokowano konto"
+
+msgid "Account unlocked"
+msgstr "Odblokowano konto"
+
+msgid "Link previews enabled"
+msgstr "Włączono podgląd odnośników"
+
+msgid "Link previews disabled"
+msgstr "Wyłączono podgląd odnośników"
+
+msgid "You didn't allow notifications"
+msgstr "Nie zezwoliłeś(-aś) na wyświetlanie powiadomień"
+
+msgid "Desktop notifications enabled"
+msgstr "Włączono powiadomienia na pulpicie"
+
+msgid "Desktop notifications disabled"
+msgstr "Wyłączono powiadomienia na pulpicie"
+
+msgid "Replies shown"
+msgstr "Odpowiedzi będą wyświetlane"
+
+msgid "Replies hidden"
+msgstr "Odpowiedzi nie będą wyświetlane"
+
+msgid "CW content shown"
+msgstr "Zawartość zza ostrzeżenia będzie wyświetlana"
+
+msgid "CW content hidden"
+msgstr "Zawartość zza ostrzeżenia nie będzie wyświetlana"
+
+msgid "NSFW content shown"
+msgstr "Zawartość NSFW będzie wyświetlana"
+
+msgid "NSFW content hidden"
+msgstr "Zawartość NSFW nie będzie wyświetlana"
+
+msgid "Reply to"
+msgstr "Odpowiedz"
+
+msgid "Report"
+msgstr "Zgłoś"
+
+msgid "Report a Toot of"
+msgstr "Zgłoś wpis"
+
+msgid "What's happening?"
+msgstr "Co Ci chodzi po głowie?"
+
+msgid "Toot"
+msgstr "Wyślij"
+
+msgid "Compose new Toot"
+msgstr "Utwórz nowy wpis"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "Opisz problem dotyczący tego wpisu"
+
+msgid "TOOTS"
+msgstr "WPISY"
+
+msgid "PEOPLE"
+msgstr "LUDZIE"
+
+msgid "Settings"
+msgstr "Ustawienia"
+
+msgid "GENERAL"
+msgstr "OGÓLNE"
+
+msgid "PROFILE"
+msgstr "PROFIL"
+
+msgid "APPEARANCE"
+msgstr "WYGLĄD"
+
+msgid "Change instance"
+msgstr "Zmień instancję"
+
+msgid "Blank for default"
+msgstr "Pozostaw puste, aby użyć domyślnej"
+
+msgid "FOLLOWING"
+msgstr "ŚLEDZENI"
+
+msgid "Interesting accounts of devs"
+msgstr "Ciekawe konta programistów"
+
+msgid "Halcyon for"
+msgstr "Halcyon dla"
+
+msgid "About"
+msgstr "O instancji"
+
+msgid "Terms"
+msgstr "Zasady"
+
+msgid "Apps"
+msgstr "Aplikacje"
+
+msgid "Source code"
+msgstr "Kod źródłowy"
+
+msgid "Other instances"
+msgstr "Inne instancje"
+
+msgid "Privacy policy"
+msgstr "Polityka prywatności"
+
+msgid "Version"
+msgstr "Wersja"
+
+msgid "Who to follow"
+msgstr "Sugerowane profile"
+
+msgid "Enable who to follow"
+msgstr "Włącz sugerowane profile"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr ""
+"Halcyon musi połączyć się z zewnętrznym serwerem, aby znaleźć osoby o "
+"zainteresowaniach podobnych do Twoich. Jeżeli chcesz używać tej funkcji, "
+"włącz ją."
+
+msgid "MORE"
+msgstr "WIĘCEJ"
+
+msgid "FOLLOWERS"
+msgstr "ŚLEDZĄCY"
+
+msgid "Following"
+msgstr "Śledzisz"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "Nie będziesz otrzymywać powiadomień od tego użytkownika"
+
+msgid "Unmuted this user"
+msgstr "Cofnięto wyciszenie tego użytkownika"
+
+msgid "This user has been blocked"
+msgstr "Ten użytkownik został zablokowany"
+
+msgid "Unblocked this user"
+msgstr "Odblokowano tego użytkownika"
+
+msgid "Your Toot has been deleted"
+msgstr "Twój wpis został usunięty"
+
+msgid "Your Toot has been pinned"
+msgstr "Twój wpis został przypięty"
+
+msgid "Your Toot has been unpinned"
+msgstr "Twój wpis został odpięty"
+
+msgid "Edit profile"
+msgstr "Edytuj profil"
+
+msgid "FAVOURITES"
+msgstr "ULUBIONE"
+
+msgid "Show"
+msgstr "Pokaż"
+
+msgid "Blocking"
+msgstr "Zablokowano"
+
+msgid "Muting"
+msgstr "Wyciszono"
+
+msgid "Requested"
+msgstr "Wysłano prośbę"
+
+msgid "Photos and toots"
+msgstr "Zdjęcia i wpisy"
+
+msgid "favourited your toot"
+msgstr "dodał(a) Twój wpis do ulubionych"
+
+msgid "boosted your toot"
+msgstr "podbił(a) Twój wpis"
+
+msgid "mentioned you"
+msgstr "wspomniał(a) o Tobie"
+
+msgid "Your Toot was posted!"
+msgstr "Twój wpis został opublikowany!"
+
+msgid "News"
+msgstr "Nowości"
+
+msgid "Source"
+msgstr "Kod źródłowy"
+
+msgid "Privacy"
+msgstr "Prywatność"
+
+msgid "Imprint"
+msgstr "Imprint"
+
+msgid "Contact"
+msgstr "Kontakt"
+
+msgid "Login"
+msgstr "Zaloguj się"
+
+msgid "Login to Halcyon"
+msgstr "Zaloguj się na Halcyon"
+
+msgid "create an account"
+msgstr "utwórz konto"
+
+msgid "or"
+msgstr "lub"
+
+msgid "I agree with the"
+msgstr "Zgadzam się z"
+
+msgid "What is Halcyon"
+msgstr "Czym jest Halcyon"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr ""
+"mającym na celu odtworzyć prostotę i piękno interfejsu Twittera zachowując "
+"wszystkie zalety zdecentralizowanych sieci."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon jest klientem webowym dla"
+
+msgid "Contact / Feedback"
+msgstr "Kontakt/opinie"
+
+msgid "Use my contact form"
+msgstr "Uzyj mojego formularza kontaktowego"
+
+msgid "Help us"
+msgstr "Pomóż nam"
+
+msgid "Halcyon Terms of Use"
+msgstr "Zasady korzystania z Halcyon"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"Te zasady użytkowania przeznaczone są dla użytkowników usługi sieciowej "
+"Halcyon dla Mastodona i Pleromy (w skrócie Halcyon) uruchamianego przez"
+
+msgid "Your Reply was posted!"
+msgstr "Twoja odpowiedź została opublikowana!"
+
+msgid "Toot reported successfully!"
+msgstr "Pomyślnie zgłoszono wpis!"
+
+msgid "Link successfully copied!"
+msgstr "Pomyślnie skopiowano odnośnik!"
+
+msgid "Home"
+msgstr "Strona główna"
+
+msgid "Local"
+msgstr "Lokalne"
+
+msgid "Federated"
+msgstr "Federacja"
+
+msgid "Notifications"
+msgstr "Powiadomienia"
+
+msgid "Search Mastodon"
+msgstr "Szukaj na Mastodonie"
+
+msgid "View profile"
+msgstr "Wyświetl profil"
+
+msgid "Log out"
+msgstr "Wyloguj się"
+
+msgid "All"
+msgstr "Wszystko"
+
+msgid "new notitification"
+msgstr "nowe powiadomienie"
+
+msgid "Show all NSFW content"
+msgstr "Pokazuj zawartość oznaczoną jako NSFW"
+
+msgid "Show all CW content"
+msgstr "Pokazuj zawartość zza ostrzeżenia o zawartości"
+
+msgid "Show replies"
+msgstr "Pokazuj odpowiedzi"
+
+msgid "Desktop notifications"
+msgstr "Powiadomienia na pulpicie"
+
+msgid "Enable link previews"
+msgstr "Włącz podgląd odnośników"
+
+msgid "Auto update"
+msgstr "Aktualizuj automatycznie"
+
+msgid "Manual update"
+msgstr "Aktualizuj ręcznie"
+
+msgid "Appearance settings"
+msgstr "Ustawienia wyglądu"
+
+msgid "New posts streaming"
+msgstr "Wyświetlanie nowych wpisów"
+
+msgid "replies"
+msgstr "odpowiedzi"
+
+msgid "General settings"
+msgstr "Ustawienia ogólne"
+
+msgid "Default post privacy"
+msgstr "Domyślna prywatność wpisów"
+
+msgid "Mark as NSFW by default"
+msgstr "Domyślnie oznaczaj jako NSFW"
+
+msgid "Media"
+msgstr "Zawartość multimedialna"
+
+msgid "FOLLOWS YOU"
+msgstr "ŚLEDZI CIĘ"
+
+msgid "Local instance"
+msgstr "Lokalna Instancja"
+
+msgid "Hashtag search filter"
+msgstr "Filtr wyszukiwania hashtagów"
+
+msgid "All instances"
+msgstr "Wszystkie instancje"
+
+msgid "Local only"
+msgstr "Tylko lokalne"
+
+msgid "Lock account"
+msgstr "Zablokuj konto"
+
+msgid "Header"
+msgstr "Nagłówek"
+
+msgid "Avatar"
+msgstr "Awatar"
+
+msgid "About me"
+msgstr "O mnie"
+
+msgid "Display name"
+msgstr "Nazwa wyświetlana"
+
+msgid "Profile settings"
+msgstr "Ustawienia profilu"
+
+msgid "Toots"
+msgstr "Wpisy"
+
+msgid "Favourites"
+msgstr "Ulubione"
+

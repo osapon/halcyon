@@ -13,6 +13,8 @@ RewriteRule ^login/?$ login/login\.php [NC,L,QSA]
 RewriteRule ^auth/?$ login/auth\.php [NC,L,QSA]
 RewriteRule ^logout/?$ login/logout\.php [NC,L,QSA]
 RewriteRule ^terms/?$ login/terms\.php [NC,L,QSA]
+RewriteRule ^privacy/?$ login/privacy\.php [NC,L,QSA]
+RewriteRule ^imprint/?$ login/imprint\.php [NC,L,QSA]
 
 # LTL
 RewriteBase /local
@@ -30,6 +32,20 @@ RewriteRule ^notifications/?$ notifications\.php [NC,L]
 RewriteBase /whotofollow
 RewriteRule ^whotofollow/?$ who_to_follow\.php [NC,L]
 
+# Direct
+RewriteBase /direct
+RewriteRule ^direct/?$ direct\.php [NC,L]
+
+# Instance
+RewriteBase /instance
+RewriteRule ^instance/?$ instance\.php [NC,L]
+
+# Lists
+RewriteBase /lists
+RewriteRule ^lists/?$ lists\.php [NC,L]
+RewriteRule ^lists/(\d+)/?$ lists_view\.php?id=$1 [NC,L,QSA]
+RewriteRule ^lists/(\d+)/add/?$ lists_add\.php?id=$1 [NC,L,QSA]
+
 # Search
 RewriteBase /search
 RewriteRule ^search/?$ search_hash_tag\.php [NC,L,QSA]
@@ -40,6 +56,8 @@ RewriteBase /settings
 RewriteRule ^settings/?$ settings_general\.php [NC,L]
 RewriteRule ^settings/profile/?$ settings_profile\.php [NC,L]
 RewriteRule ^settings/appearance/?$ settings_appearance\.php [NC,L]
+RewriteRule ^settings/filters/?$ settings_filters\.php [NC,L]
+RewriteRule ^settings/media/?$ settings_media\.php [NC,L]
 
 # User
 RewriteBase /
@@ -61,4 +79,3 @@ RewriteRule ^404/?$ 404\.php [NC,L,QSA]
 ErrorDocument 404 /404
 
 </IfModule>
-

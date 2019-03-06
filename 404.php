@@ -11,7 +11,7 @@
 <body>
 <article>
 <h1>404</h1>
-<h2>Sorry, something went wrong.</h2>
+<h2><?=_('Sorry, something went wrong.')?></h2>
 </article>
 </body>
 </html>

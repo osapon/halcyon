@@ -10,11 +10,6 @@
 <h2><?=_('TOOTS')?></h2>
 </a>
 </li>
-<li id="js-search_nav_hashtag" class="header_nav_item search_hashtags">
-<a>
-<h2><?=_('HASHTAG')?></h2>
-</a>
-</li>
 <li id="js-search_nav_peoples" class="header_nav_item search_following">
 <a>
 <h2><?=_('PEOPLE')?></h2>

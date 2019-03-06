@@ -1,0 +1,13 @@
+[{
+"title":"Example 1", <- The text displayed in the footer
+"link":"http://example.com", <- The address it links to
+"login":true, <- Show it in the side footer when logged in
+"logout":false <- Show it in the footer on the information pages
+},{
+"title":"Example 2",
+"link":"https://yandex.com",
+"login":false,
+"logout":true
+}]
+
+IMPORTANT: Remove the descriptions in line 2 to 5 and this line or it won't work!

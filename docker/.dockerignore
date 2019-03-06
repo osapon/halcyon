@@ -1,0 +1,7 @@
+# Git
+.git/
+.gitignore
+config/
+
+# OSX
+.DS_Store

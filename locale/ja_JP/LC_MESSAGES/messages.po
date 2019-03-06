@@ -12,204 +12,34 @@ msgstr ""
 "X-Generator: Weblate 3.0\n"
 
 msgid "Language"
-msgstr "言語(Language)"
-
-msgid "Language_de_DE"
-msgstr "Deutsch"
+msgstr "言語"
 
 msgid "Language_en_US"
-msgstr "English(US)"
+msgstr "English"
+
+msgid "Language_de_DE"
+msgstr "Germany"
 
 msgid "Language_ja_JP"
 msgstr "日本語"
 
 msgid "Language_ko_KR"
-msgstr "한국어"
+msgstr "Korean"
 
-msgid "Login"
-msgstr "ログイン"
+msgid "Language_pl_PL"
+msgstr "Polish"
 
-msgid "News"
-msgstr "ニュース"
+msgid "Language_pt_BR"
+msgstr "Portuguese (Brazil)"
 
-msgid "Source"
-msgstr "ソース/課題"
+msgid "Language_gl_ES"
+msgstr "Galician"
 
-msgid "Terms"
-msgstr "利用規約"
+msgid "Sensitive content"
+msgstr "非表示のメディア"
 
-msgid "Contact"
-msgstr "連絡先"
-
-msgid "Login to Halcyon"
-msgstr "Halcyonでログイン"
-
-msgid "or"
-msgstr "または"
-
-msgid "create an account"
-msgstr "アカウント作成"
-
-msgid "I agree with the Terms"
-msgstr "<a href='/terms'>利用規約</a>に同意します"
-
-msgid "What is Halcyon"
-msgstr "Halcyonとは何ですか"
-
-msgid "Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet."
-msgstr "Halcyon はマストドン用の<span style='font-weight: bold'>Twitterに似せたクライアント</span>です。あなたが所属するサーバーにログインして使うことができます。ツイートのようにトゥートしてみましょう。"
-
-msgid "Contact / Feedback"
-msgstr "連絡先 / フィードバック"
-
-msgid "Halcyon Terms of Use"
-msgstr "Halcyon 利用規約"
-
-msgid "This terms of use agreement is for the users of web service Halcyon for Mastodon (Halcyon for short) hosted at"
-msgstr "この利用規約は、次に記述されているアドレスで提供されている Halcyon for Mastodon (略してHalcyon)に提示されているものです"
-
-msgid "Home"
-msgstr "ホーム"
-
-msgid "Local"
-msgstr "ローカル"
-
-msgid "Federated"
-msgstr "連合"
-
-msgid "Notifications"
-msgstr "通知"
-
-msgid "Search Mastodon"
-msgstr "検索"
-
-msgid "View profile"
-msgstr "プロフィールを見る"
-
-msgid "Settings"
-msgstr "ユーザー設定"
-
-msgid "Log out"
-msgstr "ログアウト"
-
-msgid "Toot"
-msgstr "トゥート"
-
-msgid "TOOTS"
-msgstr "投稿"
-
-msgid "FOLLOWING"
-msgstr "フォロー"
-
-msgid "FOLLOWERS"
-msgstr "フォロワー"
-
-msgid "Preferences"
-msgstr "設定"
-
-msgid "SHOW"
-msgstr "表示"
-
-msgid "HIDE"
-msgstr "隠す"
-
-msgid "New posts streaming"
-msgstr "新着投稿のストリーミング"
-
-msgid "Default post privacy"
-msgstr "投稿の公開範囲"
-
-msgid "Local instance"
-msgstr "ローカルに表示するサーバー"
-
-msgid "Hashtag search filter"
-msgstr "ハッシュタグ検索フィルター"
-
-msgid "HASHTAG"
-msgstr "ハッシュタグ"
-
-msgid "What's happening?"
-msgstr "今なにしてる？"
-
-msgid "Content warning"
-msgstr "ここに警告を書いてください"
-
-msgctxt "TootForm"
-msgid "Public"
-msgstr "<abbr title='公開TLに投稿する'>公開</abbr>"
-
-msgctxt "TootForm"
-msgid "Unlisted"
-msgstr "<abbr title='公開TLで表示しない'>未収載</abbr>"
-
-msgctxt "TootForm"
-msgid "Followers-only"
-msgstr "<abbr title='フォロワーだけに公開'>非公開</abbr>"
-
-msgctxt "TootForm"
-msgid "Direct"
-msgstr "<abbr title='メンションしたユーザーだけに公開'>ダイレクト</abbr>"
-
-msgid "View new Toots"
-msgstr "<span></span> 件の新着トゥート"
-
-msgid "About this instance"
-msgstr "このサーバーについて"
-
-msgid "Terms this instance"
-msgstr "このサーバーの利用規約"
-
-msgid "Other instances"
-msgstr "他のサーバー"
-
-msgid "Follow"
-msgstr "フォロー"
-
-msgid "Auto update"
-msgstr "自動更新"
-
-msgid "Manual update"
-msgstr "手動更新"
-
-msgctxt "Option"
-msgid "Public"
-msgstr "公開：公開TLに投稿する"
-
-msgctxt "Option"
-msgid "Unlisted"
-msgstr "未収載：公開TLで表示しない"
-
-msgctxt "Option"
-msgid "Followers-only"
-msgstr "非公開：フォロワーだけに公開"
-
-msgctxt "Option"
-msgid "Direct"
-msgstr "ダイレクト：メンションしたユーザーだけに公開"
-
-msgid "All instances"
-msgstr "全てのサーバー"
-
-msgid "Local only"
-msgstr "ログインしているサーバーだけ"
-
-msgid "All"
-msgstr "全て"
-
-msgid "View new notitification"
-msgstr "<span></span> 件の新着通知を見る"
-
-msgid "boosted Your Toot"
-msgstr "さんがあなたのトゥートをブーストしました"
-
-msgid "favourited Your Toot"
-msgstr "さんがあなたのトゥートをお気に入りに登録しました"
-
-msgid "followed you"
-msgstr "さんにフォローされました"
-
-msgid "Boosted"
-msgstr "さんがブースト"
+msgid "Click to view"
+msgstr "クリックして表示"
 
 msgid "SHOW MORE"
 msgstr "もっと見る"
@@ -217,38 +47,260 @@ msgstr "もっと見る"
 msgid "SHOW LESS"
 msgstr "隠す"
 
-msgid "Toots"
-msgstr "投稿"
+msgid "Public"
+msgstr "公開"
 
-msgid "Toots &amp; replies"
-msgstr "投稿と返信"
+msgid "Unlisted"
+msgstr "非収載"
 
-msgid "Media"
-msgstr "メディア"
+msgid "Followers-only"
+msgstr "フォロワー限定"
 
-msgid "FOLLOWS YOU"
-msgstr "フォローされています"
+msgid "Direct"
+msgstr "ダイレクト"
 
-msgid "Photos and toots"
-msgstr "の画像と投稿"
+msgid "Delete Toot"
+msgstr "トゥートを削除"
+
+msgid "Unpin Toot"
+msgstr "プロフィールページから固定を解除する"
+
+msgid "Pin Toot"
+msgstr "プロフィールに固定表示する"
+
+msgid "Mute"
+msgstr "ミュート"
+
+msgid "Block"
+msgstr "ブロック"
+
+msgid "Report this Toot"
+msgstr "このトゥートを報告する"
+
+msgid "Copy link to Toot"
+msgstr "トゥートへのリンク"
+
+msgid "View original"
+msgstr "オリジナルを見る"
+
+msgid "Boosted"
+msgstr "さんがブースト"
+
+msgid "Pinned Toot"
+msgstr "固定されたトゥート"
+
+msgid "favourited Your Toot"
+msgstr "さんがあなたのトゥートをいいねしました"
+
+msgid "boosted Your Toot"
+msgstr "さんがあなたのトゥートをブーストしました"
+
+msgid "followed you"
+msgstr "さんにフォローされました"
+
+msgid "Follow"
+msgstr "フォロー"
+
+msgid "Toot your reply"
+msgstr "あなたの返信トゥート"
 
 msgid "Reply"
 msgstr "返信"
 
-msgid "Edit profile"
-msgstr "プロフィールを編集"
+msgid "Content warning"
+msgstr "ここに警告を書いてください"
+
+msgid "Jan"
+msgstr "1月"
+
+msgid "Feb"
+msgstr "2月"
+
+msgid "Mar"
+msgstr "3月"
+
+msgid "Apr"
+msgstr "4月"
+
+msgid "May"
+msgstr "5月"
+
+msgid "Jun"
+msgstr "6月"
+
+msgid "Jul"
+msgstr "7月"
+
+msgid "Aug"
+msgstr "8月"
+
+msgid "Sep"
+msgstr "9月"
+
+msgid "Oct"
+msgstr "10月"
+
+msgid "Nov"
+msgstr "11月"
+
+msgid "Dec"
+msgstr "12月"
+
+msgid "Changed setting to"
+msgstr "変更しました:"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "デフォルトでNSFWをマークするようになりました"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "デフォルトでNSFWをマークしないようになりました"
+
+msgid "Who to follow enabled"
+msgstr "おすすめユーザーが有効になりました"
+
+msgid "Who to follow disabled"
+msgstr "おすすめユーザーが無効になりました"
+
+msgid "Changed about me setting"
+msgstr "プロフィールを更新しました"
+
+msgid "Uploaded new avatar"
+msgstr "アイコンを更新しました"
+
+msgid "Uploaded new header"
+msgstr "ヘッダー画像を更新しました"
+
+msgid "Account locked"
+msgstr "フォローを承認制にしました"
+
+msgid "Account unlocked"
+msgstr "フォローの承認制を解除しました"
+
+msgid "Link previews enabled"
+msgstr "リンクのプレビューが有効になりました"
+
+msgid "Link previews disabled"
+msgstr "リンクのプレビューが無効になりました"
+
+msgid "You didn't allow notifications"
+msgstr "ブラウザでの通知が許可されていません"
+
+msgid "Desktop notifications enabled"
+msgstr "デスクトップの通知が有効になりました"
+
+msgid "Desktop notifications disabled"
+msgstr "デスクトップの通知が無効になりました"
+
+msgid "Replies shown"
+msgstr "返信が表示されています"
+
+msgid "Replies hidden"
+msgstr "返信が表示されていません"
+
+msgid "CW content shown"
+msgstr "CWが表示されています"
+
+msgid "CW content hidden"
+msgstr "CWが表示されていません"
+
+msgid "NSFW content shown"
+msgstr "NSFWが表示されています"
+
+msgid "NSFW content hidden"
+msgstr "NSFWが表示されていません"
+
+msgid "Reply to"
+msgstr "返信:"
+
+msgid "Report"
+msgstr "報告"
+
+msgid "Report a Toot of"
+msgstr "トゥートを報告:"
+
+msgid "What's happening?"
+msgstr "いまどうしてる？"
+
+msgid "Toot"
+msgstr "トゥート"
 
 msgid "Compose new Toot"
 msgstr "トゥートする"
 
+msgid "Please describe what the problem with the Toot is."
+msgstr "このトゥートの問題を説明してください"
+
+msgid "TOOTS"
+msgstr "トゥート"
+
 msgid "PEOPLE"
-msgstr "人々"
+msgstr "ユーザー"
 
-msgid "FAVOURITES"
-msgstr "お気に入り"
+msgid "Settings"
+msgstr "設定"
 
-msgid "Show"
-msgstr "見る"
+msgid "GENERAL"
+msgstr "全般"
+
+msgid "PROFILE"
+msgstr "プロフィール"
+
+msgid "APPEARANCE"
+msgstr "外観"
+
+msgid "Change instance"
+msgstr "サーバーの変更"
+
+msgid "Blank for default"
+msgstr "空白でデフォルトになります"
+
+msgid "FOLLOWING"
+msgstr "フォロー"
+
+msgid "Interesting accounts of devs"
+msgstr "開発者のアカウント"
+
+msgid "Halcyon for"
+msgstr "Halcyon for"
+
+msgid "About"
+msgstr "このサーバーについて"
+
+msgid "Terms"
+msgstr "利用規約"
+
+msgid "Apps"
+msgstr "アプリ"
+
+msgid "Source code"
+msgstr "ソースコード"
+
+msgid "Other instances"
+msgstr "他のサーバー"
+
+msgid "Privacy policy"
+msgstr "プライバシーポリシー"
+
+msgid "Version"
+msgstr "バージョン"
+
+msgid "Who to follow"
+msgstr "おすすめユーザー"
+
+msgid "Enable who to follow"
+msgstr "おすすめユーザーを有効にする"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr "あなたに興味・関心が似ているユーザーを表示するには、下のボタンでオプトインしてください。外部のサーバーにあなたのデータが送信されます。"
+
+msgid "MORE"
+msgstr "すべて見る"
+
+msgid "FOLLOWERS"
+msgstr "フォロワー"
 
 msgid "Following"
 msgstr "フォロー中"
@@ -283,197 +335,367 @@ msgstr "お気に入りへ切り替え"
 msgid "Open this guide"
 msgstr "この説明を開く"
 
-msgid "Copy link to Toot"
-msgstr "トゥートへのリンク"
+msgid "You'll no longer receive notifications from this user"
+msgstr "このユーザーからの通知を受け取らない"
 
-msgid "Delete Toot"
-msgstr "トゥート削除"
+msgid "Unmuted this user"
+msgstr "このユーザーのミュートが解除されました"
 
-msgid "View original"
-msgstr "オリジナルを見る"
+msgid "This user has been blocked"
+msgstr "このユーザーをブロックしました"
 
-msgid "Sensitive content"
-msgstr "非表示のメディア"
-
-msgid "Click to view"
-msgstr "クリックして表示"
-
-msgid "Auto-play animated GIFs"
-msgstr "アニメーションGIFを自動再生する"
-
-msgid "Yes"
-msgstr "はい"
-
-msgid "No"
-msgstr "いいえ"
-
-msgid "Changed setting to"
-msgstr "${val}に変更しました"
-
-msgid "Exist new Toot."
-msgstr "新しいトゥートがあります。"
-
-msgid "Boost & Favorite"
-msgstr "ブーストとふぁぼ"
-
-msgid "Enable link previews"
-msgstr "リンク先の詳細表示"
-
-msgctxt "Option"
-msgid "true"
-msgstr "有効"
-
-msgctxt "Option"
-msgid "false"
-msgstr "無効"
-
-msgid "Desktop notifications"
-msgstr "デスクトップ通知"
-
-msgid "You didn't allow notifications"
-msgstr "ブラウザでの通知が許可されていません"
-
-msgid "favourited your toot"
-msgstr "${name}さんがお気に入りに登録しました"
-
-msgid "boosted your toot"
-msgstr "${name}さんがブーストしました"
-
-msgid "followed your account"
-msgstr "${name}さんにフォローされました"
-
-msgid "mentioned you"
-msgstr "${name}さんがあなたに返信しました"
-
-msgid "Recently Used"
-msgstr "よく使う絵文字"
-
-msgid "Search Results"
-msgstr "検索結果"
-
-msgid "Search..."
-msgstr "検索..."
-
-msgid "Custom"
-msgstr "カスタム絵文字"
-
-msgid "People"
-msgstr "人々"
-
-msgid "Nature"
-msgstr "自然"
-
-msgid "Food"
-msgstr "食べ物"
-
-msgid "Activities"
-msgstr "活動"
-
-msgid "Travel & Places"
-msgstr "旅行と場所"
-
-msgid "Objects"
-msgstr "物"
-
-msgid "Symbols"
-msgstr "記号"
-
-msgid "Flags"
-msgstr "国旗"
-
-msgctxt "Notifications"
-msgid "Direct"
-msgstr "ダイレクト"
+msgid "Unblocked this user"
+msgstr "このユーザーのブロックを解除しました"
 
 msgid "Your Toot has been deleted"
 msgstr "トゥートを削除しました"
 
+msgid "Your Toot has been pinned"
+msgstr "トゥートをプロフィールに固定表示しました"
+
+msgid "Your Toot has been unpinned"
+msgstr "プロフィールページから固定を解除しました"
+
+msgid "Edit profile"
+msgstr "プロフィールを編集"
+
+msgid "FAVOURITES"
+msgstr "いいね"
+
+msgid "Show"
+msgstr "見る"
+
+msgid "Blocking"
+msgstr "ブロックしたユーザー"
+
+msgid "Muting"
+msgstr "ミュートしたユーザー"
+
+msgid "Requested"
+msgstr "フォローリクエスト"
+
+msgid "Photos and toots"
+msgstr "の画像と投稿"
+
+msgid "favourited your toot"
+msgstr "さんがあなたのトゥートをいいねしました"
+
+msgid "boosted your toot"
+msgstr "さんがあなたのトゥートをブーストしました"
+
+msgid "mentioned you"
+msgstr "さんがあなたに返信しました"
+
 msgid "Your Toot was posted!"
 msgstr "トゥートが投稿されました！"
+
+msgid "News"
+msgstr "ニュース"
+
+msgid "Source"
+msgstr "ソースコード"
+
+msgid "Privacy"
+msgstr "プライバシー"
+
+msgid "Imprint"
+msgstr "合意主体"
+
+msgid "Contact"
+msgstr "連絡先"
+
+msgid "Login"
+msgstr "ログイン"
+
+msgid "Login to Halcyon"
+msgstr "Halcyonでログイン"
+
+msgid "create an account"
+msgstr "アカウント作成"
+
+msgid "or"
+msgstr "または"
+
+msgid "I agree with the"
+msgstr "同意します:"
+
+msgid "What is Halcyon"
+msgstr "Halcyonとは何ですか"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr "のウェブクライアントです。ツイッターのシンプルで美しいユーザーインターフェイスと脱中央集権ネットワークの利点をともにもたらします。"
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyonは"
+
+msgid "Contact / Feedback"
+msgstr "連絡先 / フィードバック"
+
+msgid "Use my contact form"
+msgstr "コンタクトフォーム"
+
+msgid "Help us"
+msgstr "寄付のお願い"
+
+msgid "Halcyon Terms of Use"
+msgstr "Halcyon利用規約"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"この利用規約はHalcyon for Mastodon and Pleroma (Halcyon) ウェブサービスの利用者に適用されます、hosted "
+"at"
 
 msgid "Your Reply was posted!"
 msgstr "返信が投稿されました！"
 
-msgid "Reply to"
-msgstr "${val}への返信"
+msgid "Toot reported successfully!"
+msgstr "通知が送信されました！"
 
-msgid "Toot your reply"
-msgstr "あなたの返信トゥート"
+msgid "Link successfully copied!"
+msgstr "リンクがコピーされました！"
 
-msgid "Copy to draft"
-msgstr "下書きへコピー"
+msgid "Home"
+msgstr "ホーム"
 
-msgid "Move to draft"
-msgstr "下書きへ移動"
+msgid "Local"
+msgstr "ローカル"
 
-msgid "Delete draft"
-msgstr "削除"
+msgid "Federated"
+msgstr "連合"
 
-msgid "Replace toot"
-msgstr "トゥート置換"
+msgid "Notifications"
+msgstr "通知"
 
-msgid "General settings"
-msgstr "全般の設定"
+msgid "Search Mastodon"
+msgstr "検索"
 
-msgid "Profile settings"
-msgstr "プロフィール設定"
+msgid "View profile"
+msgstr "プロフィールを見る"
 
-msgid "Appearance settings"
-msgstr "外観の設定"
+msgid "Log out"
+msgstr "ログアウト"
 
-msgid "GENERAL"
-msgstr "全般"
+msgid "All"
+msgstr "全て"
 
-msgid "PROFILE"
-msgstr "プロフィール"
+msgid "new notitification"
+msgstr "新しい通知"
 
-msgid "APPEARANCE"
-msgstr "外観"
+msgid "Show all NSFW content"
+msgstr "すべてのNSFWを表示する"
+
+msgid "Show all CW content"
+msgstr "すべてのCWを表示する"
+
+msgid "Show threads in thread view in timeline"
+msgstr "タイムラインで返信の表示"
+
+msgid "Filter settings"
+msgstr "フィルター設定"
 
 msgid "Show replies"
 msgstr "返信の表示"
 
+msgid "Show toots of bots"
+msgstr "ボットの投稿を表示"
+
+msgid "Desktop notifications"
+msgstr "デスクトップ通知"
+
+msgid "Enable link previews"
+msgstr "リンク先の詳細表示"
+
+msgid "Auto update"
+msgstr "自動更新"
+
+msgid "Manual update"
+msgstr "手動更新"
+
+msgid "Appearance settings"
+msgstr "外観の設定"
+
+msgid "New posts streaming"
+msgstr "新着投稿のストリーミング"
+
+msgid "replies"
+msgstr "返信"
+
+msgid "General settings"
+msgstr "全般の設定"
+
+msgid "Default post privacy"
+msgstr "投稿の公開範囲"
+
 msgid "Mark as NSFW by default"
 msgstr "メディアを常に閲覧注意としてマークする"
 
-msgid "Display name"
-msgstr "表示名"
+msgid "Media"
+msgstr "メディア"
 
-msgid "About me"
-msgstr "プロフィール"
+msgid "Play animated GIFs"
+msgstr "アニメーションGIFを自動再生する"
 
-msgid "Avatar"
-msgstr "アイコン"
+msgid "Enable video player"
+msgstr "動画プレイヤーを有効にする"
 
-msgid "Header"
-msgstr "ヘッダー"
+msgid "Enable audio player"
+msgstr "音声プレイヤーを有効にする"
+
+msgid "Embed PeerTube videos"
+msgstr "PeerTube動画を埋め込む"
+
+msgid "Embed YouTube using YouPlay"
+msgstr "YouTube動画を埋め込む"
+
+msgid "Embed Vimeo using YouPlay"
+msgstr "Vimeo動画を埋め込む"
+
+msgid "FOLLOWS YOU"
+msgstr "フォローされています"
+
+msgid "Local instance"
+msgstr "ローカルに表示するサーバー"
+
+msgid "Hashtag search filter"
+msgstr "ハッシュタグ検索フィルター"
+
+msgid "All instances"
+msgstr "全てのサーバー"
+
+msgid "Local only"
+msgstr "ログインしているサーバーだけ"
 
 msgid "Lock account"
 msgstr "承認制アカウントにする"
 
-msgid "Select file and upload"
-msgstr "ファイルの選択と更新"
+msgid "Header"
+msgstr "ヘッダー"
 
-msgid "Changed about me setting"
-msgstr "プロフィールを更新しました"
+msgid "Avatar"
+msgstr "アイコン"
 
-msgid "Uploaded new avatar"
-msgstr "アイコンを更新しました"
+msgid "About me"
+msgstr "プロフィール"
 
-msgid "Uploaded new header"
-msgstr "ヘッダー画像を更新しました"
+msgid "Display name"
+msgstr "表示名"
 
-msgid "Account locked"
-msgstr "フォローを承認制にしました"
+msgid "Profile settings"
+msgstr "プロフィール設定"
 
-msgid "Account unlocked"
-msgstr "フォローの承認制を解除しました"
+msgid "Toots"
+msgstr "トゥート"
 
-msgid "Apps"
-msgstr "アプリ"
+msgid "Favourites"
+msgstr "いいね"
 
-msgid "Translation"
-msgstr "翻訳"
+msgid "New favourite"
+msgstr "新しいいいね"
+
+msgid "New boost"
+msgstr "新しいブースト"
+
+msgid "New follower"
+msgstr "新しいフォロワー"
+
+msgid "New mention"
+msgstr "新しいメンション"
+
+msgid "Dark theme enabled"
+msgstr "ダークテーマが有効になりました"
+
+msgid "Dark theme disabled"
+msgstr "ダークテーマが無効になりました"
+
+msgid "Only on top"
+msgstr "先頭を表示していれば自動更新"
+
+msgid "Enable dark theme"
+msgstr "ダークテーマ"
+
+msgid "Please enter the new name for this list."
+msgstr "リストの新しい名称を入力してください。"
+
+msgid "The name of your list can't be empty!"
+msgstr "リストの名称は空にできません。"
+
+msgid "Your list has been renamed"
+msgstr "リストの名称を変更しました"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "リストを削除してもよろしいですか？"
+
+msgid "Your list has been deleted"
+msgstr "リストを削除しました"
+
+msgid "Please enter the name of your new list."
+msgstr "新しいリストの名称を入力してください。"
+
+msgid "Add"
+msgstr "追加"
+
+msgid "Remove"
+msgstr "削除"
+
+msgid "Add to list"
+msgstr "リストに追加"
+
+msgid "Are you sure that you want to mute this user?"
+msgstr "このユーザーをミュートしてもよろしいですか？"
+
+msgid "Are you sure that you want to block this user?"
+msgstr "このユーザーをブロックしてもよろしいですか？"
+
+msgid "Are you sure that you want to delete this toot?"
+msgstr "このトゥートを削除してもよろしいですか？"
+
+msgid "Added this account to the list"
+msgstr "このユーザーをリストに追加しました"
+
+msgid ""
+"You need to follow this user to add him/her to the list. Do you want to do "
+"that now?"
+msgstr "このユーザーをリストに追加するには、まずフォローする必要があります。フォローしますか？"
+
+msgid "You successfully followed this user."
+msgstr "このユーザーをフォローしました"
+
+msgid "Removed this account from the list"
+msgstr "このユーザーをリストから削除しました"
+
+msgid "Joined at"
+msgstr "参加しました:"
+
+msgid "Direct messages"
+msgstr "ダイレクトメッセージ"
+
+msgid "Lists"
+msgstr "リスト"
+
+msgid "Open public profile"
+msgstr "公開プロフィールを開く"
+
+msgid "My Lists"
+msgstr "リスト"
+
+msgid "Confirmation"
+msgstr "確認"
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "Cancel"
+msgstr "キャンセル"
+
+msgid "Prompt"
+msgstr "プロンプト"
+
+msgid "Ok"
+msgstr "Ok"
 
 msgid "Image size on timeline"
 msgstr "タイムラインでの画像の高さ"
@@ -485,3 +707,18 @@ msgstr "通常"
 msgctxt "Option"
 msgid "Low"
 msgstr "低い"
+
+msgid "FILTERS"
+msgstr "フィルター"
+
+msgid "MEDIA"
+msgstr "メディア"
+
+msgid "Autocomplete in compose field"
+msgstr "入力欄のオートコンプリート"
+
+msgid "Custom profile fields"
+msgstr "プロフィール補足情報"
+
+msgid "To verify that the links in your custom fields really belong to you, you can add the link below to your website. The link text can be changed to whatever you want."
+msgstr "補足情報のあなたのものであることを確認するには、以下のリンクをウェブサイトに追加します。リンクのテキストは好きなように変えられます。"

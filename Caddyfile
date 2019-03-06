@@ -1,113 +1,181 @@
-halcyon.domain.tld  {
-tls user@domain.tld
-log /var/log/caddy/halcyon.log
-fastcgi / 127.0.0.1:9000 php
-root /opt/halcyon
-status 404 {
-/config.ini
-/.bat
-/.git
-/.ini
-/.sh
-/.svn
-/.txt
-/.tpl
-/.xml
-}
-rewrite {
-r ^/home/?$
-to /
-}
-rewrite {
-r ^/login/?$
-to /login/login.php
-}
-rewrite {
-r ^/auth/?$
-to /login/auth.php
-}
-rewrite {
-r ^/logout/?$
-to /login/logout.php
-}
-rewrite {
-r ^/terms/?$
-to /login/terms.php
-}
-rewrite {
-r ^/local/?$
-to /local.php
-}
-rewrite {
-r ^/federated/?$
-to /federated.php
-}
-rewrite {
-r ^/notifications/?$
-to /notifications.php
-}
-rewrite {
-r ^/whotofollow/?$
-to /who_to_follow.php
-}
-rewrite {
-r ^/search/?$
-to /search_hash_tag.php
-}
-rewrite {
-r ^/search/users/?$
-to /search_user.php
-}
-rewrite {
-r ^/settings/?$
-to /settings_general.php
-}
-rewrite {
-r ^/settings/profile/?$
-to /settings_profile.php
-}
-rewrite {
-r ^/settings/appearance/?$
-to /settings_appearance.php
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/?$
-to /user.php?user=@{1}@{2}.{3}
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/status/(.+?)?$
-to /user.php?user=@{1}@{2}.{3}&status={4}
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/media/?$
-to /user_only_media.php?user=@{1}@{2}.{3}
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/with_replies/?$
-to /user_include_replies.php?user=@{1}@{2}.{3}
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/followers/?$
-to /user_followers.php?user=@{1}@{2}.{3}
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/following/?$
-to /user_following.php?user=@{1}@{2}.{3}
-}
-rewrite {
-r ^/@(.+)@(.+).([a-z]+)/favourites/?$
-to /user_favorite.php?user=@{1}@{2}.{3}
-}
-rewrite {
-r ^/avatars/original/missing.png$
-to /assets/images/missing.png
-}
-rewrite {
-r ^/headers/original/missing.png$
-to /assets/images/missing_header.png
-}
-rewrite {
-r ^/404/?$
-to /404.php
-}
+halcyon.domain.tld {
+  tls user@domain.tld
+  log /var/log/caddy/halcyon.log
+  fastcgi / 127.0.0.1:9000 php
+  root /opt/halcyon
+  status 404 {
+    /config.ini
+    /.bat
+    /.git
+    /.ini
+    /.sh
+    /.svn
+    /.txt
+    /.tpl
+    /.xml
+  }
+
+  # Begin Main
+  rewrite {
+    r ^/home/?$
+    to /
+  }
+  rewrite {
+    r ^/login/?$
+    to /login/login.php
+  }
+  rewrite {
+    r ^/auth/?$
+    to /login/auth.php
+  }
+  rewrite {
+    r ^/logout/?$
+    to /login/logout.php
+  }
+  rewrite {
+    r ^/terms/?$
+    to /login/terms.php
+  }
+  rewrite {
+    r ^/privacy/?$
+    to /login/privacy.php
+  }
+  rewrite {
+    r ^/imprint/?$
+    to /login/imprint.php
+  }
+  # End Main
+
+  # LTL
+  rewrite {
+    r ^/local/?$
+    to /local.php
+  }
+
+  # FTL
+  rewrite {
+    r ^/federated/?$
+    to /federated.php
+  }
+
+  # Notice
+  rewrite {
+    r ^/notifications/?$
+    to /notifications.php
+  }
+
+  # Who to follow
+  rewrite {
+    r ^/whotofollow/?$
+    to /who_to_follow.php
+  }
+
+  # Direct
+  rewrite {
+    r ^/direct/?$
+    to direct.php
+  }
+
+  # Instance
+  rewrite {
+    r ^/instance/?$
+    to instance.php
+  }
+
+  # Begin Lists
+  rewrite {
+    r ^/lists/?$
+    to lists.php
+  }
+  rewrite {
+    r ^/lists/(\d+)/?$
+    to lists_view.php?id={1}
+  }
+  rewrite {
+    r ^/lists/(\d+)/add/?$
+    to lists_add.php?id={1}
+  }
+  # End Lists
+
+  # Begin Search
+  rewrite {
+    r ^/search/?$
+    to /search_hash_tag.php
+  }
+  rewrite {
+    r ^/search/users/?$
+    to /search_user.php
+  }
+  # End Search
+
+  # Begin Settings
+  rewrite {
+    r ^/settings/?$
+    to /settings_general.php
+  }
+  rewrite {
+    r ^/settings/profile/?$
+    to /settings_profile.php
+  }
+  rewrite {
+    r ^/settings/appearance/?$
+    to /settings_appearance.php
+  }
+  rewrite {
+    r ^/settings/filters/?$
+    to /settings_filters.php
+  }
+  rewrite {
+    r ^/settings/media/?$
+    to /settings_media.php
+  }
+  # End settings
+
+  # Begin user
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/?$
+    to /user.php?user=@{1}@{2}.{3}
+  }
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/status/(.+?)?$
+    to /user.php?user=@{1}@{2}\.{3}&status={4}
+  }
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/media/?$
+    to /user_only_media.php?user=@{1}@{2}\.{3}
+  }
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/with_replies/?$
+    to /user_include_replies.php?user=@{1}@{2}\.{3}
+  }
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/followers/?$
+    to /user_followers.php?user=@{1}@{2}\.{3}
+  }
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/following/?$
+    to /user_following.php?user=@{1}@{2}\.{3}
+  }
+  rewrite {
+    r ^/@(.+)@(.+)\.([a-z]+)/favourites/?$
+    to /user_favorite.php?user=@{1}@{2}\.{3}
+  }
+  # End User
+
+  # Begin Image
+  rewrite {
+    r ^/avatars/original/missing.png$
+    to /assets/images/missing.png
+  }
+  rewrite {
+    r ^/headers/original/missing.png$
+    to /assets/images/missing_header.png
+  }
+  # End Image
+
+  # 404
+  rewrite {
+    r ^/404/?$
+    to /404.php
+  }
 }

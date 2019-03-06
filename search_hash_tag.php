@@ -15,7 +15,7 @@
 </header>
 <div id="js-stream_update">
 <button>
-<?=_('View new Toots')?>
+<?=_('View ')?> <span></span><?=_(' new Toots')?>
 </button>
 </div>
 <ul id="js-timeline" class="timeline">
@@ -33,12 +33,18 @@ current_file = location.pathname+location.search;
 $(function() {
 var query = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'q'), ENT_QUOTES) ?>";
 if(query[0] == "@") {
-window.location.href = "/search/users/?q="+query.substr(1);
+window.location.href = "/search/users?q="+query.substr(1);
 }
 else {
 if(query[0] == "#") {
 query = query.substr(1);
 }
+if(query.length > 0) {
+current_search_history.push(query);
+if(current_search_history.length > 99) {
+current_search_history.shift();
+}
+localStorage.current_search_history = JSON.stringify(current_search_history);
 $('#main > .article_wrap > .center_column > .timeline_header > .header_items > .item').text("#"+query);
 $('#js-header_title_box > h1').text(query);
 $('title').text('#'+query+' - Halcyon Search');
@@ -53,6 +59,10 @@ else if(localStorage.getItem("setting_search_filter") === "local") {
 setTimeline("timelines/tag/"+query,[{name:"local",data:"true"}]);
 }
 replace_emoji();
+}
+else {
+history.back();
+}
 }
 });
 <?php } else { ?>

@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
-require_once('./lang.php');
+include("language.php");
 
 function filedate($filename){
   $filename = str_replace('/..', '', $filename);
@@ -15,35 +15,49 @@ function filedate($filename){
     return $filename;
   }
 }
-
-?><!DOCTYPE HTML>
-<html lang="<?=$lang?>">
+?>
+<!DOCTYPE HTML>
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
-<link rel="stylesheet" href="<?php echo filedate('/assets/css/style.css'); ?>" media="all">
-<link rel="stylesheet" href="//stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" media="all">
+<link rel="gettext" type="text/x-gettext-translation" href="/locale/<?=$locale?>/LC_MESSAGES/messages.po">
+<link rel="stylesheet" href="/assets/css/style.css" media="all">
+<?php
+if(array_key_exists('darktheme',$_COOKIE)) {
+if($_COOKIE['darktheme'] == "true") echo '<link rel="stylesheet" href="/assets/css/dark.css" media="all">';
+else if($_COOKIE['darktheme'] == "unset") {
+?>
+<script>
+if(window.matchMedia("prefers-color-scheme:dark").matches)
+document.write('<link rel="stylesheet" href="/assets/css/dark.css" media="all">');
+</script>
+<?php }} ?>
+<link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.css'); ?>" media="all">
 <link rel="stylesheet" href="<?php echo filedate('/assets/js/jquery-emoji-picker/css/jquery.emojipicker.tw2.css'); ?>" media="all">
-<link rel="gettext" type="text/x-gettext-translation" href="<?php echo filedate('/locale/'.$locale.'/LC_MESSAGES/messages.po'); ?>"/>
-<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="<?php echo filedate('/assets/js/halcyon/halcyonFunctions.js'); ?>"></script>
-<script src="<?php echo filedate('/assets/js/mastodon.js/mastodon.js'); ?>"></script><!-- thx @kirschn -->
+<script src="/assets/js/jquery/jquery.min.js"></script>
+<script src="/assets/js/halcyon/halcyonFunctions.js"></script>
+<script src="/assets/js/mastodon.js/mastodon.js"></script><!-- thx @kirschn -->
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/assets/js/autosize/autosize.js"></script>
+<script src="/assets/js/autocomplete/textarea.js"></script>
 <script src="/assets/js/shortcut.js"></script>
-<script src="<?php echo filedate('/assets/js/replace_emoji.js'); ?>"></script>
-<script src="<?php echo filedate('/assets/js/halcyon/halcyonTemplates.js'); ?>"></script>
-<script src="<?php echo filedate('/assets/js/halcyon/halcyonUI.js'); ?>"></script>
-<script src="/assets/js/pomo/src/dist/pomo.js"></script>
-<script src="//cdn.jsdelivr.net/npm/twemoji@11.0.0/2/twemoji.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/clipboard@2.0.1/dist/clipboard.min.js"></script>
+<script src="/assets/js/replace_emoji.js"></script>
+<script src="/assets/js/halcyon/halcyonTemplates.js"></script>
+<script src="/assets/js/halcyon/halcyonUI.js"></script>
+<script src="/assets/js/autocomplete/search.js"></script>
+<script src="/assets/js/pomo/pomo.js"></script>
+<script src="/assets/js/twemoji/twemoji.min.js"></script>
+<script src="/assets/js/clipboard.js/clipboard.min.js"></script>
 <script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojipicker.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/jquery-emoji-picker/js/jquery.emojis.js'); ?>"></script>
 <script src="<?php echo filedate('/assets/js/draft.js'); ?>"></script>
+<script src="/assets/js/player/soundmanager.js"></script>
+<script src="/assets/js/player/audio.js"></script>
 <script>
 Pomo.domain = 'messages';
 Pomo.returnStrings = true;
@@ -59,13 +73,32 @@ if (!localStorage.getItem("current_id") | !localStorage.getItem("current_instanc
   location.href = "/login";
 }
 else {
-  if($.cookie("session") === "true") {
-    refreshApp();
-  }
-  else if($.cookie("session") === undefined) {
-    resetApp();
-  }
+Pomo.domain = 'messages';
+Pomo.returnStrings = true;
+Pomo.unescapeStrings = true;
+var pomo_def = Pomo.load(null,{
+format:'po',
+mode:'link',
+translation_domain:'messages'
+});
+var __ = (function(){
+var _ = !!window.Pomo? window.Pomo : (!!window.__Pomo? window.__Pomo: false);
+var gettext_wrap = function(word, options){return _.getText(word, options)};
+gettext_wrap = !!_? gettext_wrap: false;
+if(!gettext_wrap){
+throw new "Pomo can't be found";
 }
+return gettext_wrap;
+})();
+if($.cookie("session") === "true") {
+refreshApp();
+}
+else if($.cookie("session") === undefined) {
+resetApp();
+}
+}
+server_setting_youplay = <?=$config["Media"]["youplay"] ? "true" : "false"?>;
+server_setting_vimeo = <?=$config["Media"]["vimeo"] ? "true" : "false"?>;
 </script>
 </head>
 <body>
@@ -101,18 +134,18 @@ else {
 </a>
 <div class="notification_badge nav_badge invisible"></div>
 </li>
+<li id="header_nav_item_lists" class="header_nav_item lists_nav">
+<a href="/lists" id="lists_nav">
+<i class="fa fa-fw fa-list"></i>
+<span><?=_('Lists')?></span>
+</a>
+<div class="lists_badge nav_badge invisible"></div>
+</li>
 </ul>
 </nav>
-<div class="header_center_box">
-<h1 class="header_nav_item mastodon_logo logo_box">
-<a href="/">
-<img src="/assets/images/mastodon.svg" alt="Halcyon for Mastodon">
-</a>
-</h1>
-</div>
 <nav class="header_right_box">
 <ul class="header_nav_list">
-<li class="header_nav_item serch_form_wrap">
+<li class="header_nav_item search_form_wrap">
 <form class="search_form" action="/search" method="GET">
 <input id="search_form" class="search_form_input" placeholder="<?=_('Search Mastodon')?>" type="text" name="q" accesskey="/">
 <span class="search_form_submit">
@@ -121,11 +154,12 @@ else {
 </button>
 </span>
 </form>
+<nav class="header_search_suggestions invisible"></nav>
 </li>
 <li class="header_nav_item my_account_wrap">
 <button class="header_account_avatar">
 <div class="my_account">
-<img class="js_current_profile_image" />
+<img class="js_current_profile_image">
 </div>
 </button>
 <nav class="header_my_account_nav invisible">
@@ -139,7 +173,10 @@ else {
 </ul>
 <ul>
 <li>
-<a class="header_settings_link" href="/settings"><?=_('Settings')?></a>
+<a href="/direct"><?=_('Direct')?></a>
+</li>
+<li>
+<a href="/settings"><?=_('Settings')?></a>
 </li>
 <li>
 <a href="/logout"><?=_('Log out')?></a>

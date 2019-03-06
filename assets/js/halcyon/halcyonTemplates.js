@@ -21,6 +21,70 @@ function mediaattachments_template_object(status, idx) {
   }
   return media_views;
 }
+function mediaattachments_template(status) {
+  let media_views = "";
+  var border = "";
+  var mvfullheight = "";
+  var dsplength = status.media_attachments.length;
+  if(status.media_attachments[0].remote_url != null) {
+    status.media_attachments[0].url = status.media_attachments[0].remote_url;
+  }
+  if(status.media_attachments[0].type === "video" && localStorage.setting_play_video != "false") border = ' style="border:0;border-radius:0"';
+  if(localStorage.setting_full_height == "true") {
+    mvfullheight = " media_full_height";
+    dsplength = "1";
+  }
+  if(status.media_attachments[0].url === "/files/original/missing.png") {
+    return "";
+  }
+  else if(!status.sensitive || localStorage.setting_show_nsfw == "true") {
+    media_views = `<div class='media_views${mvfullheight}' sid="${status.id}" media_length='${dsplength}'${border}>`;
+  }
+  else {
+    media_views = `<div class='media_views sensitive${mvfullheight}' media_length='${dsplength}'${border}>
+    <div class='sensitive_alart'>
+    <span class="text1">${__('Sensitive content')}</span>
+    <span class="text2">${__('Click to view')}</span>
+    </div>`;
+  }
+  if((status.media_attachments[0].type === "video" && localStorage.setting_play_video == "false") || (status.media_attachments[0].type === "gifv" && localStorage.setting_play_gif == "false")) {
+    media_views += (`
+    <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[0].id}" url="${status.media_attachments[0].preview_url}" mediacount="0">
+    <img src="${status.media_attachments[0].preview_url}" window_view="enable" />
+    </div>`);
+  } else if(status.media_attachments[0].type === "video") {
+    media_views += (`
+    <div class="media_attachment" otype="video/gifv" mediacount="0">
+    <iframe src="/media/video.php?url=${encodeURIComponent(status.media_attachments[0].url)}&preview=${encodeURIComponent(status.media_attachments[0].preview_url)}" frameborder="0" allowfullscreen></iframe>
+    </div>`);
+  } else if(status.media_attachments[0].type === "gifv") {
+    media_views += (`
+    <div class="media_attachment" otype="video/gifv" mediacount="0">
+    <video frameborder="0" autoplay loop muted>
+    <source src="${status.media_attachments[0].url}">
+    <img src="${status.media_attachments[0].preview_url}">
+    </video>
+    </div>`);
+  } else if(status.media_attachments[0].type === "audio" || (status.media_attachments[0].type === "unknown" && status.media_attachments[0].url.substring(status.media_attachments[0].url.length-4) == ".mp3")) {
+    if(localStorage.setting_play_audio != "false") {
+      media_views = $("<div>").addClass("player");
+      media_views.player(status.media_attachments[0].url);
+    }
+  } else {
+    if ( status.media_attachments.length <= 2 ) {
+      for ( let i in status.media_attachments ) {
+        if(status.media_attachments[i].remote_url != null) {
+          status.media_attachments[i].url = status.media_attachments[i].remote_url;
+        }
+        media_views += (`
+        <div class="media_attachment" otype="image" sid="${status.id}" oid="${status.media_attachments[i].id}" url="${status.media_attachments[i].url}" mediacount="${i}">
+        <img src="${status.media_attachments[i].url}" window_view="enable" />
+        </div>`);
+      }
+      return media_views;
+    }
+  }
+}
 
 function mediaattachments_template(status) {
   let media_views = "";
@@ -65,61 +129,96 @@ function mediaattachments_template(status) {
 }
 
 function timeline_template(status) {
-  var target_account = {};
-  if (status.reblog === null) {
-    target_account = status.account;
-  }
-  else {
-    target_account = status.reblog.account;
-  }
-  if ( target_account.acct.indexOf('@') == -1 ) target_account.acct = target_account.acct + '@' + current_instance;
-  setWhoToFollow(target_account);
-  if (status.reblog === null) {
-    status.content = status.content.emoji_replace(status.emojis);
-    const status_account_link= getRelativeURL(status.account.url, status.account.id),
-    status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
-    status_attr_datetime = getConversionedDate(null, status.created_at);
-    let alart_text= "",
-    article_option= "",
-    toot_reblogs_count= "",
-    toot_favourites_count = "",
-    media_views = "";
-    if ( status.spoiler_text ) {
-      alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+Pomo.getText('SHOW MORE')+"</button>",
-      article_option = "content_warning";
-    }
-    if (status.reblogs_count) {
-      toot_reblogs_count = status.reblogs_count;
-    }
-    if (status.favourites_count) {
-      toot_favourites_count = status.favourites_count;
-    }
-    if ( status.media_attachments.length ) {
-      media_views = mediaattachments_template(status);
-    }
-    if(status.account.display_name.length == 0) {
-      status.account.display_name = status.account.username;
-    }
-    switch(status.visibility) {
-      case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-      case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-      case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
-      case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
-    }
-    if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
-      toot_footer_width = " style='width:320px'";
-      toot_reblog_button = (`<div class="toot_reaction">
+if (status.reblog === null) {
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(var i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<status.mentions.length;i++) {
+if(status.mentions[i].acct.indexOf("@") == -1) status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'@'+current_instance+'?mid='+status.mentions[i].id+'"');
+else status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'?mid='+status.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
+status_attr_datetime = getConversionedDate(null, status.created_at);
+let alart_text= "",
+article_option= "",
+toot_replies_count = "",
+toot_reblogs_count= "",
+toot_favourites_count = "",
+media_views = "";
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(status.replies_count) {
+toot_replies_count = status.replies_count;
+}
+if (status.reblogs_count) {
+toot_reblogs_count = status.reblogs_count;
+}
+if (status.favourites_count) {
+toot_favourites_count = status.favourites_count;
+}
+if ( status.media_attachments.length ) {
+media_views = mediaattachments_template(status);
+}
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+switch(status.visibility) {
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
+}
+if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+toot_footer_width = " style='width:320px'";
+toot_reblog_button = (`<div class="toot_reaction">
 <button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
 <i class="fa fa-fw fa-retweet"></i>
 <span class="reaction_count boost_count">${toot_reblogs_count}</span>
 </button>
 </div>`);
-    }
-    else {
-      toot_footer_width = "";
-      toot_reblog_button = "";
-    }
-    const html=(`
+}
+else {
+toot_footer_width = "";
+toot_reblog_button = "";
+}
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>`);
+if(status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">${__('Pin Toot')}</a></li>`);
+}
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html=$(`
 <li sid="${status.id}" class="toot_entry">
 <div class="toot_entry_body">
 <a href="${status_account_link}">
@@ -132,10 +231,10 @@ ${icon(status.account.avatar)}
 <div class="text_ellipsis">
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${status.account.display_name}`}
+${status.account.display_name}
 </span>
 <span class="username">
-@${status.account.acct}
+@${status.account.acct}${account_state_icons}
 </span>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </a>
@@ -146,13 +245,11 @@ ${htmlEscape`${status.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li><a class="delete_button" tid="${status.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+<li><a class="copylink_button" url="${status.url}">${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -162,13 +259,12 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape`${status.account.display_name}`}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
 </button>
 </div>
 ${toot_reblog_button}
@@ -187,46 +283,96 @@ ${toot_reblog_button}
 </section>
 </div>
 </li>`);
-    return $(html)
-  } else {
-    status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
-    const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
-    status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
-    status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
-    status_account_link= getRelativeURL(status.account.url, status.account.id);
-    let alart_text= "",
-    article_option= "",
-    toot_reblogs_count= "",
-    toot_favourites_count = "",
-    media_views = "";
-    if ( status.reblog.spoiler_text ) {
-      alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+Pomo.getText('SHOW MORE')+"</button>",
-      article_option = "content_warning";
-    }
-    if (status.reblog.reblogs_count) {
-      toot_reblogs_count = status.reblog.reblogs_count;
-    }
-    if (status.reblog.favourites_count) {
-      toot_favourites_count = status.reblog.favourites_count;
-    }
-    if ( status.reblog.media_attachments.length ) {
-      media_views = mediaattachments_template(status.reblog);
-    }
-    if(status.account.display_name.length == 0) {
-      status.account.display_name = status.account.username;
-    }
-    if(status.reblog.account.display_name.length == 0) {
-      status.reblog.account.display_name = status.reblog.account.username;
-    }
-    switch(status.reblog.visibility) {
-      case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-      case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-    }
-    const html = (`
+html.find(".toot_article").append(media_views);
+return html
+} else {
+for(i=0;i<status.reblog.emojis.length;i++) {
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+status.reblog.account.display_name = htmlEscape(status.reblog.account.display_name);
+for(i=0;i<status.reblog.account.emojis.length;i++) {
+status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<status.reblog.mentions.length;i++) {
+if(status.reblog.mentions[i].acct.indexOf("@") == -1) status.reblog.content = status.reblog.content.replace(new RegExp('href="'+status.reblog.mentions[i].url+'"',"g"),'href="/@'+status.reblog.mentions[i].acct+'@'+current_instance+'?mid='+status.reblog.mentions[i].id+'"');
+else status.reblog.content = status.reblog.content.replace(new RegExp('href="'+status.reblog.mentions[i].url+'"',"g"),'href="/@'+status.reblog.mentions[i].acct+'?mid='+status.reblog.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = status.reblog.account.id;
+writtenby.username = status.reblog.account.username;
+writtenby.url = status.reblog.account.url;
+writtenby.acct = status.reblog.account.acct;
+status.reblog.mentions.push(writtenby);
+const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
+status_attr_datetime = getConversionedDate(null, status.reblog.created_at);
+var status_reblog_account_link,status_account_link;
+if(status.reblog.account.acct.indexOf("@") == -1)  status_reblog_account_link = "/@"+status.reblog.account.acct+"@"+current_instance+"?mid="+status.reblog.account.id;
+else status_reblog_account_link = "/@"+status.reblog.account.acct+"?mid="+status.reblog.account.id;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+let alart_text= "",
+article_option= "",
+toot_replies_count = "",
+toot_reblogs_count= "",
+toot_favourites_count = "",
+media_views = "";
+if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(status.reblog.replies_count) {
+toot_replies_count = status.reblog.replies_count;
+}
+if (status.reblog.reblogs_count) {
+toot_reblogs_count = status.reblog.reblogs_count;
+}
+if (status.reblog.favourites_count) {
+toot_favourites_count = status.reblog.favourites_count;
+}
+if ( status.reblog.media_attachments.length ) {
+media_views = mediaattachments_template(status.reblog);
+}
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+if(status.reblog.account.display_name.length == 0) {
+status.reblog.account.display_name = status.reblog.account.username;
+}
+switch(status.reblog.visibility) {
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+}
+var own_toot_buttons = "";
+if(status.reblog.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">${__('Delete Toot')}</a></li>`);
+if(status.reblog.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">${__('Pin Toot')}</a></li>`);
+}
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Mute')} @${status.reblog.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Block')} @${status.reblog.account.username}</a></li>
+<li><a class="addlist_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Add to list')} @${status.reblog.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html = $(`
 <li sid="${status.id}" class="toot_entry">
 <div class="boost_author_box">
 <a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape`${status.account.display_name}`} ${Pomo.getText('Boosted')}</span>
+<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} ${__('Boosted')}</span>
 </a>
 </div>
 <div class="toot_entry_body">
@@ -240,10 +386,10 @@ ${icon(status.reblog.account.avatar)}
 <div class="text_ellipsis">
 <a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${status.reblog.account.display_name}`}
+${status.reblog.account.display_name}
 </span>
 <span class="username">
-@${status.reblog.account.acct}
+@${status.reblog.account.acct}${account_state_icons}
 </span>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </a>
@@ -254,13 +400,11 @@ ${htmlEscape`${status.reblog.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.reblog.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
+<li><a class="copylink_button" url="${status.reblog.url}" >${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">${Pomo.getText('View original')}</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -270,13 +414,12 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}"acct="@${status.reblog.account.acct}" display_name="${htmlEscape`${status.reblog.account.display_name}`}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}' display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
 </button>
 </div>
 <div class="toot_reaction">
@@ -300,21 +443,188 @@ ${media_views}
 </section>
 </div>
 </li>`);
-    return $(html)
-  }
+html.find(".toot_article").append(media_views);
+return html
+}
+}
+function timeline_pinned_template(status) {
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<status.mentions.length;i++) {
+if(status.mentions[i].acct.indexOf("@") == -1) status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'@'+current_instance+'?mid='+status.mentions[i].id+'"');
+else status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'?mid='+status.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1) status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
+status_attr_datetime = getConversionedDate(null, status.created_at);
+let alart_text= "",
+article_option= "",
+toot_replies_count = "",
+toot_reblogs_count= "",
+toot_favourites_count = "",
+media_views = "";
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(status.replies_count) {
+toot_replies_count = status.replies_count;
+}
+if (status.reblogs_count) {
+toot_reblogs_count = status.reblogs_count;
+}
+if (status.favourites_count) {
+toot_favourites_count = status.favourites_count;
+}
+if ( status.media_attachments.length ) {
+media_views = mediaattachments_template(status);
+}
+if(status.account.display_name.length == 0) {
+status.account.display_name = status.account.username;
+}
+switch(status.visibility) {
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+}
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>
+<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html = $(`
+<li sid="${status.id}" class="toot_entry">
+<div class="pinned_notice_box">
+<i class="fa fa-fw fa-thumb-tack"></i>${__('Pinned Toot')}</span>
+</div>
+<div class="toot_entry_body">
+<a href="${status_account_link}">
+<div class="icon_box">
+<img src="${status.account.avatar}">
+</div>
+</a>
+<section class="toot_content">
+<header class="toot_header">
+<div class="text_ellipsis">
+<a href="${status_account_link}">
+<span class="displayname emoji_poss">
+${status.account.display_name}
+</span>
+<span class="username">
+@${status.account.acct}${account_state_icons}
+</span>
+<time datetime="${status_attr_datetime}">${status_datetime}</time>
+</a>
+</div>
+<div class="expand_button_wrap">
+<button class="expand_button">
+<i class="fa fa-fw fa-chevron-down"></i>
+</button>
+<div class="expand_menu invisible disallow_select">
+<ul>
+<li><a class="copylink_button" url="${status.url}" >${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
+</ul>
+<ul>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
+</ul>
+</div>
+</div>
+</header>
+<article class="toot_article ${article_option}">
+${alart_text}
+<span class="status_content emoji_poss">
+${status.content}
+</span>
+</article>
+<footer class="toot_footer" style="width:320px">
+<div class="toot_reaction">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
+<i class="fa fa-fw fa-reply"></i>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
+<i class="fa fa-fw fa-star"></i>
+<span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+</button>
+</div>
+</footer>
+</section>
+</div>
+</li>`);
+html.find(".toot_article").append(media_views);
+return html
 }
 
 function notifications_template(NotificationObj) {
-const notice_author_link = getRelativeURL(NotificationObj.account.url, NotificationObj.account.id);
+var notice_author_link;
+if(NotificationObj.account.acct.indexOf("@") == -1)  notice_author_link = "/@"+NotificationObj.account.acct+"@"+current_instance+"?mid="+NotificationObj.account.id;
+else notice_author_link = "/@"+NotificationObj.account.acct+"?mid="+NotificationObj.account.id;
 if(NotificationObj.account.display_name.length == 0) {
 NotificationObj.account.display_name = NotificationObj.account.username;
 }
+NotificationObj.account.display_name = htmlEscape(NotificationObj.account.display_name);
+for(i=0;i<NotificationObj.account.emojis.length;i++) {
+NotificationObj.account.display_name = NotificationObj.account.display_name.replace(new RegExp(":"+NotificationObj.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.account.emojis[i].url+"' class='emoji'>");
+}
 if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
-const toot_author_link = getRelativeURL(NotificationObj.status.account.url, NotificationObj.status.account.id),
-toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+var toot_author_link;
+if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 if( NotificationObj.type=='favourite' ){
-  NotificationObj.status.content = NotificationObj.status.content.emoji_replace(NotificationObj.status.emojis);
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+}
+var account_state_icons = "";
+if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
 const html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
 <div class="notice_author_box">
@@ -325,7 +635,7 @@ ${icon(NotificationObj.account.avatar)}
 </a>
 <i class="fa fa-fw fa-star font-icon favourite"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${htmlEscape`${NotificationObj.account.display_name}`}</span> ${Pomo.getText('favourited Your Toot')}
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('favourited Your Toot')}
 </a>
 </div>
 <div class="notice_entry_body">
@@ -334,15 +644,15 @@ ${icon(NotificationObj.account.avatar)}
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${NotificationObj.status.account.display_name}`}
+${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
-@${NotificationObj.status.account.acct}
+@${NotificationObj.status.account.acct}${account_state_icons}
 </span>
 </a>
 </div>
 </header>
-<article class="toot_article">
+<article class="toot_article emoji_poss">
 <p>${NotificationObj.status.content}</p>
 </article>
 <footer class="toot_footer"></footer>
@@ -351,8 +661,21 @@ ${htmlEscape`${NotificationObj.status.account.display_name}`}
 </li>`);
 return $(html);
 } else if ( NotificationObj.type === 'reblog' ) {
-  NotificationObj.status.content = NotificationObj.status.content.emoji_replace(NotificationObj.status.emojis);
-const sid= NotificationObj.status.id,
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+}
+const sid= NotificationObj.status.id;
+var account_state_icons = "";
+if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
 html = (`
 <li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
 <div class="notice_author_box">
@@ -363,7 +686,7 @@ ${icon(NotificationObj.account.avatar)}
 </a>
 <i class="fa fa-fw fa-retweet font-icon boost"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${htmlEscape`${NotificationObj.account.display_name}`}</span> ${Pomo.getText('boosted Your Toot')}
+<span class="emoji_poss" >${NotificationObj.account.display_name}</span> ${__('boosted Your Toot')}
 </a>
 </div>
 <blockquote class="notice_entry_body">
@@ -372,15 +695,15 @@ ${icon(NotificationObj.account.avatar)}
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${NotificationObj.status.account.display_name}`}
+${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
-@${NotificationObj.status.account.acct}
+@${NotificationObj.status.account.acct}${account_state_icons}
 </span>
 </a>
 </div>
 </header>
-<article class="toot_article">
+<article class="toot_article emoji_poss">
 <p>${NotificationObj.status.content}</p>
 </article>
 <footer class="toot_footer"></footer>
@@ -390,18 +713,43 @@ ${htmlEscape`${NotificationObj.status.account.display_name}`}
 return $(html);
 }
 } else if ( NotificationObj.type === 'mention' ) {
-const toot_author_link = getRelativeURL(NotificationObj.status.account.url, NotificationObj.status.account.id),
-toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+var toot_author_link;
+if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
 toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
 let alart_text= "",
 article_option= "",
+toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-NotificationObj.status.content = NotificationObj.status.content.emoji_replace(NotificationObj.status.emojis);
-if (NotificationObj.status.spoiler_text) {
-alart_text = '<span>'+NotificationObj.status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
-article_option = 'content_warning';
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = NotificationObj.status.account.id;
+writtenby.username = NotificationObj.status.account.username;
+writtenby.url = NotificationObj.status.account.url;
+writtenby.acct = NotificationObj.status.account.acct;
+NotificationObj.status.mentions.push(writtenby);
+if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(NotificationObj.status.replies_count) {
+toot_replies_count = NotificationObj.status.replies_count;
 }
 if (NotificationObj.status.reblogs_count) {
 toot_reblogs_count = NotificationObj.status.reblogs_count;
@@ -416,10 +764,10 @@ if(NotificationObj.status.account.display_name.length == 0) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.username;
 }
 switch(NotificationObj.status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
 }
 if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
 toot_footer_width = " style='width:320px'";
@@ -434,7 +782,26 @@ else {
 toot_footer_width = "";
 toot_reblog_button = "";
 }
-const html=(`
+var own_toot_buttons = "";
+if(NotificationObj.status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">${__('Delete Toot')}</a></li>`);
+if(NotificationObj.status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">${__('Pin Toot')}</a></li>`);
+}
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Mute')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Block')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="addlist_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.status.account.display_name}">${__('Add to list')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html=$(`
 <li sid="${NotificationObj.status.id}" class="toot_entry">
 <div class="toot_entry_body">
 <a href="${toot_author_link}">
@@ -447,10 +814,10 @@ ${icon(NotificationObj.status.account.avatar)}
 <div class="text_ellipsis">
 <a href="${toot_author_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${NotificationObj.status.account.display_name}`}
+${NotificationObj.status.account.display_name}
 </span>
 <span class="username">
-@${NotificationObj.status.account.acct}
+@${NotificationObj.status.account.acct}${account_state_icons}
 </span>
 <time datetime="${toot_attr_datetime}">${toot_datetime}</time>
 </a>
@@ -461,13 +828,11 @@ ${htmlEscape`${NotificationObj.status.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li class="delete"><a class="delete_button" tid="${NotificationObj.status.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li class="mute"><a>Mute @${NotificationObj.status.account.username}</a></li>
-<li class="block"><a>Block @${NotificationObj.status.account.username}</a></li>
+<li><a class="copylink_button" url="${NotificationObj.status.url}" >${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${NotificationObj.status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
+<li><a href="${NotificationObj.status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -477,13 +842,12 @@ ${alart_text}
 <span class="status_content emoji_poss">
 ${NotificationObj.status.content}
 </span>
-${media_views}
 </article>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" acct="@${NotificationObj.account.acct}" display_name="${htmlEscape`${NotificationObj.account.display_name}`}" privacy="${NotificationObj.status.visibility}">
+<button class="reply_button" tid="${NotificationObj.status.id}" mentions='${JSON.stringify(NotificationObj.status.mentions)}' display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
 </button>
 </div>
 ${toot_reblog_button}
@@ -502,7 +866,8 @@ ${toot_reblog_button}
 </section>
 </div>
 </li>`);
-return $(html);
+html.find(".toot_article").append(media_views);
+return html
 } else {
 const html=(`
 <li sid="${NotificationObj.id}" class="notice_entry fol">
@@ -514,7 +879,7 @@ ${icon(NotificationObj.account.avatar)}
 </a>
 <i class="fa fa-fw fa-user font-icon follow"></i>
 <a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${htmlEscape`${NotificationObj.account.display_name}`}</span> ${Pomo.getText('followed you')}
+<span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('followed you')}
 </a>
 </div>
 </li>`);
@@ -523,13 +888,20 @@ return $(html);
 }
 
 function follows_template(AccountObj) {
-  let acct = AccountObj.acct;
-  if (acct.match('@')==null) acct = acct +'@'+ AccountObj.url.match(/^https:\/\/([0-9a-z\.\-:]+?):?[0-9]*?\//i)[1];
-  profile_link = '/@'+acct+'?mid='+AccountObj.id+'&';
-  if(AccountObj.display_name.length == 0) {
-    AccountObj.display_name = AccountObj.username;
-  }
-  const html = (`
+var profile_link;
+if(AccountObj.acct.indexOf("@") == -1) profile_link = "/@"+AccountObj.acct+"@"+current_instance+"?mid="+AccountObj.id;
+else profile_link = "/@"+AccountObj.acct+"?mid="+AccountObj.id;
+if(AccountObj.display_name.length == 0) {
+AccountObj.display_name = AccountObj.username;
+}
+AccountObj.display_name = htmlEscape(AccountObj.display_name);
+for(i=0;i<AccountObj.emojis.length;i++) {
+AccountObj.display_name = AccountObj.display_name.replace(new RegExp(":"+AccountObj.emojis[i].shortcode+":","g"),"<img src='"+AccountObj.emojis[i].url+"' class='emoji'>");
+}
+var account_state_icons = "";
+if(AccountObj.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(AccountObj.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+var html = (`
 <div class="follows_profile_box" mid="${AccountObj.id}">
 <div class="follows_profile_header">
 <img class="js_follows_header_image" src="${AccountObj.header}"/>
@@ -538,26 +910,27 @@ function follows_template(AccountObj) {
 <div class="follows_profile_icon">
 <img class="js_follows_profile_image" src="${AccountObj.avatar}"/>
 </div>
-<button class="follow_button action_button" mid="${AccountObj.id}">
+<button class="halcyon_button follow_button action_button" mid="${AccountObj.id}">
 <i class="fa fa-fw fa-user-plus"></i>
-<span>${Pomo.getText('Follow')}</span>
+<span>${__('Follow')}</span>
 </button>
-<div class="follows_profile_name_box emoji_poss">
-<a class="js_follows_profile_link" href="${profile_link}">
+<div class="follows_profile_name_box">
+<a class="js_follows_profile_link emoji_poss" href="${profile_link}">
 <h2 class="js_follows_profile_displayname">
-${htmlEscape`${AccountObj.display_name}`}
+${AccountObj.display_name}
 </h2>
 <span class="js_follows_profile_username">
-@${acct}
+@${AccountObj.acct}${account_state_icons}
 </span>
 </a>
 </div>
-<div class="follows_profile_bio" >
+<div class="follows_profile_bio emoji_poss">
 <p>${AccountObj.note}</p>
 </div>
 </div>
 </div>`);
-  return $(html)
+html = html.replace(new RegExp('class="emojione"',"g"),'class=emoji');
+return $(html);
 }
 
 function hashtag_template(hashtag) {
@@ -571,18 +944,43 @@ function hashtag_template(hashtag) {
 
 function status_template(status, class_options) {
 if ( status.reblog === null ) {
-const status_account_link= getRelativeURL(status.account.url, status.account.id),
-status_datetime= getConversionedDate(null, status.created_at),
+var status_account_link;
+if(status.account.acct.indexOf("@") == -1) status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+const status_datetime= getConversionedDate(null, status.created_at),
 status_attr_datetime = getConversionedDate(null, status.created_at);
 let alart_text= "",
 article_option= "",
+toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-status.content = status.content.emoji_replace(status.emojis);
-if (status.spoiler_text) {
-alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
-article_option = 'content_warning';
+for(i=0;i<status.emojis.length;i++) {
+status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<status.mentions.length;i++) {
+if(status.mentions[i].acct.indexOf("@") == -1) status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'@'+current_instance+'?mid='+status.mentions[i].id+'"');
+else status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'?mid='+status.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = status.account.id;
+writtenby.username = status.account.username;
+writtenby.url = status.account.url;
+writtenby.acct = status.account.acct;
+status.mentions.push(writtenby);
+if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(status.replies_count) {
+toot_replies_count = status.replies_count;
 }
 if (status.reblogs_count) {
 toot_reblogs_count = status.reblogs_count;
@@ -601,10 +999,10 @@ checked_unlisted = "";
 checked_private = "";
 checked_direct = "";
 switch(status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";checked_private=" checked";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";checked_direct=" checked";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";checked_public=" checked";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";checked_private=" checked";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";checked_direct=" checked";break;
 }
 if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
 toot_footer_width = " style='width:320px'";
@@ -619,7 +1017,26 @@ else {
 toot_footer_width = "";
 toot_reblog_button = "";
 }
-const html=(`
+var own_toot_buttons = "";
+if(status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>`);
+if(status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">${__('Pin Toot')}</a></li>`);
+}
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+<li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
+<li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html=$(`
 <div sid="${status.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
 <header class="toot_header">
@@ -628,10 +1045,10 @@ ${icon(status.account.avatar)}
 </div>
 <a href="${status_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${status.account.display_name}`}
+${status.account.display_name}
 </span>
 <span class="username">
-@${status.account.acct}
+@${status.account.acct}${account_state_icons}
 </span>
 </a>
 <div class="expand_button_wrap">
@@ -640,13 +1057,11 @@ ${htmlEscape`${status.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li class="delete"><a class="delete_button" tid="${status.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
+<li><a class="copylink_button" url="${status.url}" >${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
+<li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -654,18 +1069,17 @@ ${htmlEscape`${status.account.display_name}`}
 <section class="toot_content">
 <article class="toot_article ${article_option} emoji_poss">
 ${alart_text}
-<span class="status_content">
+<span class="status_content emoji_poss">
 ${status.content}
 </span>
-${media_views}
 </article>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </section>
 <footer class="toot_footer"${toot_footer_width}>
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape`${status.account.display_name}`}" privacy="${status.visibility}">
+<button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
 <i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
 </button>
 </div>
 ${toot_reblog_button}
@@ -683,9 +1097,9 @@ ${toot_reblog_button}
 </footer>
 </div>
 </div>
-<form id="reply_status_form" name="reply_status_form" class="status_form"sid="${status.id}" username="${status.account.acct}">
+<form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.id}" mentions='${JSON.stringify(status.mentions)}'>
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="${Pomo.getText('Content warning')}" type="text"/>
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
 </div>
 <div class="status_main">
 <!-- current avatar -->
@@ -694,7 +1108,7 @@ ${toot_reblog_button}
 </div>
 <!-- text area -->
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="${Pomo.getText('Toot your reply')}"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -718,23 +1132,22 @@ ${toot_reblog_button}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>${Pomo.getText('Public', {context: 'TootForm'})}
+<i class="fa fa-globe" aria-hidden="true"></i>${__('Public')}
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>${Pomo.getText('Unlisted', {context: 'TootForm'})}
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>${__('Unlisted')}
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>${Pomo.getText('Followers-only', {context: 'TootForm'})}
+<i class="fa fa-lock" aria-hidden="true"></i>${__('Followers-only')}
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>${Pomo.getText('Direct', {context: 'TootForm'})}
+<i class="fa fa-envelope" aria-hidden="true"></i>${__('Direct')}
 </label>
 </div>
 </div>
-<div class="split"></div>
-<div class="draftSelecterIcon status_option_button">
-  <i class="fa fa-sticky-note" aria-hidden="true"></i>
-</div>
+<label for="reply_status_emoji" class="status_emoji status_option_button">
+<i class="fa fa-smile-o" aria-hidden="true"></i>
+</label>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
@@ -742,6 +1155,7 @@ ${toot_reblog_button}
 <input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
 <input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio"${checked_private}>
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio"${checked_direct}>
+<div id="reply_status_emoji" name="status_emoji" type="button"></div>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -750,29 +1164,60 @@ ${current_instance_charlimit}
 <label for="reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>
-<span>${Pomo.getText('Reply')}</span>
+<span>${__('Reply')}</span>
 </div>
 </label>
 </div>
 <input id="reply_status_form_submit" class="submit_status" type="button" class="invisible"/>
 </div>
 </form>`);
-history.pushState(null, null, getRelativeURL(status.account.url, status.account.id, '/status/'+status.id));
-return $(html)
+history.pushState(null, null, status_account_link.replace("?mid=",'/status/'+status.id+"?mid="));
+html.find(".toot_article").append(media_views);
+return html
 } else {
 const status_datetime= getConversionedDate(null, status.reblog.created_at),
-status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
-status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
-status_account_link= getRelativeURL(status.reblog.account.url, status.reblog.account.id);
+status_attr_datetime = getConversionedDate(null, status.reblog.created_at);
+var status_reblog_account_link,status_account_link;
+if(status.reblog.account.acct.indexOf("@") == -1)  status_reblog_account_link = "/@"+status.reblog.account.acct+"@"+current_instance+"?mid="+status.reblog.account.id;
+else status_reblog_account_link = "/@"+status.reblog.account.acct+"?mid="+status.reblog.account.id;
+if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
 let alart_text= "",
 article_option= "",
+toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
 media_views = "";
-status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
-if (status.spoiler_text) {
-alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
-article_option = 'content_warning';
+for(i=0;i<status.reblog.emojis.length;i++) {
+status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
+}
+status.account.display_name = htmlEscape(status.account.display_name);
+for(i=0;i<status.account.emojis.length;i++) {
+status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+}
+status.reblog.account.display_name = htmlEscape(status.reblog.account.display_name);
+for(i=0;i<status.reblog.account.emojis.length;i++) {
+status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<status.reblog.mentions.length;i++) {
+if(status.reblog.mentions[i].acct.indexOf("@") == -1) status.reblog.content = status.reblog.content.replace(new RegExp('href="'+status.reblog.mentions[i].url+'"',"g"),'href="/@'+status.reblog.mentions[i].acct+'@'+current_instance+'?mid='+status.reblog.mentions[i].id+'"');
+else status.reblog.content = status.reblog.content.replace(new RegExp('href="'+status.reblog.mentions[i].url+'"',"g"),'href="/@'+status.reblog.mentions[i].acct+'?mid='+status.reblog.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = status.reblog.account.id;
+writtenby.username = status.reblog.account.username;
+writtenby.url = status.reblog.account.url;
+writtenby.acct = status.reblog.account.acct;
+status.reblog.mentions.push(writtenby);
+if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(status.reblog.replies_count) {
+toot_replies_count = status.reblog.replies_count;
 }
 if (status.reblog.reblogs_count) {
 toot_reblogs_count = status.reblog.reblogs_count;
@@ -792,22 +1237,41 @@ status.reblog.account.display_name = status.reblog.account.username;
 checked_public = "";
 checked_unlisted = "";
 switch(status.reblog.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";checked_public=" checked";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";checked_public=" checked";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";checked_unlisted=" checked";break;
 }
-const html=(`
+var own_toot_buttons = "";
+if(status.reblog.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">${__('Delete Toot')}</a></li>`);
+if(status.reblog.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">${__('Pin Toot')}</a></li>`);
+}
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Mute')} @${status.reblog.account.username}</a></li>
+<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Block')} @${status.reblog.account.username}</a></li>
+<li><a class="addlist_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Add to list')} @${status.reblog.account.username}</a></li>
+<li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html=$(`
 <div sid="${status.reblog.id}" class="toot_detail ${class_options}">
 <div class="toot_detail_body">
 <header class="toot_header">
 <div class="icon_box">
 ${icon(status.reblog.account.avatar)}
 </div>
-<a href="${status_account_link}">
+<a href="${status_reblog_account_link}">
 <span class="displayname emoji_poss">
-${htmlEscape`${status.reblog.account.display_name}`}
+${status.reblog.account.display_name}
 </span>
 <span class="username">
-@${status.reblog.account.acct}
+@${status.reblog.account.acct}${account_state_icons}
 </span>
 </a>
 <div class="expand_button_wrap">
@@ -816,13 +1280,11 @@ ${htmlEscape`${status.reblog.account.display_name}`}
 </button>
 <div class="expand_menu invisible disallow_select">
 <ul>
-<li><a class="copylink_button" url="${status.reblog.url}" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">Block @${status.reblog.account.username}</a></li>
+<li><a class="copylink_button" url="${status.reblog.url}" >${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
 </ul>
 <ul>
-<li><a href="${status.reblog.url}" target="_blank">${Pomo.getText('View original')}</a></li>
+<li><a href="${status.reblog.url}" target="_blank">${__('View original')}</a></li>
 </ul>
 </div>
 </div>
@@ -830,18 +1292,17 @@ ${htmlEscape`${status.reblog.account.display_name}`}
 <section class="toot_content">
 <article class="toot_article ${article_option} emoji_poss">
 ${alart_text}
-<span class="status_content">
+<span class="status_content emoji_poss">
 ${status.reblog.content}
 </span>
-${media_views}
 </article>
 <time datetime="${status_attr_datetime}">${status_datetime}</time>
 </section>
 <footer class="toot_footer" style="width:320px">
 <div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape`${status.reblog.account.display_name}`}" privacy="${status.reblog.visibility}">
+<button class="reply_button" tid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}' display_name="${status.reblog.account.display_name}" privacy="${status.reblog.visibility}">
 <i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
 </button>
 </div>
 <div class="toot_reaction">
@@ -864,9 +1325,9 @@ ${media_views}
 </footer>
 </div>
 </div>
-<form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" username="${status.reblog.account.acct}">
+<form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}'>
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="${Pomo.getText('Content warning')}" type="text"/>
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
 </div>
 <div class="status_main">
 <!-- current avatar -->
@@ -875,7 +1336,7 @@ ${media_views}
 </div>
 <!-- text area -->
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="${Pomo.getText('Toot your reply')}"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 </div>
 </div>
@@ -899,23 +1360,22 @@ ${media_views}
 <!-- Privacy options -->
 <div class="expand_privacy_menu invisible">
 <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
-<i class="fa fa-globe" aria-hidden="true"></i>${Pomo.getText('Public', {context: 'TootForm'})}
+<i class="fa fa-globe" aria-hidden="true"></i>${__('Public')}
 </label>
 <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-<i class="fa fa-unlock-alt" aria-hidden="true"></i>${Pomo.getText('Unlisted', {context: 'TootForm'})}
+<i class="fa fa-unlock-alt" aria-hidden="true"></i>${__('Unlisted')}
 </label>
 <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
-<i class="fa fa-lock" aria-hidden="true"></i>${Pomo.getText('Followers-only', {context: 'TootForm'})}
+<i class="fa fa-lock" aria-hidden="true"></i>${__('Followers-only')}
 </label>
 <label for="reply_status_direct" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-envelope">
-<i class="fa fa-envelope" aria-hidden="true"></i>${Pomo.getText('Direct', {context: 'TootForm'})}
+<i class="fa fa-envelope" aria-hidden="true"></i>${__('Direct')}
 </label>
 </div>
 </div>
-<div class="split"></div>
-<div class="draftSelecterIcon status_option_button">
-  <i class="fa fa-sticky-note" aria-hidden="true"></i>
-</div>
+<label for="single_reply_status_emoji" class="status_emoji status_option_button">
+<i class="fa fa-smile-o" aria-hidden="true"></i>
+</label>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
 <input id="reply_status_cw" name="status_cw" type="checkbox" class="invisible" />
 <input id="reply_status_nsfw" name="status_nsfw" type="checkbox" class="invisible" />
@@ -923,6 +1383,7 @@ ${media_views}
 <input id="reply_status_unlisted" name='privacy_option' value="unlisted" class="invisible" type="radio"${checked_unlisted}>
 <input id="reply_status_fonly" name='privacy_option' value="private" class="invisible" type="radio">
 <input id="reply_status_direct" name='privacy_option' value="direct" class="invisible" type="radio">
+<div id="reply_status_emoji" name="status_emoji" type="button"></div>
 <div class="submit_status_label_wrap">
 <span class="character_count">
 ${current_instance_charlimit}
@@ -931,7 +1392,7 @@ ${current_instance_charlimit}
 <label for="reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>
-<span>${Pomo.getText('Reply')}</span>
+<span>${__('Reply')}</span>
 </div>
 </label>
 </div>
@@ -939,35 +1400,40 @@ ${current_instance_charlimit}
 </div>
 </form>
 `);
-history.pushState(null, null, getRelativeURL(status.reblog.account.url, status.reblog.id, '/status/'+status.reblog.id));
-return $(html)
+history.pushState(null, null, status_reblog_account_link.replace("?mid=",'/status/'+status.reblog.id+"?mid="));
+html.find(".toot_article").append(media_views);
+return html
 }
 }
-
-function media_template(status, mediaURL) {
-  if ( !status ) {
-    const html = (`
+function media_template(status,media) {
+if(!status) {
+const html = (`
 <div class="media_detail">
 <div class="media_box">
-<img src="${mediaURL}" />
+<img src="${media}">
 </div>
 </div>`);
-    return $(html)
-  } else {
-    let multi_img = false, setting_autoplay_animated = localStorage.getItem("setting_autoplay_animated");
-    if ((arguments.length==4) && (arguments[2].length>1)) {multi_img=true;}
-    const status_template = timeline_template(status).html();
-    let html = (`
-<div class="media_detail">
-${multi_img?`<p id="slider_prev"></p><p id="slider_next"></p>`:''}
-<div class="media_box">`);
-    if ( mediaURL.match( /\.mp4$/ ) == '.mp4' ) {
-      html = html + (`<video src="${mediaURL}" frameborder="0" allowfullscreen ${setting_autoplay_animated=='false'?'':'autoplay'} loop muted controls></video>`);
-    }
-    else {
-      html = html + (`<img src="${mediaURL}" />`);
-    }
-    html = html + (`</div>
+return $(html)
+}
+else {
+var pictures = new Array;
+var hidebackward = "";
+var hideforward ="";
+for(var i=0;i<status.media_attachments.length;i++) {
+if(status.media_attachments[i].remote_url != null) {
+status.media_attachments[i].url = status.media_attachments[i].remote_url;
+pictures.push(status.media_attachments[i].url);
+}
+}
+if(media == 0) hidebackward = " style='display:none'";
+if(media == status.media_attachments.length-1) hideforward = " style='display:none'";
+const status_template = timeline_template(status).html(),
+html = (`<div class="media_detail" pictures='${JSON.stringify(pictures)}' cid="${media}">
+<div class="media_box">
+<span class="media_backward"${hidebackward}><i class="fa fa-2x fa-chevron-left"></i></span>
+<img src="${status.media_attachments[media].url}">
+<span class="media_forward"${hideforward}><i class="fa fa-2x fa-chevron-right"></i></span>
+</div>
 <div class="toot_entry" sid="${status.id}">
 ${status_template}
 </div>
@@ -977,224 +1443,309 @@ ${status_template}
 }
 
 function context_template(status, class_options) {
-if ( status.reblog === null ) {
-const status_account_link= getRelativeURL(status.account.url, status.account.id),
-status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
-status_attr_datetime = getConversionedDate(null, status.created_at);
-let alart_text= "",
-article_option= "",
-toot_reblogs_count= "",
-toot_favourites_count = "",
-media_views = "";
-status.content = status.content.emoji_replace(status.emojis);
-if ( status.spoiler_text ) {
-alart_text = '<span>'+status.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
-article_option = 'content_warning';
-}
-if (status.reblogs_count) {
-toot_reblogs_count = status.reblogs_count;
-}
-if (status.favourites_count) {
-toot_favourites_count = status.favourites_count;
-}
-if( status.media_attachments.length) {
-media_views = mediaattachments_template(status);
-}
-if(status.account.display_name.length == 0) {
-status.account.display_name = status.account.username;
-}
-switch(status.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-case "private":toot_privacy_mode="Followers-only";toot_privacy_icon="lock";break;
-case "direct":toot_privacy_mode="Direct";toot_privacy_icon="envelope";break;
-}
-if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
-toot_footer_width = " style='width:320px'";
-toot_reblog_button = (`<div class="toot_reaction">
-<button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>`);
-}
-else {
-toot_footer_width = "";
-toot_reblog_button = "";
-}
-const html=(`
-<div sid="${status.id}" class="toot_entry ${class_options}">
-<div class="toot_entry_body">
-<div class="icon_box">
-${icon(status.account.avatar)}
-</div>
-<section class="toot_content">
-<header class="toot_header">
-<a href="${status_account_link}">
-<span class="displayname emoji_poss">
-${htmlEscape`${status.account.display_name}`}
-</span>
-<span class="username">
-@${status.account.acct}
-</span>
-<time datetime="${status_attr_datetime}">${status_datetime}</time>
-</a>
-<div class="expand_button_wrap">
-<button class="expand_button">
-<i class="fa fa-fw fa-chevron-down"></i>
-</button>
-<div class="expand_menu invisible disallow_select">
-<ul>
-<li><a class="copylink_button" url="" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li class="delete"><a class="delete_button" tid="${status.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">Mute @${status.account.username}</a></li>
-<li><a class="block_button" mid="${status.account.id}" sid="${status.id}">Block @${status.account.username}</a></li>
-</ul>
-<ul>
-<li><a href="${status.url}" target="_blank">${Pomo.getText('View original')}</a></li>
-</ul>
-</div>
-</div>
-</header>
-<article class="toot_article ${article_option}">
-${alart_text}
-<span class="status_content">
-${status.content}
-</span>
-${media_views}
-</article>
-<footer class="toot_footer"${toot_footer_width}>
-<div class="toot_reaction">
-<button class="reply_button" tid="${status.id}" acct="@${status.account.acct}" display_name="${htmlEscape`${status.account.display_name}`}" privacy="${status.visibility}">
-<i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
-</button>
-</div>
-${toot_reblog_button}
-<div class="toot_reaction">
-<button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
-<i class="fa fa-fw fa-star"></i>
-<span class="reaction_count fav_count">${toot_favourites_count}</span>
-</button>
-</div>
-<div class="toot_reaction">
-<button>
-<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
-</button>
-</div>
-</footer>
-</section>
-</div>
-</div>`);
-return $(html)
-} else {
-const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
-status_attr_datetime = getConversionedDate(null, status.reblog.created_at),
-status_reblog_account_link = getRelativeURL(status.reblog.account.url, status.reblog.account.id),
-status_account_link= getRelativeURL(status.account.url, status.account.id);
-let alart_text= "",
-article_option= "",
-toot_reblogs_count= "",
-toot_favourites_count = "",
-media_views = "";
-status.reblog.content = status.reblog.content.emoji_replace(status.reblog.emojis);
-if ( status.spoiler_text ) {
-alart_text = '<span>'+status.reblog.spoiler_text+'</span><button class="cw_button">'+Pomo.getText('SHOW MORE')+'</button>',
-article_option = 'content_warning';
-}
-if (status.reblog.reblogs_count) {
-toot_reblogs_count = status.reblog.reblogs_count;
-}
-if (status.reblog.favourites_count) {
-toot_favourites_count = status.reblog.favourites_count;
-}
-if (status.reblog.media_attachments.length) {
-media_views = mediaattachments_template(status.reblog);
-}
-if(status.account.display_name.length == 0) {
-status.account.display_name = status.account.username;
-}
-if(status.reblog.account.display_name.length == 0) {
-status.reblog.account.display_name = status.reblog.account.username;
-}
-switch(status.reblog.visibility) {
-case "public":toot_privacy_mode="Public";toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode="Unlisted";toot_privacy_icon="unlock-alt";break;
-}
-const html=(`
-<div sid="${status.id}" class="toot_entry ${class_options}">
-<div class="boost_author_box">
-<a href="${status_account_link}">
-<span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${htmlEscape`${status.account.display_name}`} ${Pomo.getText('Boosted')}</span>
-</a>
-</div>
-<div class="toot_entry_body">
-<div class="icon_box">
-${icon(status.reblog.account.avatar)}
-</div>
-<section class="toot_content">
-<header class="toot_header">
-<a href="${status_reblog_account_link}">
-<span class="displayname emoji_poss">
-${htmlEscape`${status.reblog.account.display_name}`}
-</span>
-<span class="username">
-@${status.reblog.account.acct}
-</span>
-</a>
-<time datetime="${status_attr_datetime}">${status_datetime}</time>
-<div class="expand_button_wrap">
-<button class="expand_button">
-<i class="fa fa-fw fa-chevron-down"></i>
-</button>
-<div class="expand_menu invisible disallow_select">
-<ul>
-<li><a class="copylink_button" url="" >${Pomo.getText('Copy link to Toot')}</a></li>
-<li class="delete"><a class="delete_button" tid="${status.reblog.id}">${Pomo.getText('Delete Toot')}</a></li>
-<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.id}">Mute @${status.reblog.account.username}</a></li>
-<li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.id}">Block @${status.reblog.account.username}</a></li>
-</ul>
-<ul>
-<li><a href="${status.reblog.url}" target="_blank">${Pomo.getText('View original')}</a></li>
-</ul>
-</div>
-</div>
-</header>
-<article class="toot_article ${article_option}">
-${alart_text}
-<span class="status_content">
-${status.reblog.content}
-</span>
-${media_views}
-</article>
-<footer class="toot_footer" style="width:320px">
-<div class="toot_reaction">
-<button class="reply_button" tid="${status.reblog.id}" acct="@${status.reblog.account.acct}" display_name="${htmlEscape`${status.reblog.account.display_name}`}" privacy="${status.reblog.visibility}">
-<i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count"></span>
-</button>
-</div>
-<div class="toot_reaction">
-<button class="boost_button" tid="${status.reblog.id}" reblogged="${status.reblog.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>
-<div class="toot_reaction">
-<button class="fav_button" tid="${status.reblog.id}" favourited="${status.reblog.favourited}">
-<i class="fa fa-fw fa-star"></i>
-<span class="reaction_count fav_count">${toot_favourites_count}</span>
-</button>
-</div>
-<div class="toot_reaction">
-<button>
-<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
-</button>
-</div>
-</footer>
-</section>
-</div>
-</div>`);
-return $(html)
-}
+  if ( status.reblog === null ) {
+    var status_account_link;
+    if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+    else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+    const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.created_at)),
+    status_attr_datetime = getConversionedDate(null, status.created_at);
+    let alart_text= "",
+    article_option= "",
+    toot_replies_count = "",
+    toot_reblogs_count= "",
+    toot_favourites_count = "",
+    media_views = "";
+    for(i=0;i<status.emojis.length;i++) {
+      status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
+    }
+    status.account.display_name = htmlEscape(status.account.display_name);
+    for(i=0;i<status.account.emojis.length;i++) {
+      status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+    }
+    for(var i=0;i<status.mentions.length;i++) {
+      if(status.mentions[i].acct.indexOf("@") == -1) status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'@'+current_instance+'?mid='+status.mentions[i].id+'"');
+      else status.content = status.content.replace(new RegExp('href="'+status.mentions[i].url+'"',"g"),'href="/@'+status.mentions[i].acct+'?mid='+status.mentions[i].id+'"');
+    }
+    var writtenby = new Object();
+    writtenby.id = status.account.id;
+    writtenby.username = status.account.username;
+    writtenby.url = status.account.url;
+    writtenby.acct = status.account.acct;
+    status.mentions.push(writtenby);
+    if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+      alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+      article_option = "content_warning";
+    }
+    else if(status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+      alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+    }
+    if(status.replies_count) {
+      toot_replies_count = status.replies_count;
+    }
+    if (status.reblogs_count) {
+      toot_reblogs_count = status.reblogs_count;
+    }
+    if (status.favourites_count) {
+      toot_favourites_count = status.favourites_count;
+    }
+    if( status.media_attachments.length) {
+      media_views = mediaattachments_template(status);
+    }
+    if(status.account.display_name.length == 0) {
+      status.account.display_name = status.account.username;
+    }
+    switch(status.visibility) {
+      case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+      case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+      case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+      case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
+    }
+    if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+      toot_footer_width = " style='width:320px'";
+      toot_reblog_button = (`<div class="toot_reaction">
+      <button class="boost_button" tid="${status.id}" reblogged="${status.reblogged}">
+      <i class="fa fa-fw fa-retweet"></i>
+      <span class="reaction_count boost_count">${toot_reblogs_count}</span>
+      </button>
+      </div>`);
+    }
+    else {
+      toot_footer_width = "";
+      toot_reblog_button = "";
+    }
+    var own_toot_buttons = "";
+    if(status.account.acct == current_acct) {
+      var own_toot_buttons = (`<li><a class="delete_button" tid="${status.id}">${__('Delete Toot')}</a></li>`);
+      if(status.pinned == true) {
+        own_toot_buttons += (`<li><a class="unpin_button" tid="${status.id}">${__('Unpin Toot')}</a></li>`);
+      }
+      else {
+        own_toot_buttons += (`<li><a class="pin_button" tid="${status.id}">${__('Pin Toot')}</a></li>`);
+      }
+    }
+    else {
+      var own_toot_buttons = (`<li><a class="mute_button" mid="${status.account.id}" sid="${status.id}">${__('Mute')} @${status.account.username}</a></li>
+      <li><a class="block_button" mid="${status.account.id}" sid="${status.id}">${__('Block')} @${status.account.username}</a></li>
+      <li><a class="addlist_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Add to list')} @${status.account.username}</a></li>
+      <li><a class="report_button" mid="${status.account.id}" sid="${status.id}" display_name="${status.account.display_name}">${__('Report this Toot')}</a></li>`);
+    }
+    var account_state_icons = "";
+    if(status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+    if(status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+    const html=$(`
+    <div sid="${status.id}" class="toot_entry ${class_options}">
+    <div class="toot_entry_body">
+    <div class="icon_box">
+    ${icon(status.account.avatar)}
+    </div>
+    <section class="toot_content">
+    <header class="toot_header">
+    <a href="${status_account_link}">
+    <span class="displayname emoji_poss">
+    ${status.account.display_name}
+    </span>
+    <span class="username">
+    @${status.account.acct}${account_state_icons}
+    </span>
+    <time datetime="${status_attr_datetime}">${status_datetime}</time>
+    </a>
+    <div class="expand_button_wrap">
+    <button class="expand_button">
+    <i class="fa fa-fw fa-chevron-down"></i>
+    </button>
+    <div class="expand_menu invisible disallow_select">
+    <ul>
+    <li><a class="copylink_button" url="${status.url}" >${__('Copy link to Toot')}</a></li>
+    ${own_toot_buttons}
+    </ul>
+    <ul>
+    <li><a href="${status.url}" target="_blank">${__('View original')}</a></li>
+    </ul>
+    </div>
+    </div>
+    </header>
+    <article class="toot_article ${article_option}">
+    ${alart_text}
+    <span class="status_content emoji_poss">
+    ${status.content}
+    </span>
+    </article>
+    <footer class="toot_footer"${toot_footer_width}>
+    <div class="toot_reaction">
+    <button class="reply_button" tid="${status.id}" mentions='${JSON.stringify(status.mentions)}' display_name="${status.account.display_name}" privacy="${status.visibility}">
+    <i class="fa fa-fw fa-reply"></i>
+    <span class="reaction_count reply_count">${toot_replies_count}</span>
+    </button>
+    </div>
+    ${toot_reblog_button}
+    <div class="toot_reaction">
+    <button class="fav_button" tid="${status.id}" favourited="${status.favourited}">
+    <i class="fa fa-fw fa-star"></i>
+    <span class="reaction_count fav_count">${toot_favourites_count}</span>
+    </button>
+    </div>
+    <div class="toot_reaction">
+    <button>
+    <i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+    </button>
+    </div>
+    </footer>
+    </section>
+    </div>
+    </div>`);
+    html.find(".toot_article").append(media_views);
+    return html
+  } else {
+    const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
+    status_attr_datetime = getConversionedDate(null, status.reblog.created_at);
+    var status_reblog_account_link,status_account_link;
+    if(status.reblog.account.acct.indexOf("@") == -1)  status_reblog_account_link = "/@"+status.reblog.account.acct+"@"+current_instance+"?mid="+status.reblog.account.id;
+    else status_reblog_account_link = "/@"+status.reblog.account.acct+"?mid="+status.reblog.account.id;
+    if(status.account.acct.indexOf("@") == -1)  status_account_link = "/@"+status.account.acct+"@"+current_instance+"?mid="+status.account.id;
+    else status_account_link = "/@"+status.account.acct+"?mid="+status.account.id;
+    let alart_text= "",
+    article_option= "",
+    toot_replies_count = "",
+    toot_reblogs_count= "",
+    toot_favourites_count = "",
+    media_views = "";
+    for(i=0;i<status.reblog.emojis.length;i++) {
+      status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
+    }
+    status.account.display_name = htmlEscape(status.account.display_name);
+    for(i=0;i<status.account.emojis.length;i++) {
+      status.account.display_name = status.account.display_name.replace(new RegExp(":"+status.account.emojis[i].shortcode+":","g"),"<img src='"+status.account.emojis[i].url+"' class='emoji'>");
+    }
+    status.reblog.account.display_name = htmlEscape(status.reblog.account.display_name);
+    for(i=0;i<status.reblog.account.emojis.length;i++) {
+      status.reblog.account.display_name = status.reblog.account.display_name.replace(new RegExp(":"+status.reblog.account.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.account.emojis[i].url+"' class='emoji'>");
+    }
+    for(var i=0;i<status.reblog.mentions.length;i++) {
+      if(status.reblog.mentions[i].acct.indexOf("@") == -1) status.reblog.content = status.reblog.content.replace(new RegExp('href="'+status.reblog.mentions[i].url+'"',"g"),'href="/@'+status.reblog.mentions[i].acct+'@'+current_instance+'?mid='+status.reblog.mentions[i].id+'"');
+      else status.reblog.content = status.reblog.content.replace(new RegExp('href="'+status.reblog.mentions[i].url+'"',"g"),'href="/@'+status.reblog.mentions[i].acct+'?mid='+status.reblog.mentions[i].id+'"');
+    }
+    var writtenby = new Object();
+    writtenby.id = status.reblog.account.id;
+    writtenby.username = status.reblog.account.username;
+    writtenby.url = status.reblog.account.url;
+    writtenby.acct = status.reblog.account.acct;
+    status.reblog.mentions.push(writtenby);
+    if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
+      alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+      article_option = "content_warning";
+    }
+    else if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "true") {
+      alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+    }
+    if(status.reblog.replies_count) {
+      toot_replies_count = status.reblog.replies_count;
+    }
+    if (status.reblog.reblogs_count) {
+      toot_reblogs_count = status.reblog.reblogs_count;
+    }
+    if (status.reblog.favourites_count) {
+      toot_favourites_count = status.reblog.favourites_count;
+    }
+    if (status.reblog.media_attachments.length) {
+      media_views = mediaattachments_template(status.reblog);
+    }
+    if(status.account.display_name.length == 0) {
+      status.account.display_name = status.account.username;
+    }
+    if(status.reblog.account.display_name.length == 0) {
+      status.reblog.account.display_name = status.reblog.account.username;
+    }
+    switch(status.reblog.visibility) {
+      case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+      case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+    }
+    var own_toot_buttons = "";
+    if(status.reblog.account.acct == current_acct) {
+      var own_toot_buttons = (`<li><a class="delete_button" tid="${status.reblog.id}">${__('Delete Toot')}</a></li>`);
+      if(status.reblog.pinned == true) {
+        own_toot_buttons += (`<li><a class="unpin_button" tid="${status.reblog.id}">${__('Unpin Toot')}</a></li>`);
+      }
+      else {
+        own_toot_buttons += (`<li><a class="pin_button" tid="${status.reblog.id}">${__('Pin Toot')}</a></li>`);
+      }
+    }
+    else {
+      var own_toot_buttons = (`<li><a class="mute_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Mute')} @${status.reblog.account.username}</a></li>
+      <li><a class="block_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}">${__('Block')} @${status.reblog.account.username}</a></li>
+      <li><a class="addlist_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Add to list')} @${status.reblog.account.username}</a></li>
+      <li><a class="report_button" mid="${status.reblog.account.id}" sid="${status.reblog.id}" display_name="${status.reblog.account.display_name}">${__('Report this Toot')}</a></li>`);
+    }
+    var account_state_icons = "";
+    if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+    if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+    const html=$(`
+    <div sid="${status.id}" class="toot_entry ${class_options}">
+    <div class="boost_author_box">
+    <a href="${status_account_link}">
+    <span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} ${__('Boosted')}</span>
+    </a>
+    </div>
+    <div class="toot_entry_body">
+    <div class="icon_box">
+    ${icon(status.reblog.account.avatar)}
+    </div>
+    <section class="toot_content">
+    <header class="toot_header">
+    <a href="${status_reblog_account_link}">
+    <span class="displayname emoji_poss">
+    ${status.reblog.account.display_name}
+    </span>
+    <span class="username">
+    @${status.reblog.account.acct}${account_state_icons}
+    </span>
+    </a>
+    <time datetime="${status_attr_datetime}">${status_datetime}</time>
+    <div class="expand_button_wrap">
+    <button class="expand_button">
+    <i class="fa fa-fw fa-chevron-down"></i>
+    </button>
+    <div class="expand_menu invisible disallow_select">
+    <ul>
+    <li><a class="copylink_button" url="${status.reblog.url}" >${__('Copy link to Toot')}</a></li>
+    ${own_toot_buttons}
+    </ul>
+    <ul>
+    <li><a href="${status.reblog.url}" target="_blank">${__('View original')}</a></li>
+    </ul>
+    </div>
+    </div>
+    </header>
+    <article class="toot_article ${article_option}">
+    ${alart_text}
+    <span class="status_content emoji_poss">
+    ${status.reblog.content}
+    </span>
+    </article>
+    <footer class="toot_footer" style="width:320px">
+    <div class="toot_reaction">
+    </button>
+    <div class="toot_reaction">
+    <button class="boost_button" tid="${status.reblog.id}" reblogged="${status.reblog.reblogged}">
+    <i class="fa fa-fw fa-retweet"></i>
+    <span class="reaction_count boost_count">${toot_reblogs_count}</span>
+    </button>
+    </div>
+    <div class="toot_reaction">
+    <button class="fav_button" tid="${status.reblog.id}" favourited="${status.reblog.favourited}">
+    <i class="fa fa-fw fa-star"></i>
+    <span class="reaction_count fav_count">${toot_favourites_count}</span>
+    </button>
+    </div>
+    <div class="toot_reaction">
+    <button>
+    <i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+    </button>
+    </div>
+    </footer>
+    </section>
+    </div>
+    </div>`);
+    html.find(".toot_article").append(media_views);
+    return html
+  }
 }

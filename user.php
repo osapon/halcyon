@@ -13,8 +13,18 @@
       <h2 class="profile_username">
         @<a id="js_profile_username" href="#"></a><span class="profile_followed_by invisible"><?=_('FOLLOWS YOU')?></span>
       </h2>
-      <p id="js_profile_bio" class="profile_bio emoji_poss"></p>
-      <p id="js_header_fiels" class="profile_bio emoji_poss"></p>
+      <p id="js_profile_bio" class="profile_bio"></p>
+      <div id="js_profile_fields" class="profile_fields"></div>
+      <div id="js_profile_public_link" class="profile_with_icon invisible" style="margin-bottom:5px">
+        <a target="_blank"><i class="fa fa-fw fa-link" aria-hidden="true"></i><span><?=_('Open public profile')?></span></a>
+      </div>
+      <div id="js_profile_joined_date" class="profile_with_icon" style="margin-bottom:5px">
+        <span><i class="fa fa-fw fa-calendar" aria-hidden="true"></i><span></span></span>
+      </div>
+      <div id="profile_toot_buttons" style="height:31px;margin-bottom:5px;display:none">
+        <button class="toot_button profile_sendto" style="width:calc(50% - 3px)"><div class="toot_button_label"><i class="fa fa-fw fa-pencil-square-o"></i><span><?=_('Toot to')?></span></div></button>
+        <button class="toot_button profile_sendto" style="width:calc(50% - 3px)" privacy="direct"><div class="toot_button_label"><i class="fa fa-fw fa-envelope"></i><span><?=_('Message')?></span></div></button>
+      </div>
       <?php include dirname(__FILE__).('/widgets/user_recent_images.php'); ?>
     </section>
   </aside>
@@ -28,7 +38,7 @@
         </li>
         <li class="item wreplies">
           <a id="with_replies_link">
-          <?=_('Toots &amp; replies')?>
+          <?=_('Toots')?>&amp;<?=_('Reply')?>
           </a>
         </li>
         <li class="item media">
@@ -67,42 +77,42 @@ $("#js-profile_nav_toots > a").attr('href', location.pathname+location.search);
 $("#js-profile_nav_following > a").attr('href', location.pathname+'/following'+location.search);
 $("#js-profile_nav_followers > a").attr('href', location.pathname+'/followers'+location.search);
 $("#js-profile_nav_favourites > a").attr('href', location.pathname+'/favourites'+location.search);
-<?php if (isset($_GET['mid'])): ?>
 $(function() {
-  const account_id = <?= htmlspecialchars((string)filter_input(INPUT_GET, 'mid'), ENT_QUOTES) ?>;
-  api.get('accounts/'+account_id, function(userprofile) {
-    if ( userprofile !== null ) {
+  <?php if(isset($_GET['mid'])) { ?>
+    const account_id = "<?= htmlspecialchars((string)filter_input(INPUT_GET,'mid'),ENT_QUOTES) ?>";
+    api.get('accounts/'+account_id, function(userprofile) {
+      if(userprofile !== null) {
+  <?php } else if(isset($_GET['user'])) {
+    $name = preg_split("/@/",$_GET['user'])[1];
+    $domain = preg_split("/@/",$_GET['user'])[2];
+    $url= "https://$domain/@$name";
+  ?>
+    const query = '<?= htmlspecialchars((string)filter_input(INPUT_GET, 'user'), ENT_QUOTES) ?>';
+    api.get('search',[{name:'q',data:query},{name:'resolve',data:'true'}],function(search) {
+      if(!search.accounts.length) {
+        location.href = "/404.php";
+      }
+      else if("@"+search.accounts[0].acct === query || "@"+search.accounts[0].acct+"@"+localStorage.current_instance === query) {
+        userprofile = search.accounts[0];
+  <?php } ?>
       $('title').text(replaced_emoji_return(userprofile.display_name)+' (@'+userprofile.acct+') | Halcyon');
       setAccount(userprofile);
-      setTimeline("accounts/"+userprofile.id+"/statuses",[{name:'exclude_replies',data:'true'}],"false");
-      setRecentImages(userprofile.id)
-      $('.profile_button_box').prepend('<a href="'+userprofile.url+'" target="_blank"><button class="relationship_button" mid="33514"><span><?=_("View original")?></span></button></a>');
-    } else {
+      $(".profile_sendto").attr("acct","@"+userprofile.acct);
+      $(".profile_sendto").attr("display_name",userprofile.display_name);
+      api.get("accounts/"+userprofile.id+"/statuses",[{name:'pinned',data:'true'},{name:'limit',data:'40'}],function(statuses) {
+        for(var i=0;i<statuses.length;i++) {
+          timeline_pinned_template(statuses[i]).appendTo("#js-timeline");
+        }
+        replaceInternalLink();
+        replace_emoji();
+        setTimeline("accounts/"+userprofile.id+"/statuses",[{name:'exclude_replies',data:'true'}],"false",true);
+      });
+      setRecentImages(userprofile.id);
+      $('.profile_button_box').prepend('<a href="'+userprofile.url+'" target="_blank"><button class="relationship_button"><span><?=_("View original")?></span></button></a>');
+    }
+    else {
       location.href = "/404.php";
     }
   });
-});
-<?php elseif((isset($_GET['user']))): ?>
-$(function(){
-<?php
-$name = preg_split("/@/", $_GET['user'])[1];
-$domain = preg_split("/@/", $_GET['user'])[2];
-$url= "https://$domain/@$name";
-?>
-const query = '<?= htmlspecialchars((string)filter_input(INPUT_GET, 'user'), ENT_QUOTES) ?>';
-api.get('search', [{name:'q',data:query},{name:'resolve',data:'true'}], function(search) {
-if ( !search.accounts.length ) {
-location.href = "/404.php";
-} else if ("@"+search.accounts[0].acct === query || "@"+search.accounts[0].acct+"@"+localStorage.current_instance === query) {
-$('title').text(replaced_emoji_return(search.accounts[0].display_name)+' (@'+search.accounts[0].acct+') | Halcyon');
-setAccount(search.accounts[0]);
-setTimeline("accounts/"+search.accounts[0].id+"/statuses",[{name:'exclude_replies',data:'true'}],"false");
-setRecentImages(search.accounts[0].id)
-} else {
-location.href = "/404.php";
-}
-});
 })
-<?php endif; ?>
-</script>
-<?php include ('footer.php'); ?>
+</script><?php include ('footer.php'); ?>

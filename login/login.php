@@ -2,7 +2,6 @@
 require_once(__DIR__.'/../lang.php');
 require_once('../authorize/mastodon.php');
 use HalcyonSuite\HalcyonForMastodon\Mastodon;
-use Exception;
 if (isset($_POST['acct'])) {
 $domain = explode("@", mb_strtolower(htmlspecialchars((string)filter_input(INPUT_POST, 'acct'), ENT_QUOTES)))[2];
 $URL= 'https://'.$domain;
@@ -13,7 +12,7 @@ die();
 } else {
 try {
 $client_id = $api->getInstance($URL)["client_id"];
-$authorizeURL= $URL.'/oauth/authorize?client_id='.$client_id.'&response_type=code&scope=read+write+follow&website='.$api->clientWebsite.'&redirect_uri='.urlencode($api->clientWebsite.'/auth?&host='.$domain);
+$authorizeURL= $URL.'/oauth/authorize?client_id='.$client_id.'&response_type=code&scope=read+write+follow&redirect_uri='.urlencode($api->clientWebsite.'/auth?&host='.$domain);
 header("Location: {$authorizeURL}", true, 303);
 die();
 } catch (Exception $e) {
@@ -22,6 +21,7 @@ die();
 }
 }
 }
+include("../language.php");
 ?>
 <!DOCTYPE HTML>
 <html lang="<?=$lang?>">
@@ -29,13 +29,13 @@ die();
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Halcyon for Mastodon</title>
+<title>Halcyon</title>
 <link rel="shortcut icon" href="/assets/images/favicon.ico">
 <link rel="stylesheet" href="/login/assets/css/style.css" media="all">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" media="all">
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/cookieconsent@3.0.6/build/cookieconsent.min.css">
-<script src="//cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-<script src="//cdn.jsdelivr.net/npm/cookieconsent@3.0.6/build/cookieconsent.min.js"></script>
+<link rel="stylesheet" href="/assets/css/fontawesome.min.css" media="all">
+<link rel="stylesheet" href="/assets/css/cookieconsent.min.css">
+<script src="/assets/js/jquery/jquery.min.js"></script>
+<script src="/assets/js/cookieconsent/cookieconsent.min.js"></script>
 <script src="/assets/js/jquery-cookie/src/jquery.cookie.js"></script>
 <script src="/login/assets/js/halcyon_login.js"></script>
 <script>
@@ -71,12 +71,24 @@ location.href = "/";
 <span><i class="fa fa-code" aria-hidden="true"></i><?=_('Source')?></span>
 </li>
 </a>
-<a href="/terms/" class="no-underline">
+<a href="/terms" class="no-underline">
 <li>
 <span><i class="fa fa-balance-scale" aria-hidden="true"></i><?=_('Terms')?></span>
 </li>
 </a>
-<a href="<?=$config['App']['contact_link']?>" class="no-underline">
+<a href="/privacy" class="no-underline">
+<li>
+<span><i class="fa fa-shield" aria-hidden="true"></i><?=_('Privacy')?></span>
+</li>
+</a>
+<?php if(file_exists("../config/imprint.txt")) { ?>
+<a href="/imprint" class="no-underline">
+<li>
+<span><i class="fa fa-id-card-o" aria-hidden="true"></i><?=_('Imprint')?></span>
+</li>
+</a>
+<?php } ?>
+<a href="http://www.nikisoft.one/contact.php" class="no-underline">
 <li>
 <span><i class="fa fa-envelope" aria-hidden="true"></i><?=_('Contact')?></span>
 </li>
@@ -110,10 +122,9 @@ location.href = "/";
 </label>
 </div>
 <div class="login_form_agree">
-<label class="login_form_agree_check disallow_select pointer">
-<i class="fa fa-check-square-o" aria-hidden="true"></i>
-<?=_('I agree with the Terms')?>
-<input id="agree" type="checkbox" required checked class="invisible">
+<input id="agree" type="checkbox" required checked>
+<label for="agree" class="login_form_agree_check disallow_select pointer">
+<?=_('I agree with the')?> <a href="/terms"><?=_('Terms')?></a>
 </label>
 </div>
 </form>
@@ -122,7 +133,7 @@ location.href = "/";
 <article id="article">
 <h2><?=_('What is Halcyon')?></h2>
 <p>
-<?=_("Halcyon is standard Twitter like client of Mastodon, And you can use it just by login to your instance. Let's Toot like a tweet.")?>
+<?=_('Halcyon is a webclient for')?><a href="https://joinmastodon.org"> Mastodon </a><?=_('and')?><a href="https://pleroma.social"> Pleroma </a><?=_('which aims to recreate the simple and beautiful user interface of Twitter while keeping all advantages of decentral networks in focus.')?>
 </p>
 <div class="image_wrap">
 <ul>
@@ -142,17 +153,11 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 <h2>このサーバのHalcyonは機能追加されています</h2>
 <p>
 <ul style="list-style:inside;">
-<li>MultiLanguage(English / Japanese / Korean).（多言語対応）</li>
-<li>Emoji input pad.（カスタム絵文字を含む絵文字入力機能）</li>
+<li>Input history, Zero-width space addition function added pictogram input.（入力履歴・ゼロ幅スペース追加機能付き絵文字入力）</li>
 <li>Draft（下書き機能）</li>
-<li>Multi image/gifv viewer.（複数枚画像の閲覧ビューワー）</li>
 <li>Fix images are missing with multiple images toots.（複数枚画像の投稿不具合修正）</li>
-<li>Same search processing as WebUI.（WebUIと同様の検索処理）</li>
+<li>Image size reduction function of timeline.（タイムラインの画像サイズ縮小）</li>
 <li>Sensitive image can switched for show / hide.（画像の非表示化）</li>
-<li>Auto-play animated GIFs(selectable stop or play).（GIFアニメの再生停止機能（選択可））</li>
-<li>2 column view.（2カラム表示）</li>
-<li>Toot URL copy to clipboard.（トゥートアドレスのクリップボードコピー機能）</li>
-<li>Timeline pause the auto scroll.（タイムラインの自動スクロールによる誤操作を防止）</li>
 <li>Notification tab is split(All / Reply / Follow / Boost &amp; Fav / Direct).（通知タブの分類分け）</li>
 </ul>
 </p>
@@ -166,6 +171,27 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 </a>
 </div>
 <span>Photo by <a href="https://www.flickr.com/photos/95387826@N08/">Michio Morimoto on Flickr</a> (CC BY 2.0)</span><br/>
+<?php
+if(file_exists("../config/footerlinks.txt")) {
+$footerlinks = json_decode(file_get_contents("../config/footerlinks.txt"));
+$haslinks = false;
+for($i=0;$i<count($footerlinks);$i++) {
+if($footerlinks[$i]->logout == true) {
+if($haslinks == false) {
+$haslinks = true;
+echo "<span>";
+}
+else {
+echo " | ";
+}
+echo "<a href='".$footerlinks[$i]->link."'>".$footerlinks[$i]->title."</a>";
+}
+}
+if($haslinks == true) {
+echo "</span><br/>";
+}
+}
+?>
 <span>Halcyon version <?php echo file_get_contents("../version.txt") ?></span>
 </footer>
 </body>
@@ -190,7 +216,7 @@ var cause = "<?= htmlspecialchars((string)filter_input(INPUT_GET, 'cause'), ENT_
 if(cause === "domain") {
 $('.login_form_main').addClass('error');
 $('.session_aleart').removeClass('invisible');
-$('.session_aleart > span').text('This instance does not exsist.');
+$('.session_aleart > span').text('This instance does not exist.');
 }
 });
 $(document).on('click','.login_form_main', function(e) {
