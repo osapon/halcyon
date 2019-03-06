@@ -1978,69 +1978,6 @@ function addFollowProfile(id,account) {
   $('.what_to_follow_'+id+' .label_box > .follow_button').attr('data',account.url);
   $('.what_to_follow_'+id).removeClass('invisible');
 }
-$(function() {
-  shortcut.add("n",function() {
-    $("#creat_status").click();
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("/",function() {
-    $("#search_form").focus();
-  },{
-    "disable_in_input":true,
-    'keycode':191
-  });
-  shortcut.add("Meta+Enter",function() {
-    $(".active_submit_button").click();
-  });
-  shortcut.add("Ctrl+Enter",function() {
-    $(".active_submit_button").click();
-  });
-  shortcut.add(".",function() {
-    $("#js-stream_update").click();
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("Shift+h",function() {
-    location.href="/home";
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("Shift+l",function() {
-    location.href="/local";
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("Shift+f",function() {
-    location.href="/federated";
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("Shift+n",function() {
-    location.href="/notifications";
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("Shift+p",function() {
-    location.href=current_url;
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("Shift+v",function() {
-    location.href=current_favourites_link;
-  },{
-    "disable_in_input":true,
-  });
-  shortcut.add("esc",function() {
-    $("#js-overlay_content_wrap").click();
-  });
-  shortcut.add("Shift+/",function() {
-    $("#shortcut_guide").click();
-  },{
-    "disable_in_input":true,
-    'keycode':191
-  });
-});
 var actEmojiData = new Array();
 $(function() {
   var emoji_data_read_check = window.setInterval(function(){
