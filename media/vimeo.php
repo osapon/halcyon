@@ -19,7 +19,12 @@ $vdata = vimeo(htmlspecialchars($_GET["id"]));
 if($vdata) {
 $vlink = $vdata["dl"];
 ?>
-<video class="video-js vjs-default-skin" controls id="player" poster="<?=$vdata["info"]["Thumbnail"]?>" title="<?=$vdata["info"]["Title"]?>" style="width:100%;height:100%">
+<video class="video-js vjs-default-skin" controls id="player" poster="image.php?url=<?=urlencode($vdata["info"]["Thumbnail"])?>" title="<?=$vdata["info"]["Title"]?>" style="width:100%;height:100%">
+<?php
+for($i=0;$i<count($vdata["info"]["Captions"]);$i++) {
+echo "<track kind='captions' label='".$vdata["info"]["Captions"][$i]["title"]."' src='vimeocaption.php?url=".urlencode($vdata["info"]["Captions"][$i]["url"])."'>";
+}
+?>
 Your browser does not support the video tag.
 </video>
 <script>
@@ -29,7 +34,7 @@ for($i=0;$i<count($vlink);$i++) {
 echo "{src:'".$vlink[$i]["url"]."',label:'".$vlink[$i]["type"]."',audio:true},";
 }
 ?>
-]});
+],thumbnails:JSON.parse('<?=json_encode($vdata["info"]["Thumbs"])?>')});
 </script>
 <?php } else { ?>
 Sorry, there was an error while trying to load your video.
