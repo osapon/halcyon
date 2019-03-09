@@ -25,6 +25,9 @@ echo "<li><a href='".$footerlinks[$i]->link."'>".$footerlinks[$i]->title."</a></
 }
 ?>
 <li><?=_('Version')?> <?php echo file_get_contents("version.txt") ?></li>
+<li><a href="https://boostwatch.osa-p.net/" target="boostwatch">[Tool]BoostWatch</a></li>
+<li><a href="https://followlink.osa-p.net/" target="_blank">[Tool]FollowLink</a></li>
+<li><a href="https://notestock.osa-p.net/" target="_blank">[Tool]notestock</a></li>
 </ul>
 </footer>
 <img style="display:block;margin:16px auto;width: 30%;opacity: .3;" src="/assets/images/halcyon.png">
