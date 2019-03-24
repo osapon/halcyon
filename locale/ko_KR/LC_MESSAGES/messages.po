@@ -535,3 +535,11 @@ msgstr "툿"
 msgid "Favourites"
 msgstr "마음에 들어요"
 
+msgid "Recently Used"
+msgstr "Recently Used"
+
+msgid "Search Results"
+msgstr "Search Results"
+
+msgid "Search..."
+msgstr "Search..."

@@ -725,3 +725,12 @@ msgstr "プロフィール補足情報"
 
 msgid "To verify that the links in your custom fields really belong to you, you can add the link below to your website. The link text can be changed to whatever you want."
 msgstr "補足情報のあなたのものであることを確認するには、以下のリンクをウェブサイトに追加します。リンクのテキストは好きなように変えられます。"
+
+msgid "Recently Used"
+msgstr "最近使ったもの"
+
+msgid "Search Results"
+msgstr "検索結果"
+
+msgid "Search..."
+msgstr "検索..."

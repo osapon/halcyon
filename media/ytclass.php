@@ -4,11 +4,22 @@ private $cache_dir;
 private $cookie_dir;
 private $itag_info = array(
 // Full Video
+5 => "FLV[400x240]",
+6 => "FLV[450x270]",
+17 => "3GP[176x144]",
 18 => "MP4[640x360]",
 22 => "HD MP4[1280x720]",
+34 => "FLV[640x360]",
+35 => "FLV[854x480]",
 36 => "3GP[320x180]",
+37 => "MP4[1920x1080]",
+38 => "MP4[4096x3072]",
 43 => "WEBM[640x360]",	
-17 => "3GP[176x144]",
+44 => "WEBM[854x480]",
+45 => "WEBM[1280x720]",
+46 => "WEBM[1920x1080]",
+59 => "MP4[854x480]",
+78 => "MP4[854x480]",
 // DASH videos
 137 => "(Video Only) MP4[1920x1080]",
 248 => "(Video Only) WEBM[1920x1080]",
@@ -28,14 +39,25 @@ private $itag_info = array(
 249 => "(Audio Only) WEBM[50Kbps]",
 250 => "(Audio Only) WEBM[70Kbps]",
 251 => "(Audio Only) WEBM[160Kbps]"
-	);
+);
 private $itag_ext = array(
 // Full Video
+5 => ".flv",
+6 => ".flv",
+17 => ".3gp",
 18 => ".mp4",
 22 => ".mp4",
+34 => ".flv",
+35 => ".flv",
 36 => ".3gp",
+37 => ".mp4",
+38 => ".mp4",
 43 => ".webm",
-17 => ".3gp",
+44 => ".webm",
+45 => ".webm",
+46 => ".webm",
+59 => ".mp4",
+78 => ".mp4",
 // DASH videos
 137 => ".mp4",
 248 => ".webm",
@@ -90,12 +112,34 @@ break;
 }
 }
 if(isset($videoData['status']) && $videoData['status'] !== 'fail') {
+$playerData = json_decode($videoData["player_response"]);
+$captions = array();
+for($i=0;$i<count($playerData->captions->playerCaptionsTracklistRenderer->captionTracks);$i++) {
+$caption = array();
+$caption["title"] = $playerData->captions->playerCaptionsTracklistRenderer->captionTracks[$i]->name->simpleText;
+$caption["lang"] = $playerData->captions->playerCaptionsTracklistRenderer->captionTracks[$i]->languageCode;
+$caption["url"] = $playerData->captions->playerCaptionsTracklistRenderer->captionTracks[$i]->baseUrl;
+array_push($captions,$caption);
+}
+$thumbinfo = $playerData->storyboards->playerStoryboardSpecRenderer->spec;
+$thumbparts = explode("|",$thumbinfo);
+$thumbnum = count($thumbparts)-1;
+$thumbdata = explode("#",$thumbparts[$thumbnum]);
 $vInfo['Title'] = $videoData['title'];
 $vInfo['ChannelName'] = $videoData['author'];
 $vInfo['ChannelId'] = $videoData['ucid'];
 $vInfo['Thumbnail'] = str_replace('default', 'maxresdefault', $videoData['thumbnail_url']);
 $vInfo['Duration'] = $videoData['length_seconds'];
-//$vInfo['Rating'] = $videoData['avg_rating'];
+$vInfo['Rating'] = $playerData->videoDetails->averageRating;
+$vInfo['Captions'] = $captions;
+$vInfo['Thumbs'] = array();
+$vInfo['Thumbs']["src"] = "ytthumbs.php?data=".urlencode($thumbinfo);
+$vInfo['Thumbs']["width"] = $thumbdata[0]*$thumbdata[3];
+$vInfo['Thumbs']["height"] = $thumbdata[1]*ceil($thumbdata[2]/$thumbdata[3]);
+$vInfo['Thumbs']["fwidth"] = $thumbdata[0];
+$vInfo['Thumbs']["fheight"] = $thumbdata[1];
+$vInfo['Thumbs']["fcount"] = $thumbdata[2];
+$vInfo['Thumbs']["row"] = $thumbdata[3];
 }
 if (isset($videoData['url_encoded_fmt_stream_map']) && isset($videoData['adaptive_fmts'])) {
 $draft1 = explode(',',$videoData['url_encoded_fmt_stream_map']);
