@@ -159,6 +159,7 @@ Github: <a href="<?=$config['App']['source_link']?>" target="_blank"><?=$config[
 <li>Image size reduction function of timeline.（タイムラインの画像サイズ縮小）</li>
 <li>Sensitive image can switched for show / hide.（画像の非表示化）</li>
 <li>Notification tab is split(All / Reply / Follow / Boost &amp; Fav / Direct).（通知タブの分類分け）</li>
+<li>Only voting, posting of votes is not supported.（投票だけ、投票の投稿は未対応）</li>
 </ul>
 </p>
 </article>

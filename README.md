@@ -24,6 +24,17 @@ We moved our instances list to our webpage: https://www.halcyon.social/instances
 - Supports multiple languages.
 - Privacy-friendly video embeds.
 
+## Custom features
+- Input history, Zero-width space addition function added pictogram input.（入力履歴・ゼロ幅スペース追加機能付き絵文字入力）
+- Draft（下書き機能）
+- Fix images are missing with multiple images toots.（複数枚画像の投稿不具合修正）
+- Image size reduction function of timeline.（タイムラインの画像サイズ縮小）
+- Sensitive image can switched for show / hide.（画像の非表示化）
+- Notification tab is split(All / Reply / Follow / Boost &amp; Fav / Direct).（通知タブの分類分け）
+- Only voting, posting of votes is not supported.（投票だけ、投票の投稿は未対応）
+
+
+
 ## Install
 [![Install Halcyon with YunoHost](https://install-app.yunohost.org/install-with-yunohost.png)](https://install-app.yunohost.org/?app=halcyon)  
 or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install

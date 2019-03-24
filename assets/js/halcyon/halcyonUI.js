@@ -20,6 +20,28 @@ $(function() {
   $(document).on('keypress',"input.disallow_enter[type='text']", function(e) {
     if((e.which == 13) || (e.keyCode == 13)){ return false; }
   });
+  $(document).on('click','.vote_button', function(e) {
+    e.stopPropagation();
+    var pollid=$(this).attr('pollid');
+    if (pollid !== null) {
+      let poll_val=[];
+      if ($(this).attr('multiple')) {
+        poll_val = $('input[name="poll_'+pollid+'"]:checked').map(function() {
+          return $(this).val();
+        }).get();
+      }
+      else {
+        let val = $('input[name="poll_'+pollid+'"]:checked').val();
+        if (val!='undefined') poll_val.push(val);
+      }
+      params = {choices: poll_val};
+      api.post('polls/'+pollid+'/votes', params, function (data) {
+        $(this).removeClass('vote_button');
+        $(this).val(Pomo.getText('Voted'));
+      });
+    }
+    return false;
+  });
   $(document).on('click','.follow_button', function(e) {
     e.stopPropagation();
     if ($(this).attr('mid') !== null) {
