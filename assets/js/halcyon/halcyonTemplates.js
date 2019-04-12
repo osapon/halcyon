@@ -604,297 +604,355 @@ return html
 }
 
 function notifications_template(NotificationObj) {
-var notice_author_link;
-if(NotificationObj.account.acct.indexOf("@") == -1)  notice_author_link = "/@"+NotificationObj.account.acct+"@"+current_instance+"?mid="+NotificationObj.account.id;
-else notice_author_link = "/@"+NotificationObj.account.acct+"?mid="+NotificationObj.account.id;
-if(NotificationObj.account.display_name.length == 0) {
-NotificationObj.account.display_name = NotificationObj.account.username;
-}
-NotificationObj.account.display_name = htmlEscape(NotificationObj.account.display_name);
-for(i=0;i<NotificationObj.account.emojis.length;i++) {
-NotificationObj.account.display_name = NotificationObj.account.display_name.replace(new RegExp(":"+NotificationObj.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.account.emojis[i].url+"' class='emoji'>");
-}
-if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
-var toot_author_link;
-if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
-else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
-const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
-toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
-if( NotificationObj.type=='favourite' ){
-for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
-}
-NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
-for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
-NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
-}
-for(var i=0;i<NotificationObj.status.mentions.length;i++) {
-if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
-else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
-}
-var account_state_icons = "";
-if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
-if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html = (`
-<li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
-<div class="notice_author_box">
-<a href="${notice_author_link}">
-<div class="icon_box">
-${icon(NotificationObj.account.avatar)}
-</div>
-</a>
-<i class="fa fa-fw fa-star font-icon favourite"></i>
-<a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('favourited Your Toot')}
-</a>
-</div>
-<div class="notice_entry_body">
-<section class="toot_content">
-<header class="toot_header">
-<div class="text_ellipsis">
-<a href="${toot_author_link}">
-<span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
-</span>
-<span class="username">
-@${NotificationObj.status.account.acct}${account_state_icons}
-</span>
-</a>
-</div>
-</header>
-<article class="toot_article emoji_poss">
-<p>${NotificationObj.status.content}</p>
-</article>
-<footer class="toot_footer"></footer>
-</section>
-</div>
-</li>`);
-return $(html);
-} else if ( NotificationObj.type === 'reblog' ) {
-for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
-}
-NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
-for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
-NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
-}
-for(var i=0;i<NotificationObj.status.mentions.length;i++) {
-if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
-else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
-}
-const sid= NotificationObj.status.id;
-var account_state_icons = "";
-if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
-if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-html = (`
-<li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
-<div class="notice_author_box">
-<a href="${notice_author_link}">
-<div class="icon_box">
-${icon(NotificationObj.account.avatar)}
-</div>
-</a>
-<i class="fa fa-fw fa-retweet font-icon boost"></i>
-<a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss" >${NotificationObj.account.display_name}</span> ${__('boosted Your Toot')}
-</a>
-</div>
-<blockquote class="notice_entry_body">
-<section class="toot_content">
-<header class="toot_header">
-<div class="text_ellipsis">
-<a href="${toot_author_link}">
-<span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
-</span>
-<span class="username">
-@${NotificationObj.status.account.acct}${account_state_icons}
-</span>
-</a>
-</div>
-</header>
-<article class="toot_article emoji_poss">
-<p>${NotificationObj.status.content}</p>
-</article>
-<footer class="toot_footer"></footer>
-</section>
-</blockquote>
-</li>`);
-return $(html);
-}
-} else if ( NotificationObj.type === 'mention' ) {
-var toot_author_link;
-if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
-else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
-const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
-toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
-let alart_text= "",
-article_option= "",
-toot_replies_count = "",
-toot_reblogs_count= "",
-toot_favourites_count = "",
-media_views = "";
-for(i=0;i<NotificationObj.status.emojis.length;i++) {
-NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
-}
-NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
-for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
-NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
-}
-for(var i=0;i<NotificationObj.status.mentions.length;i++) {
-if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
-else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
-}
-var writtenby = new Object();
-writtenby.id = NotificationObj.status.account.id;
-writtenby.username = NotificationObj.status.account.username;
-writtenby.url = NotificationObj.status.account.url;
-writtenby.acct = NotificationObj.status.account.acct;
-NotificationObj.status.mentions.push(writtenby);
-if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
-alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
-article_option = "content_warning";
-}
-else if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "true") {
-alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
-}
-if(NotificationObj.status.replies_count) {
-toot_replies_count = NotificationObj.status.replies_count;
-}
-if (NotificationObj.status.reblogs_count) {
-toot_reblogs_count = NotificationObj.status.reblogs_count;
-}
-if (NotificationObj.status.favourites_count) {
-toot_favourites_count = NotificationObj.status.favourites_count;
-}
-if (NotificationObj.status.media_attachments.length) {
-media_views = mediaattachments_template(NotificationObj.status);
-}
-if(NotificationObj.status.account.display_name.length == 0) {
-NotificationObj.status.account.display_name = NotificationObj.status.account.username;
-}
-switch(NotificationObj.status.visibility) {
-case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
-case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
-case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
-case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
-}
-if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
-toot_footer_width = " style='width:320px'";
-toot_reblog_button = (`<div class="toot_reaction">
-<button class="boost_button" tid="${NotificationObj.status.id}" reblogged="${NotificationObj.status.reblogged}">
-<i class="fa fa-fw fa-retweet"></i>
-<span class="reaction_count boost_count">${toot_reblogs_count}</span>
-</button>
-</div>`);
-}
-else {
-toot_footer_width = "";
-toot_reblog_button = "";
-}
-var own_toot_buttons = "";
-if(NotificationObj.status.account.acct == current_acct) {
-var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">${__('Delete Toot')}</a></li>`);
-if(NotificationObj.status.pinned == true) {
-own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">${__('Unpin Toot')}</a></li>`);
-}
-else {
-own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">${__('Pin Toot')}</a></li>`);
-}
-}
-else {
-var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Mute')} @${NotificationObj.status.account.username}</a></li>
-<li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Block')} @${NotificationObj.status.account.username}</a></li>
-<li><a class="addlist_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.status.account.display_name}">${__('Add to list')} @${NotificationObj.status.account.username}</a></li>
-<li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">${__('Report this Toot')}</a></li>`);
-}
-var account_state_icons = "";
-if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
-if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
-const html=$(`
-<li sid="${NotificationObj.status.id}" class="toot_entry">
-<div class="toot_entry_body">
-<a href="${toot_author_link}">
-<div class="icon_box">
-${icon(NotificationObj.status.account.avatar)}
-</div>
-</a>
-<section class="toot_content">
-<header class="toot_header">
-<div class="text_ellipsis">
-<a href="${toot_author_link}">
-<span class="displayname emoji_poss">
-${NotificationObj.status.account.display_name}
-</span>
-<span class="username">
-@${NotificationObj.status.account.acct}${account_state_icons}
-</span>
-<time datetime="${toot_attr_datetime}">${toot_datetime}</time>
-</a>
-</div>
-<div class="expand_button_wrap">
-<button class="expand_button">
-<i class="fa fa-fw fa-chevron-down"></i>
-</button>
-<div class="expand_menu invisible disallow_select">
-<ul>
-<li><a class="copylink_button" url="${NotificationObj.status.url}" >${__('Copy link to Toot')}</a></li>
-${own_toot_buttons}
-</ul>
-<ul>
-<li><a href="${NotificationObj.status.url}" target="_blank">${__('View original')}</a></li>
-</ul>
-</div>
-</div>
-</header>
-<article class="toot_article ${article_option}">
-${alart_text}
-<span class="status_content emoji_poss">
-${NotificationObj.status.content}
-</span>
-</article>
-<footer class="toot_footer"${toot_footer_width}>
-<div class="toot_reaction">
-<button class="reply_button" tid="${NotificationObj.status.id}" mentions='${JSON.stringify(NotificationObj.status.mentions)}' display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
-<i class="fa fa-fw fa-reply"></i>
-<span class="reaction_count reply_count">${toot_replies_count}</span>
-</button>
-</div>
-${toot_reblog_button}
-<div class="toot_reaction">
-<button class="fav_button" tid="${NotificationObj.status.id}" favourited="${NotificationObj.status.favourited}">
-<i class="fa fa-fw fa-star"></i>
-<span class="reaction_count fav_count">${toot_favourites_count}</span>
-</button>
-</div>
-<div class="toot_reaction">
-<button>
-<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
-</button>
-</div>
-</footer>
-</section>
-</div>
-</li>`);
-html.find(".toot_article").append(media_views);
-return html
-} else {
-const html=(`
-<li sid="${NotificationObj.id}" class="notice_entry fol">
-<div class="notice_author_box">
-<a href="${notice_author_link}">
-<div class="icon_box">
-${icon(NotificationObj.account.avatar)}
-</div>
-</a>
-<i class="fa fa-fw fa-user font-icon follow"></i>
-<a class="notice_author" href="${notice_author_link}">
-<span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('followed you')}
-</a>
-</div>
-</li>`);
-return $(html);
-}
+  var notice_author_link;
+  if(NotificationObj.account.acct.indexOf("@") == -1)  notice_author_link = "/@"+NotificationObj.account.acct+"@"+current_instance+"?mid="+NotificationObj.account.id;
+  else notice_author_link = "/@"+NotificationObj.account.acct+"?mid="+NotificationObj.account.id;
+  if(NotificationObj.account.display_name.length == 0) {
+    NotificationObj.account.display_name = NotificationObj.account.username;
+  }
+  NotificationObj.account.display_name = htmlEscape(NotificationObj.account.display_name);
+  for(i=0;i<NotificationObj.account.emojis.length;i++) {
+    NotificationObj.account.display_name = NotificationObj.account.display_name.replace(new RegExp(":"+NotificationObj.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.account.emojis[i].url+"' class='emoji'>");
+  }
+  if ( NotificationObj.type === 'favourite' || NotificationObj.type === 'reblog' || NotificationObj.type === 'poll' ) {
+    var toot_author_link;
+    if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+    else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+    const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+    toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
+    if( NotificationObj.type=='favourite' ){
+      for(i=0;i<NotificationObj.status.emojis.length;i++) {
+        NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+      }
+      NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+      for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+        NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+      }
+      for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+        if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+        else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+      }
+      var account_state_icons = "";
+      if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+      if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+      const html = (`
+      <li sid="${NotificationObj.status.id}" class="notice_entry fav favourite toot_entry">
+      <div class="notice_author_box">
+      <a href="${notice_author_link}">
+      <div class="icon_box">
+      ${icon(NotificationObj.account.avatar)}
+      </div>
+      </a>
+      <i class="fa fa-fw fa-star font-icon favourite"></i>
+      <a class="notice_author" href="${notice_author_link}">
+      <span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('favourited Your Toot')}
+      </a>
+      </div>
+      <div class="notice_entry_body">
+      <section class="toot_content">
+      <header class="toot_header">
+      <div class="text_ellipsis">
+      <a href="${toot_author_link}">
+      <span class="displayname emoji_poss">
+      ${NotificationObj.status.account.display_name}
+      </span>
+      <span class="username">
+      @${NotificationObj.status.account.acct}${account_state_icons}
+      </span>
+      </a>
+      </div>
+      </header>
+      <article class="toot_article emoji_poss">
+      <p>${NotificationObj.status.content}</p>
+      </article>
+      <footer class="toot_footer"></footer>
+      </section>
+      </div>
+      </li>`);
+      return $(html);
+    } else if ( NotificationObj.type === 'reblog' ) {
+      for(i=0;i<NotificationObj.status.emojis.length;i++) {
+        NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+      }
+      NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+      for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+        NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+      }
+      for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+        if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+        else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+      }
+      const sid= NotificationObj.status.id;
+      var account_state_icons = "";
+      if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+      if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+      html = (`
+      <li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
+      <div class="notice_author_box">
+      <a href="${notice_author_link}">
+      <div class="icon_box">
+      ${icon(NotificationObj.account.avatar)}
+      </div>
+      </a>
+      <i class="fa fa-fw fa-retweet font-icon boost"></i>
+      <a class="notice_author" href="${notice_author_link}">
+      <span class="emoji_poss" >${NotificationObj.account.display_name}</span> ${__('boosted Your Toot')}
+      </a>
+      </div>
+      <blockquote class="notice_entry_body">
+      <section class="toot_content">
+      <header class="toot_header">
+      <div class="text_ellipsis">
+      <a href="${toot_author_link}">
+      <span class="displayname emoji_poss">
+      ${NotificationObj.status.account.display_name}
+      </span>
+      <span class="username">
+      @${NotificationObj.status.account.acct}${account_state_icons}
+      </span>
+      </a>
+      </div>
+      </header>
+      <article class="toot_article emoji_poss">
+      <p>${NotificationObj.status.content}</p>
+      </article>
+      <footer class="toot_footer"></footer>
+      </section>
+      </blockquote>
+      </li>`);
+      return $(html);
+    } else if ( NotificationObj.type === 'poll' ) {
+      for(i=0;i<NotificationObj.status.emojis.length;i++) {
+        NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+      }
+      NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+      for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+        NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+      }
+      for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+        if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+        else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+      }
+      const sid= NotificationObj.status.id;
+      var account_state_icons = "";
+      if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+      if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+      html = (`
+      <li sid="${NotificationObj.status.id}" class="notice_entry bos boost toot_entry">
+      <div class="notice_author_box">
+      <a href="${notice_author_link}">
+      <div class="icon_box">
+      ${icon(NotificationObj.account.avatar)}
+      </div>
+      </a>
+      <i class="fa fa-pie-chart font-icon poll"></i>
+      <a class="notice_author" href="${notice_author_link}">
+      <span class="emoji_poss" >${NotificationObj.account.display_name}</span> ${__('End of voting')}
+      </a>
+      </div>
+      <blockquote class="notice_entry_body">
+      <section class="toot_content">
+      <header class="toot_header">
+      <div class="text_ellipsis">
+      <a href="${toot_author_link}">
+      <span class="displayname emoji_poss">
+      ${NotificationObj.status.account.display_name}
+      </span>
+      <span class="username">
+      @${NotificationObj.status.account.acct}${account_state_icons}
+      </span>
+      </a>
+      </div>
+      </header>
+      <article class="toot_article emoji_poss">
+      <p>${NotificationObj.status.content}</p>
+      <table class="pool_article">`);
+      for(i=0;i<NotificationObj.status.poll.options.length;i++) {
+        html = html + (`<tr><th>${NotificationObj.status.poll.options[i].title}</th><td>${NotificationObj.status.poll.options[i].votes_count}</td></tr>`);
+      }
+    
+      html = html + (`
+      </table>
+      </article>
+      <footer class="toot_footer"></footer>
+      </section>
+      </blockquote>
+      </li>`);
+      return $(html);
+    }
+  } else if ( NotificationObj.type === 'mention' ) {
+    var toot_author_link;
+    if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+    else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+    const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+    toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
+    let alart_text= "",
+    article_option= "",
+    toot_replies_count = "",
+    toot_reblogs_count= "",
+    toot_favourites_count = "",
+    media_views = "";
+    for(i=0;i<NotificationObj.status.emojis.length;i++) {
+      NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+    }
+    NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+    for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+      NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+    }
+    for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+      if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+      else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+    }
+    var writtenby = new Object();
+    writtenby.id = NotificationObj.status.account.id;
+    writtenby.username = NotificationObj.status.account.username;
+    writtenby.url = NotificationObj.status.account.url;
+    writtenby.acct = NotificationObj.status.account.acct;
+    NotificationObj.status.mentions.push(writtenby);
+    if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+      alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+      article_option = "content_warning";
+    }
+    else if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+      alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+    }
+    if(NotificationObj.status.replies_count) {
+      toot_replies_count = NotificationObj.status.replies_count;
+    }
+    if (NotificationObj.status.reblogs_count) {
+      toot_reblogs_count = NotificationObj.status.reblogs_count;
+    }
+    if (NotificationObj.status.favourites_count) {
+      toot_favourites_count = NotificationObj.status.favourites_count;
+    }
+    if (NotificationObj.status.media_attachments.length) {
+      media_views = mediaattachments_template(NotificationObj.status);
+    }
+    if(NotificationObj.status.account.display_name.length == 0) {
+      NotificationObj.status.account.display_name = NotificationObj.status.account.username;
+    }
+    switch(NotificationObj.status.visibility) {
+      case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+      case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+      case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+      case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
+    }
+    if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+      toot_footer_width = " style='width:320px'";
+      toot_reblog_button = (`<div class="toot_reaction">
+      <button class="boost_button" tid="${NotificationObj.status.id}" reblogged="${NotificationObj.status.reblogged}">
+      <i class="fa fa-fw fa-retweet"></i>
+      <span class="reaction_count boost_count">${toot_reblogs_count}</span>
+      </button>
+      </div>`);
+    }
+    else {
+      toot_footer_width = "";
+      toot_reblog_button = "";
+    }
+    var own_toot_buttons = "";
+    if(NotificationObj.status.account.acct == current_acct) {
+      var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">${__('Delete Toot')}</a></li>`);
+      if(NotificationObj.status.pinned == true) {
+        own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">${__('Unpin Toot')}</a></li>`);
+      }
+      else {
+        own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">${__('Pin Toot')}</a></li>`);
+      }
+    }
+    else {
+      var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Mute')} @${NotificationObj.status.account.username}</a></li>
+      <li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Block')} @${NotificationObj.status.account.username}</a></li>
+      <li><a class="addlist_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.status.account.display_name}">${__('Add to list')} @${NotificationObj.status.account.username}</a></li>
+      <li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">${__('Report this Toot')}</a></li>`);
+    }
+    var account_state_icons = "";
+    if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+    if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+    const html=$(`
+    <li sid="${NotificationObj.status.id}" class="toot_entry">
+    <div class="toot_entry_body">
+    <a href="${toot_author_link}">
+    <div class="icon_box">
+    ${icon(NotificationObj.status.account.avatar)}
+    </div>
+    </a>
+    <section class="toot_content">
+    <header class="toot_header">
+    <div class="text_ellipsis">
+    <a href="${toot_author_link}">
+    <span class="displayname emoji_poss">
+    ${NotificationObj.status.account.display_name}
+    </span>
+    <span class="username">
+    @${NotificationObj.status.account.acct}${account_state_icons}
+    </span>
+    <time datetime="${toot_attr_datetime}">${toot_datetime}</time>
+    </a>
+    </div>
+    <div class="expand_button_wrap">
+    <button class="expand_button">
+    <i class="fa fa-fw fa-chevron-down"></i>
+    </button>
+    <div class="expand_menu invisible disallow_select">
+    <ul>
+    <li><a class="copylink_button" url="${NotificationObj.status.url}" >${__('Copy link to Toot')}</a></li>
+    ${own_toot_buttons}
+    </ul>
+    <ul>
+    <li><a href="${NotificationObj.status.url}" target="_blank">${__('View original')}</a></li>
+    </ul>
+    </div>
+    </div>
+    </header>
+    <article class="toot_article ${article_option}">
+    ${alart_text}
+    <span class="status_content emoji_poss">
+    ${NotificationObj.status.content}
+    </span>
+    </article>
+    <footer class="toot_footer"${toot_footer_width}>
+    <div class="toot_reaction">
+    <button class="reply_button" tid="${NotificationObj.status.id}" mentions='${JSON.stringify(NotificationObj.status.mentions)}' display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
+    <i class="fa fa-fw fa-reply"></i>
+    <span class="reaction_count reply_count">${toot_replies_count}</span>
+    </button>
+    </div>
+    ${toot_reblog_button}
+    <div class="toot_reaction">
+    <button class="fav_button" tid="${NotificationObj.status.id}" favourited="${NotificationObj.status.favourited}">
+    <i class="fa fa-fw fa-star"></i>
+    <span class="reaction_count fav_count">${toot_favourites_count}</span>
+    </button>
+    </div>
+    <div class="toot_reaction">
+    <button>
+    <i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+    </button>
+    </div>
+    </footer>
+    </section>
+    </div>
+    </li>`);
+    html.find(".toot_article").append(media_views);
+    return html
+  } else {
+    const html=(`
+    <li sid="${NotificationObj.id}" class="notice_entry fol">
+    <div class="notice_author_box">
+    <a href="${notice_author_link}">
+    <div class="icon_box">
+    ${icon(NotificationObj.account.avatar)}
+    </div>
+    </a>
+    <i class="fa fa-fw fa-user font-icon follow"></i>
+    <a class="notice_author" href="${notice_author_link}">
+    <span class="emoji_poss">${NotificationObj.account.display_name}</span> ${__('followed you')}
+    </a>
+    </div>
+    </li>`);
+    return $(html);
+  }
 }
 
 function follows_template(AccountObj) {

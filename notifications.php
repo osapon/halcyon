@@ -18,6 +18,9 @@
     <li class="item bf">
       <a href="notifications?target=bf"><?=_('Boost & Favorite')?></a>
     </li>
+    <li class="item poll">
+      <a href="notifications?target=poll"><?=_('Poll')?></a>
+    </li>
     <li class="item dm">
       <a href="notifications?target=dm"><?=pgettext('Notifications', 'Direct')?></a>
     </li>
@@ -45,7 +48,7 @@
 <script>
 current_file = location.pathname;
 <?php
-$allow_target=['follow','reply','bf', 'dm'];
+$allow_target=['follow','reply','bf', 'dm', 'poll'];
 $target = 'all';
 if (isset($_GET['target']) && in_array($_GET['target'], $allow_target)) $target = $_GET['target'];
 ?>
@@ -54,11 +57,18 @@ $("#notifications_nav").addClass('view');
 localStorage.setItem("notification_count", 0);
 var options = [];
 if ( '<?=$target?>' != 'all' ) {
-  if ( '<?=$target?>' != 'follow' ) options.push({name:'exclude_types[]', data:'follow'});
-  if ( '<?=$target?>' != 'reply' ) options.push({name:'exclude_types[]', data:'mention'});
+  if ( '<?=$target?>' != 'follow' ) {
+    options.push({name:'exclude_types[]', data:'follow'});
+  }
+  if ( '<?=$target?>' != 'reply' ) {
+    options.push({name:'exclude_types[]', data:'mention'});
+  }
   if ( '<?=$target?>' != 'bf' ) {
     options.push({name:'exclude_types[]', data:'favourite'});
     options.push({name:'exclude_types[]', data:'reblog'});
+  }
+  if ( '<?=$target?>' != 'poll' ) {
+    options.push({name:'exclude_types[]', data:'poll'});
   }
 }
 if ( '<?=$target?>' == 'dm' ) {

@@ -860,3 +860,6 @@ msgstr "Search Results"
 
 msgid "Search..."
 msgstr "Search..."
+
+msgid "End of voting"
+msgstr "End of voting"

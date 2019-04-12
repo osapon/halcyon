@@ -734,3 +734,12 @@ msgstr "検索結果"
 
 msgid "Search..."
 msgstr "検索..."
+
+msgid "End of voting"
+msgstr "の投票受付が終了しました"
+
+msgid "Poll"
+msgstr "投票"
+
+msgid "Boost & Favorite"
+msgstr "ブースト・ふぁぼ"

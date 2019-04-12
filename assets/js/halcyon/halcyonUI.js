@@ -37,7 +37,7 @@ $(function() {
       params = {choices: poll_val};
       api.post('polls/'+pollid+'/votes', params, function (data) {
         $(this).removeClass('vote_button');
-        $(this).val(Pomo.getText('Voted'));
+        $(this).html(`<span>{Pomo.getText('Voted')}</span>`);
       });
     }
     return false;
