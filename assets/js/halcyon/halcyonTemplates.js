@@ -7,7 +7,7 @@ if(status.media_attachments[0].remote_url != null) {
 status.media_attachments[0].url = status.media_attachments[0].remote_url;
 }
 if(status.media_attachments[0].type === "video" && localStorage.setting_play_video != "false") border = ' style="border:0;border-radius:0"';
-if(localStorage.setting_full_height == "true") {
+if(localStorage.setting_full_height == "true" && status.media_attachments.length == 1 && (status.media_attachments[0].type == "image" || (status.media_attachments[0].type === "video" && localStorage.setting_play_video == "false") || (status.media_attachments[0].type === "gifv" && localStorage.setting_play_gif == "false"))) {
 mvfullheight = " media_full_height";
 dsplength = "1";
 }
@@ -82,6 +82,52 @@ media_views += "</div>";
 }
 return media_views;
 }
+function poll_template(poll) {
+let poll_html = "";
+var expires_at = new Date(new Date(poll.expires_at).getTime()-Date.now());
+var expires_string;
+if(expires_at.getUTCDate() == 2) expires_string = "1 "+__("day");
+else if(expires_at.getUTCDate() > 2) expires_string = (expires_at.getUTCDate()-1)+" "+__("days");
+else if(expires_at.getUTCHours() == 1) expires_string = "1 "+__("hour");
+else if(expires_at.getUTCHours() > 1) expires_string = expires_at.getUTCHours()+" "+__("hours");
+else if(expires_at.getUTCMinutes() == 1) expires_string = "1 "+__("minute");
+else if(expires_at.getUTCMinutes() > 1) expires_string = expires_at.getUTCMinutes()+" "+__("minutes");
+else if(expires_at.getUTCSeconds() == 1) expires_string = "1 "+__("second");
+else expires_string = expires_at.getUTCSeconds()+" "+__("seconds");
+if(poll.voted || poll.expired) {
+poll_html = (`<div class="poll_box">`);
+optionsort = [...poll.options];
+optionsort.sort(function(a,b) {return a.votes_count - b.votes_count});
+optionsort.reverse();
+if(optionsort[0].votes_count != optionsort[1].votes_count) poll.options[poll.options.indexOf(optionsort[0])].winner = true;
+for(var i=0;i<poll.options.length;i++) {
+var winner = "";
+if(poll.options[i].winner) winner = " poll_winner";
+poll_html += (`<div class="poll_result_option"><span class="poll_bar${winner}" style="width:${poll.options[i].votes_count/poll.votes_count*100}%"></div>
+<label class="poll_result_label"><strong>${Math.round(poll.options[i].votes_count/poll.votes_count*100) || 0}%</strong> <span class="emoji_poss">${poll.options[i].title}</span></label>`);
+}
+if(poll.expired) poll_html += (`<br/><span class="poll_footer">${poll.votes_count} ${__("votes")} &bull; ${__("Final results")}</span>`);
+else poll_html += (`<br/><span class="poll_footer">${poll.votes_count} ${__("votes")} &bull; ${expires_string} ${__("left")}</span>`);
+}
+else {
+const poll_random = Math.round(Math.random()*1000);
+poll_html = (`<div class="poll_box poll_box_form poll_${poll.id}" data-poll="${poll.id}" data-random="${poll_random}" id="poll_${poll.id}_${poll_random}">`);
+for(var i=0;i<poll.options.length;i++) {
+if(poll.multiple) {
+poll_html += (`<input type="checkbox" id="poll_${poll.id}_${poll_random}_${i}" name="poll_${poll.id}" class="poll_vote_option checkbox">
+<label for="poll_${poll.id}_${poll_random}_${i}" class="poll_vote_label poll_checkbox_label emoji_poss">${poll.options[i].title}</label><br/>`);
+}
+else {
+poll_html += (`<div class="radiobox"><input type="radio" id="poll_${poll.id}_${poll_random}_${i}" name="poll_${poll.id}" class="poll_vote_option">
+<label for="poll_${poll.id}_${poll_random}_${i}" class="poll_vote_label radiotext emoji_poss">${poll.options[i].title}</label></div>`);
+}
+}
+poll_html += (`<button class="halcyon_button poll_vote"><span>${__("Vote")}</span></button>
+${poll.votes_count} ${__("votes")} &bull; ${expires_string} ${__("left")}`);
+}
+poll_html += (`</div>`);
+return poll_html;
+}
 function timeline_template(status) {
 if (status.reblog === null) {
 for(i=0;i<status.emojis.length;i++) {
@@ -111,7 +157,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -128,8 +175,11 @@ toot_reblogs_count = status.reblogs_count;
 if (status.favourites_count) {
 toot_favourites_count = status.favourites_count;
 }
-if ( status.media_attachments.length ) {
+if(status.media_attachments.length) {
 media_views = mediaattachments_template(status);
+}
+if(status.poll) {
+poll_object = poll_template(status.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -238,6 +288,7 @@ ${toot_reblog_button}
 </div>
 </li>`);
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 } else {
 for(i=0;i<status.reblog.emojis.length;i++) {
@@ -273,7 +324,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 if(status.reblog.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.reblog.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -292,6 +344,9 @@ toot_favourites_count = status.reblog.favourites_count;
 }
 if ( status.reblog.media_attachments.length ) {
 media_views = mediaattachments_template(status.reblog);
+}
+if(status.reblog.poll) {
+poll_object = poll_template(status.reblog.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -398,6 +453,7 @@ ${status.reblog.content}
 </div>
 </li>`);
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 }
 }
@@ -429,7 +485,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 if(status.spoiler_text && localStorage.setting_show_content_warning == "false") {
 alart_text = "<span>"+status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
 article_option = "content_warning";
@@ -448,6 +505,9 @@ toot_favourites_count = status.favourites_count;
 }
 if ( status.media_attachments.length ) {
 media_views = mediaattachments_template(status);
+}
+if(status.poll) {
+poll_object = poll_template(status.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -544,6 +604,7 @@ ${status.content}
 </div>
 </li>`);
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 }
 function notifications_template(NotificationObj) {
@@ -557,7 +618,7 @@ NotificationObj.account.display_name = htmlEscape(NotificationObj.account.displa
 for(i=0;i<NotificationObj.account.emojis.length;i++) {
 NotificationObj.account.display_name = NotificationObj.account.display_name.replace(new RegExp(":"+NotificationObj.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.account.emojis[i].url+"' class='emoji'>");
 }
-if ( NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
+if (NotificationObj.type === 'favourite' | NotificationObj.type === 'reblog' ) {
 var toot_author_link;
 if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
 else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
@@ -676,7 +737,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 for(i=0;i<NotificationObj.status.emojis.length;i++) {
 NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
 }
@@ -712,6 +774,9 @@ toot_favourites_count = NotificationObj.status.favourites_count;
 }
 if (NotificationObj.status.media_attachments.length) {
 media_views = mediaattachments_template(NotificationObj.status);
+}
+if(NotificationObj.status.poll) {
+poll_object = poll_template(NotificationObj.status.poll);
 }
 if(NotificationObj.status.account.display_name.length == 0) {
 NotificationObj.status.account.display_name = NotificationObj.status.account.username;
@@ -820,8 +885,176 @@ ${toot_reblog_button}
 </div>
 </li>`);
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
-} else {
+} else if ( NotificationObj.type === 'poll' ) {
+var toot_author_link;
+if(NotificationObj.status.account.acct.indexOf("@") == -1)  toot_author_link = "/@"+NotificationObj.status.account.acct+"@"+current_instance+"?mid="+NotificationObj.status.account.id;
+else toot_author_link = "/@"+NotificationObj.status.account.acct+"?mid="+NotificationObj.status.account.id;
+const toot_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, NotificationObj.status.created_at)),
+toot_attr_datetime = getConversionedDate(null, NotificationObj.status.created_at);
+let alart_text= "",
+article_option= "",
+toot_replies_count = "",
+toot_reblogs_count= "",
+toot_favourites_count = "",
+media_views = "",
+poll_object = "";
+for(i=0;i<NotificationObj.status.emojis.length;i++) {
+NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp(":"+NotificationObj.status.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.emojis[i].url+"' class='emoji'>");
+}
+NotificationObj.status.account.display_name = htmlEscape(NotificationObj.status.account.display_name);
+for(i=0;i<NotificationObj.status.account.emojis.length;i++) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.display_name.replace(new RegExp(":"+NotificationObj.status.account.emojis[i].shortcode+":","g"),"<img src='"+NotificationObj.status.account.emojis[i].url+"' class='emoji'>");
+}
+for(var i=0;i<NotificationObj.status.mentions.length;i++) {
+if(NotificationObj.status.mentions[i].acct.indexOf("@") == -1) NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'@'+current_instance+'?mid='+NotificationObj.status.mentions[i].id+'"');
+else NotificationObj.status.content = NotificationObj.status.content.replace(new RegExp('href="'+NotificationObj.status.mentions[i].url+'"',"g"),'href="/@'+NotificationObj.status.mentions[i].acct+'?mid='+NotificationObj.status.mentions[i].id+'"');
+}
+var writtenby = new Object();
+writtenby.id = NotificationObj.status.account.id;
+writtenby.username = NotificationObj.status.account.username;
+writtenby.url = NotificationObj.status.account.url;
+writtenby.acct = NotificationObj.status.account.acct;
+NotificationObj.status.mentions.push(writtenby);
+if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "false") {
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW MORE')+"</button>",
+article_option = "content_warning";
+}
+else if(NotificationObj.status.spoiler_text && localStorage.setting_show_content_warning == "true") {
+alart_text = "<span>"+NotificationObj.status.spoiler_text+"</span><button class='cw_button'>"+__('SHOW LESS')+"</button>";
+}
+if(NotificationObj.status.replies_count) {
+toot_replies_count = NotificationObj.status.replies_count;
+}
+if (NotificationObj.status.reblogs_count) {
+toot_reblogs_count = NotificationObj.status.reblogs_count;
+}
+if (NotificationObj.status.favourites_count) {
+toot_favourites_count = NotificationObj.status.favourites_count;
+}
+if (NotificationObj.status.media_attachments.length) {
+media_views = mediaattachments_template(NotificationObj.status);
+}
+if(NotificationObj.status.poll) {
+poll_object = poll_template(NotificationObj.status.poll);
+}
+if(NotificationObj.status.account.display_name.length == 0) {
+NotificationObj.status.account.display_name = NotificationObj.status.account.username;
+}
+switch(NotificationObj.status.visibility) {
+case "public":toot_privacy_mode=__("Public");toot_privacy_icon="globe";break;
+case "unlisted":toot_privacy_mode=__("Unlisted");toot_privacy_icon="unlock-alt";break;
+case "private":toot_privacy_mode=__("Followers-only");toot_privacy_icon="lock";break;
+case "direct":toot_privacy_mode=__("Direct");toot_privacy_icon="envelope";break;
+}
+if(toot_privacy_icon == "globe" || toot_privacy_icon == "unlock-alt") {
+toot_footer_width = " style='width:320px'";
+toot_reblog_button = (`<div class="toot_reaction">
+<button class="boost_button" tid="${NotificationObj.status.id}" reblogged="${NotificationObj.status.reblogged}">
+<i class="fa fa-fw fa-retweet"></i>
+<span class="reaction_count boost_count">${toot_reblogs_count}</span>
+</button>
+</div>`);
+}
+else {
+toot_footer_width = "";
+toot_reblog_button = "";
+}
+var own_toot_buttons = "";
+if(NotificationObj.status.account.acct == current_acct) {
+var own_toot_buttons = (`<li><a class="delete_button" tid="${NotificationObj.status.id}">${__('Delete Toot')}</a></li>`);
+if(NotificationObj.status.pinned == true) {
+own_toot_buttons += (`<li><a class="unpin_button" tid="${NotificationObj.status.id}">${__('Unpin Toot')}</a></li>`);
+}
+else {
+own_toot_buttons += (`<li><a class="pin_button" tid="${NotificationObj.status.id}">${__('Pin Toot')}</a></li>`);
+}
+}
+else {
+var own_toot_buttons = (`<li><a class="mute_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Mute')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="block_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}">${__('Block')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="addlist_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.status.account.display_name}">${__('Add to list')} @${NotificationObj.status.account.username}</a></li>
+<li><a class="report_button" mid="${NotificationObj.status.account.id}" sid="${NotificationObj.status.id}" display_name="${NotificationObj.account.display_name}">${__('Report this Toot')}</a></li>`);
+}
+var account_state_icons = "";
+if(NotificationObj.status.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
+if(NotificationObj.status.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
+const html=$(`
+<li sid="${NotificationObj.status.id}" class="toot_entry">
+<div class="notice_author_box poll_notify_header">
+<i class="fa fa-fw fa-pie-chart font-icon poll"></i>
+<a class="notice_author" href="javascript:void(0)">
+${__('A poll you participated in has ended')}
+</a>
+</div>
+<div class="toot_entry_body">
+<a href="${toot_author_link}">
+<div class="icon_box">
+<img src="${NotificationObj.status.account.avatar}">
+</div>
+</a>
+<section class="toot_content">
+<header class="toot_header">
+<div class="text_ellipsis">
+<a href="${toot_author_link}">
+<span class="displayname emoji_poss">
+${NotificationObj.status.account.display_name}
+</span>
+<span class="username">
+@${NotificationObj.status.account.acct}${account_state_icons}
+</span>
+<time datetime="${toot_attr_datetime}">${toot_datetime}</time>
+</a>
+</div>
+<div class="expand_button_wrap">
+<button class="expand_button">
+<i class="fa fa-fw fa-chevron-down"></i>
+</button>
+<div class="expand_menu invisible disallow_select">
+<ul>
+<li><a class="copylink_button" url="${NotificationObj.status.url}" >${__('Copy link to Toot')}</a></li>
+${own_toot_buttons}
+</ul>
+<ul>
+<li><a href="${NotificationObj.status.url}" target="_blank">${__('View original')}</a></li>
+</ul>
+</div>
+</div>
+</header>
+<article class="toot_article ${article_option}">
+${alart_text}
+<span class="status_content emoji_poss">
+${NotificationObj.status.content}
+</span>
+</article>
+<footer class="toot_footer"${toot_footer_width}>
+<div class="toot_reaction">
+<button class="reply_button" tid="${NotificationObj.status.id}" mentions='${JSON.stringify(NotificationObj.status.mentions)}' display_name="${NotificationObj.account.display_name}" privacy="${NotificationObj.status.visibility}">
+<i class="fa fa-fw fa-reply"></i>
+<span class="reaction_count reply_count">${toot_replies_count}</span>
+</button>
+</div>
+${toot_reblog_button}
+<div class="toot_reaction">
+<button class="fav_button" tid="${NotificationObj.status.id}" favourited="${NotificationObj.status.favourited}">
+<i class="fa fa-fw fa-star"></i>
+<span class="reaction_count fav_count">${toot_favourites_count}</span>
+</button>
+</div>
+<div class="toot_reaction">
+<button>
+<i class="fa fa-fw fa-${toot_privacy_icon}" title="${toot_privacy_mode}"></i>
+</button>
+</div>
+</footer>
+</section>
+</div>
+</li>`);
+html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
+return html
+} else if(NotificationObj.type === 'follow') {
 const html=(`
 <li sid="${NotificationObj.id}" class="notice_entry fol">
 <div class="notice_author_box">
@@ -896,7 +1129,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 for(i=0;i<status.emojis.length;i++) {
 status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
 }
@@ -932,6 +1166,9 @@ toot_favourites_count = status.favourites_count;
 }
 if (status.media_attachments.length) {
 media_views = mediaattachments_template(status);
+}
+if(status.poll) {
+poll_object = poll_template(status.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -1052,6 +1289,23 @@ ${toot_reblog_button}
 <div class="status_textarea">
 <textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
+<div class="status_poll_editor invisible">
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<div style="height:32px;display:inline-block;padding-top:10px">${__("Expires in")} </div>
+<div style="float:right;margin-right:5px"><div class="poll_time"><input type="number" min="0" max="7" placeholder="0-7" class="poll_days">${__('Days')}</div>
+<div class="poll_time"><input type="number" min="0" max="24" placeholder="0-24" class="poll_hours">${__('Hours')}</div>
+<div class="poll_time"><input type="number" min="0" max="60" placeholder="0-60" class="poll_mins">${__('Minutes')}</div></div><br/>
+<div class="switch poll_mc_switch">
+<input type="checkbox" class="poll_multiple_choice">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+${__("Multiple choice")}
+</div>
 </div>
 </div>
 <div class="status_bottom invisible">
@@ -1087,6 +1341,9 @@ ${toot_reblog_button}
 </label>
 </div>
 </div>
+<label for="reply_status_poll" class="status_poll status_option_button">
+<i class="fa fa-pie-chart" aria-hidden="true"></i>
+</label>
 <label for="reply_status_emoji" class="status_emoji status_option_button">
 <i class="fa fa-smile-o" aria-hidden="true"></i>
 </label>
@@ -1115,6 +1372,7 @@ ${current_instance_charlimit}
 </form>`);
 history.pushState(null, null, status_account_link.replace("?mid=",'/status/'+status.id+"?mid="));
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 } else {
 const status_datetime= getConversionedDate(null, status.reblog.created_at),
@@ -1129,7 +1387,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 for(i=0;i<status.reblog.emojis.length;i++) {
 status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
 }
@@ -1169,6 +1428,9 @@ toot_favourites_count = status.reblog.favourites_count;
 }
 if(status.reblog.media_attachments.length){
 media_views = mediaattachments_template(status.reblog);
+}
+if(status.reblog.poll) {
+poll_object = poll_template(status.reblog.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -1280,6 +1542,23 @@ ${status.reblog.content}
 <div class="status_textarea">
 <textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
+<div class="status_poll_editor invisible">
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<div style="height:32px;display:inline-block;padding-top:10px">${__("Expires in")} </div>
+<div style="float:right;margin-right:5px"><div class="poll_time"><input type="number" min="0" max="7" placeholder="0-7" class="poll_days">${__('Days')}</div>
+<div class="poll_time"><input type="number" min="0" max="24" placeholder="0-24" class="poll_hours">${__('Hours')}</div>
+<div class="poll_time"><input type="number" min="0" max="60" placeholder="0-60" class="poll_mins">${__('Minutes')}</div></div><br/>
+<div class="switch poll_mc_switch">
+<input type="checkbox" class="poll_multiple_choice">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+${__("Multiple choice")}
+</div>
 </div>
 </div>
 <div class="status_bottom invisible">
@@ -1315,7 +1594,10 @@ ${status.reblog.content}
 </label>
 </div>
 </div>
-<label for="single_reply_status_emoji" class="status_emoji status_option_button">
+<label for="reply_status_poll" class="status_poll status_option_button">
+<i class="fa fa-pie-chart" aria-hidden="true"></i>
+</label>
+<label for="reply_status_emoji" class="status_emoji status_option_button">
 <i class="fa fa-smile-o" aria-hidden="true"></i>
 </label>
 <input id="reply_status_media_atta" name="files" type="file" multiple class="invisible"/>
@@ -1344,6 +1626,7 @@ ${current_instance_charlimit}
 `);
 history.pushState(null, null, status_reblog_account_link.replace("?mid=",'/status/'+status.reblog.id+"?mid="));
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 }
 }
@@ -1395,7 +1678,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 for(i=0;i<status.emojis.length;i++) {
 status.content = status.content.replace(new RegExp(":"+status.emojis[i].shortcode+":","g"),"<img src='"+status.emojis[i].url+"' class='emoji'>");
 }
@@ -1431,6 +1715,9 @@ toot_favourites_count = status.favourites_count;
 }
 if( status.media_attachments.length) {
 media_views = mediaattachments_template(status);
+}
+if(status.poll) {
+poll_object = poll_template(status.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -1535,6 +1822,7 @@ ${toot_reblog_button}
 </div>
 </div>`);
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 } else {
 const status_datetime= getRelativeDatetime(Date.now(), getConversionedDate(null, status.reblog.created_at)),
@@ -1549,7 +1837,8 @@ article_option= "",
 toot_replies_count = "",
 toot_reblogs_count= "",
 toot_favourites_count = "",
-media_views = "";
+media_views = "",
+poll_object = "";
 for(i=0;i<status.reblog.emojis.length;i++) {
 status.reblog.content = status.reblog.content.replace(new RegExp(":"+status.reblog.emojis[i].shortcode+":","g"),"<img src='"+status.reblog.emojis[i].url+"' class='emoji'>");
 }
@@ -1589,6 +1878,9 @@ toot_favourites_count = status.reblog.favourites_count;
 }
 if (status.reblog.media_attachments.length) {
 media_views = mediaattachments_template(status.reblog);
+}
+if(status.reblog.poll) {
+poll_object = poll_template(status.reblog.poll);
 }
 if(status.account.display_name.length == 0) {
 status.account.display_name = status.account.username;
@@ -1691,6 +1983,7 @@ ${status.reblog.content}
 </div>
 </div>`);
 html.find(".toot_article").append(media_views);
+html.find(".toot_article").append(poll_object);
 return html
 }
 }

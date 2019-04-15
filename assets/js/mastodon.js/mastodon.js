@@ -173,7 +173,7 @@ type: "POST",
 data: postData,
 headers: requestHeaders,
 success: function(data, textStatus) {
-if(endpoint == "statuses") {
+if(endpoint == "statuses" && data.visibility != "direct") {
 $(".js_current_toots_count").html(++localStorage.current_statuses_count);
 }
 else if(endpoint.indexOf("/follow") != -1) {
@@ -244,9 +244,6 @@ url: apiBase + endpoint,
 type: "DELETE",
 headers: {"Authorization": "Bearer " + config.api_user_token},
 success: function(data, textStatus) {
-if(endpoint.indexOf("statuses") != -1) {
-$(".js_current_toots_count").html(--localStorage.current_statuses_count);
-}
 console.log("Successful DELETE API request to " +apiBase+endpoint);
 callback(data,textStatus)
 },

@@ -9,6 +9,23 @@
 <div class="status_textarea">
 <textarea class="emoji_poss" name="status_textarea" placeholder="<?=_('What\'s happening?')?>"></textarea> 
 <div class="media_attachments_preview_area invisible"></div>
+<div class="status_poll_editor invisible">
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
+<div style="height:32px;display:inline-block;padding-top:10px"><?=_("Expires in")?> </div>
+<div style="float:right;margin-right:5px"><div class="poll_time"><input type="number" min="0" max="7" placeholder="0-7" class="poll_days"><?=_('Days')?></div>
+<div class="poll_time"><input type="number" min="0" max="24" placeholder="0-24" class="poll_hours"><?=_('Hours')?></div>
+<div class="poll_time"><input type="number" min="0" max="60" placeholder="0-60" class="poll_mins"><?=_('Minutes')?></div></div><br/>
+<div class="switch poll_mc_switch">
+<input type="checkbox" class="poll_multiple_choice">
+<div class="switch-btn">
+<span></span>
+</div>
+</div>
+<?=_("Multiple choice")?>
+</div>
 </div>
 </div>
 <div class="status_bottom invisible">
@@ -38,6 +55,9 @@
 </label>
 </div>
 </div>
+<label for="header_status_poll" class="status_poll status_option_button">
+<i class="fa fa-pie-chart" aria-hidden="true"></i>
+</label>
 <label for="header_status_emoji" class="status_emoji status_option_button">
 <i class="fa fa-smile-o" aria-hidden="true"></i>
 </label>
