@@ -27,7 +27,7 @@ We moved our instances list to our webpage: https://www.halcyon.social/instances
 or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install
 
 ## Blog
-- Release of Version 2.3.0 - Blog article will be published soon
+- [Release of Version 2.3.0 - Polls are coming to Mastodon](https://nikisoft.myblog.de/nikisoft/art/11669027/Halcyon-2-3-0-Polls-are-coming-to-Mastodon)
 - Release of Version 2.2.5 - Add French translation,improve German translation,add support for video captions,add support for video thumbnails
 - Release of Version 2.2.4 - Easily switch between pictures in overlay,show pictures in full height in timeline,duplicated threads removed,many smaller bugfixes
 - Release of Version 2.2.3 - Fixed login with Pleroma,fixed compatibility with Pawoo (older Mastodon),added support for prefers-color-scheme,some more fixes
