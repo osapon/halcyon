@@ -22,7 +22,7 @@ $(function() {
   });
   $(document).on('click','.vote_button', function(e) {
     e.stopPropagation();
-    var pollid=$(this).attr('pollid');
+    var $btn_obj = $(this), pollid=$btn_obj.attr('pollid');
     if (pollid !== null) {
       let poll_val=[];
       if ($(this).attr('multiple')) {
@@ -36,8 +36,8 @@ $(function() {
       }
       params = {choices: poll_val};
       api.post('polls/'+pollid+'/votes', params, function (data) {
-        $(this).removeClass('vote_button');
-        $(this).html(`<span>{Pomo.getText('Voted')}</span>`);
+        $btn_obj.removeClass('vote_button');
+        $btn_obj.html(`<span>${Pomo.getText('Voted')}</span>`);
       });
     }
     return false;
