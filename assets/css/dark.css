@@ -21,6 +21,10 @@ background-color:#243447!important;
 background-color:#189EFC !important;
 opacity:0.5;
 }
+.status_form .status_bottom .disabled {
+color:#189EFC !important;
+opacity:0.5;
+}
 .status_form .status_top .status_spoiler {
 color:#fff;
 border:1px solid #000;
@@ -34,7 +38,8 @@ background-color:#132030;
 background-color: #132030;
 color:#fff;
 }
-.status_form .status_textarea .media_attachments_preview_area {
+.status_form .status_textarea .media_attachments_preview_area,
+.status_form .status_textarea .status_poll_editor {
 background-color:#1B2836;
 border-top:1px solid #000;
 }
@@ -51,6 +56,22 @@ background-color:rgba(0,0,0,0);
 .status_form .status_textarea .media_attachments_preview .remove_button {
 color:#fff;
 background-color:rgba(0,0,0,.8);
+}
+.poll_time {
+color: #FFFFFF;
+border:1px solid #AAB8C2;
+background-color:#1B2836;
+}
+.poll_time:focus-within {
+border:1px solid #189EFC;
+background-color:#1B2836;
+}
+.poll_time.redborder {
+border:1px solid #FF0000;
+}
+.poll_time input {
+color:#FFFFFF;
+background-color:#1B2836;
 }
 .status_form .status_bottom .status_option_button {
 color:#189EFC;
@@ -459,7 +480,7 @@ color:#999;
 .toot_detail {
 background-color:#1B2836;
 }
-.toot_entry.ancestors_status .toot_entry_body::after,.toot_entry.descendants_status .toot_entry_body::after {
+.toot_entry.ancestors_status .toot_entry_body::after,.toot_entry.descendants_status.direct_answer .toot_entry_body::after {
 border:2px solid #76BFEC;
 }
 .toot_entry.descendants_status:last-child .toot_entry_body::after {
@@ -495,12 +516,11 @@ background:#243447;
 background:#189EFC;
 }
 .radiobox input[type="radio"] + .radiotext:before {
-background:#243447;
 border:1px solid #AAB8C2;
 }
 .radiobox input[type="radio"]:checked + .radiotext:before {
 background-color:#189EFC;
-box-shadow:inset 0 0 0 4px #fff;
+box-shadow: inset 0 0 0 4px #243447;
 border-color:#189EFC;
 }
 .options {
@@ -630,4 +650,13 @@ background: rgb(101, 119, 134);
 }
 .player .volume .pointer {
 background: #189EFC;
+}
+.poll_bar {
+background-color:rgb(101, 119, 134);
+}
+.poll_winner {
+background-color:#189EFC;
+}
+.poll_footer {
+color:#66757f;
 }

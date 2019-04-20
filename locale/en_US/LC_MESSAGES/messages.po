@@ -21,8 +21,14 @@ msgstr "Language"
 msgid "Language_en_US"
 msgstr "English (US)"
 
+msgid "Language_cs_CZ"
+msgstr "Czech"
+
 msgid "Language_de_DE"
 msgstr "German"
+
+msgid "Language_fr_FR"
+msgstr "French"
 
 msgid "Language_ja_JP"
 msgstr "Japanese"
