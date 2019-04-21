@@ -2097,6 +2097,31 @@ $(function() {
     $(".media_detail .media_backward").fadeIn();
     $(".media_detail .media_box img").attr("src",JSON.parse($(".media_detail").attr("pictures"))[$(".media_detail").attr("cid")]);
   });
+  $(document).on("keyup",".status_poll_editor .poll_time input",function() {
+    console.log("checked");
+    if($(this).is(":invalid")) $(this).parent().addClass("redborder");
+    else $(this).parent().removeClass("redborder");
+  });
+  $(document).on("click",".poll_vote_option,.poll_vote_label,.poll_vote",function(e) {
+    e.stopPropagation();
+  });
+  $(document).on('click','.poll_vote',function(e) {
+    var poll_id = $(this).parent().data('poll');
+    var poll_random = $(this).parent().data('random');
+    if(poll_id !== null) {
+      let poll_options = new Array;
+      $('#poll_'+poll_id+'_'+poll_random+' input[name="poll_'+poll_id+'"]').each(function(i) {
+        if($(this).is(":checked")) poll_options.push(i);
+      });
+      if(poll_options.length != 0) {
+        api.post('polls/'+poll_id+'/votes',{choices:poll_options},function(data) {
+          $(".poll_"+poll_id).after(poll_template(data));
+          $(".poll_"+poll_id).remove();
+        });
+      }
+    }
+    return false;
+  });
   shortcut.add("n",function() {
     $("#creat_status").click();
   },{
