@@ -38,6 +38,9 @@ background-color:#132030;
 background-color: #132030;
 color:#fff;
 }
+.status_form .status_textarea textarea:not(:last-of-type) {
+border-bottom:1px solid #000;
+}
 .status_form .status_textarea .media_attachments_preview_area,
 .status_form .status_textarea .status_poll_editor {
 background-color:#1B2836;

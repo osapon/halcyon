@@ -5,11 +5,11 @@
 <div class="status_preview"></div>
 <form id="single_reply_status_form" name="single_reply_status_form" class="status_form">
 <div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="<?=_('Content warning')?>" type="text">
+<input class="status_spoiler invisible" name="status_spoiler" placeholder="<?=_('Content warning')?>" data-random="94785" type="text">
 </div>
 <div class="status_main">
 <div class="status_textarea">
-<textarea class="emoji_poss" name="status_textarea" placeholder="<?=_('What\'s happening?')?>"></textarea>
+<textarea class="emoji_poss" name="status_textarea" placeholder="<?=_('What\'s happening?')?>" data-random="39303"></textarea>
 <div class="media_attachments_preview_area invisible"></div>
 <div class="status_poll_editor invisible">
 <i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
@@ -74,6 +74,9 @@
 <div class="submit_status_label_wrap">
 <span class="character_count">
 </span>
+<label for="header_status_addfield" class="status_addfield status_option_button">
+<i class="fa fa-plus-circle" aria-hidden="true"></i>
+</label>
 <label for="single_reply_status_form_submit" class="submit_status_label">
 <div class="toot_button_label disallow_select">
 <i class="fa fa-reply" aria-hidden="true"></i>

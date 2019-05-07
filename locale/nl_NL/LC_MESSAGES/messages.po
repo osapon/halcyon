@@ -1,0 +1,933 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-07 17:09+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: nl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /nl/halcyon/nl.po\n"
+"X-Pootle-Revision: 210\n"
+
+msgid "Language"
+msgstr "Taal"
+
+msgid "Language_en_US"
+msgstr "Engels (VS)"
+
+msgid "Language_de_DE"
+msgstr "Duits"
+
+msgid "Language_ja_JP"
+msgstr "Japans"
+
+msgid "Language_ko_KR"
+msgstr "Koreaans"
+
+msgid "Language_pl_PL"
+msgstr "Pools"
+
+msgid "Language_gl_ES"
+msgstr "Galicisch"
+
+msgid "Language_pt_BR"
+msgstr "Portugees (Brazilië)"
+
+msgid "Language_it_IT"
+msgstr "Italiaans"
+
+msgid "Language_cs_CZ"
+msgstr "Tsjechisch"
+
+msgid "Language_fr_FR"
+msgstr "Frans"
+
+msgid "Sensitive content"
+msgstr "Gevoelige inhoud"
+
+msgid "Click to view"
+msgstr "Klik om te bekijken"
+
+msgid "SHOW MORE"
+msgstr "MEER TONEN"
+
+msgid "SHOW LESS"
+msgstr "MINDER TONEN"
+
+msgid "Public"
+msgstr "Openbaar"
+
+msgid "Unlisted"
+msgstr "Minder openbaar"
+
+msgid "Followers-only"
+msgstr "Alleen volgers"
+
+msgid "Direct"
+msgstr "Direct"
+
+msgid "Delete Toot"
+msgstr "Toot verwijderen"
+
+msgid "Unpin Toot"
+msgstr "Toot losmaken"
+
+msgid "Pin Toot"
+msgstr "Toot vastmaken"
+
+msgid "Mute"
+msgstr "Negeren"
+
+msgid "Block"
+msgstr "Blokkeren"
+
+msgid "Report this Toot"
+msgstr "Deze toot rapporteren"
+
+msgid "Copy link to Toot"
+msgstr "Link naar toot kopiëren"
+
+msgid "View original"
+msgstr "Origineel bekijken"
+
+msgid "Boosted"
+msgstr "Geboost"
+
+msgid "Pinned Toot"
+msgstr "Vastgemaakte toot"
+
+msgid "favourited Your Toot"
+msgstr "voegde jouw toot als favoriet toe"
+
+msgid "boosted Your Toot"
+msgstr "boostte jouw toot"
+
+msgid "followed you"
+msgstr "volgt jou nu"
+
+msgid "Follow"
+msgstr "Volgen"
+
+msgid "Toot your reply"
+msgstr "Toot jouw reactie"
+
+msgid "Reply"
+msgstr "Reageren"
+
+msgid "Content warning"
+msgstr "Tekstwaarschuwing"
+
+msgid "Jan"
+msgstr "jan"
+
+msgid "Feb"
+msgstr "feb"
+
+msgid "Mar"
+msgstr "mrt"
+
+msgid "Apr"
+msgstr "apr"
+
+msgid "May"
+msgstr "mei"
+
+msgid "Jun"
+msgstr "jun"
+
+msgid "Jul"
+msgstr "jul"
+
+msgid "Aug"
+msgstr "aug"
+
+msgid "Sep"
+msgstr "sep"
+
+msgid "Oct"
+msgstr "okt"
+
+msgid "Nov"
+msgstr "nov"
+
+msgid "Dec"
+msgstr "dec"
+
+msgid "Changed setting to"
+msgstr "Instellingen veranderd naar"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "Altijd als gevoelig markeren (nsfw) ingeschakeld"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "Altijd als gevoelig markeren (nsfw) uitgeschakeld"
+
+msgid "Who to follow enabled"
+msgstr "Wie te volgen ingeschakeld"
+
+msgid "Who to follow disabled"
+msgstr "Wie te volgen uitgeschakeld"
+
+msgid "Changed about me setting"
+msgstr "Instelling over mij veranderd"
+
+msgid "Uploaded new avatar"
+msgstr "Nieuwe avatar geüpload"
+
+msgid "Uploaded new header"
+msgstr "Nieuwe omslagfoto geüpload"
+
+msgid "Account locked"
+msgstr "Account besloten"
+
+msgid "Account unlocked"
+msgstr "Account niet besloten"
+
+msgid "Link previews enabled"
+msgstr "Voorvertoningen links ingeschakeld"
+
+msgid "Link previews disabled"
+msgstr "Voorvertoningen links uitgeschakeld"
+
+msgid "You didn't allow notifications"
+msgstr "Je hebt meldingen niet toegestaan"
+
+msgid "Desktop notifications enabled"
+msgstr "Desktopmeldingen ingeschakeld"
+
+msgid "Desktop notifications disabled"
+msgstr "Desktopmeldingen uitgeschakeld"
+
+msgid "Replies shown"
+msgstr "Reacties getoond"
+
+msgid "Replies hidden"
+msgstr "Reacties verborgen"
+
+msgid "CW content shown"
+msgstr "Tekstwaarschuwingen (cw) getoond"
+
+msgid "CW content hidden"
+msgstr "Tekstwaarschuwingen (cw) verborgen"
+
+msgid "NSFW content shown"
+msgstr "Gevoelige inhoud (nsfw) getoond"
+
+msgid "NSFW content hidden"
+msgstr "Gevoelige inhoud (nsfw) verborgen"
+
+msgid "Reply to"
+msgstr "Reageer op"
+
+msgid "Report"
+msgstr "Rapportage"
+
+msgid "Report a Toot of"
+msgstr "Rapporteer een toot van"
+
+msgid "What's happening?"
+msgstr "Wat houdt je bezig?"
+
+msgid "Toot"
+msgstr "Toot"
+
+msgid "Compose new Toot"
+msgstr "Nieuwe toot opstellen"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "Omschrijf wat er mis is met deze Toot?"
+
+msgid "TOOTS"
+msgstr "TOOTS"
+
+msgid "PEOPLE"
+msgstr "MENSEN"
+
+msgid "Settings"
+msgstr "Instellingen"
+
+msgid "GENERAL"
+msgstr "ALGEMEEN"
+
+msgid "PROFILE"
+msgstr "PROFIEL"
+
+msgid "APPEARANCE"
+msgstr "UITERLIJK"
+
+msgid "Change instance"
+msgstr "Server veranderen"
+
+msgid "Blank for default"
+msgstr "Leeg voor de standaardwaarde"
+
+msgid "FOLLOWING"
+msgstr "VOLGEND"
+
+msgid "Interesting accounts of devs"
+msgstr "Interessante accounts van softwareontwikkelaars"
+
+msgid "Halcyon for"
+msgstr "Halcyon voor"
+
+msgid "About"
+msgstr "Over"
+
+msgid "Terms"
+msgstr "Voorwaarden"
+
+msgid "Apps"
+msgstr "Apps"
+
+msgid "Source code"
+msgstr "Broncode"
+
+msgid "Other instances"
+msgstr "Andere servers"
+
+msgid "Privacy policy"
+msgstr "Privacybeleid"
+
+msgid "Version"
+msgstr "Versie"
+
+msgid "Who to follow"
+msgstr "Wie te volgen"
+
+msgid "Enable who to follow"
+msgstr "Wie te volgen inschakelen"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr ""
+"Halcyon moet met een externe server verbinden om een lijst met gebruikers op "
+"te halen die gelijksoortige interesses hebben als jij. Geef hiervoor "
+"toestemming wanneer je deze functie wilt gebruiken."
+
+msgid "MORE"
+msgstr "MEER"
+
+msgid "FOLLOWERS"
+msgstr "VOLGERS"
+
+msgid "Following"
+msgstr "Volgend"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "Je ontvangt niet langer meldingen van deze gebruiker"
+
+msgid "Unmuted this user"
+msgstr "Deze gebruiker niet langer negeren"
+
+msgid "This user has been blocked"
+msgstr "Deze gebruiker is geblokkeerd"
+
+msgid "Unblocked this user"
+msgstr "Deze gebruiker is deblokkeerd"
+
+msgid "Your Toot has been deleted"
+msgstr "Jouw toot is verwijderd"
+
+msgid "Your Toot has been pinned"
+msgstr "Jouw toot is vastgezet"
+
+msgid "Your Toot has been unpinned"
+msgstr "Jouw toot is losgemaakt"
+
+msgid "Edit profile"
+msgstr "Profiel bewerken"
+
+msgid "FAVOURITES"
+msgstr "FAVORIETEN"
+
+msgid "Show"
+msgstr "Tonen"
+
+msgid "Blocking"
+msgstr "Blokkeren"
+
+msgid "Muting"
+msgstr "Negeren"
+
+msgid "Requested"
+msgstr "Aangevraagd"
+
+msgid "Photos and toots"
+msgstr "Foto's en toots"
+
+msgid "favourited your toot"
+msgstr "voegde jouw toot als favoriet toe"
+
+msgid "boosted your toot"
+msgstr "boostte jouw toot"
+
+msgid "mentioned you"
+msgstr "vermeldde jou"
+
+msgid "Your Toot was posted!"
+msgstr "Jouw toot is geplaatst!"
+
+msgid "News"
+msgstr "Nieuws"
+
+msgid "Source"
+msgstr "Broncode"
+
+msgid "Privacy"
+msgstr "Privacy"
+
+msgid "Imprint"
+msgstr "Impressum"
+
+msgid "Contact"
+msgstr "Contact"
+
+msgid "Login"
+msgstr "Inloggen"
+
+msgid "Login to Halcyon"
+msgstr "Op Halcyon inloggen"
+
+msgid "create an account"
+msgstr "Maak een account aan"
+
+msgid "or"
+msgstr "of"
+
+msgid "I agree with the"
+msgstr "I ga akkoord met"
+
+msgid "What is Halcyon"
+msgstr "Wat is Halcyon"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr ""
+"die als doel heeft om de eenvoudige en mooie gebruikersomgeving van Twitter "
+"na te bootsen, zonder dat de voordelen van decentrale netwerken verloren "
+"gaan."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon is een webclient voor"
+
+msgid "Contact / Feedback"
+msgstr "Contact / feedback"
+
+msgid "Use my contact form"
+msgstr "Gebruik mijn contactformulier"
+
+msgid "Help us"
+msgstr "Help ons"
+
+msgid "Halcyon Terms of Use"
+msgstr "Gebruiksovereenkomst Halcyon"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"Deze gebruikersvoorwaarden zijn van toepassing voor gebruikers van de "
+"webservice Halcyon voor Mastodon en Pleroma (Halcyon in het kort) gehost op"
+
+msgid "Your Reply was posted!"
+msgstr "Jouw reactie is geplaatst!"
+
+msgid "Toot reported successfully!"
+msgstr "Toot succesvol gerapporteerd"
+
+msgid "Link successfully copied!"
+msgstr "Link succesvol gekopieerd!"
+
+msgid "Home"
+msgstr "Start"
+
+msgid "Local"
+msgstr "Lokaal"
+
+msgid "Federated"
+msgstr "Globaal"
+
+msgid "Notifications"
+msgstr "Meldingen"
+
+msgid "Search Mastodon"
+msgstr "Zoek op Mastodon"
+
+msgid "View profile"
+msgstr "Profiel bekijken"
+
+msgid "Log out"
+msgstr "Uitloggen"
+
+msgid "All"
+msgstr "Alles"
+
+msgid "new notitification"
+msgstr "nieuwe melding"
+
+msgid "Show all NSFW content"
+msgstr "Alle gevoelige inhoud (nsfw) tonen"
+
+msgid "Show all CW content"
+msgstr "Alle tekstwaarschuwingen (cw) uitklappen"
+
+msgid "Show replies"
+msgstr "Reacties tonen"
+
+msgid "Desktop notifications"
+msgstr "Desktopmeldingen"
+
+msgid "Enable link previews"
+msgstr "Voorvertoningen links inschakelen"
+
+msgid "Auto update"
+msgstr "Automatisch bijwerken"
+
+msgid "Manual update"
+msgstr "Handmatig bijwerken"
+
+msgid "Appearance settings"
+msgstr "Instellingen voor het uiterlijk"
+
+msgid "New posts streaming"
+msgstr "Streaming nieuwe toots"
+
+msgid "replies"
+msgstr "reacties"
+
+msgid "General settings"
+msgstr "Algemene instellingen"
+
+msgid "Default post privacy"
+msgstr "Standaardzichtbaarheid toots"
+
+msgid "Mark as NSFW by default"
+msgstr "Altijd als gevoelig (nsfw) markeren"
+
+msgid "Media"
+msgstr "Media"
+
+msgid "FOLLOWS YOU"
+msgstr "VOLGT JOU"
+
+msgid "Local instance"
+msgstr "Lokale server"
+
+msgid "Hashtag search filter"
+msgstr "Hashtagzoekfilter"
+
+msgid "All instances"
+msgstr "Alle servers"
+
+msgid "Local only"
+msgstr "Alleen lokaal"
+
+msgid "Lock account"
+msgstr "Maak account besloten"
+
+msgid "Header"
+msgstr "Omslagfoto"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "About me"
+msgstr "Over mij"
+
+msgid "Display name"
+msgstr "Weergavenaam"
+
+msgid "Profile settings"
+msgstr "Profielinstellingen"
+
+msgid "Toots"
+msgstr "Toots"
+
+msgid "Favourites"
+msgstr "Favorieten"
+
+msgid "New favourite"
+msgstr "Nieuwe favoriet"
+
+msgid "New boost"
+msgstr "Nieuwe boost"
+
+msgid "New follower"
+msgstr "Nieuwe volger"
+
+msgid "New mention"
+msgstr "Nieuwe vermelding"
+
+msgid "Dark theme enabled"
+msgstr "Donker thema ingeschakeld"
+
+msgid "Dark theme disabled"
+msgstr "Donker thema uitgeschakeld"
+
+msgid "Only on top"
+msgstr "Alleen bovenaan"
+
+msgid "Enable dark theme"
+msgstr "Donker thema inschakelen"
+
+msgid "Please enter the new name for this list."
+msgstr "Vul een nieuwe naam in voor deze lijst"
+
+msgid "The name of your list can't be empty!"
+msgstr "De naam van jouw lijst kan niet leeg blijven!"
+
+msgid "Your list has been renamed"
+msgstr "Jouw lijst is hernoemd"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Weet je zeker dat je deze lijst wilt verwijderen?"
+
+msgid "Your list has been deleted"
+msgstr "Jouw lijst is verwijderd"
+
+msgid "Please enter the name of your new list."
+msgstr "Vul een naam in voor jouw nieuwe lijst"
+
+msgid "Add"
+msgstr "Toevoegen"
+
+msgid "Remove"
+msgstr "Verwijderen"
+
+msgid "Add to list"
+msgstr "Aan lijst toevoegen"
+
+msgid "Are you sure that you want to mute this user?"
+msgstr "Weet je zeker dat je deze gebruiker wilt negeren?"
+
+msgid "Are you sure that you want to block this user?"
+msgstr "Weet je zeker dat je deze gebruiker wilt blokkeren?"
+
+msgid "Are you sure that you want to delete this toot?"
+msgstr "Weet je zeker dat je deze toot wilt verwijderen?"
+
+msgid "Added this account to the list"
+msgstr "Dit account aan de lijst toegevoegd"
+
+msgid ""
+"You need to follow this user to add him/her to the list. Do you want to do "
+"that now?"
+msgstr ""
+"Je moet deze gebruiker volgen om deze aan de lijst te kunnen toevoegen. Wil "
+"je dat nu doen?"
+
+msgid "You successfully followed this user."
+msgstr "Het volgen van deze gebruiker is geslaagd."
+
+msgid "Removed this account from the list"
+msgstr "Dit account van is van de lijst verwijderd"
+
+msgid "Joined at"
+msgstr "Geregistreerd in"
+
+msgid "Direct messages"
+msgstr "Directe berichten"
+
+msgid "Lists"
+msgstr "Lijsten"
+
+msgid "Open public profile"
+msgstr "Openbaar profiel tonen"
+
+msgid "My Lists"
+msgstr "Mijn lijsten"
+
+msgid "Confirmation"
+msgstr "Bevestiging"
+
+msgid "Yes"
+msgstr "Ja"
+
+msgid "Cancel"
+msgstr "Annuleren"
+
+# What is the context for this word? This can mean different things.
+msgid "Prompt"
+msgstr "Prompt"
+
+msgid "Ok"
+msgstr "OK"
+
+msgid "Autocomplete enabled"
+msgstr "Automatisch aanvullen ingeschakeld"
+
+msgid "Autocomplete disabled"
+msgstr "Automatisch aanvullen uitgeschakeld"
+
+msgid "Changed custom profile field"
+msgstr "Handmatig profielveld veranderd"
+
+msgid "Notifications when tab is closed enabled"
+msgstr "Meldingen wanneer tabblad is gesloten ingeschakeld"
+
+msgid "Notifications when tab is closed disabled"
+msgstr "Meldingen wanneer tabblad is gesloten uitgeschakeld"
+
+msgid "Toots of bots shown"
+msgstr "Toots van bots worden getoond"
+
+msgid "Toots of bots hidden"
+msgstr "Toots van bots worden verborgen"
+
+msgid "Filter created"
+msgstr "Filter aangemaakt"
+
+msgid "Gif animations enabled"
+msgstr "GIF-animaties ingeschakeld"
+
+msgid "Gif animations disabled"
+msgstr "GIF-animaties uitgeschakeld"
+
+msgid "Video player enabled"
+msgstr "Videospeler ingeschakeld"
+
+msgid "Video player disabled"
+msgstr "Videospeler uitgeschakeld"
+
+msgid "Audio player enabled"
+msgstr "Audiospeler ingeschakeld"
+
+msgid "Audio player disabled"
+msgstr "Audiospeler uitgeschakeld"
+
+msgid "PeerTube embeds enabled"
+msgstr "Embedden van PeerTubevideo's ingeschakeld"
+
+msgid "PeerTube embeds disabled"
+msgstr "Embedden van PeerTubevideo's uitgeschakeld"
+
+msgid "YouPlay embeds enabled"
+msgstr "Embedden met YouPlay ingeschakeld"
+
+msgid "YouPlay embeds disabled"
+msgstr "Embedden met YouPlay uitgeschakeld"
+
+msgid "Invidio.us embeds enabled"
+msgstr "Embedden met Invidio.us ingeschakeld"
+
+msgid "Invidio.us embeds disabled"
+msgstr "Embedden met Invidio.us uitgeschakeld"
+
+msgid "Vimeo embeds enabled"
+msgstr "Embedden van Vimeovideo's ingeschakeld"
+
+msgid "Vimeo embeds disabled"
+msgstr "Embedden van Vimeovideo's uitgeschakeld"
+
+msgid "Thread"
+msgstr "Gesprek"
+
+msgid "Never"
+msgstr "Nooit"
+
+msgid "Don't change"
+msgstr "Niet veranderen"
+
+msgid "Filter updated"
+msgstr "Filter bijgewerkt"
+
+msgid "Are you sure that you want to delete this filter?"
+msgstr "Weet je zeker dat je deze filter wilt verwijderen?"
+
+msgid "Your filter has been deleted"
+msgstr "Jouw filter is verwijderd"
+
+msgid "Toot to"
+msgstr "Toot naar"
+
+msgid "Administrated by"
+msgstr "Beheerd door"
+
+msgid "Users"
+msgstr "Gebruikers"
+
+msgid "Connections"
+msgstr "Verbindingen"
+
+msgid "Notifications when tab closed"
+msgstr "Meldingen wanneer tabblad is gesloten"
+
+msgid "Filter settings"
+msgstr "Filterinstellingen"
+
+msgid "Show toots of bots"
+msgstr "Toots van bots tonen"
+
+msgid "Add new filter"
+msgstr "Nieuw filter toevoegen"
+
+msgid "Create a filter"
+msgstr "Filter aanmaken"
+
+msgid "Word or phrase to filter"
+msgstr "Woord of zinsdeel om te filteren"
+
+msgid "Filter in the following timelines"
+msgstr "In de volgende tijdlijnen filteren"
+
+msgid "Expires in"
+msgstr "Verloopt in"
+
+msgid "Autocomplete in compose field"
+msgstr "Autoaanvullen in tekstvak voor toots"
+
+msgid "Media settings"
+msgstr "Mediainstellingen"
+
+msgid "Play animated GIFs"
+msgstr "GIF-animaties afspelen"
+
+msgid "Enable video player"
+msgstr "Videospeler inschakelen"
+
+msgid "Enable audio player"
+msgstr "Audiospeler inschakelen"
+
+msgid "Embed PeerTube videos"
+msgstr "PeerTubevideo's embedden"
+
+msgid "Embed YouTube using YouPlay"
+msgstr "YouTubevideo's met YouPlay embedden"
+
+msgid "Embed YouTube using Invidio.us"
+msgstr "YouTubevideo's met Invidio.us embedden"
+
+msgid "Embed Vimeo using YouPlay"
+msgstr "Vimeovideo's met YouPlay embedden"
+
+msgid "Custom profile fields"
+msgstr "Handmatige profielvelden"
+
+msgid "Name"
+msgstr "Naam"
+
+msgid "Value"
+msgstr "Waarde"
+
+msgid ""
+"To verify that the links in your custom fields really belong to you, you can "
+"add the link below to your website. The link text can be changed to whatever "
+"you want."
+msgstr ""
+"Om te kunnen verifiëren dat de gelinkte websites in jouw handmatige "
+"profielvelden echt van jou zijn, kun je de link hieronder aan jouw website "
+"toevoegen. De omschrijving van de link maakt niet uit."
+
+msgid "Message"
+msgstr "Bericht"
+
+msgid "Filter"
+msgstr "Filter"
+
+msgid "second"
+msgstr "seconde"
+
+msgid "seconds"
+msgstr "seconden"
+
+msgid "minute"
+msgstr "minuut"
+
+msgid "minutes"
+msgstr "minuten"
+
+msgid "hour"
+msgstr "uur"
+
+msgid "hours"
+msgstr "uur"
+
+msgid "day"
+msgstr "dag"
+
+msgid "days"
+msgstr "dagen"
+
+msgid "week"
+msgstr "week"
+
+msgid "Filter posts irreversible"
+msgstr "Berichten onomkeerbaar filteren"
+
+msgid "Whole word"
+msgstr "Heel woord"
+
+msgid "FILTERS"
+msgstr "FILTERS"
+
+msgid "MEDIA"
+msgstr "MEDIA"
+
+msgid "Dark theme reset to standard"
+msgstr "Donker thema uitgeschakeld"
+
+msgid "Pictures shown in full height"
+msgstr "Afbeeldingen met volledige hoogte getoond"
+
+msgid "Pictures shown in default height"
+msgstr "Afbeeldingen met standaardhoogte getoond"
+
+msgid "Threads shown in thread view"
+msgstr "Gesprekken in gespreksweergave getoond"
+
+msgid "Threads shown in chronological order"
+msgstr "Gesprekken in chronologische volgorde getoond"
+
+msgid "Final results"
+msgstr "Uiteindelijk resultaat"
+
+msgid "votes"
+msgstr "stemmen"
+
+msgid "left"
+msgstr "links"
+
+msgid "Vote"
+msgstr "Stem"
+
+msgid "A poll you participated in has ended"
+msgstr "Een poll waaraan jij hebt meegedaan is beëindigd"
+
+msgid "Days"
+msgstr "Dagen"
+
+msgid "Hours"
+msgstr "Uur"
+
+msgid "Minutes"
+msgstr "Minuten"
+
+msgid "Multiple choice"
+msgstr "Meerdere keuzes"
+
+msgid "Poll finished"
+msgstr "Poll beëindigd"
+
+msgid ""
+"If you close the overlay, your text will get deleted! Are you sure you want "
+"to close it?"
+msgstr ""
+"Wanneer je dit tekstvenster sluit wordt jouw tekst verwijderd! Weet je zeker "
+"dat je het wilt sluiten?"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Show pictures in full height"
+msgstr "Afbeeldingen in volledige hoogte tonen"
+
+msgid "Show threads in thread view in timeline"
+msgstr "Gesprekken in gespreksweergave op de tijdlijn tonen"

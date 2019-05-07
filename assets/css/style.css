@@ -139,17 +139,17 @@ cursor: default;
 .status_form .status_top {
 display: flex;
 align-items: center;
-width: calc( 100% - 54px );
 padding-bottom: 0;
-margin-left: 54px;
 box-sizing: border-box;
 }
 .status_form .status_top .status_spoiler {
-color: #189EFC;
+color: #000;
 width: 100%;
 height: 35px;
-border-radius: 4px;
+border-top-left-radius:4px;
+border-top-right-radius:4px;
 border: 1px solid #C7E7FB;
+border-bottom:0 !important;
 font-size: 14px;
 padding: 8px;
 box-sizing: border-box;
@@ -157,8 +157,9 @@ box-sizing: border-box;
 .status_form .status_main {
 display: flex;
 flex-wrap: nowrap;
+width:100%;
 }
-.status_form .status_main .icon_box {
+#autoCompleteDropDown .icon_box {
 flex-shrink: 0;
 margin-right: 8px;
 width: 32px;
@@ -167,13 +168,31 @@ border-radius: 5px;
 overflow: hidden;
 margin-left: 14px;
 }
+#header_status_form .status_main,#reply_status_form .status_main,#header_status_form .status_top,#reply_status_form .status_top {
+width: calc( 100% - 54px );
+margin-left: 54px;
+}
+.status_form .status_left.icon_box {
+flex-shrink: 0;
+margin-right: 8px;
+width: 32px;
+height: 32px;
+border-radius: 5px;
+overflow: hidden;
+margin-left: 14px;
+float:left
+}
 .status_form .status_main .status_textarea {
 flex: 1;
 padding: 8px;
-border-radius: 3px;
+border-radius:3px;
 box-sizing: border-box;
 border: 1px solid #C7E7FB;
 background-color: #fff;
+}
+.status_form .status_main .status_textarea.status_has_cw {
+border-top-left-radius:0;
+border-top-right-radius:0;
 }
 .status_form .status_main .status_textarea textarea {
 color: #000;
@@ -186,6 +205,9 @@ font-family : "Helvetica Neue",Helvetica,Arial,sans-serif;
 line-height: normal;
 outline: 0;
 overflow: hidden;
+}
+.status_form .status_textarea textarea:not(:last-of-type) {
+border-bottom:1px solid #C7E7FB;
 }
 .status_form .status_textarea textarea.focus {
 height: 68px;

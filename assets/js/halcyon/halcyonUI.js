@@ -356,7 +356,7 @@ if(statuses[i].content.match(new RegExp("[^a-zA-Z1-9]"+current_filters[a].phrase
 }
 }
 }
-if(filterstatus == false && timeline_hide_status.indexOf(statuses[i]) == -1 && !(show_replies == "false" && statuses[i].in_reply_to_id) && !(localStorage.setting_show_bots == "false" && statuses[i].account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
+if(filterstatus == false && timeline_hide_status.indexOf(statuses[i].id) == -1 && !(show_replies == "false" && statuses[i].in_reply_to_id) && !(localStorage.setting_show_bots == "false" && statuses[i].account.bot == true && !level.match(/accounts\/\d+\/statuses/)) && !(statuses[i].visibility == "direct" && level == "timelines/home")) {
 timeline_template(statuses[i]).appendTo("#js-timeline");
 if(statuses[i].in_reply_to_id && level === "timelines/home" | level === "timelines/public") {
 if(localStorage.setting_thread_view == "true") {
@@ -1259,6 +1259,8 @@ $(function() {
 $(document).on('click', function(e) {
 if(!$(e.target).closest('#creat_status').length && !$(e.target).closest('.overlay_status').length) {
 $('#overlay_status_emoji').lsxEmojiPicker("destroy");
+$('#overlay_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
+$('#overlay_status_form .status_textarea textarea').autoCompleteToken("destroy");
 }
 });
 $('label[for=overlay_status_emoji]').click(function(e) {$('#overlay_status_emoji').trigger('click',e)});
@@ -1279,13 +1281,8 @@ $('#overlay_status_form .status_textarea textarea').addClass('focus');
 $('.overlay_status .submit_status_label').addClass('active_submit_button');
 $('#overlay_status_form .status_textarea textarea').focus();
 autosize($('#overlay_status_form .status_textarea textarea'));
-if(localStorage.setting_compose_autocomplete == "true") {
-$('#overlay_status_form .status_textarea textarea').autoCompleteToken({instance:1,startkey:"@",endkey:" ",arrayname:"accounts",resultname:"acct"});
-$('#overlay_status_form .status_textarea textarea').autoCompleteToken({instance:2,startkey:"#",endkey:" ",arrayname:"hashtags"});
-$('#overlay_status_form .status_textarea textarea').autoCompleteToken({instance:3,startkey:":",endkey:";",source:actEmojiData,resultname:"name",callback:function() {
-$('#overlay_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-}});
-}
+enableAutoComplete($('#overlay_status_form .status_top .status_spoiler'));
+enableAutoComplete($('#overlay_status_form .status_textarea textarea'));
 $('#overlay_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 if($(this).attr("display_name")) $('.overlay_status .overlay_status_header span').addClass("emoji_poss").html(__("Toot to")+" "+$(this).attr("display_name"));
@@ -1297,9 +1294,12 @@ $('#overlay_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#overlay_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
-$('#overlay_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-var textLen = $('#overlay_status_form .status_textarea textarea').val().length * 2;
+$('#overlay_status_form .status_top .status_spoiler,#overlay_status_form .status_textarea textarea').each(function() {
+if(global_focus_textfield == $(this).data("random")) {
+$(this).insertText(":"+emoji.name+":");
+$(this).trigger({"type":"keyup","key":":"});
+}
+});
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1313,6 +1313,7 @@ if(e.keyCode !== 224 & e.keyCode !== 17) {
 if(e.key == ":") {
 replace_emoji_textarea(this);
 }
+if($('#overlay_status_form textarea').length == 1) {
 const textCount = $('#overlay_status_form textarea').val().length + $('#overlay_status_form .status_spoiler').val().length;
 let textLen = ( current_instance_charlimit - textCount );
 if(textLen <= -1) {
@@ -1325,6 +1326,24 @@ $('#overlay_status_form .character_count').removeClass('red');
 is_ready = false;
 }
 $('#overlay_status_form .character_count').text(textLen);
+}
+else {
+is_ready = false;
+$('#overlay_status_form .character_count').removeClass('red');
+$('#overlay_status_form textarea').each(function() {
+const textCount = $(this).val().length + $('#overlay_status_form .status_spoiler').val().length;
+let textLen = ( current_instance_charlimit - textCount );
+if(textLen <= -1) {
+$('#overlay_status_form .character_count').addClass('red');
+is_ready = true;
+} else if(textLen === current_instance_charlimit) {
+is_ready = true;
+}
+if($(this).is(":focus")) {
+$('#overlay_status_form .character_count').text(textLen);
+}
+});
+}
 }
 if($('#overlay_status_form .status_poll_editor').hasClass("invisible")) {
 if(is_ready) $('#overlay_status_form').addClass('ready');
@@ -1340,6 +1359,7 @@ else $('#overlay_status_form').addClass('ready');
 });
 $(document).on('click','#overlay_status_form .status_CW', function(e) {
 $('#overlay_status_form .status_spoiler').toggleClass('invisible');
+$('#overlay_status_form .status_textarea').toggleClass('status_has_cw');
 });
 $(document).on('click','#overlay_status_form .status_poll', function(e) {
 $('#overlay_status_form .status_poll_editor').toggleClass('invisible');
@@ -1348,6 +1368,12 @@ $('#overlay_status_form textarea').keyup();
 });
 $(document).on('click','#overlay_status_form .expand_privacy_menu_button', function(e) {
 $('#overlay_status_form .expand_privacy_menu').removeClass('invisible');
+});
+$(document).on('click','#overlay_status_form .status_addfield', function(e) {
+var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
+autosize(new_textarea);
+enableAutoComplete(new_textarea);
+$('#overlay_status_form textarea').last().after(new_textarea);
 });
 $(document).on('click','#overlay_status_form .status_privacy.select_privacy', function(e) {
 e.stopPropagation();
@@ -1381,7 +1407,7 @@ $('#overlay_status_form .character_count').html('<i class="fa fa-circle-o-notch 
 const form = document.forms.overlay_status_form;
 if (!$('#overlay_status_media_atta')[0].files.length || !$('#overlay_status_form .status_poll_editor').hasClass("invisible")) {
 const params = {
-status : form.status_textarea.value,
+status:$('#overlay_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value
@@ -1397,7 +1423,7 @@ params.poll.expires_in = $('#overlay_status_form .poll_days').val()*86400+$('#ov
 if($('#overlay_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
 }
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#overlay_status_form .media_attachments_preview_area').empty();
 $('#overlay_status_form .status_spoiler').addClass('invisible');
 $('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -1425,13 +1451,13 @@ if ( i === 3 || i === filesLen ) {
 api.postMedia("media", formData, function (postMedia) {
 media_array.unshift(postMedia.id);
 const params = {
-status : form.status_textarea.value,
+status:$('#overlay_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
 media_ids: media_array
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#overlay_status_form .media_attachments_preview_area').empty();
 $('#overlay_status_form .status_spoiler').addClass('invisible');
 $('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -1468,6 +1494,7 @@ $('#header_status_form .status_textarea textarea').removeClass('focus');
 $('#header_status_form .status_bottom').addClass('invisible');
 autosize.destroy($('#header_status_form .status_textarea textarea'));
 $('#header_status_emoji').lsxEmojiPicker("destroy");
+$('#header_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
 $('#header_status_form .status_textarea textarea').autoCompleteToken("destroy");
 $('#header_status_form .status_textarea').addClass("closed");
 }
@@ -1478,6 +1505,7 @@ if(e.keyCode !== 224 & e.keyCode !== 17) {
 if(e.key == ":") {
 replace_emoji_textarea(this);
 }
+if($('#header_status_form textarea').length == 1) {
 const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
 let textLen = ( current_instance_charlimit - textCount );
 if(textLen <= -1) {
@@ -1490,6 +1518,24 @@ $('#header_status_form .character_count').removeClass('red');
 is_ready = false;
 }
 $('#header_status_form .character_count').text(textLen);
+}
+else {
+is_ready = false;
+$('#header_status_form .character_count').removeClass('red');
+$('#header_status_form textarea').each(function() {
+const textCount = $(this).val().length + $('#header_status_form .status_spoiler').val().length;
+let textLen = ( current_instance_charlimit - textCount );
+if(textLen <= -1) {
+$('#header_status_form .character_count').addClass('red');
+is_ready = true;
+} else if(textLen === current_instance_charlimit) {
+is_ready = true;
+}
+if($(this).is(":focus")) {
+$('#header_status_form .character_count').text(textLen);
+}
+});
+}
 }
 if($('#header_status_form .status_poll_editor').hasClass("invisible")) {
 if(is_ready) $('#header_status_form').addClass('ready');
@@ -1505,11 +1551,19 @@ else $('#header_status_form').addClass('ready');
 });
 $(document).on('click','#header_status_form .status_CW', function(e) {
 $('#header_status_form .status_spoiler').toggleClass('invisible');
+$('#header_status_form .status_textarea').toggleClass('status_has_cw');
+$('#header_status_form .status_spoiler').val("");
 });
 $(document).on('click','#header_status_form .status_poll', function(e) {
 $('#header_status_form .status_poll_editor').toggleClass('invisible');
 $('#header_status_form .status_media_attachment').toggleClass('disabled');
 $('#header_status_form textarea').keyup();
+});
+$(document).on('click','#header_status_form .status_addfield', function(e) {
+var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
+autosize(new_textarea);
+enableAutoComplete(new_textarea);
+$('#header_status_form textarea').last().after(new_textarea);
 });
 $(document).on('click','#header_status_form .expand_privacy_menu_button', function(e) {
 $('#header_status_form .expand_privacy_menu').removeClass('invisible');
@@ -1533,13 +1587,8 @@ $('#header_status_form input[name="privacy_option"]').val([localStorage.getItem(
 $('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#header_status_form .status_textarea textarea').addClass('focus');
 autosize($('#header_status_form .status_textarea textarea'));
-if(localStorage.setting_compose_autocomplete == "true") {
-$('#header_status_form .status_textarea textarea').autoCompleteToken({instance:1,startkey:"@",endkey:" ",arrayname:"accounts",resultname:"acct"});
-$('#header_status_form .status_textarea textarea').autoCompleteToken({instance:2,startkey:"#",endkey:" ",arrayname:"hashtags"});
-$('#header_status_form .status_textarea textarea').autoCompleteToken({instance:3,startkey:":",endkey:";",source:actEmojiData,resultname:"name",callback:function() {
-$('#header_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-}});
-}
+enableAutoComplete($('#header_status_form .status_top .status_spoiler'));
+enableAutoComplete($('#header_status_form .status_textarea textarea'));
 $('#header_status_form .status_bottom').removeClass('invisible');
 $('#header_status_form .submit_status_label').addClass('active_submit_button');
 const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
@@ -1549,9 +1598,12 @@ $('#header_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#header_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
-$('#header_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-var textLen = $('#header_status_form .status_textarea textarea').val().length * 2;
+$('#header_status_form .status_top .status_spoiler,#header_status_form .status_textarea textarea').each(function() {
+if(global_focus_textfield == $(this).data("random")) {
+$(this).insertText(":"+emoji.name+":");
+$(this).trigger({"type":"keyup","key":":"});
+}
+});
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1587,7 +1639,7 @@ $('#header_status_form .character_count').html('<i class="fa fa-circle-o-notch f
 const form = document.forms.header_status_form;
 if(!$('#header_status_media_atta')[0].files.length || !$('#header_status_form .status_poll_editor').hasClass("invisible")) {
 const params = {
-status : form.status_textarea.value,
+status: $('#header_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value
@@ -1603,7 +1655,7 @@ params.poll.expires_in = $('#header_status_form .poll_days').val()*86400+$('#hea
 if($('#header_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
 }
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#header_status_form .media_attachments_preview_area').empty();
 $('#header_status_form .status_spoiler').addClass('invisible');
 $('#header_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -1613,6 +1665,7 @@ $('#header_status_form').removeClass('ready');
 $('#header_status_form .status_textarea').removeClass('disallow_select');
 $('#header_status_form .character_count').html(current_instance_charlimit);
 $(document).click();
+$('#header_status_form .additional_textarea').remove();
 });
 } else {
 const dummy_form = $('<form></form>').append($('#header_status_media_atta')),
@@ -1627,13 +1680,13 @@ if ( i === 3 || i === filesLen ) {
 api.postMedia("media", formData, function (postMedia) {
 media_array.unshift(postMedia.id);
 const params = {
-status : form.status_textarea.value,
+status : $('#header_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
 media_ids: media_array
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#header_status_form .media_attachments_preview_area').empty();
 $('#header_status_form .status_spoiler').addClass('invisible');
 $('#header_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -1643,6 +1696,7 @@ $('#header_status_form').removeClass('ready');
 $('#header_status_form .status_textarea').removeClass('disallow_select');
 $('#header_status_form .character_count').html(current_instance_charlimit);
 $(document).click();
+$('#header_status_form .additional_textarea').remove();
 });
 });
 break;
@@ -1664,6 +1718,8 @@ $('#reply_status_form .status_bottom').addClass('invisible');
 $('#reply_status_form .status_textarea textarea').removeClass('focus');
 $('#reply_status_form .submit_status_label').removeClass('active_submit_button');
 $('#reply_status_emoji').lsxEmojiPicker("destroy");
+$('#reply_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
+$('#reply_status_form .status_textarea textarea').autoCompleteToken("destroy");
 }
 });
 $(document).on('click','#reply_status_form', function(e) {
@@ -1678,13 +1734,8 @@ replyto += "@"+mentions[i].acct+" ";
 }
 $('#reply_status_form .status_textarea textarea').addClass('focus');
 autosize($('#reply_status_form .status_textarea textarea'));
-if(localStorage.setting_compose_autocomplete == "true") {
-$('#reply_status_form .status_textarea textarea').autoCompleteToken({instance:1,startkey:"@",endkey:" ",arrayname:"accounts",resultname:"acct"});
-$('#reply_status_form .status_textarea textarea').autoCompleteToken({instance:2,startkey:"#",endkey:" ",arrayname:"hashtags"});
-$('#reply_status_form .status_textarea textarea').autoCompleteToken({instance:3,startkey:":",endkey:";",source:actEmojiData,resultname:"name",callback:function() {
-$('#reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-}});
-}
+enableAutoComplete($('#reply_status_form .status_top .status_spoiler'));
+enableAutoComplete($('#reply_status_form .status_textarea textarea'));
 $('#reply_status_form .status_bottom').removeClass('invisible');
 $('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val(replyto);
@@ -1696,9 +1747,12 @@ $('#reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#reply_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
-$('#reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-var textLen = $('#reply_status_form .status_textarea textarea').val().length * 2;
+$('#reply_status_form .status_top .status_spoiler,#reply_status_form .status_textarea textarea').each(function() {
+if(global_focus_textfield == $(this).data("random")) {
+$(this).insertText(":"+emoji.name+":");
+$(this).trigger({"type":"keyup","key":":"});
+}
+});
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1713,6 +1767,7 @@ if(e.keyCode !== 224 & e.keyCode !== 17) {
 if(e.key == ":") {
 replace_emoji_textarea(this);
 }
+if($('#reply_status_form textarea').length == 1) {
 const textCount = $('#reply_status_form textarea').val().length + $('#reply_status_form .status_spoiler').val().length;
 let textLen = ( current_instance_charlimit - textCount );
 if(textLen <= -1) {
@@ -1725,6 +1780,24 @@ $('#reply_status_form .character_count').removeClass('red');
 is_ready = false;
 }
 $('#reply_status_form .character_count').text(textLen);
+}
+else {
+is_ready = false;
+$('#reply_status_form .character_count').removeClass('red');
+$('#reply_status_form textarea').each(function() {
+const textCount = $(this).val().length + $('#reply_status_form .status_spoiler').val().length;
+let textLen = ( current_instance_charlimit - textCount );
+if(textLen <= -1) {
+$('#reply_status_form .character_count').addClass('red');
+is_ready = true;
+} else if(textLen === current_instance_charlimit) {
+is_ready = true;
+}
+if($(this).is(":focus")) {
+$('#reply_status_form .character_count').text(textLen);
+}
+});
+}
 }
 if($('#reply_status_form .status_poll_editor').hasClass("invisible")) {
 if(is_ready) $('#reply_status_form').addClass('ready');
@@ -1740,11 +1813,18 @@ else $('#reply_status_form').addClass('ready');
 });
 $(document).on('click','#reply_status_form .status_CW', function(e) {
 $('#reply_status_form .status_spoiler').toggleClass('invisible');
+$('#reply_status_form .status_textarea').toggleClass('status_has_cw');
 });
 $(document).on('click','#reply_status_form .status_poll', function(e) {
 $('#reply_status_form .status_poll_editor').toggleClass('invisible');
 $('#reply_status_form .status_media_attachment').toggleClass('disabled');
 $('#reply_status_form textarea').keyup();
+});
+$(document).on('click','#reply_status_form .status_addfield', function(e) {
+var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
+autosize(new_textarea);
+enableAutoComplete(new_textarea);
+$('#reply_status_form textarea').last().after(new_textarea);
 });
 $(document).on('click','#reply_status_form .expand_privacy_menu_button', function(e) {
 $('#reply_status_form .expand_privacy_menu').removeClass('invisible');
@@ -1781,7 +1861,7 @@ $('#reply_status_form .character_count').html('<i class="fa fa-circle-o-notch fa
 let form = document.forms.reply_status_form;
 if(!$('#reply_status_media_atta')[0].files.length || !$('#reply_status_form .status_poll_editor').hasClass("invisible")) {
 const params = {
-status : form.status_textarea.value,
+status:$('#reply_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
@@ -1798,7 +1878,7 @@ params.poll.expires_in = $('#reply_status_form .poll_days').val()*86400+$('#repl
 if($('#reply_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
 }
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#reply_status_form .media_attachments_preview_area').empty();
 $('#reply_status_form .status_spoiler').addClass('invisible');
 $('#reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -1825,14 +1905,14 @@ if ( i === 3 || i === filesLen ) {
 api.postMedia("media", formData, function (postMedia) {
 media_array.unshift(postMedia.id);
 const params = {
-status : form.status_textarea.value,
+status:$('#reply_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
 media_ids: media_array,
 in_reply_to_id : $('#reply_status_form').attr('sid')
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#reply_status_form .media_attachments_preview_area').empty();
 $('#reply_status_form .status_spoiler').addClass('invisible');
 $('#reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -1861,6 +1941,8 @@ $(function() {
 $(document).on('click', function(e) {
 if(!$(e.target).closest('.reply_button').length && !$(e.target).closest('.single_reply_status').length) {
 $('#single_reply_status_emoji').lsxEmojiPicker("destroy");
+$('#single_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
+$('#single_status_form .status_textarea textarea').autoCompleteToken("destroy");
 }
 });
 $(document).on('click','single_reply_status_header, #single_reply_status_form', function(e) {
@@ -1895,13 +1977,8 @@ $('.single_reply_status .submit_status_label').addClass('active_submit_button');
 $('#single_reply_status_form .status_textarea textarea').addClass('focus');
 $('#single_reply_status_form .status_textarea textarea').focus();
 autosize($('#single_reply_status_form .status_textarea textarea'));
-if(localStorage.setting_compose_autocomplete == "true") {
-$('#single_reply_status_form .status_textarea textarea').autoCompleteToken({instance:1,startkey:"@",endkey:" ",arrayname:"accounts",resultname:"acct"});
-$('#single_reply_status_form .status_textarea textarea').autoCompleteToken({instance:2,startkey:"#",endkey:" ",arrayname:"hashtags"});
-$('#single_reply_status_form .status_textarea textarea').autoCompleteToken({instance:3,startkey:":",endkey:";",source:actEmojiData,resultname:"name",callback:function() {
-$('#single_reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-}});
-}
+enableAutoComplete($('#single_reply_status_form .status_top .status_spoiler'));
+enableAutoComplete($('#single_reply_status_form .status_textarea textarea'));
 $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
@@ -1914,9 +1991,12 @@ $('#single_reply_status_emoji').lsxEmojiPicker({
 closeOnSelect:true,
 twemoji:!checkEmojiSupport(),
 onSelect:function(emoji) {
-$('#single_reply_status_form .status_textarea textarea').insertText(":"+emoji.name+":");
-$('#single_reply_status_form .status_textarea textarea').trigger({"type":"keyup","key":":"});
-var textLen = $('#single_reply_status_form .status_textarea textarea').val().length * 2;
+$('#single_reply_status_form .status_top .status_spoiler,#single_reply_status_form .status_textarea textarea').each(function() {
+if(global_focus_textfield == $(this).data("random")) {
+$(this).insertText(":"+emoji.name+":");
+$(this).trigger({"type":"keyup","key":":"});
+}
+});
 }
 });
 if(localStorage.setting_post_sensitive == "true") {
@@ -1936,6 +2016,7 @@ if(e.keyCode !== 224 & e.keyCode !== 17) {
 if(e.key == ":") {
 replace_emoji_textarea(this);
 }
+if($('#single_reply_status_form textarea').length == 1) {
 const textCount = $('#single_reply_status_form textarea').val().length + $('#single_reply_status_form .status_spoiler').val().length;
 let textLen = ( current_instance_charlimit - textCount );
 if(textLen <= -1) {
@@ -1948,6 +2029,24 @@ $('#single_reply_status_form .character_count').removeClass('red');
 is_ready = false;
 }
 $('#single_reply_status_form .character_count').text(textLen);
+}
+else {
+is_ready = false;
+$('#single_reply_status_form .character_count').removeClass('red');
+$('#single_reply_status_form textarea').each(function() {
+const textCount = $(this).val().length + $('#single_reply_status_form .status_spoiler').val().length;
+let textLen = ( current_instance_charlimit - textCount );
+if(textLen <= -1) {
+$('#single_reply_status_form .character_count').addClass('red');
+is_ready = true;
+} else if(textLen === current_instance_charlimit) {
+is_ready = true;
+}
+if($(this).is(":focus")) {
+$('#single_reply_status_form .character_count').text(textLen);
+}
+});
+}
 }
 if($('#single_reply_status_form .status_poll_editor').hasClass("invisible")) {
 if(is_ready) $('#single_reply_status_form').addClass('ready');
@@ -1963,11 +2062,18 @@ else $('#single_reply_status_form').addClass('ready');
 });
 $(document).on('click','#single_reply_status_form .status_CW', function(e) {
 $('#single_reply_status_form .status_spoiler').toggleClass('invisible');
+$('#single_reply_status_form .status_textarea').toggleClass('status_has_cw');
 });
 $(document).on('click','#single_reply_status_form .status_poll', function(e) {
 $('#single_reply_status_form .status_poll_editor').toggleClass('invisible');
 $('#single_reply_status_form .status_media_attachment').toggleClass('disabled');
 $('#single_reply_status_form textarea').keyup();
+});
+$(document).on('click','#single_reply_status_form .status_addfield', function(e) {
+var new_textarea = $("<textarea>").addClass("focus").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
+autosize(new_textarea);
+enableAutoComplete(new_textarea);
+$('#single_reply_status_form textarea').last().after(new_textarea);
 });
 $(document).on('click','#single_reply_status_form .expand_privacy_menu_button', function(e) {
 $('#single_reply_status_form .expand_privacy_menu').removeClass('invisible');
@@ -2004,7 +2110,7 @@ $('#single_reply_status_form .character_count').html('<i class="fa fa-circle-o-n
 let form = document.forms.single_reply_status_form;
 if(!$('#single_reply_status_media_atta')[0].files.length || !$('#single_reply_status_form .status_poll_editor').hasClass("invisible")) {
 const params = {
-status : form.status_textarea.value,
+status:$('#single_reply_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
@@ -2021,7 +2127,7 @@ params.poll.expires_in = $('#single_reply_status_form .poll_days').val()*86400+$
 if($('#single_reply_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
 }
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#single_reply_status_form .media_attachments_preview_area').empty();
 $('#single_reply_status_form .status_spoiler').addClass('invisible');
 $('#single_reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -2052,14 +2158,14 @@ if ( i === 3 || i === filesLen ) {
 api.postMedia("media", formData, function (postMedia) {
 media_array.unshift(postMedia.id);
 const params = {
-status : form.status_textarea.value,
+status:$('#single_reply_status_form textarea'),
 sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
 media_ids: media_array,
 in_reply_to_id : $('#single_reply_status_form').attr('tid')
 }
-api.post("statuses", params, function (data) {
+submitStatusArray(params,function(data) {
 $('#single_reply_status_form .media_attachments_preview_area').empty();
 $('#single_reply_status_form .status_spoiler').addClass('invisible');
 $('#single_reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
@@ -2237,7 +2343,7 @@ $('#js-overlay_content .temporary_object, #js-overlay_content .parmanent_object'
 $('#js-overlay_content_wrap .overlay_status.submit_status_label').removeClass('active_submit_button');
 $('#js-overlay_content_wrap .single_reply_status .submit_status_label').removeClass('active_submit_button');
 $('#js-overlay_content_wrap #reply_status_form .submit_status_label').removeClass('active_submit_button');
-$('#js-overlay_content_wrap #header_status_form.submit_status_label').removeClass('active_submit_button');
+$('#js-overlay_content_wrap #header_status_form .submit_status_label').removeClass('active_submit_button');
 $('#js-overlay_content_wrap').removeClass('black_05');
 $('#js-overlay_content_wrap').removeClass('black_08');
 $('#js-overlay_content_wrap .overlay_confirm_yes').off('click');
@@ -2245,6 +2351,7 @@ $('#js-overlay_content_wrap .overlay_prompt_ok').off('click');
 $('#js-overlay_content_wrap .overlay_prompt_text').val("");
 $('#js-overlay_content_wrap .overlay_addlist_body').empty();
 $('#js-overlay_content_wrap #addfilter').trigger("reset");
+$('#js-overlay_content_wrap .status_form .additional_textarea').remove();
 if(window.current_file) {
 if(current_file === "/user") {
 history.pushState(null, null, "/"+location.pathname.split("/")[1]+location.search);
@@ -2315,6 +2422,10 @@ $(".poll_"+poll_id).remove();
 }
 }
 return false;
+});
+$(document).on('focus','.status_textarea textarea,.status_top .status_spoiler',function(e) {
+global_focus_textfield = $(this).data("random");
+$(".status_textarea textarea").change();
 });
 shortcut.add("n",function() {
 $("#creat_status").click();
