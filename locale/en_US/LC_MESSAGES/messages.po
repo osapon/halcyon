@@ -46,6 +46,9 @@ msgstr "Czech"
 
 msgid "Language_fr_FR"
 msgstr "French"
+  
+msgid "Language_nl_NL"
+msgstr "Dutch"
 
 msgid "Sensitive content"
 msgstr "Sensitive content"
