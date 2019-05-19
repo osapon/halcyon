@@ -1,0 +1,930 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-05-19 15:53+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: ca\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /ca/halcyon/ca.po\n"
+"X-Pootle-Revision: 212\n"
+
+msgid "Language"
+msgstr "Idioma"
+
+msgid "Language_en_US"
+msgstr "Anglès (EUA)"
+
+msgid "Language_de_DE"
+msgstr "Alemany"
+
+msgid "Language_ja_JP"
+msgstr "Japonès"
+
+msgid "Language_ko_KR"
+msgstr "Coreà"
+
+msgid "Language_pl_PL"
+msgstr "Polonès"
+
+msgid "Language_gl_ES"
+msgstr "Gallec"
+
+msgid "Language_pt_BR"
+msgstr "Portuguès (Brasil)"
+
+msgid "Language_it_IT"
+msgstr "Italià"
+
+msgid "Language_cs_CZ"
+msgstr "Txec"
+
+msgid "Language_fr_FR"
+msgstr "Francès"
+
+msgid "Sensitive content"
+msgstr "Contingut delicat"
+
+msgid "Click to view"
+msgstr "Clica aquí per a veure-ho"
+
+msgid "SHOW MORE"
+msgstr "MOSTRA'N MÉS"
+
+msgid "SHOW LESS"
+msgstr "MOSTRA'N MENYS"
+
+msgid "Public"
+msgstr "Públic"
+
+msgid "Unlisted"
+msgstr "Ocult"
+
+msgid "Followers-only"
+msgstr "Només seguidors"
+
+msgid "Direct"
+msgstr "Directe"
+
+msgid "Delete Toot"
+msgstr "Suprimeix el tuut"
+
+msgid "Unpin Toot"
+msgstr "Desclava el tuut"
+
+msgid "Pin Toot"
+msgstr "Clava el tuut"
+
+msgid "Mute"
+msgstr "Silencia"
+
+msgid "Block"
+msgstr "Bloqueja"
+
+msgid "Report this Toot"
+msgstr "Denuncia aquest tuut"
+
+msgid "Copy link to Toot"
+msgstr "Copia l'enllaç en el tuut"
+
+msgid "View original"
+msgstr "Veure l'original"
+
+msgid "Boosted"
+msgstr "Promocionat"
+
+msgid "Pinned Toot"
+msgstr "El tuut s'ha clavat"
+
+msgid "favourited Your Toot"
+msgstr "ha afegit el teu tuut a favorits"
+
+msgid "boosted Your Toot"
+msgstr "ha promocionat el teu tuut"
+
+msgid "followed you"
+msgstr "t'ha seguit"
+
+msgid "Follow"
+msgstr "Segueix"
+
+msgid "Toot your reply"
+msgstr "Tuuteja la teva resposta"
+
+msgid "Reply"
+msgstr "Contesta"
+
+msgid "Content warning"
+msgstr "Avís sobre el contingut"
+
+msgid "Jan"
+msgstr "Gen."
+
+msgid "Feb"
+msgstr "Febr."
+
+msgid "Mar"
+msgstr "Març"
+
+msgid "Apr"
+msgstr "Abr."
+
+msgid "May"
+msgstr "Maig"
+
+msgid "Jun"
+msgstr "Juny"
+
+msgid "Jul"
+msgstr "Jul."
+
+msgid "Aug"
+msgstr "Ag."
+
+msgid "Sep"
+msgstr "Set."
+
+msgid "Oct"
+msgstr "Oct."
+
+msgid "Nov"
+msgstr "Nov."
+
+msgid "Dec"
+msgstr "Des."
+
+msgid "Changed setting to"
+msgstr "Canvia la configuració a"
+
+msgid "Mark as NSFW by default enabled"
+msgstr "S'ha activat Marcar com a NSFW com a predeterminat"
+
+msgid "Mark as NSFW by default disabled"
+msgstr "S'ha desactivat Marcar com a NSFW com a predeterminat"
+
+msgid "Who to follow enabled"
+msgstr "S'ha activat A qui t'agradaria seguir"
+
+msgid "Who to follow disabled"
+msgstr "S'ha desactivat A qui t'agradaria seguir"
+
+msgid "Changed about me setting"
+msgstr "S'ha canviat la configuració de Sobre mi"
+
+msgid "Uploaded new avatar"
+msgstr "S'ha pujat un nou avatar"
+
+msgid "Uploaded new header"
+msgstr "S'ha pujat una nova capçalera"
+
+msgid "Account locked"
+msgstr "Compte privat"
+
+msgid "Account unlocked"
+msgstr "Compte públic"
+
+msgid "Link previews enabled"
+msgstr "S'ha activat la vista prèvia dels enllaços"
+
+msgid "Link previews disabled"
+msgstr "S'ha desactivat la vista prèvia dels enllaços"
+
+msgid "You didn't allow notifications"
+msgstr "No has permès notificacions"
+
+msgid "Desktop notifications enabled"
+msgstr "S'han activat les notificacions a l'escriptori"
+
+msgid "Desktop notifications disabled"
+msgstr "S'han desactivat les notificacions a l'escriptori"
+
+msgid "Replies shown"
+msgstr "Respostes mostrades"
+
+msgid "Replies hidden"
+msgstr "Respostes ocultes"
+
+msgid "CW content shown"
+msgstr "Contingut delicat mostrat"
+
+msgid "CW content hidden"
+msgstr "Contingut delicat ocult"
+
+msgid "NSFW content shown"
+msgstr "Contingut NSFW mostrat"
+
+msgid "NSFW content hidden"
+msgstr "Contingut NSFW ocult"
+
+msgid "Reply to"
+msgstr "Contesta a"
+
+msgid "Report"
+msgstr "Denuncia"
+
+msgid "Report a Toot of"
+msgstr "Denuncia un tuut de"
+
+msgid "What's happening?"
+msgstr "Què passa?"
+
+msgid "Toot"
+msgstr "Tuut"
+
+msgid "Compose new Toot"
+msgstr "Redacta un tuut nou"
+
+msgid "Please describe what the problem with the Toot is."
+msgstr "Si us plau, descriu el problema amb el tuut."
+
+msgid "TOOTS"
+msgstr "TUUTS"
+
+msgid "PEOPLE"
+msgstr "PERSONES"
+
+msgid "Settings"
+msgstr "Configuració"
+
+msgid "GENERAL"
+msgstr "GENERAL"
+
+msgid "PROFILE"
+msgstr "PERFIL"
+
+msgid "APPEARANCE"
+msgstr "APARENÇA"
+
+msgid "Change instance"
+msgstr "Canvia d'instància"
+
+msgid "Blank for default"
+msgstr "En blanc com a predeterminat"
+
+msgid "FOLLOWING"
+msgstr "USUARIS QUE SEGUEIXES"
+
+msgid "Interesting accounts of devs"
+msgstr "Comptes de desenvolupadors interessants"
+
+msgid "Halcyon for"
+msgstr "Halcyon per a"
+
+msgid "About"
+msgstr "Sobre"
+
+msgid "Terms"
+msgstr "Condicions"
+
+msgid "Apps"
+msgstr "Aplicacions"
+
+msgid "Source code"
+msgstr "Codi font"
+
+msgid "Other instances"
+msgstr "Altres instàncies"
+
+msgid "Privacy policy"
+msgstr "Política de privacitat"
+
+msgid "Version"
+msgstr "Versió"
+
+msgid "Who to follow"
+msgstr "A qui t'agradaria seguir"
+
+msgid "Enable who to follow"
+msgstr "Activa A qui t'agradaria seguir"
+
+msgid ""
+"Halcyon needs to connect to an external server to get a list of users which "
+"have similar interests as you. If you want to use this feature, please opt-"
+"in."
+msgstr ""
+"Halcyon s'ha de connectar amb un servidor extern per a obtenir una llista "
+"d'usuaris que tinguin els mateixos interessos que tu. Si vols utilitzar "
+"aquesta funció, si us plau,tria-la"
+
+msgid "MORE"
+msgstr "MÉS"
+
+msgid "FOLLOWERS"
+msgstr "SEGUIDORS"
+
+msgid "Following"
+msgstr "Usuaris que segueixes"
+
+msgid "You'll no longer receive notifications from this user"
+msgstr "No rebràs més notificacions d'aquest usuari"
+
+msgid "Unmuted this user"
+msgstr "Deixa de silenciar l'usuari"
+
+msgid "This user has been blocked"
+msgstr "Aquest usuari ha estat bloquejat"
+
+msgid "Unblocked this user"
+msgstr "Aquest usuari ha estat desbloquejat"
+
+msgid "Your Toot has been deleted"
+msgstr "S'ha suprimit el teu tuut"
+
+msgid "Your Toot has been pinned"
+msgstr "S'ha clavat el teu tuut"
+
+msgid "Your Toot has been unpinned"
+msgstr "S'ha desclavat el teu tuut"
+
+msgid "Edit profile"
+msgstr "Edita el perfil"
+
+msgid "FAVOURITES"
+msgstr "FAVORITS"
+
+msgid "Show"
+msgstr "Mostra"
+
+msgid "Blocking"
+msgstr "Usuaris bloquejats"
+
+msgid "Muting"
+msgstr "Usuaris silenciats"
+
+msgid "Requested"
+msgstr "Sol·licitat"
+
+msgid "Photos and toots"
+msgstr "Fotos i tuuts"
+
+msgid "favourited your toot"
+msgstr "ha afegit el teu tuut a favorits"
+
+msgid "boosted your toot"
+msgstr "ha promocionat el teu tuut"
+
+msgid "mentioned you"
+msgstr "t'ha mencionat"
+
+msgid "Your Toot was posted!"
+msgstr "S'ha penjat el teu tuut!"
+
+msgid "News"
+msgstr "Notícies"
+
+msgid "Source"
+msgstr "Font"
+
+msgid "Privacy"
+msgstr "Privacitat"
+
+msgid "Imprint"
+msgstr "Avís legal"
+
+msgid "Contact"
+msgstr "Contacte"
+
+msgid "Login"
+msgstr "Inicia sessió"
+
+msgid "Login to Halcyon"
+msgstr "Inicia sessió a Halcyon"
+
+msgid "create an account"
+msgstr "crea un compte"
+
+msgid "or"
+msgstr "o"
+
+msgid "I agree with the"
+msgstr "Accepto"
+
+msgid "What is Halcyon"
+msgstr "Què és Halcyon"
+
+msgid ""
+"which aims to recreate the simple and beautiful user interface of Twitter "
+"while keeping all advantages of decentral networks in focus."
+msgstr ""
+"que té per objectiu recrear la interfície senzilla i bonica de Twitter  i "
+"alhora mantenir tots els avantatges de les xarxes descentralitzades."
+
+msgid "Halcyon is a webclient for"
+msgstr "Halcyon és un client web"
+
+msgid "Contact / Feedback"
+msgstr "Contacte / Retorn"
+
+msgid "Use my contact form"
+msgstr "Utilitza el meu formulari de contacte"
+
+msgid "Help us"
+msgstr "Ajuda'ns"
+
+msgid "Halcyon Terms of Use"
+msgstr "Condicions d'ús de Halcyon"
+
+msgid ""
+"This terms of use agreement is for the users of web service Halcyon for "
+"Mastodon and Pleroma (Halcyon for short) hosted at"
+msgstr ""
+"Aquest acord de condicions d'ús és per als usuaris del servei web de Halcyon "
+"per a Mastodon i Pleroma («Halcyon», abreujat) allotjat a"
+
+msgid "Your Reply was posted!"
+msgstr "S'ha penjat la teva resposta!"
+
+msgid "Toot reported successfully!"
+msgstr "Tuut denunciat!"
+
+msgid "Link successfully copied!"
+msgstr "Enllaç copiat correctament!"
+
+msgid "Home"
+msgstr "Inici"
+
+msgid "Local"
+msgstr "Local"
+
+msgid "Federated"
+msgstr "Federat"
+
+msgid "Notifications"
+msgstr "Notificacions"
+
+msgid "Search Mastodon"
+msgstr "Cerca a Mastodon"
+
+msgid "View profile"
+msgstr "Visita el perfil"
+
+msgid "Log out"
+msgstr "Tanca la sessió"
+
+msgid "All"
+msgstr "Tot"
+
+msgid "new notitification"
+msgstr "nova notificació"
+
+msgid "Show all NSFW content"
+msgstr "Mostra tot el contingut NSFW"
+
+msgid "Show all CW content"
+msgstr "Mostra tot el contingut delicat"
+
+msgid "Show replies"
+msgstr "Mostra les respostes"
+
+msgid "Desktop notifications"
+msgstr "Notificacions de l'escriptori"
+
+msgid "Enable link previews"
+msgstr "Activa la vista prèvia dels enllaços"
+
+msgid "Auto update"
+msgstr "Actualització automàtica"
+
+msgid "Manual update"
+msgstr "Actualització manual"
+
+msgid "Appearance settings"
+msgstr "Configuració de l'aparença"
+
+msgid "New posts streaming"
+msgstr "Reproducció d'apunts nous"
+
+msgid "replies"
+msgstr "respostes"
+
+msgid "General settings"
+msgstr "Configuració general"
+
+msgid "Default post privacy"
+msgstr "Privadesa dels apunts com a predeterminat"
+
+msgid "Mark as NSFW by default"
+msgstr "Marca com a NSFW com a predeterminat"
+
+msgid "Media"
+msgstr "Multimèdia"
+
+msgid "FOLLOWS YOU"
+msgstr "ET SEGUEIX"
+
+msgid "Local instance"
+msgstr "Instància local"
+
+msgid "Hashtag search filter"
+msgstr "Filtre de cerca d'etiqueta"
+
+msgid "All instances"
+msgstr "Totes les instàncies"
+
+msgid "Local only"
+msgstr "Només locals"
+
+msgid "Lock account"
+msgstr "Protegeix el compte"
+
+msgid "Header"
+msgstr "Capçalera"
+
+msgid "Avatar"
+msgstr "Avatar"
+
+msgid "About me"
+msgstr "Sobre mi"
+
+msgid "Display name"
+msgstr "Mostra el nom"
+
+msgid "Profile settings"
+msgstr "Configuració del perfil"
+
+msgid "Toots"
+msgstr "Tuuts"
+
+msgid "Favourites"
+msgstr "Favorits"
+
+msgid "New favourite"
+msgstr "Nou favorit"
+
+msgid "New boost"
+msgstr "Nova promoció"
+
+msgid "New follower"
+msgstr "Nou seguidor"
+
+msgid "New mention"
+msgstr "Nova menció"
+
+msgid "Dark theme enabled"
+msgstr "Mode fosc activat"
+
+msgid "Dark theme disabled"
+msgstr "Mode fosc desactivat"
+
+msgid "Only on top"
+msgstr "Només a dalt"
+
+msgid "Enable dark theme"
+msgstr "Activa el mode fosc"
+
+msgid "Please enter the new name for this list."
+msgstr "Si us plau, introdueix el nom nou per a aquesta llista."
+
+msgid "The name of your list can't be empty!"
+msgstr "El nom de la llista no es pot quedar en blanc!"
+
+msgid "Your list has been renamed"
+msgstr "S'ha canviat el nom de la llista"
+
+msgid "Are you sure that you want to delete this list?"
+msgstr "Segur que vols suprimir aquesta llista?"
+
+msgid "Your list has been deleted"
+msgstr "S'ha suprimit la llista"
+
+msgid "Please enter the name of your new list."
+msgstr "Si us plau, introdueix el nom de la teva nova llista."
+
+msgid "Add"
+msgstr "Afegeix"
+
+msgid "Remove"
+msgstr "Elimina"
+
+msgid "Add to list"
+msgstr "Afegeix a la llista"
+
+msgid "Are you sure that you want to mute this user?"
+msgstr "Segur que vols silenciar aquest usuari?"
+
+msgid "Are you sure that you want to block this user?"
+msgstr "Segur que vols bloquejar aquest usuari?"
+
+msgid "Are you sure that you want to delete this toot?"
+msgstr "Segur que vols eliminar aquest tuut?"
+
+msgid "Added this account to the list"
+msgstr "Aquest compte s'ha afegit a la llista"
+
+msgid ""
+"You need to follow this user to add him/her to the list. Do you want to do "
+"that now?"
+msgstr ""
+"Has de seguir aquest usuari per a afegir-lo a la llista. Ho vols fer ara?"
+
+msgid "You successfully followed this user."
+msgstr "Has seguit aquest usuari correctament."
+
+msgid "Removed this account from the list"
+msgstr "Aquest compte s'ha eliminat de la llista"
+
+msgid "Joined at"
+msgstr "S'ha unit a"
+
+msgid "Direct messages"
+msgstr "Missatges directes"
+
+msgid "Lists"
+msgstr "Llistes"
+
+msgid "Open public profile"
+msgstr "Perfil obert públic"
+
+msgid "My Lists"
+msgstr "Les meves llistes"
+
+msgid "Confirmation"
+msgstr "Confirmació"
+
+msgid "Yes"
+msgstr "Sí"
+
+msgid "Cancel"
+msgstr "Cancel·la"
+
+msgid "Prompt"
+msgstr "Avís"
+
+msgid "Ok"
+msgstr "D'acord"
+
+msgid "Autocomplete enabled"
+msgstr "Predicció de text activada"
+
+msgid "Autocomplete disabled"
+msgstr "Predicció de text desactivada"
+
+msgid "Changed custom profile field"
+msgstr "S'ha canviat el camp de perfil personalitzat"
+
+msgid "Notifications when tab is closed enabled"
+msgstr "S'han activat les notificacions quan la pestanya està tancada"
+
+msgid "Notifications when tab is closed disabled"
+msgstr "S'han desactivat les notificacions quan la pestanya està tancada"
+
+msgid "Toots of bots shown"
+msgstr "Tuuts de bots mostrats"
+
+msgid "Toots of bots hidden"
+msgstr "Tuuts de bots ocults"
+
+msgid "Filter created"
+msgstr "S'ha creat el filtre"
+
+msgid "Gif animations enabled"
+msgstr "S'han activat els gifs animats"
+
+msgid "Gif animations disabled"
+msgstr "S'han desactivat els gifs animats"
+
+msgid "Video player enabled"
+msgstr "S'ha activat el reproductor de vídeo"
+
+msgid "Video player disabled"
+msgstr "S'ha desactivat el reproductor de vídeo"
+
+msgid "Audio player enabled"
+msgstr "S'ha activat el reproductor d'àudio"
+
+msgid "Audio player disabled"
+msgstr "S'ha desactivat el reproductor d'àudio"
+
+msgid "PeerTube embeds enabled"
+msgstr "S'han activat les incrustacions de PeerTube"
+
+msgid "PeerTube embeds disabled"
+msgstr "S'han desactivat les incrustacions de PeerTube"
+
+msgid "YouPlay embeds enabled"
+msgstr "S'han activat les incrustacions de YouPlay"
+
+msgid "YouPlay embeds disabled"
+msgstr "S'han desactivat les incrustacions de YouPlay"
+
+msgid "Invidio.us embeds enabled"
+msgstr "S'han activat les incrustacions d'Invidio.us"
+
+msgid "Invidio.us embeds disabled"
+msgstr "S'han desactivat les incrustacions d'Invidio.us"
+
+msgid "Vimeo embeds enabled"
+msgstr "S'han activat les incrustacions de Vimeo"
+
+msgid "Vimeo embeds disabled"
+msgstr "S'han desactivat les incrustacions de Vimeo"
+
+msgid "Thread"
+msgstr "Fil"
+
+msgid "Never"
+msgstr "Mai"
+
+msgid "Don't change"
+msgstr "No ho canviïs"
+
+msgid "Filter updated"
+msgstr "Filtre actualitzat"
+
+msgid "Are you sure that you want to delete this filter?"
+msgstr "Segur que vols suprimir aquest filtre?"
+
+msgid "Your filter has been deleted"
+msgstr "S'ha suprimit el teu filtre"
+
+msgid "Toot to"
+msgstr "Enviat un tuut a "
+
+msgid "Administrated by"
+msgstr "Administrat per "
+
+msgid "Users"
+msgstr "Usuaris"
+
+msgid "Connections"
+msgstr "Connexions"
+
+msgid "Notifications when tab closed"
+msgstr "Notificacions quan la pestanya està tancada"
+
+msgid "Filter settings"
+msgstr "Configuració de filtres"
+
+msgid "Show toots of bots"
+msgstr "Mostra tuuts de bots"
+
+msgid "Add new filter"
+msgstr "Afegeix un nou filtre"
+
+msgid "Create a filter"
+msgstr "Crea un nou filtre"
+
+msgid "Word or phrase to filter"
+msgstr "Paraula o frase que vols filtrar"
+
+msgid "Filter in the following timelines"
+msgstr "Filtra les cronologies següents"
+
+msgid "Expires in"
+msgstr "Expira el"
+
+msgid "Autocomplete in compose field"
+msgstr "Predicció de text en el camp de redacció"
+
+msgid "Media settings"
+msgstr "Configuració de multimèdia"
+
+msgid "Play animated GIFs"
+msgstr "Reprodueix els gifs animats"
+
+msgid "Enable video player"
+msgstr "Activa el reproductor de vídeo"
+
+msgid "Enable audio player"
+msgstr "Activa el reproductor d'àudio"
+
+msgid "Embed PeerTube videos"
+msgstr "Incrusta vídeos de PeerTube"
+
+msgid "Embed YouTube using YouPlay"
+msgstr "Incrusta vídeos de YouTube emprant YouPlay"
+
+msgid "Embed YouTube using Invidio.us"
+msgstr "Incrusta vídeos de YouTube emprant Invidio.us"
+
+msgid "Embed Vimeo using YouPlay"
+msgstr "Incrusta vídeos de Vimeo emprant YouPlay"
+
+msgid "Custom profile fields"
+msgstr "Camps de perfil personalitzats"
+
+msgid "Name"
+msgstr "Nom"
+
+msgid "Value"
+msgstr "Valor"
+
+msgid ""
+"To verify that the links in your custom fields really belong to you, you can "
+"add the link below to your website. The link text can be changed to whatever "
+"you want."
+msgstr ""
+"er a verificar que els enllaços dels teus camps personalitzats et pertanyen, "
+"pots afegir l'enllaç de sota al teu web. Pots canviar el text de l'enllaç "
+"com vulguis."
+
+msgid "Message"
+msgstr "Missatge"
+
+msgid "Filter"
+msgstr "Filtra"
+
+msgid "second"
+msgstr "segon"
+
+msgid "seconds"
+msgstr "segons"
+
+msgid "minute"
+msgstr "minut"
+
+msgid "minutes"
+msgstr "minuts"
+
+msgid "hour"
+msgstr "hora"
+
+msgid "hours"
+msgstr "hores"
+
+msgid "day"
+msgstr "dia"
+
+msgid "days"
+msgstr "dies"
+
+msgid "week"
+msgstr "setmana"
+
+msgid "Filter posts irreversible"
+msgstr "Filtrar apunts (irreversible)"
+
+msgid "Whole word"
+msgstr "Paraula sencera"
+
+msgid "FILTERS"
+msgstr "FILTRES"
+
+msgid "MEDIA"
+msgstr "MULTIMÈDIA"
+
+msgid "Dark theme reset to standard"
+msgstr "El tema fosc es restableix a l'estàndard"
+
+msgid "Pictures shown in full height"
+msgstr "Les imatges es mostren a mida completa"
+
+msgid "Pictures shown in default height"
+msgstr "Les imatges es mostren a la mida per defecte"
+
+msgid "Threads shown in thread view"
+msgstr "Els fils es mostren en vista de fils"
+
+msgid "Threads shown in chronological order"
+msgstr "Els fils es mostren en ordre cronològic"
+
+msgid "Final results"
+msgstr "Resultats finals"
+
+msgid "votes"
+msgstr "vots"
+
+msgid "left"
+msgstr "esquerra"
+
+msgid "Vote"
+msgstr "Vota"
+
+msgid "A poll you participated in has ended"
+msgstr "L'enquesta a la que has participat ha acabat"
+
+msgid "Days"
+msgstr "Dies"
+
+msgid "Hours"
+msgstr "Hores"
+
+msgid "Minutes"
+msgstr "Minuts"
+
+msgid "Multiple choice"
+msgstr "Opció múltiple"
+
+msgid "Poll finished"
+msgstr "Enquesta finalitzada"
+
+msgid ""
+"If you close the overlay, your text will get deleted! Are you sure you want "
+"to close it?"
+msgstr ""
+"Si tanqueu la superposició, s’eliminarà el text! Esteu segur que voleu "
+"tancar-lo?"
+
+msgid "Website"
+msgstr "Lloc web"
+
+msgid "Show pictures in full height"
+msgstr "Mostra imatges en alçada completa"
+
+msgid "Show threads in thread view in timeline"
+msgstr "Mostra els fils en la vista de fil en la línia de temps"

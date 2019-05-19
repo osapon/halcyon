@@ -129,6 +129,18 @@ halcyon.domain.tld {
     r ^/settings/media/?$
     to /settings_media.php
   }
+  rewrite {
+    r ^/settings/followers/?$
+    to /settings_accounts.php
+  }
+  rewrite {
+    r ^/settings/mutes/?$
+    to /settings_accounts.php
+  }
+  rewrite {
+    r ^/settings/blocks/?$
+    to /settings_accounts.php
+  }
   # End settings
 
   # Begin user

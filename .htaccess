@@ -58,6 +58,9 @@ RewriteRule ^settings/profile/?$ settings_profile\.php [NC,L]
 RewriteRule ^settings/appearance/?$ settings_appearance\.php [NC,L]
 RewriteRule ^settings/filters/?$ settings_filters\.php [NC,L]
 RewriteRule ^settings/media/?$ settings_media\.php [NC,L]
+RewriteRule ^settings/followers/?$ settings_accounts\.php [NC,L]
+RewriteRule ^settings/mutes/?$ settings_accounts\.php [NC,L]
+RewriteRule ^settings/blocks/?$ settings_accounts\.php [NC,L]
 
 # User
 RewriteBase /

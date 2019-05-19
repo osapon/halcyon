@@ -151,7 +151,17 @@ else {
 formdata.append('locked','0');
 var msgtext = "Account unlocked";
 }
-api.patch("accounts/update_credentials",formdata,function() {
+api.patch("accounts/update_credentials",formdata,function(data) {
+current_locked = data.locked;
+localStorage.current_locked = data.locked;
+if(data.locked) {
+$(".js_current_profile_username").append(" <i class='fa fa-lock'>");
+$("#js-settings_nav_followers").show();
+}
+else {
+$(".js_current_profile_username .fa-lock").remove();
+$("#js-settings_nav_followers").hide();
+}
 $("#savestate").removeClass("fa-spin").removeClass("fa-circle-o-notch").addClass("fa-check");
 putMessage(__(msgtext));
 });
@@ -503,6 +513,175 @@ else {
 localStorage.setItem("setting_play_vimeo","false");
 putMessage(__("Vimeo embeds disabled"));
 }
+});
+}
+else if(window.location.pathname == "/settings/blocks") {
+$('#js-settings_nav_blocks').toggleClass('view');
+var load_options = [{name:'limit',data:18}];
+let isSyncing = true;
+api.get('blocks',load_options,function(blocks) {
+for(let i in blocks) {
+follows_template(blocks[i]).appendTo("#js-follows_profile");
+$('#js-follows_profile .follow_button[mid="'+blocks[i].id+'"]').removeClass("follow_button").addClass("unblock_button").children("span").text(__("Unblock"));
+$('#js-follows_profile .unblock_button[mid="'+blocks[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("accounts/"+mid+"/unblock",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+}
+links = getLinkFromXHRHeader(responce_headers);
+replace_emoji();
+$("#js-follows_footer > i").css({"display":"none"});
+isSyncing = false;
+});
+$(window).scroll(function () {
+if($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
+if(!isSyncing){
+isSyncing = true;
+load_options.unshift({name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]});
+api.get('blocks',load_options,function(blocks) {
+if(blocks.length) {
+for(let i in blocks) {
+follows_template(blocks[i]).appendTo("#js-follows_profile");
+$('#js-follows_profile .follow_button[mid="'+blocks[i].id+'"]').removeClass("follow_button").addClass("unblock_button").children("span").text(__("Unblock"));
+$('#js-follows_profile .unblock_button[mid="'+blocks[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("accounts/"+mid+"/unblock",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+}
+links = getLinkFromXHRHeader(responce_headers);
+replace_emoji();
+isSyncing = false;
+} else {
+isSyncing = true;
+}
+});
+load_options.shift();
+};
+};
+});
+}
+else if(window.location.pathname == "/settings/mutes") {
+$('#js-settings_nav_mutes').toggleClass('view');
+var load_options = [{name:'limit',data:18}];
+let isSyncing = true;
+api.get('mutes',load_options,function(mutes) {
+for(let i in mutes) {
+follows_template(mutes[i]).appendTo("#js-follows_profile");
+$('#js-follows_profile .follow_button[mid="'+mutes[i].id+'"]').removeClass("follow_button").addClass("unmute_button").children("span").text(__("Unmute"));
+$('#js-follows_profile .unmute_button[mid="'+mutes[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("accounts/"+mid+"/unmute",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+}
+links = getLinkFromXHRHeader(responce_headers);
+replace_emoji();
+$("#js-follows_footer > i").css({"display":"none"});
+isSyncing = false;
+});
+$(window).scroll(function () {
+if($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
+if(!isSyncing){
+isSyncing = true;
+load_options.unshift({name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]});
+api.get('mutes',load_options,function(mutes) {
+if(mutes.length) {
+for(let i in mutes) {
+follows_template(mutes[i]).appendTo("#js-follows_profile");
+$('#js-follows_profile .follow_button[mid="'+mutes[i].id+'"]').removeClass("follow_button").addClass("unmute_button").children("span").text(__("Unmute"));
+$('#js-follows_profile .unmute_button[mid="'+mutes[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("accounts/"+mid+"/unmute",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+}
+links = getLinkFromXHRHeader(responce_headers);
+replace_emoji();
+isSyncing = false;
+} else {
+isSyncing = true;
+}
+});
+load_options.shift();
+};
+};
+});
+}
+else if(window.location.pathname == "/settings/followers") {
+$('#js-settings_nav_followers').toggleClass('view');
+var load_options = [{name:'limit',data:18}];
+let isSyncing = true;
+api.get('follow_requests',load_options,function(followers) {
+for(let i in followers) {
+follows_template(followers[i]).appendTo("#js-follows_profile");
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').wrap($("<div>").css({position:"absolute",top:-32,right:8}));
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').css({position:"initial",display:"inline",paddingLeft:6,paddingRight:6});
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').after($('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').clone());
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').first().css("margin-right","5px").removeClass("follow_button").addClass("reject_button").children("span").text(__("Reject"));
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').removeClass("follow_button").addClass("accept_button").children("span").text(__("Accept"));
+$('#js-follows_profile .reject_button[mid="'+followers[i].id+'"] .fa-user-plus').removeClass("fa-user-plus").addClass("fa-user-times");
+$('#js-follows_profile .reject_button[mid="'+followers[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("follow_requests/"+mid+"/reject",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+$('#js-follows_profile .accept_button[mid="'+followers[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("follow_requests/"+mid+"/authorize",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+}
+links = getLinkFromXHRHeader(responce_headers);
+replace_emoji();
+$("#js-follows_footer > i").css({"display":"none"});
+isSyncing = false;
+});
+$(window).scroll(function () {
+if($(window).scrollTop() + window.innerHeight >= $(document).height()-700) {
+if(!isSyncing){
+isSyncing = true;
+load_options.unshift({name:"max_id",data:links['next'].match(/max_id=(.+)&?/)[1]});
+api.get('follow_requests',load_options,function(followers) {
+if(followers.length) {
+for(let i in followers) {
+follows_template(followers[i]).appendTo("#js-follows_profile");
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').wrap($("<div>").css({position:"absolute",top:-32,right:8}));
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').css({position:"initial",display:"inline",paddingLeft:6,paddingRight:6});
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').after($('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').clone());
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').first().css("margin-right","5px").removeClass("follow_button").addClass("reject_button").children("span").text(__("Reject"));
+$('#js-follows_profile .follow_button[mid="'+followers[i].id+'"]').removeClass("follow_button").addClass("accept_button").children("span").text(__("Accept"));
+$('#js-follows_profile .reject_button[mid="'+followers[i].id+'"] .fa-user-plus').removeClass("fa-user-plus").addClass("fa-user-times");
+$('#js-follows_profile .reject_button[mid="'+followers[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("follow_requests/"+mid+"/reject",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+$('#js-follows_profile .accept_button[mid="'+followers[i].id+'"]').click(function() {
+var mid = $(this).attr("mid");
+api.post("follow_requests/"+mid+"/authorize",function() {
+$(".follows_profile_box[mid='"+mid+"']").fadeOut();
+});
+});
+}
+links = getLinkFromXHRHeader(responce_headers);
+replace_emoji();
+isSyncing = false;
+} else {
+isSyncing = true;
+}
+});
+load_options.shift();
+};
+};
 });
 }
 function selectbox($this) {
