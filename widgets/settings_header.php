@@ -30,7 +30,25 @@
 <h2><?=_('MEDIA')?></h2>
 </a>
 </li>
+<li id="js-settings_nav_blocks" class="header_nav_item settings_blocks">
+<a href="/settings/blocks">
+<h2><?=_('BLOCKS')?></h2>
+</a>
+</li>
+<li id="js-settings_nav_mutes" class="header_nav_item settings_mutes">
+<a href="/settings/mutes">
+<h2><?=_('MUTES')?></h2>
+</a>
+</li>
+<li id="js-settings_nav_followers" class="header_nav_item settings_followers" style="display:none">
+<a href="/settings/followers">
+<h2><?=_('FOLLOW REQUESTS')?></h2>
+</a>
+</li>
 </ul>
+<script>
+if(current_locked == "true") $("#js-settings_nav_followers").show();
+</script>
 </div>
 </div>
 </div>
