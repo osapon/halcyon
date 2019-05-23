@@ -1397,8 +1397,8 @@ function mediaattachments_template2(status) {
   <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
   <i class="fa fa-globe" aria-hidden="true"></i>${__('Public')}
   </label>
-  <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-  <i class="fa fa-unlock-alt" aria-hidden="true"></i>${__('Unlisted')}
+  <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock">
+  <i class="fa fa-unlock" aria-hidden="true"></i>${__('Unlisted')}
   </label>
   <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
   <i class="fa fa-lock" aria-hidden="true"></i>${__('Followers-only')}
@@ -1651,8 +1651,8 @@ function mediaattachments_template2(status) {
   <label for="reply_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
   <i class="fa fa-globe" aria-hidden="true"></i>${__('Public')}
   </label>
-  <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-  <i class="fa fa-unlock-alt" aria-hidden="true"></i>${__('Unlisted')}
+  <label for="reply_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock">
+  <i class="fa fa-unlock" aria-hidden="true"></i>${__('Unlisted')}
   </label>
   <label for="reply_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
   <i class="fa fa-lock" aria-hidden="true"></i>${__('Followers-only')}

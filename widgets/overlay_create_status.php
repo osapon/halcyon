@@ -47,8 +47,8 @@
           <label for="overlay_status_public" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-globe">
           <i class="fa fa-globe" aria-hidden="true"></i><?=_('Public')?>
           </label>
-          <label for="overlay_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock-alt">
-          <i class="fa fa-unlock-alt" aria-hidden="true"></i><?=_('Unlisted')?>
+          <label for="overlay_status_unlisted" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-unlock">
+          <i class="fa fa-unlock" aria-hidden="true"></i><?=_('Unlisted')?>
           </label>
           <label for="overlay_status_fonly" class="status_privacy select_privacy disallow_select" privacyicon="fa fa-lock">
           <i class="fa fa-lock" aria-hidden="true"></i><?=_('Followers-only')?>
