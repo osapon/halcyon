@@ -1,19 +1,18 @@
-# Niklas Poslovski <ni.pos@yandex.com>, 2018. #zanata
-# Niklas Poslovski <ni.pos@yandex.com>, 2019. #zanata
 msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-01-19 16:33+0000\n"
+"POT-Creation-Date: 2019-05-07 17:12+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2019-01-19 04:39+0000\n"
-"Last-Translator: Niklas Poslovski <ni.pos@yandex.com>\n"
-"Language-Team: English (United States)\n"
-"Language: en\n"
-"X-Generator: Zanata 4.6.2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"X-Generator: Translate Toolkit 2.2.5\n"
+"X-Pootle-Path: /en/halcyon/en.po\n"
+"X-Pootle-Revision: 75\n"
 
 msgid "Language"
 msgstr "Language"
@@ -21,14 +20,8 @@ msgstr "Language"
 msgid "Language_en_US"
 msgstr "English (US)"
 
-msgid "Language_cs_CZ"
-msgstr "Czech"
-
 msgid "Language_de_DE"
 msgstr "German"
-
-msgid "Language_fr_FR"
-msgstr "French"
 
 msgid "Language_ja_JP"
 msgstr "Japanese"
@@ -47,6 +40,15 @@ msgstr "Portuguese (Brazil)"
 
 msgid "Language_it_IT"
 msgstr "Italian"
+
+msgid "Language_cs_CZ"
+msgstr "Czech"
+
+msgid "Language_fr_FR"
+msgstr "French"
+  
+msgid "Language_nl_NL"
+msgstr "Dutch"
 
 msgid "Sensitive content"
 msgstr "Sensitive content"
@@ -831,6 +833,15 @@ msgstr "Message"
 msgid "Filter"
 msgstr "Filter"
 
+msgid "second"
+msgstr "second"
+
+msgid "seconds"
+msgstr "seconds"
+
+msgid "minute"
+msgstr "minute"
+
 msgid "minutes"
 msgstr "minutes"
 
@@ -842,6 +853,9 @@ msgstr "hours"
 
 msgid "day"
 msgstr "day"
+
+msgid "days"
+msgstr "days"
 
 msgid "week"
 msgstr "week"
@@ -869,3 +883,64 @@ msgstr "Search..."
 
 msgid "End of voting"
 msgstr "End of voting"
+
+msgid "Dark theme reset to standard"
+msgstr "Dark theme reset to standard"
+
+msgid "Pictures shown in full height"
+msgstr "Pictures shown in full height"
+
+msgid "Pictures shown in default height"
+msgstr "Pictures shown in default height"
+
+msgid "Threads shown in thread view"
+msgstr "Threads shown in thread view"
+
+msgid "Threads shown in chronological order"
+msgstr "Threads shown in chronological order"
+
+msgid "Final results"
+msgstr "Final results"
+
+msgid "votes"
+msgstr "votes"
+
+msgid "left"
+msgstr "left"
+
+msgid "Vote"
+msgstr "Vote"
+
+msgid "A poll you participated in has ended"
+msgstr "A poll you participated in has ended"
+
+msgid "Days"
+msgstr "Days"
+
+msgid "Hours"
+msgstr "Hours"
+
+msgid "Minutes"
+msgstr "Minutes"
+
+msgid "Multiple choice"
+msgstr "Multiple choice"
+
+msgid "Poll finished"
+msgstr "Poll finished"
+
+msgid ""
+"If you close the overlay, your text will get deleted! Are you sure you want "
+"to close it?"
+msgstr ""
+"If you close the overlay, your text will get deleted! Are you sure you want "
+"to close it?"
+
+msgid "Website"
+msgstr "Website"
+
+msgid "Show pictures in full height"
+msgstr "Show pictures in full height"
+
+msgid "Show threads in thread view in timeline"
+msgstr "Show threads in thread view in timeline"

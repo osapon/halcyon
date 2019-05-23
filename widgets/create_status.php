@@ -1,13 +1,13 @@
 <form id="header_status_form" name="header_status_form" class="status_form ready">
+  <div class="status_left icon_box">
+    <img class="js_current_profile_image">
+  </div>
   <div class="status_top">
-    <input class="status_spoiler invisible" name="status_spoiler" placeholder="Content warning" type="text">
+    <input class="status_spoiler invisible" name="status_spoiler" placeholder="<?=_('Content warning')?>" data-random="43884" type="text">
   </div>
   <div class="status_main">
-    <div class="icon_box">
-      <img class="js_current_profile_image">
-    </div>
     <div class="status_textarea">
-      <textarea class="emoji_poss" name="status_textarea" placeholder="<?=_('What\'s happening?')?>"></textarea> 
+      <textarea class="emoji_poss" name="status_textarea" placeholder="<?=_('What\'s happening?')?>" data-random="14839"></textarea> 
       <div class="media_attachments_preview_area invisible"></div>
       <div class="status_poll_editor invisible">
         <i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>

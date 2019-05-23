@@ -15,7 +15,7 @@ Follow our Mastodon account and never miss an important update: [@halcyon@social
 We moved our instances list to our webpage: https://www.halcyon.social/instances.php
 
 ## Translate
-[Help us translating Halcyon into many languages](https://translate.zanata.org/project/view/halcyon)
+[Help us translating Halcyon into many languages](https://translate.nikisoft.one/projects/halcyon/)
 
 ## Features
 - Twitter like UI, familiar interface.
@@ -41,6 +41,8 @@ We moved our instances list to our webpage: https://www.halcyon.social/instances
 or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install
 
 ## Blog
+- Release of Version 2.3.1 - Fix duplicated thread,allow adding more toots as reply chain,add Dutch translation,more bugfixes,improved translations.
+- [Zanata outage and our reactions](https://nikisoft.myblog.de/nikisoft/art/11671991/Zanata-outage-and-our-reactions)
 - [Release of Version 2.3.0 - Polls are coming to Mastodon](https://nikisoft.myblog.de/nikisoft/art/11669027/Halcyon-2-3-0-Polls-are-coming-to-Mastodon)
 - Release of Version 2.2.5 - Add French translation,improve German translation,add support for video captions,add support for video thumbnails
 - Release of Version 2.2.4 - Easily switch between pictures in overlay,show pictures in full height in timeline,duplicated threads removed,many smaller bugfixes

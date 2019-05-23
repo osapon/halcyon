@@ -649,3 +649,30 @@ media_views += "</div>";
 if($(media_views).children().length != 0) element.append(media_views);
 }
 }
+function enableAutoComplete(textarea) {
+if(localStorage.setting_compose_autocomplete == "true") {
+textarea.autoCompleteToken({instance:1,startkey:"@",endkey:" ",arrayname:"accounts",resultname:"acct"});
+textarea.autoCompleteToken({instance:2,startkey:"#",endkey:" ",arrayname:"hashtags"});
+textarea.autoCompleteToken({instance:3,startkey:":",endkey:";",source:actEmojiData,resultname:"name",callback:function() {
+textarea.trigger({"type":"keyup","key":":"});
+}});
+}
+}
+function submitStatusArray(params,callback) {
+var statuses = params.status;
+params.status = params.status.first().val();
+api.post("statuses",params,function(data) {
+statuses = statuses.filter(function(index) {return index != 0});
+if(statuses.length == 0) {
+callback();
+}
+else {
+var nparams = new Object();
+nparams.status = statuses;
+nparams.visibility = params.visibility;
+nparams.spoiler_text = params.spoiler_text;
+nparams.in_reply_to_id = data.id;
+submitStatusArray(nparams,callback);
+}
+});
+}

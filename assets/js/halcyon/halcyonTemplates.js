@@ -1124,7 +1124,7 @@ function mediaattachments_template2(status) {
   return html
   } else if(NotificationObj.type === 'follow') {
   const html=(`
-  <li sid="${NotificationObj.id}" class="notice_entry fol">
+  <li sid="${NotificationObj.id}" class="notice_entry fol toot_entry">
   <div class="notice_author_box">
   <a href="${notice_author_link}">
   <div class="icon_box">
@@ -1345,17 +1345,16 @@ function mediaattachments_template2(status) {
   </div>
   </div>
   <form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.id}" mentions='${JSON.stringify(status.mentions)}'>
+  <div class="status_left icon_box">
+  <img class="js_current_profile_image" src="${current_avatar}">
+  </div>
   <div class="status_top">
-  <input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
+  <input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" data-random="${Math.round(Math.random()*1000)}" type="text"/>
   </div>
   <div class="status_main">
-  <!-- current avatar -->
-  <div class="icon_box">
-  <img class="js_current_profile_image" src="${current_avatar}" />
-  </div>
   <!-- text area -->
   <div class="status_textarea">
-  <textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
+  <textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}" data-random="${Math.round(Math.random()*1000)}"></textarea>
   <div class="media_attachments_preview_area invisible"></div>
   <div class="status_poll_editor invisible">
   <i class="fa fa-circle-o"></i> <input name="options[]" type="text" class="disallow_enter textfield poll_field" maxlength="25"><br/>
@@ -1427,7 +1426,9 @@ function mediaattachments_template2(status) {
   <span class="character_count">
   ${current_instance_charlimit}
   </span>
-  <!-- Submit -->
+  <label for="header_status_addfield" class="status_addfield status_option_button">
+  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+  </label>
   <label for="reply_status_form_submit" class="submit_status_label">
   <div class="toot_button_label disallow_select">
   <i class="fa fa-reply" aria-hidden="true"></i>
@@ -1598,14 +1599,13 @@ function mediaattachments_template2(status) {
   </div>
   </div>
   <form id="reply_status_form" name="reply_status_form" class="status_form" sid="${status.reblog.id}" mentions='${JSON.stringify(status.reblog.mentions)}'>
+  <div class="status_left icon_box">
+  <img class="js_current_profile_image" src="${current_avatar}">
+  </div>
   <div class="status_top">
   <input class="status_spoiler invisible" name="status_spoiler" placeholder="${__('Content warning')}" type="text"/>
   </div>
   <div class="status_main">
-  <!-- current avatar -->
-  <div class="icon_box">
-  <img class="js_current_profile_image" src="${current_avatar}" />
-  </div>
   <!-- text area -->
   <div class="status_textarea">
   <textarea class="emoji_poss" name="status_textarea" placeholder="${__('Toot your reply')}"></textarea>
@@ -1680,7 +1680,9 @@ function mediaattachments_template2(status) {
   <span class="character_count">
   ${current_instance_charlimit}
   </span>
-  <!-- Submit -->
+  <label for="header_status_addfield" class="status_addfield status_option_button">
+  <i class="fa fa-plus-circle" aria-hidden="true"></i>
+  </label>
   <label for="reply_status_form_submit" class="submit_status_label">
   <div class="toot_button_label disallow_select">
   <i class="fa fa-reply" aria-hidden="true"></i>
@@ -1699,40 +1701,40 @@ function mediaattachments_template2(status) {
   }
   }
   function media_template(status,media) {
-  if(!status) {
-  const html = (`
-  <div class="media_detail">
-  <div class="media_box">
-  <img src="${media}">
-  </div>
-  </div>`);
-  return $(html)
-  }
-  else {
-  var pictures = new Array;
-  var hidebackward = "";
-  var hideforward ="";
-  for(var i=0;i<status.media_attachments.length;i++) {
-  if(status.media_attachments[i].remote_url != null) {
-  status.media_attachments[i].url = status.media_attachments[i].remote_url;
-  pictures.push(status.media_attachments[i].url);
-  }
-  }
-  if(media == 0) hidebackward = " style='display:none'";
-  if(media == status.media_attachments.length-1) hideforward = " style='display:none'";
-  const status_template = timeline_template(status).html(),
-  html = (`<div class="media_detail" pictures='${JSON.stringify(pictures)}' cid="${media}">
-  <div class="media_box">
-  <span class="media_backward"${hidebackward}><i class="fa fa-2x fa-chevron-left"></i></span>
-  <img src="${status.media_attachments[media].url}">
-  <span class="media_forward"${hideforward}><i class="fa fa-2x fa-chevron-right"></i></span>
-  </div>
-  <div class="toot_entry" sid="${status.id}">
-  ${status_template}
-  </div>
-  </div>`);
-  return $(html)
-  }
+    if(!status) {
+      const html = (`
+      <div class="media_detail">
+      <div class="media_box">
+      <img src="${media}">
+      </div>
+      </div>`);
+      return $(html)
+    }
+    else {
+      var pictures = new Array;
+      var hidebackward = "";
+      var hideforward ="";
+      for(var i=0;i<status.media_attachments.length;i++) {
+        if(status.media_attachments[i].remote_url != null) {
+          status.media_attachments[i].url = status.media_attachments[i].remote_url;
+        }
+        pictures.push(status.media_attachments[i].url);
+      }
+      if(media == 0) hidebackward = " style='display:none'";
+      if(media == status.media_attachments.length-1) hideforward = " style='display:none'";
+      const status_template = timeline_template(status).html(),
+      html = (`<div class="media_detail" pictures='${JSON.stringify(pictures)}' cid="${media}">
+      <div class="media_box">
+      <span class="media_backward"${hidebackward}><i class="fa fa-2x fa-chevron-left"></i></span>
+      <img src="${status.media_attachments[media].url}">
+      <span class="media_forward"${hideforward}><i class="fa fa-2x fa-chevron-right"></i></span>
+      </div>
+      <div class="toot_entry" sid="${status.id}">
+      ${status_template}
+      </div>
+      </div>`);
+      return $(html)
+    }
   }
   function context_template(status, class_options) {
   if ( status.reblog === null ) {
@@ -1980,7 +1982,7 @@ function mediaattachments_template2(status) {
   if(status.reblog.account.locked == true) account_state_icons += " <i class='fa fa-lock'></i>";
   if(status.reblog.account.bot == true) account_state_icons += " <img src='/assets/images/robot.svg' class='emoji'>";
   const html=$(`
-  <div sid="${status.id}" class="toot_entry ${class_options}">
+  <div sid="${status.reblog.id}" class="toot_entry ${class_options}">
   <div class="boost_author_box">
   <a href="${status_account_link}">
   <span class="emoji_poss"><i class="fa fa-fw fa-retweet"></i>${status.account.display_name} ${__('Boosted')}</span>
