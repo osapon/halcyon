@@ -27,6 +27,7 @@ We moved our instances list to our webpage: https://www.halcyon.social/instances
 or read our new documentation pages to install it manually: https://www.halcyon.social/documentation.php?page=install
 
 ## Blog
+- Release of Version 2.3.3 - New media uploader,sort uploads,drag&drop and copy&paste uploads,fix automatic dark mode
 - Release of Version 2.3.2 - Add block and mute management,add management for follow requests,add Catalan translation
 - Release of Version 2.3.1 - Fix duplicated thread,allow adding more toots as reply chain,add Dutch translation,more bugfixes,improved translations.
 - [Zanata outage and our reactions](https://blog.nikisoft.one/note/656562f160a728ea)

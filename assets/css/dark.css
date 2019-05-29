@@ -541,11 +541,11 @@ background-color:#2571D0;
 .status_form .status_bottom .submit_status_label:active,#header .header_nav_wrap .header_right_box .toot_button:active {
 background-color:#255ED0;
 }
-.overlay_status_header,.single_reply_status_header,.report_status_header {
+.overlay_status_header,.single_reply_status_header,.report_status_header,.caption_status_header {
 background-color:#1B2836;
 color:#eee;
 }
-#overlay_status_form.status_form,#single_reply_status_form.status_form,#report_status_form.status_form {
+#overlay_status_form.status_form,#single_reply_status_form.status_form,#report_status_form.status_form,#caption_status_form.status_form {
 background-color:#243447;
 }
 .follow_button:hover,.follow_button:hover i,.halcyon_button:hover,.halcyon_button:hover i,.following_button,.following_button i {
@@ -662,4 +662,23 @@ background-color:#189EFC;
 }
 .poll_footer {
 color:#66757f;
+}
+.media_attachments_preview_area .media_attachments_preview.over {
+border:2px dashed #000;
+}
+.media_attachments_delete_button {
+background-color:#1B2836;
+color:#FF0000;
+}
+.media_attachments_delete_button:hover {
+background-color:#FF0000;
+color:#1B2836;
+}
+.media_attachments_caption_button {
+background-color:#1B2836;
+color:#189EFC;
+}
+.media_attachments_caption_button:hover {
+background-color:#189EFC;
+color:#1B2836;
 }

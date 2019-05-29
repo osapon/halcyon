@@ -1254,7 +1254,329 @@ $(document).on('click','img[mediaaccess="true"]', function(e) {
 e.stopPropagation();
 setOverlayMediaWithoutStatus($(this).attr('src'));
 });
-})
+});
+function handleMediaUpload(place,f) {
+if($('#'+place+'_status_form .media_attachments_preview_area').children().length == 4) {
+putMessage(__("You can only add four pictures to one post!"));
+}
+else if($('#'+place+'_status_form .status_media_attachment').hasClass("disabled")) {
+putMessage(__("You can not add media files to posts with polls!"));
+}
+else {
+if($('#'+place+'_status_form .media_attachments_preview_area').children().length == 0) {
+$('#'+place+'_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
+$('#'+place+'_status_form .status_poll').addClass('disabled');
+}
+let reader= new FileReader();
+reader.readAsDataURL(f);
+reader.onloadend = (function() {
+return function (e) {
+var imgrandom = Math.round(Math.random()*100000);
+image_uploads[place][imgrandom] = new Object();
+image_uploads[place][imgrandom].upload = f;
+if(f.type.indexOf("image") != -1) var mediaelement = `<img src="${e.target.result}" class="media_element" data-random="${imgrandom}">`;
+if(f.type.indexOf("video") != -1) var mediaelement = `<video src="${e.target.result}" muted class="media_element" data-random="${imgrandom}">`;
+if(f.type.indexOf("audio") != -1) var mediaelement = `<span class="media_element" data-random="${imgrandom}"><center><i class="fa fa-file-audio-o" style="font-size:7em"></i></center></span>`;
+const html = (`<div class="media_attachments_preview" draggable="true">
+<div class="media_attachments_caption_button"><i class="fa fa-pencil"></i></div>
+<div class="media_attachments_delete_button"><i class="fa fa-trash"></i></div>
+${mediaelement}
+</div>`);
+$(html).appendTo('#'+place+'_status_form .media_attachments_preview_area');
+}
+})(f);
+}
+}
+var image_uploads = new Object();
+function initStatusEditor(place) {
+image_uploads[place] = new Object();
+$('label[for='+place+'_status_emoji]').click(function(e) {$('#'+place+'_status_emoji').trigger('click',e)});
+$(document).on('change keyup','#'+place+'_status_form textarea,#'+place+'_status_form .status_spoiler,#'+place+'_status_form .poll_days,#'+place+'_status_form .poll_hours,#'+place+'_status_form .poll_mins', function(e) {
+var is_ready;
+if(e.keyCode !== 224 & e.keyCode !== 17) {
+if(e.key == ":") {
+replace_emoji_textarea(this);
+}
+if($('#'+place+'_status_form textarea').length == 1) {
+const textCount = $('#'+place+'_status_form textarea').val().length + $('#'+place+'_status_form .status_spoiler').val().length;
+let textLen = ( current_instance_charlimit - textCount );
+if(textLen <= -1) {
+$('#'+place+'_status_form .character_count').addClass('red');
+is_ready = true;
+} else if(textLen === current_instance_charlimit) {
+is_ready = true;
+} else {
+$('#'+place+'_status_form .character_count').removeClass('red');
+is_ready = false;
+}
+$('#'+place+'_status_form .character_count').text(textLen);
+}
+else {
+is_ready = false;
+$('#'+place+'_status_form .character_count').removeClass('red');
+$('#'+place+'_status_form textarea').each(function() {
+const textCount = $(this).val().length + $('#'+place+'_status_form .status_spoiler').val().length;
+let textLen = ( current_instance_charlimit - textCount );
+if(textLen <= -1) {
+$('#'+place+'_status_form .character_count').addClass('red');
+is_ready = true;
+} else if(textLen === current_instance_charlimit) {
+is_ready = true;
+}
+if($(this).is(":focus")) {
+$('#'+place+'_status_form .character_count').text(textLen);
+}
+});
+}
+}
+if($('#'+place+'_status_form .status_poll_editor').hasClass("invisible")) {
+if(is_ready) $('#'+place+'_status_form').addClass('ready');
+else $('#'+place+'_status_form').removeClass('ready');
+}
+else {
+if($('#'+place+'_status_form .poll_days').is(":valid") && $('#'+place+'_status_form .poll_hours').is(":valid") && $('#'+place+'_status_form .poll_mins').is(":valid")) {
+if(is_ready) $('#'+place+'_status_form').addClass('ready');
+else $('#'+place+'_status_form').removeClass('ready');
+}
+else $('#'+place+'_status_form').addClass('ready');
+}
+});
+$(document).on('click','#'+place+'_status_form .status_CW', function(e) {
+$('#'+place+'_status_form .status_spoiler').toggleClass('invisible');
+$('#'+place+'_status_form .status_textarea').toggleClass('status_has_cw');
+});
+$(document).on('click','#'+place+'_status_form .status_poll', function(e) {
+$('#'+place+'_status_form .status_poll_editor').toggleClass('invisible');
+$('#'+place+'_status_form .status_media_attachment').toggleClass('disabled');
+$('#'+place+'_status_form textarea').keyup();
+});
+$(document).on('click','#'+place+'_status_form .expand_privacy_menu_button', function(e) {
+$('#'+place+'_status_form .expand_privacy_menu').removeClass('invisible');
+});
+$(document).on('click','#'+place+'_status_form .status_addfield', function(e) {
+var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
+autosize(new_textarea);
+enableAutoComplete(new_textarea);
+$('#'+place+'_status_form textarea').last().after(new_textarea);
+});
+$(document).on('click','#'+place+'_status_form .status_privacy.select_privacy', function(e) {
+e.stopPropagation();
+$('#'+place+'_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
+$('#'+place+'_status_form .expand_privacy_menu').addClass('invisible');
+});
+$(document).on('change','#'+place+'_status_media_atta', function(e) {
+for(let i=0,f;f=e.target.files[i];i++) {
+if(f.type.indexOf("image") != -1 || f.type.indexOf("video") != -1 || f.type.indexOf("audio") != -1) handleMediaUpload(place,f);
+}
+});
+$(document).on('click','#'+place+'_status_form .status_NSFW', function(e) {
+$('#'+place+'_status_form .media_attachments_preview_area').toggleClass('nsfw');
+});
+$(document).on('click','#'+place+'_status_form .media_attachments_delete_button',function(e) {
+e.stopPropagation();
+delete image_uploads[place][$(this).parent().children(".media_element").data("random")];
+$(this).parent().remove();
+if($('#'+place+'_status_form .media_attachments_preview_area').children().length == 0) {
+$('#'+place+'_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+$('#'+place+'_status_form .status_poll').removeClass('disabled');
+}
+});
+$(document).on('click','#'+place+'_status_form .media_attachments_caption_button',function(e) {
+e.stopPropagation();
+$("#caption_status_form").data("place",place);
+$("#caption_status_form").data("random",$(this).parent().children(".media_element").data("random"));
+if(image_uploads[place][$(this).parent().children(".media_element").data("random")].caption) $("#caption_status_form .status_textarea textarea").val(image_uploads[place][$(this).parent().children(".media_element").data("random")].caption);
+if(place == "reply") $(".toot_detail_wrap").addClass("invisible");
+else if(place != "header") $("."+place+"_status").addClass("invisible"); 
+$('.caption_status').removeClass('invisible');
+$(".caption_status .status_preview").empty();
+$('#js-overlay_content_wrap').addClass('view');
+$('#js-overlay_content_wrap').addClass('black_08');
+$('.caption_status .submit_status_label').addClass('active_submit_button');
+$('#caption_status_form .status_textarea textarea').addClass('focus');
+$('#caption_status_form .status_textarea textarea').focus();
+autosize($('#caption_status_form .status_textarea textarea'));
+$('#caption_status_form').attr('random',$(this).parent().children(".media_element").data("random"));
+$('.caption_status .report_status_header span').addClass("emoji_poss").html(__("Add a caption to the media file"));
+$('#caption_status_form textarea').empty();
+$('#caption_status_form .character_count').html("420");
+replace_emoji();
+return false;
+});
+$(document).on('paste','#'+place+'_status_form .status_textarea',function(e) {
+e = e.originalEvent;
+for(var i=0;i<e.clipboardData.items.length;i++) {
+var item = e.clipboardData.items[i];
+if(item.type.indexOf("image") != -1 || item.type.indexOf("video") != -1 || item.type.indexOf("audio") != -1) {
+handleMediaUpload(place,item.getAsFile());
+}
+}
+});
+$(document).on('drop','#'+place+'_status_form .status_textarea',function(e) {
+e = e.originalEvent;
+for(var i=0;i<e.dataTransfer.files.length;i++) {
+var item = e.dataTransfer.files[i];
+if(item.type.indexOf("image") != -1 || item.type.indexOf("video") != -1 || item.type.indexOf("audio") != -1) {
+e.preventDefault();
+handleMediaUpload(place,item);
+}
+}
+});
+var dragsourceelement = null;
+$(document).on("dragstart",'#'+place+'_status_form .media_attachments_preview',function(e) {
+e.originalEvent.dataTransfer.effectAllowed = 'move';
+e.originalEvent.dataTransfer.setData('text/html',$(this).html());
+dragsourceelement = this;
+$(this).addClass("moving");
+});
+$(document).on("dragenter",'#'+place+'_status_form .media_attachments_preview',function(e) {
+if(dragsourceelement != null) {
+$(this).addClass("over");
+}
+});
+$(document).on("dragover",'#'+place+'_status_form .media_attachments_preview',function(e) {
+if(dragsourceelement != null) {
+e.preventDefault();
+e.originalEvent.dataTransfer.dropEffect = 'move';
+}
+return false;
+});
+$(document).on("dragleave",'#'+place+'_status_form .media_attachments_preview',function(e) {
+$(this).removeClass("over");
+});
+$(document).on("drop",'#'+place+'_status_form .media_attachments_preview',function(e) {
+e.stopPropagation();
+if(dragsourceelement != this && dragsourceelement != null) {
+$(dragsourceelement).html($(this).html());
+$(this).html(e.originalEvent.dataTransfer.getData('text/html'));
+}
+dragsourceelement = null;
+$('#'+place+'_status_form .media_attachments_preview').removeClass("over");
+$('#'+place+'_status_form .media_attachments_preview').removeClass("moving");
+return false;
+});
+$(document).on("dragend",'#'+place+'_status_form .media_attachments_preview',function(e) {
+dragsourceelement = null;
+$('#'+place+'_status_form .media_attachments_preview').removeClass("over");
+$('#'+place+'_status_form .media_attachments_preview').removeClass("moving");
+});
+$(document).on('click','#'+place+'_status_form .submit_status_label', function(e) {
+$('#'+place+'_status_form').addClass('ready');
+$('#'+place+'_status_form .status_textarea').addClass('disallow_select');
+$('#'+place+'_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
+const form = document.forms[place+"_status_form"];
+if(!Object.keys(image_uploads[place]).length || !$('#'+place+'_status_form .status_poll_editor').hasClass("invisible")) {
+const params = {
+status:$('#'+place+'_status_form textarea'),
+sensitive: form.status_nsfw.checked,
+spoiler_text : form.status_spoiler.value,
+visibility : form.privacy_option.value
+}
+if(!$('#'+place+'_status_form .status_poll_editor').hasClass("invisible")) {
+params.poll = new Object;
+params.poll.options = new Array;
+for(var i=0;i < $('#'+place+'_status_form .poll_field').length;i++) {
+if($('#'+place+'_status_form .poll_field').eq(i).val().length > 0) params.poll.options.push($('#'+place+'_status_form .poll_field').eq(i).val());
+}
+if(params.poll.options.length > 0) {
+params.poll.expires_in = $('#'+place+'_status_form .poll_days').val()*86400+$('#'+place+'_status_form .poll_hours').val()*3600+$('#'+place+'_status_form .poll_mins').val()*60;
+if($('#'+place+'_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
+}
+}
+submitStatusArray(params,function(data) {
+$('#'+place+'_status_form .media_attachments_preview_area').empty();
+$('#'+place+'_status_form .status_spoiler').addClass('invisible');
+$('#'+place+'_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+$('#'+place+'_status_form .status_poll').removeClass('disabled');
+form.reset();
+$('#'+place+'_status_form').removeClass('ready');
+$('#'+place+'_status_form .status_textarea').removeClass('disallow_select');
+$('#'+place+'_status_form .character_count').html(current_instance_charlimit);
+$('.'+place+'_status .submit_status_label').removeClass('active_submit_button');
+$('.'+place+'_status').addClass('invisible');
+$('#js-overlay_content_wrap').removeClass('view');
+$('#js-overlay_content_wrap').removeClass('black_05');
+putMessage(__('Your Toot was posted!'));
+});
+} else {
+const filesLen = Object.keys(image_uploads[place]).length-1;
+let media_array = [];
+var count = 0;
+for(var i in image_uploads[place]) {
+let formData = new FormData();
+formData.append('file',image_uploads[place][i].upload);
+if(image_uploads[place][i].caption) formData.append('description',image_uploads[place][i].caption);
+if(count === 3 || count === filesLen) {
+api.postMedia("media",formData,function(postMedia) {
+media_array.unshift(postMedia.id);
+const params = {
+status:$('#'+place+'_status_form textarea'),
+sensitive: form.status_nsfw.checked,
+spoiler_text : form.status_spoiler.value,
+visibility : form.privacy_option.value,
+media_ids: media_array
+}
+submitStatusArray(params,function(data) {
+$('#'+place+'_status_form .media_attachments_preview_area').empty();
+$('#'+place+'_status_form .status_spoiler').addClass('invisible');
+$('#'+place+'_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+$('#'+place+'_status_form .status_poll').removeClass('disabled');
+form.reset();
+delete image_uploads[place];
+image_uploads[place] = new Object();
+$('#'+place+'_status_form').removeClass('ready');
+$('#'+place+'_status_form .status_textarea').removeClass('disallow_select');
+$('#'+place+'_status_form .character_count').html(current_instance_charlimit);
+$('.'+place+'_status .submit_status_label').removeClass('active_submit_button');
+$('.'+place+'_status').addClass('invisible');
+autosize.destroy($('#'+place+'_status_form .status_textarea textarea'));
+$('#'+place+'_status_emoji').lsxEmojiPicker("destroy");
+$('#js-overlay_content_wrap').removeClass('view');
+$('#js-overlay_content_wrap').removeClass('black_05');
+putMessage(__('Your Toot was posted!'));
+});
+});
+break;
+}
+else if(count < filesLen) {
+api.postMedia("media",formData,function(postMedia) {
+media_array.unshift(postMedia.id);
+});
+}
+count++;
+}
+}
+});
+}
+function openStatusEditor(place) {
+$('#'+place+'_status_form .status_textarea textarea').addClass('focus');
+autosize($('#'+place+'_status_form .status_textarea textarea'));
+enableAutoComplete($('#'+place+'_status_form .status_top .status_spoiler'));
+enableAutoComplete($('#'+place+'_status_form .status_textarea textarea'));
+$('#'+place+'_status_form .status_bottom').removeClass('invisible');
+$('#'+place+'_status_form .submit_status_label').addClass('active_submit_button');
+const textCount = $('#'+place+'_status_form textarea').val().length + $('#'+place+'_status_form .status_spoiler').val().length;
+let textLen = (current_instance_charlimit - textCount);
+$('#'+place+'_status_form .character_count').html(textLen);
+$('#'+place+'_status_emoji').lsxEmojiPicker({
+closeOnSelect:true,
+twemoji:!checkEmojiSupport(),
+onSelect:function(emoji) {
+$('#'+place+'_status_form .status_top .status_spoiler,#'+place+'_status_form .status_textarea textarea').each(function() {
+if(global_focus_textfield == $(this).data("random")) {
+$(this).insertText(":"+emoji.name+":");
+$(this).trigger({"type":"keyup","key":":"});
+}
+});
+}
+});
+if(localStorage.setting_post_sensitive == "true") {
+$('#'+place+'_status_nsfw')[0].checked = true;
+$('#'+place+'_status_form .media_attachments_preview_area').addClass('nsfw');
+}
+$('#'+place+'_status_form .status_textarea textarea').focus();
+replace_emoji();
+}
 $(function() {
 $(document).on('click', function(e) {
 if(!$(e.target).closest('#creat_status').length && !$(e.target).closest('.overlay_status').length) {
@@ -1263,7 +1585,6 @@ $('#overlay_status_form .status_top .status_spoiler').autoCompleteToken("destroy
 $('#overlay_status_form .status_textarea textarea').autoCompleteToken("destroy");
 }
 });
-$('label[for=overlay_status_emoji]').click(function(e) {$('#overlay_status_emoji').trigger('click',e)});
 $(document).on('click', '#creat_status,.profile_sendto', function(e) {
 if($(this).attr("privacy")) privacy_mode = $(this).attr("privacy")
 else privacy_mode = localStorage.getItem("setting_post_privacy")
@@ -1277,446 +1598,24 @@ $('.overlay_status').removeClass('invisible');
 $("#js-overlay_content_wrap .temporary_object").empty();
 $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_08');
-$('#overlay_status_form .status_textarea textarea').addClass('focus');
-$('.overlay_status .submit_status_label').addClass('active_submit_button');
-$('#overlay_status_form .status_textarea textarea').focus();
-autosize($('#overlay_status_form .status_textarea textarea'));
-enableAutoComplete($('#overlay_status_form .status_top .status_spoiler'));
-enableAutoComplete($('#overlay_status_form .status_textarea textarea'));
+$('#overlay_status_form .media_attachments_preview_area').empty();
+$('#overlay_status_form .status_spoiler').addClass('invisible');
+$('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+$('#overlay_status_form .status_poll').removeClass('disabled');
+document.forms.overlay_status_form.reset();
+delete image_uploads.overlay;
+image_uploads.overlay = new Object();
 $('#overlay_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#overlay_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 if($(this).attr("display_name")) $('.overlay_status .overlay_status_header span').addClass("emoji_poss").html(__("Toot to")+" "+$(this).attr("display_name"));
 else $('.overlay_status .overlay_status_header span').html(__("Compose new Toot"));
 if($(this).attr("acct")) $('#overlay_status_form textarea').val($(this).attr("acct")+" ");
 else $('#overlay_status_form textarea').val("");
-$('#overlay_status_form .character_count').html(current_instance_charlimit);
-$('#overlay_status_emoji').lsxEmojiPicker({
-closeOnSelect:true,
-twemoji:!checkEmojiSupport(),
-onSelect:function(emoji) {
-$('#overlay_status_form .status_top .status_spoiler,#overlay_status_form .status_textarea textarea').each(function() {
-if(global_focus_textfield == $(this).data("random")) {
-$(this).insertText(":"+emoji.name+":");
-$(this).trigger({"type":"keyup","key":":"});
-}
+openStatusEditor("overlay");
 });
-}
-});
-if(localStorage.setting_post_sensitive == "true") {
-$("#overlay_status_nsfw")[0].checked = true;
-$('#overlay_status_form .media_attachments_preview_area').addClass('nsfw');
-}
-});
-$(document).on('change keyup','#overlay_status_form textarea,#overlay_status_form .status_spoiler,#overlay_status_form .poll_days,#overlay_status_form .poll_hours,#overlay_status_form .poll_mins', function(e) {
-var is_ready;
-if(e.keyCode !== 224 & e.keyCode !== 17) {
-if(e.key == ":") {
-replace_emoji_textarea(this);
-}
-if($('#overlay_status_form textarea').length == 1) {
-const textCount = $('#overlay_status_form textarea').val().length + $('#overlay_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#overlay_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-} else {
-$('#overlay_status_form .character_count').removeClass('red');
-is_ready = false;
-}
-$('#overlay_status_form .character_count').text(textLen);
-}
-else {
-is_ready = false;
-$('#overlay_status_form .character_count').removeClass('red');
-$('#overlay_status_form textarea').each(function() {
-const textCount = $(this).val().length + $('#overlay_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#overlay_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-}
-if($(this).is(":focus")) {
-$('#overlay_status_form .character_count').text(textLen);
-}
-});
-}
-}
-if($('#overlay_status_form .status_poll_editor').hasClass("invisible")) {
-if(is_ready) $('#overlay_status_form').addClass('ready');
-else $('#overlay_status_form').removeClass('ready');
-}
-else {
-if($('#overlay_status_form .poll_days').is(":valid") && $('#overlay_status_form .poll_hours').is(":valid") && $('#overlay_status_form .poll_mins').is(":valid")) {
-if(is_ready) $('#overlay_status_form').addClass('ready');
-else $('#overlay_status_form').removeClass('ready');
-}
-else $('#overlay_status_form').addClass('ready');
-}
-});
-$(document).on('click','#overlay_status_form .status_CW', function(e) {
-$('#overlay_status_form .status_spoiler').toggleClass('invisible');
-$('#overlay_status_form .status_textarea').toggleClass('status_has_cw');
-});
-$(document).on('click','#overlay_status_form .status_poll', function(e) {
-$('#overlay_status_form .status_poll_editor').toggleClass('invisible');
-$('#overlay_status_form .status_media_attachment').toggleClass('disabled');
-$('#overlay_status_form textarea').keyup();
-});
-$(document).on('click','#overlay_status_form .expand_privacy_menu_button', function(e) {
-$('#overlay_status_form .expand_privacy_menu').removeClass('invisible');
-});
-$(document).on('click','#overlay_status_form .status_addfield', function(e) {
-var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
-autosize(new_textarea);
-enableAutoComplete(new_textarea);
-$('#overlay_status_form textarea').last().after(new_textarea);
-});
-$(document).on('click','#overlay_status_form .status_privacy.select_privacy', function(e) {
-e.stopPropagation();
-$('#overlay_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-$('#overlay_status_form .expand_privacy_menu').addClass('invisible');
-});
-$(document).on('change','#overlay_status_media_atta', function(e) {
-$('#overlay_status_form .media_attachments_preview_area').empty();
-$('#overlay_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-$('#overlay_status_form .status_poll').addClass('disabled');
-for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-let reader= new FileReader();
-reader.readAsDataURL(f);
-reader.onloadend = (function() {
-return function (e) {
-const html = (`<div class="media_attachments_preview">
-<img src="${e.target.result}"/>
-</div>`);
-$(html).appendTo('#overlay_status_form .media_attachments_preview_area');
-}
-})(f);
-}
-});
-$(document).on('click','#overlay_status_form .status_NSFW', function(e) {
-$('#overlay_status_form .media_attachments_preview_area').toggleClass('nsfw');
-});
-$(document).on('click','#overlay_status_form .submit_status_label', function(e) {
-$('#overlay_status_form').addClass('ready');
-$('#overlay_status_form .status_textarea').addClass('disallow_select');
-$('#overlay_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
-const form = document.forms.overlay_status_form;
-if (!$('#overlay_status_media_atta')[0].files.length || !$('#overlay_status_form .status_poll_editor').hasClass("invisible")) {
-const params = {
-status:$('#overlay_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value
-}
-if(!$('#overlay_status_form .status_poll_editor').hasClass("invisible")) {
-params.poll = new Object;
-params.poll.options = new Array;
-for(var i=0;i < $('#overlay_status_form .poll_field').length;i++) {
-if($('#overlay_status_form .poll_field').eq(i).val().length > 0) params.poll.options.push($('#overlay_status_form .poll_field').eq(i).val());
-}
-if(params.poll.options.length > 0) {
-params.poll.expires_in = $('#overlay_status_form .poll_days').val()*86400+$('#overlay_status_form .poll_hours').val()*3600+$('#overlay_status_form .poll_mins').val()*60;
-if($('#overlay_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
-}
-}
-submitStatusArray(params,function(data) {
-$('#overlay_status_form .media_attachments_preview_area').empty();
-$('#overlay_status_form .status_spoiler').addClass('invisible');
-$('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#overlay_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#overlay_status_form').removeClass('ready');
-$('#overlay_status_form .status_textarea').removeClass('disallow_select');
-$('#overlay_status_form .character_count').html(current_instance_charlimit);
-$('.overlay_status .submit_status_label').removeClass('active_submit_button');
-$('.overlay_status').addClass('invisible');
-$('#js-overlay_content_wrap').removeClass('view');
-$('#js-overlay_content_wrap').removeClass('black_05');
-putMessage(__('Your Toot was posted!'));
-});
-} else {
-const dummy_form= $('<form></form>').append($('#overlay_status_media_atta')),
-files = dummy_form[0][0].files,
-filesLen= files.length -1;
-let media_array = [];
-$("#overlay_status_form .status_bottom").append($('<input id="overlay_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
-for (let i=0; i<files.length; i++) {
-let formData = new FormData();
-formData.append('file', files[i]);
-if ( i === 3 || i === filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-const params = {
-status:$('#overlay_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-media_ids: media_array
-}
-submitStatusArray(params,function(data) {
-$('#overlay_status_form .media_attachments_preview_area').empty();
-$('#overlay_status_form .status_spoiler').addClass('invisible');
-$('#overlay_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#overlay_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#overlay_status_form').removeClass('ready');
-$('#overlay_status_form .status_textarea').removeClass('disallow_select');
-$('#overlay_status_form .character_count').html(current_instance_charlimit);
-$('.overlay_status .submit_status_label').removeClass('active_submit_button');
-$('.overlay_status').addClass('invisible');
-autosize.destroy($('#overlay_status_form .status_textarea textarea'));
-$('#overlay_status_emoji').lsxEmojiPicker("destroy");
-$('#js-overlay_content_wrap').removeClass('view');
-$('#js-overlay_content_wrap').removeClass('black_05');
-putMessage(__('Your Toot was posted!'));
-});
-});
-break;
-} else if ( i < filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-});
-}
-}
-}
-});
-})
-$(function() {
-$(document).on('click', function(e) {
-if(!$(e.target).closest('#header_status_form').length) {
-$('#header_status_form .submit_status_label').removeClass('active_submit_button');
-$('#header_status_form .expand_privacy_menu').addClass('invisible');
-$('#header_status_form .status_textarea textarea').removeClass('focus');
-$('#header_status_form .status_bottom').addClass('invisible');
-autosize.destroy($('#header_status_form .status_textarea textarea'));
-$('#header_status_emoji').lsxEmojiPicker("destroy");
-$('#header_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
-$('#header_status_form .status_textarea textarea').autoCompleteToken("destroy");
-$('#header_status_form .status_textarea').addClass("closed");
-}
-});
-$(document).on('change keyup','#header_status_form textarea,#header_status_form .status_spoiler,#header_status_form .poll_days,#header_status_form .poll_hours,#header_status_form .poll_mins', function(e) {
-var is_ready;
-if(e.keyCode !== 224 & e.keyCode !== 17) {
-if(e.key == ":") {
-replace_emoji_textarea(this);
-}
-if($('#header_status_form textarea').length == 1) {
-const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#header_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-} else {
-$('#header_status_form .character_count').removeClass('red');
-is_ready = false;
-}
-$('#header_status_form .character_count').text(textLen);
-}
-else {
-is_ready = false;
-$('#header_status_form .character_count').removeClass('red');
-$('#header_status_form textarea').each(function() {
-const textCount = $(this).val().length + $('#header_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#header_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-}
-if($(this).is(":focus")) {
-$('#header_status_form .character_count').text(textLen);
-}
-});
-}
-}
-if($('#header_status_form .status_poll_editor').hasClass("invisible")) {
-if(is_ready) $('#header_status_form').addClass('ready');
-else $('#header_status_form').removeClass('ready');
-}
-else {
-if($('#header_status_form .poll_days').is(":valid") && $('#header_status_form .poll_hours').is(":valid") && $('#header_status_form .poll_mins').is(":valid")) {
-if(is_ready) $('#header_status_form').addClass('ready');
-else $('#header_status_form').removeClass('ready');
-}
-else $('#header_status_form').addClass('ready');
-}
-});
-$(document).on('click','#header_status_form .status_CW', function(e) {
-$('#header_status_form .status_spoiler').toggleClass('invisible');
-$('#header_status_form .status_textarea').toggleClass('status_has_cw');
-$('#header_status_form .status_spoiler').val("");
-});
-$(document).on('click','#header_status_form .status_poll', function(e) {
-$('#header_status_form .status_poll_editor').toggleClass('invisible');
-$('#header_status_form .status_media_attachment').toggleClass('disabled');
-$('#header_status_form textarea').keyup();
-});
-$(document).on('click','#header_status_form .status_addfield', function(e) {
-var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
-autosize(new_textarea);
-enableAutoComplete(new_textarea);
-$('#header_status_form textarea').last().after(new_textarea);
-});
-$(document).on('click','#header_status_form .expand_privacy_menu_button', function(e) {
-$('#header_status_form .expand_privacy_menu').removeClass('invisible');
-});
-$(document).on('click','#header_status_form .status_privacy.select_privacy', function(e) {
-e.stopPropagation();
-$('#header_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-$('#header_status_form .expand_privacy_menu').addClass('invisible');
-});
-$('label[for=header_status_emoji]').click(function(e) {$('#header_status_emoji').trigger('click',e)});
-$(document).on('click','#header_status_form', function(e) {
-switch(localStorage.getItem("setting_post_privacy")) {
-case "public":picon="globe";break;
-case "unlisted":picon="unlock-alt";break;
-case "private":picon="lock";break;
-case "direct":picon="envelope";break;
-}
-if(!$('#header_status_form .status_textarea textarea').hasClass('focus')) {
-$('#header_status_form .status_textarea').removeClass("closed");
-$('#header_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
-$('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
-$('#header_status_form .status_textarea textarea').addClass('focus');
-autosize($('#header_status_form .status_textarea textarea'));
-enableAutoComplete($('#header_status_form .status_top .status_spoiler'));
-enableAutoComplete($('#header_status_form .status_textarea textarea'));
-$('#header_status_form .status_bottom').removeClass('invisible');
-$('#header_status_form .submit_status_label').addClass('active_submit_button');
-const textCount = $('#header_status_form textarea').val().length + $('#header_status_form .status_spoiler').val().length;
-let textLen = (current_instance_charlimit - textCount);
-$('#header_status_form .character_count').html(textLen);
-$('#header_status_emoji').lsxEmojiPicker({
-closeOnSelect:true,
-twemoji:!checkEmojiSupport(),
-onSelect:function(emoji) {
-$('#header_status_form .status_top .status_spoiler,#header_status_form .status_textarea textarea').each(function() {
-if(global_focus_textfield == $(this).data("random")) {
-$(this).insertText(":"+emoji.name+":");
-$(this).trigger({"type":"keyup","key":":"});
-}
-});
-}
-});
-if(localStorage.setting_post_sensitive == "true") {
-$("#header_status_nsfw")[0].checked = true;
-$('#header_status_form .media_attachments_preview_area').addClass('nsfw');
-}
-}
-});
-$(document).on('change','#header_status_media_atta', function(e) {
-$('#header_status_form .media_attachments_preview_area').empty();
-$('#header_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-$('#header_status_form .status_poll').addClass('disabled');
-for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-let reader= new FileReader();
-reader.readAsDataURL(f);
-reader.onloadend = (function() {
-return function (e) {
-const html = (`<div class="media_attachments_preview">
-<img src="${e.target.result}"/>
-</div>`);
-$(html).appendTo('#header_status_form .media_attachments_preview_area');
-}
-})(f);
-}
-});
-$(document).on('click','#header_status_form .status_NSFW', function(e) {
-$('#header_status_form .media_attachments_preview_area').toggleClass('nsfw');
-});
-$(document).on('click','#header_status_form .submit_status_label', function(e) {
-$('#header_status_form').addClass('ready');
-$('#header_status_form .status_textarea').addClass('disallow_select');
-$('#header_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
-const form = document.forms.header_status_form;
-if(!$('#header_status_media_atta')[0].files.length || !$('#header_status_form .status_poll_editor').hasClass("invisible")) {
-const params = {
-status: $('#header_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value
-}
-if(!$('#header_status_form .status_poll_editor').hasClass("invisible")) {
-params.poll = new Object;
-params.poll.options = new Array;
-for(var i=0;i < $('#header_status_form .poll_field').length;i++) {
-if($('#header_status_form .poll_field').eq(i).val().length > 0) params.poll.options.push($('#header_status_form .poll_field').eq(i).val());
-}
-if(params.poll.options.length > 0) {
-params.poll.expires_in = $('#header_status_form .poll_days').val()*86400+$('#header_status_form .poll_hours').val()*3600+$('#header_status_form .poll_mins').val()*60;
-if($('#header_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
-}
-}
-submitStatusArray(params,function(data) {
-$('#header_status_form .media_attachments_preview_area').empty();
-$('#header_status_form .status_spoiler').addClass('invisible');
-$('#header_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#header_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#header_status_form').removeClass('ready');
-$('#header_status_form .status_textarea').removeClass('disallow_select');
-$('#header_status_form .character_count').html(current_instance_charlimit);
-$(document).click();
-$('#header_status_form .additional_textarea').remove();
-});
-} else {
-const dummy_form = $('<form></form>').append($('#header_status_media_atta')),
-files= dummy_form[0][0].files,
-filesLen = files.length -1;
-let media_array = [];
-$("#header_status_form .status_bottom").append($('<input id="header_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
-for (let i=0; i<files.length; i++) {
-let formData = new FormData();
-formData.append('file', files[i]);
-if ( i === 3 || i === filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-const params = {
-status : $('#header_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-media_ids: media_array
-}
-submitStatusArray(params,function(data) {
-$('#header_status_form .media_attachments_preview_area').empty();
-$('#header_status_form .status_spoiler').addClass('invisible');
-$('#header_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#header_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#header_status_form').removeClass('ready');
-$('#header_status_form .status_textarea').removeClass('disallow_select');
-$('#header_status_form .character_count').html(current_instance_charlimit);
-$(document).click();
-$('#header_status_form .additional_textarea').remove();
-});
-});
-break;
-} else if ( i < filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-});
-}
-}
-}
-});
-})
-$(function() {
+initStatusEditor("overlay");
 $(document).on('click', function(e) {
 if (!$(e.target).closest('#reply_status_form').length) {
-$("#js-overlay_content_wrap .temporary_object").empty();
-$('#reply_status_form .expand_privacy_menu').addClass('invisible');
-$('#reply_status_form .status_bottom').addClass('invisible');
-$('#reply_status_form .status_textarea textarea').removeClass('focus');
-$('#reply_status_form .submit_status_label').removeClass('active_submit_button');
 $('#reply_status_emoji').lsxEmojiPicker("destroy");
 $('#reply_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
 $('#reply_status_form .status_textarea textarea').autoCompleteToken("destroy");
@@ -1732,224 +1631,24 @@ if(mentions[i].acct != current_acct) {
 replyto += "@"+mentions[i].acct+" ";
 }
 }
-$('#reply_status_form .status_textarea textarea').addClass('focus');
-autosize($('#reply_status_form .status_textarea textarea'));
-enableAutoComplete($('#reply_status_form .status_top .status_spoiler'));
-enableAutoComplete($('#reply_status_form .status_textarea textarea'));
-$('#reply_status_form .status_bottom').removeClass('invisible');
-$('#reply_status_form .submit_status_label').addClass('active_submit_button');
 $('#reply_status_form textarea').val(replyto);
-const textCount = $('#reply_status_form textarea').val().length + $('#reply_status_form .status_spoiler').val().length;
-let textLen = (current_instance_charlimit - textCount);
-$('#reply_status_form .character_count').html(textLen);
-$('label[for=reply_status_emoji]').click(function(e) {$('#reply_status_emoji').trigger('click',e)});
-$('#reply_status_emoji').lsxEmojiPicker({
-closeOnSelect:true,
-twemoji:!checkEmojiSupport(),
-onSelect:function(emoji) {
-$('#reply_status_form .status_top .status_spoiler,#reply_status_form .status_textarea textarea').each(function() {
-if(global_focus_textfield == $(this).data("random")) {
-$(this).insertText(":"+emoji.name+":");
-$(this).trigger({"type":"keyup","key":":"});
+delete image_uploads.reply;
+image_uploads.reply = new Object();
+openStatusEditor("reply");
 }
 });
-}
-});
-if(localStorage.setting_post_sensitive == "true") {
-$("#reply_status_nsfw")[0].checked = true;
-$('#reply_status_form .media_attachments_preview_area').addClass('nsfw');
-}
-}
-});
-$(document).on('change keyup','#reply_status_form textarea,#reply_status_form .status_spoiler,#reply_status_form .poll_days,#reply_status_form .poll_hours,#reply_status_form .poll_mins', function(e) {
-var is_ready;
-if(e.keyCode !== 224 & e.keyCode !== 17) {
-if(e.key == ":") {
-replace_emoji_textarea(this);
-}
-if($('#reply_status_form textarea').length == 1) {
-const textCount = $('#reply_status_form textarea').val().length + $('#reply_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#reply_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-} else {
-$('#reply_status_form .character_count').removeClass('red');
-is_ready = false;
-}
-$('#reply_status_form .character_count').text(textLen);
-}
-else {
-is_ready = false;
-$('#reply_status_form .character_count').removeClass('red');
-$('#reply_status_form textarea').each(function() {
-const textCount = $(this).val().length + $('#reply_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#reply_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-}
-if($(this).is(":focus")) {
-$('#reply_status_form .character_count').text(textLen);
-}
-});
-}
-}
-if($('#reply_status_form .status_poll_editor').hasClass("invisible")) {
-if(is_ready) $('#reply_status_form').addClass('ready');
-else $('#reply_status_form').removeClass('ready');
-}
-else {
-if($('#reply_status_form .poll_days').is(":valid") && $('#reply_status_form .poll_hours').is(":valid") && $('#reply_status_form .poll_mins').is(":valid")) {
-if(is_ready) $('#reply_status_form').addClass('ready');
-else $('#reply_status_form').removeClass('ready');
-}
-else $('#reply_status_form').addClass('ready');
-}
-});
-$(document).on('click','#reply_status_form .status_CW', function(e) {
-$('#reply_status_form .status_spoiler').toggleClass('invisible');
-$('#reply_status_form .status_textarea').toggleClass('status_has_cw');
-});
-$(document).on('click','#reply_status_form .status_poll', function(e) {
-$('#reply_status_form .status_poll_editor').toggleClass('invisible');
-$('#reply_status_form .status_media_attachment').toggleClass('disabled');
-$('#reply_status_form textarea').keyup();
-});
-$(document).on('click','#reply_status_form .status_addfield', function(e) {
-var new_textarea = $("<textarea>").addClass("focus").addClass("additional_textarea").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
-autosize(new_textarea);
-enableAutoComplete(new_textarea);
-$('#reply_status_form textarea').last().after(new_textarea);
-});
-$(document).on('click','#reply_status_form .expand_privacy_menu_button', function(e) {
-$('#reply_status_form .expand_privacy_menu').removeClass('invisible');
-});
-$(document).on('click','#reply_status_form .status_privacy.select_privacy', function(e) {
-e.stopPropagation();
-$('#reply_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-$('#reply_status_form .expand_privacy_menu').addClass('invisible');
-});
-$(document).on('change','#reply_status_media_atta', function(e) {
-$('#reply_status_form .media_attachments_preview_area').empty();
-$('#reply_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-$('#reply_status_form .status_poll').addClass('disabled');
-for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-let reader= new FileReader();
-reader.readAsDataURL(f);
-reader.onloadend = (function() {
-return function (e) {
-const html = (`<div class="media_attachments_preview">
-<img src="${e.target.result}"/>
-</div>`);
-$(html).appendTo('#reply_status_form .media_attachments_preview_area');
-}
-})(f);
-}
-});
-$(document).on('click','#reply_status_form .status_NSFW', function(e) {
-$('#reply_status_form .media_attachments_preview_area').toggleClass('nsfw');
-});
-$(document).on('click','#reply_status_form .submit_status_label', function(e) {
-$('#reply_status_form').addClass('ready');
-$('#reply_status_form .status_textarea').addClass('disallow_select');
-$('#reply_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
-let form = document.forms.reply_status_form;
-if(!$('#reply_status_media_atta')[0].files.length || !$('#reply_status_form .status_poll_editor').hasClass("invisible")) {
-const params = {
-status:$('#reply_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-in_reply_to_id : $('#reply_status_form').attr('sid')
-}
-if(!$('#reply_status_form .status_poll_editor').hasClass("invisible")) {
-params.poll = new Object;
-params.poll.options = new Array;
-for(var i=0;i < $('#reply_status_form .poll_field').length;i++) {
-if($('#reply_status_form .poll_field').eq(i).val().length > 0) params.poll.options.push($('#reply_status_form .poll_field').eq(i).val());
-}
-if(params.poll.options.length > 0) {
-params.poll.expires_in = $('#reply_status_form .poll_days').val()*86400+$('#reply_status_form .poll_hours').val()*3600+$('#reply_status_form .poll_mins').val()*60;
-if($('#reply_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
-}
-}
-submitStatusArray(params,function(data) {
-$('#reply_status_form .media_attachments_preview_area').empty();
-$('#reply_status_form .status_spoiler').addClass('invisible');
-$('#reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#reply_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#reply_status_form').removeClass('ready');
-$('#reply_status_form .status_textarea').removeClass('disallow_select');
-$('#reply_status_form .character_count').html(current_instance_charlimit);
-$('.reply_status .submit_status_label').removeClass('active_submit_button');
-context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
-replace_emoji();
-putMessage(__('Your Toot was posted!'));
-});
-} else {
-const dummy_form = $('<form></form>').append($('#reply_status_media_atta')),
-files= dummy_form[0][0].files,
-filesLen = files.length -1;
-let media_array = [];
-$('#reply_status_form .status_bottom').append($('<input id="reply_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
-for (let i=0; i<files.length; i++) {
-let formData = new FormData();
-formData.append('file', files[i]);
-if ( i === 3 || i === filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-const params = {
-status:$('#reply_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-media_ids: media_array,
-in_reply_to_id : $('#reply_status_form').attr('sid')
-}
-submitStatusArray(params,function(data) {
-$('#reply_status_form .media_attachments_preview_area').empty();
-$('#reply_status_form .status_spoiler').addClass('invisible');
-$('#reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#reply_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#reply_status_form').removeClass('ready');
-$('#reply_status_form .status_textarea').removeClass('disallow_select');
-$('#reply_status_form .character_count').html(current_instance_charlimit);
-$('.reply_status .submit_status_label').removeClass('active_submit_button');
-context_template(data, 'descendants_status').appendTo("#js-overlay_content .temporary_object .toot_detail_wrap");
-replace_emoji();
-putMessage(__('Your Toot was posted!'));
-});
-});
-break;
-} else if ( i < filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-});
-}
-}
-}
-});
-})
-$(function() {
-$(document).on('click', function(e) {
+initStatusEditor("reply");
+$(document).on('click',function(e) {
 if(!$(e.target).closest('.reply_button').length && !$(e.target).closest('.single_reply_status').length) {
 $('#single_reply_status_emoji').lsxEmojiPicker("destroy");
 $('#single_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
 $('#single_status_form .status_textarea textarea').autoCompleteToken("destroy");
 }
 });
-$(document).on('click','single_reply_status_header, #single_reply_status_form', function(e) {
+$(document).on('click','single_reply_status_header, #single_reply_status_form',function(e) {
 e.stopPropagation();
 });
-$('label[for=single_reply_status_emoji]').click(function(e) {$('#single_reply_status_emoji').trigger('click',e)});
-$(document).on('click', '.reply_button', function(e) {
+$(document).on('click','.reply_button',function(e) {
 e.stopPropagation();
 const sid= $(this).attr('tid'),
 mentions = JSON.parse($(this).attr('mentions'));
@@ -1973,225 +1672,90 @@ $("#js-overlay_content_wrap .temporary_object").empty();
 $(".single_reply_status .status_preview").empty();
 $('#js-overlay_content_wrap').addClass('view');
 $('#js-overlay_content_wrap').addClass('black_08');
-$('.single_reply_status .submit_status_label').addClass('active_submit_button');
-$('#single_reply_status_form .status_textarea textarea').addClass('focus');
-$('#single_reply_status_form .status_textarea textarea').focus();
-autosize($('#single_reply_status_form .status_textarea textarea'));
-enableAutoComplete($('#single_reply_status_form .status_top .status_spoiler'));
-enableAutoComplete($('#single_reply_status_form .status_textarea textarea'));
+$('#single_reply_status_form .media_attachments_preview_area').empty();
+$('#single_reply_status_form .status_spoiler').addClass('invisible');
+$('#single_reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
+$('#single_reply_status_form .status_poll').removeClass('disabled');
+document.forms.single_reply_status_form.reset();
+delete image_uploads.single_reply;
+image_uploads.single_reply = new Object();
 $('#single_reply_status_form input[name="privacy_option"]').val([privacy_mode]);
 $('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
 $('#single_reply_status_form').attr('tid',sid);
 $('.single_reply_status .single_reply_status_header span').addClass("emoji_poss").html(__("Reply to")+" "+display_name);
 $('#single_reply_status_form textarea').val(replyto);
-const textCount = $('#single_reply_status_form textarea').val().length + $('#single_reply_status_form .status_spoiler').val().length;
-let textLen = (current_instance_charlimit - textCount);
-$('#single_reply_status_form .character_count').html(textLen);
-$('#single_reply_status_emoji').lsxEmojiPicker({
-closeOnSelect:true,
-twemoji:!checkEmojiSupport(),
-onSelect:function(emoji) {
-$('#single_reply_status_form .status_top .status_spoiler,#single_reply_status_form .status_textarea textarea').each(function() {
-if(global_focus_textfield == $(this).data("random")) {
-$(this).insertText(":"+emoji.name+":");
-$(this).trigger({"type":"keyup","key":":"});
-}
-});
-}
-});
-if(localStorage.setting_post_sensitive == "true") {
-$("#single_reply_status_nsfw")[0].checked = true;
-$('#single_reply_status_form .media_attachments_preview_area').addClass('nsfw');
-}
-replace_emoji();
+openStatusEditor("single_reply")
 api.get('statuses/'+sid+'/', function(status) {
 timeline_template(status).appendTo(".single_reply_status .status_preview");
 replace_emoji();
 });
-return false;
 });
-$(document).on('change keyup','#single_reply_status_form textarea,#single_reply_status_form .status_spoiler,#single_reply_status_form .poll_days,#single_reply_status_form .poll_hours,#single_reply_status_form .poll_mins', function(e) {
-var is_ready;
-if(e.keyCode !== 224 & e.keyCode !== 17) {
-if(e.key == ":") {
-replace_emoji_textarea(this);
-}
-if($('#single_reply_status_form textarea').length == 1) {
-const textCount = $('#single_reply_status_form textarea').val().length + $('#single_reply_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#single_reply_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-} else {
-$('#single_reply_status_form .character_count').removeClass('red');
-is_ready = false;
-}
-$('#single_reply_status_form .character_count').text(textLen);
-}
-else {
-is_ready = false;
-$('#single_reply_status_form .character_count').removeClass('red');
-$('#single_reply_status_form textarea').each(function() {
-const textCount = $(this).val().length + $('#single_reply_status_form .status_spoiler').val().length;
-let textLen = ( current_instance_charlimit - textCount );
-if(textLen <= -1) {
-$('#single_reply_status_form .character_count').addClass('red');
-is_ready = true;
-} else if(textLen === current_instance_charlimit) {
-is_ready = true;
-}
-if($(this).is(":focus")) {
-$('#single_reply_status_form .character_count').text(textLen);
+initStatusEditor("single_reply");
+$(document).on('click', function(e) {
+if(!$(e.target).closest('#header_status_form').length) {
+$('#header_status_form .submit_status_label').removeClass('active_submit_button');
+$('#header_status_form .expand_privacy_menu').addClass('invisible');
+$('#header_status_form .status_textarea textarea').removeClass('focus');
+$('#header_status_form .status_bottom').addClass('invisible');
+autosize.destroy($('#header_status_form .status_textarea textarea'));
+$('#header_status_emoji').lsxEmojiPicker("destroy");
+$('#header_status_form .status_top .status_spoiler').autoCompleteToken("destroy");
+$('#header_status_form .status_textarea textarea').autoCompleteToken("destroy");
+$('#header_status_form .status_textarea').addClass("closed");
 }
 });
+$(document).on('click','#header_status_form', function(e) {
+switch(localStorage.getItem("setting_post_privacy")) {
+case "public":picon="globe";break;
+case "unlisted":picon="unlock-alt";break;
+case "private":picon="lock";break;
+case "direct":picon="envelope";break;
 }
-}
-if($('#single_reply_status_form .status_poll_editor').hasClass("invisible")) {
-if(is_ready) $('#single_reply_status_form').addClass('ready');
-else $('#single_reply_status_form').removeClass('ready');
-}
-else {
-if($('#single_reply_status_form .poll_days').is(":valid") && $('#single_reply_status_form .poll_hours').is(":valid") && $('#single_reply_status_form .poll_mins').is(":valid")) {
-if(is_ready) $('#single_reply_status_form').addClass('ready');
-else $('#single_reply_status_form').removeClass('ready');
-}
-else $('#single_reply_status_form').addClass('ready');
+if(!$('#header_status_form .status_textarea textarea').hasClass('focus')) {
+$('#header_status_form .status_textarea').removeClass("closed");
+$('#header_status_form input[name="privacy_option"]').val([localStorage.getItem("setting_post_privacy")]);
+$('#header_status_form .expand_privacy_menu_button > i').attr('class', "fa fa-" + picon);
+openStatusEditor("header");
 }
 });
-$(document).on('click','#single_reply_status_form .status_CW', function(e) {
-$('#single_reply_status_form .status_spoiler').toggleClass('invisible');
-$('#single_reply_status_form .status_textarea').toggleClass('status_has_cw');
+initStatusEditor("header");
 });
-$(document).on('click','#single_reply_status_form .status_poll', function(e) {
-$('#single_reply_status_form .status_poll_editor').toggleClass('invisible');
-$('#single_reply_status_form .status_media_attachment').toggleClass('disabled');
-$('#single_reply_status_form textarea').keyup();
-});
-$(document).on('click','#single_reply_status_form .status_addfield', function(e) {
-var new_textarea = $("<textarea>").addClass("focus").attr("name","status_textarea").data("random",Math.round(Math.random()*1000));
-autosize(new_textarea);
-enableAutoComplete(new_textarea);
-$('#single_reply_status_form textarea').last().after(new_textarea);
-});
-$(document).on('click','#single_reply_status_form .expand_privacy_menu_button', function(e) {
-$('#single_reply_status_form .expand_privacy_menu').removeClass('invisible');
-});
-$(document).on('click','#single_reply_status_form .status_privacy.select_privacy', function(e) {
+$(function() {
+$(document).on('click','caption_status_header, #caption_status_form', function(e) {
 e.stopPropagation();
-$('#single_reply_status_form .expand_privacy_menu_button > i').attr('class', $(this).attr('privacyicon'));
-$('#single_reply_status_form .expand_privacy_menu').addClass('invisible');
 });
-$(document).on('change','#single_reply_status_media_atta', function(e) {
-$('#single_reply_status_form .media_attachments_preview_area').empty();
-$('#single_reply_status_form .status_textarea .media_attachments_preview_area').removeClass('invisible');
-$('#single_reply_status_form .status_poll').addClass('disabled');
-for ( let i = 0, f; f = e.target.files[i]; i++ ) {
-let reader= new FileReader();
-reader.readAsDataURL(f);
-reader.onloadend = (function() {
-return function (e) {
-const html = (`<div class="media_attachments_preview">
-<img src="${e.target.result}"/>
-</div>`);
-$(html).appendTo('#single_reply_status_form .media_attachments_preview_area');
+$(document).on('change keyup','#caption_status_form textarea', function(e) {
+if(e.keyCode !== 224 & e.keyCode !== 17) {
+const textCount = $('#caption_status_form textarea').val().length;
+let textLen = (420 - textCount);
+if(textLen <= -1) {
+$('#caption_status_form .character_count').addClass('red');
+$('#caption_status_form').addClass('ready');
 }
-})(f);
+else if(textLen === 1000) {
+$('#caption_status_form').addClass('ready');
+}
+else {
+$('#caption_status_form .character_count').removeClass('red');
+$('#caption_status_form').removeClass('ready');
+}
+$('#caption_status_form .character_count').text(textLen);
 }
 });
-$(document).on('click','#single_reply_status_form .status_NSFW', function(e) {
-$('#single_reply_status_form .media_attachments_preview_area').toggleClass('nsfw');
-});
-$(document).on('click','#single_reply_status_form .submit_status_label', function(e) {
-$('#single_reply_status_form').addClass('ready');
-$('#single_reply_status_form .status_textarea').addClass('disallow_select');
-$('#single_reply_status_form .character_count').html('<i class="fa fa-circle-o-notch fa-spin" aria-hidden="true"></i>');
-let form = document.forms.single_reply_status_form;
-if(!$('#single_reply_status_media_atta')[0].files.length || !$('#single_reply_status_form .status_poll_editor').hasClass("invisible")) {
-const params = {
-status:$('#single_reply_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-in_reply_to_id : $('#single_reply_status_form').attr('tid')
-}
-if(!$('#single_reply_status_form .status_poll_editor').hasClass("invisible")) {
-params.poll = new Object;
-params.poll.options = new Array;
-for(var i=0;i < $('#single_reply_status_form .poll_field').length;i++) {
-if($('#single_reply_status_form .poll_field').eq(i).val().length > 0) params.poll.options.push($('#single_reply_status_form .poll_field').eq(i).val());
-}
-if(params.poll.options.length > 0) {
-params.poll.expires_in = $('#single_reply_status_form .poll_days').val()*86400+$('#single_reply_status_form .poll_hours').val()*3600+$('#single_reply_status_form .poll_mins').val()*60;
-if($('#single_reply_status_form .poll_multiple_choice')[0].checked) params.poll.multiple = "On";
-}
-}
-submitStatusArray(params,function(data) {
-$('#single_reply_status_form .media_attachments_preview_area').empty();
-$('#single_reply_status_form .status_spoiler').addClass('invisible');
-$('#single_reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#single_reply_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#single_reply_status_form').removeClass('ready');
-$('#single_reply_status_form .status_textarea').removeClass('disallow_select');
-$('#single_reply_status_form .character_count').html(current_instance_charlimit);
-$('.single_reply_status .submit_status_label').removeClass('active_submit_button');
-$('.single_reply_status').addClass('invisible');
-autosize.destroy($('#single_reply_status_form .status_textarea textarea'));
-$('#single_reply_status_emoji').lsxEmojiPicker("destroy");
+$(document).on('click','#caption_status_form .submit_status_label',function(e) {
+image_uploads[$("#caption_status_form").data("place")][$("#caption_status_form").data("random")].caption = $("#caption_status_form .status_textarea textarea").val();
+document.forms.caption_status_form.reset();
+$('#caption_status_form .character_count').html("420");
+$('.caption_status .submit_status_label').removeClass('active_submit_button');
+$('.caption_status').addClass('invisible');
+autosize.destroy($('#caption_status_form .status_textarea textarea'));
+if($("#caption_status_form").data("place") == "header") {
 $('#js-overlay_content_wrap').removeClass('view');
 $('#js-overlay_content_wrap').removeClass('black_05');
-$("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
-putMessage(__('Your Reply was posted!'));
-});
-} else {
-const dummy_form= $('<form></form>').append($('#single_reply_status_media_atta')),
-files = dummy_form[0][0].files,
-filesLen= files.length -1;
-let media_array = [];
-$("#single_reply_status_form .status_bottom").append($('<input id="single_reply_status_media_atta" name="files" multiple="" class="invisible" type="file">'));
-for (let i=0; i<files.length; i++) {
-let formData = new FormData();
-formData.append('file', files[i]);
-if ( i === 3 || i === filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-const params = {
-status:$('#single_reply_status_form textarea'),
-sensitive: form.status_nsfw.checked,
-spoiler_text : form.status_spoiler.value,
-visibility : form.privacy_option.value,
-media_ids: media_array,
-in_reply_to_id : $('#single_reply_status_form').attr('tid')
 }
-submitStatusArray(params,function(data) {
-$('#single_reply_status_form .media_attachments_preview_area').empty();
-$('#single_reply_status_form .status_spoiler').addClass('invisible');
-$('#single_reply_status_form .status_textarea .media_attachments_preview_area').addClass('invisible');
-$('#single_reply_status_form .status_poll').removeClass('disabled');
-form.reset();
-$('#single_reply_status_form').removeClass('ready');
-$('#single_reply_status_form .status_textarea').removeClass('disallow_select');
-$('#single_reply_status_form .character_count').html(current_instance_charlimit);
-$('.single_reply_status .submit_status_label').removeClass('active_submit_button');
-$('.single_reply_status').addClass('invisible');
-autosize.destroy($('#single_reply_status_form .status_textarea textarea'));
-$('#single_reply_status_emoji').lsxEmojiPicker("destroy");
-$('#js-overlay_content_wrap').removeClass('view');
-$('#js-overlay_content_wrap').removeClass('black_05');
-$("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
-putMessage(__('Your Reply was posted!'));
-});
-});
-break;
-} else if ( i < filesLen ) {
-api.postMedia("media", formData, function (postMedia) {
-media_array.unshift(postMedia.id);
-});
-}
-}
-}
+else if($("#caption_status_form").data("place") == "reply") $(".toot_detail_wrap").removeClass("invisible");
+else $("."+$("#caption_status_form").data("place")+"_status").removeClass("invisible");
+putMessage(__('Caption added successfully!'));
 });
 });
 $(function() {
@@ -2211,7 +1775,7 @@ $('#js-overlay_content_wrap').addClass('black_08');
 $('.report_status .submit_status_label').addClass('active_submit_button');
 $('#report_status_form .status_textarea textarea').addClass('focus');
 $('#report_status_form .status_textarea textarea').focus();
-autosize($('#single_reply_status_form .status_textarea textarea'));
+autosize($('#report_status_form .status_textarea textarea'));
 $('#report_status_form').attr('tid',sid);
 $('#report_status_form').attr('mid',mid);
 $('.report_status .report_status_header span').addClass("emoji_poss").html(__("Report a Toot of")+" "+display_name);
@@ -2224,9 +1788,9 @@ replace_emoji();
 });
 return false;
 });
-$(document).on('change keyup','#report_status_form textarea, #report_status_form .status_spoiler', function(e) {
+$(document).on('change keyup','#report_status_form textarea', function(e) {
 if(e.keyCode !== 224 & e.keyCode !== 17) {
-const textCount = $('#report_status_form textarea').val().length + $('#report_status_form .status_spoiler').val().length;
+const textCount = $('#report_status_form textarea').val().length;
 let textLen = (1000 - textCount);
 if(textLen <= -1) {
 $('#report_status_form .character_count').addClass('red');
@@ -2302,10 +1866,11 @@ $(document).on('click','.temporary_object > *, .parmanent_object > *', function(
 e.stopPropagation();
 });
 $(document).on('click','#js-overlay_content_wrap',function(e) {
-if((!$('#js-overlay_content_wrap .overlay_status').hasClass("invisible") && $('#js-overlay_content_wrap .overlay_status textarea').val().length > 0)
-|| (!$('#js-overlay_content_wrap .single_reply_status').hasClass("invisible") && $('#js-overlay_content_wrap .single_reply_status textarea').val().length > 0)
+if((!$('#js-overlay_content_wrap .overlay_status').hasClass("invisible") && ($('#js-overlay_content_wrap .overlay_status textarea').val().length > 0 || $('#overlay_status_form .media_attachments_preview_area').children().length > 0))
+|| (!$('#js-overlay_content_wrap .single_reply_status').hasClass("invisible") && ($('#js-overlay_content_wrap .single_reply_status textarea').val().length > 0 || $('#single_reply_status_form .media_attachments_preview_area').children().length > 0))
 || (!$('#js-overlay_content_wrap .report_status').hasClass("invisible") && $('#js-overlay_content_wrap .report_status textarea').val().length > 0)
-|| ($('#js-overlay_content_wrap #reply_status_form').length == 1 && $('#js-overlay_content_wrap #reply_status_form textarea').val().length > 0)) {
+|| (!$('#js-overlay_content_wrap .caption_status').hasClass("invisible") && $('#js-overlay_content_wrap .caption_status textarea').val().length > 0)
+|| ($('#js-overlay_content_wrap #reply_status_form').length == 1 && !$(".toot_detail_wrap").hasClass("invisible") && ($('#js-overlay_content_wrap #reply_status_form textarea').val().length > 0 || $('#reply_status_form .media_attachments_preview_area').children().length > 0))) {
 $(document.body).append($(`<div id="overlay_close_warning" style="position:fixed;z-index:1001;top:0;left:0;width:100%;height:100%;background-color:rgba(0,0,0,0.8)">
 <div class="overlay_simple overlay_close">
 <header class="overlay_simple_header">
@@ -2322,8 +1887,20 @@ $(document.body).append($(`<div id="overlay_close_warning" style="position:fixed
 </div>`));
 $(".overlay_close .overlay_confirm_yes").click(function() {
 $('#overlay_close_warning').remove();
-closeOverlay();
+if(!$('#js-overlay_content_wrap .caption_status').hasClass("invisible") && $("#caption_status_form").data("place") != "header") {
+$(".caption_status").addClass("invisible");
+$(".caption_status textarea").val("");
+if($("#caption_status_form").data("place") == "reply") $(".toot_detail_wrap").removeClass("invisible");
+else $("."+$("#caption_status_form").data("place")+"_status").removeClass("invisible");
+}
+else closeOverlay();
 });
+}
+else if(!$('#js-overlay_content_wrap .caption_status').hasClass("invisible") && $("#caption_status_form").data("place") != "header") {
+$(".caption_status").addClass("invisible");
+$(".caption_status textarea").val("");
+if($("#caption_status_form").data("place") == "reply") $(".toot_detail_wrap").removeClass("invisible");
+else $("."+$("#caption_status_form").data("place")+"_status").removeClass("invisible");
 }
 else closeOverlay();
 });
@@ -2334,6 +1911,7 @@ $("#js-overlay_content_wrap .single_reply_status .status_preview").empty();
 $('#js-overlay_content_wrap .overlay_status').addClass('invisible');
 $('#js-overlay_content_wrap .single_reply_status').addClass('invisible');
 $('#js-overlay_content_wrap .report_status').addClass('invisible');
+$('#js-overlay_content_wrap .caption_status').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_copy_link').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_confirm').addClass('invisible');
 $('#js-overlay_content_wrap .overlay_prompt').addClass('invisible');
@@ -2349,6 +1927,8 @@ $('#js-overlay_content_wrap').removeClass('black_08');
 $('#js-overlay_content_wrap .overlay_confirm_yes').off('click');
 $('#js-overlay_content_wrap .overlay_prompt_ok').off('click');
 $('#js-overlay_content_wrap .overlay_prompt_text').val("");
+$('#js-overlay_content_wrap #report_status_form textarea').val("");
+$('#js-overlay_content_wrap #caption_status_form textarea').val("");
 $('#js-overlay_content_wrap .overlay_addlist_body').empty();
 $('#js-overlay_content_wrap #addfilter').trigger("reset");
 $('#js-overlay_content_wrap .status_form .additional_textarea').remove();

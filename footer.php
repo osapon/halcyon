@@ -10,6 +10,7 @@
 include dirname(__FILE__).('/widgets/overlay_create_status.php');
 include dirname(__FILE__).('/widgets/overlay_single_reply.php');
 include dirname(__FILE__).('/widgets/overlay_report_status.php');
+include dirname(__FILE__).('/widgets/overlay_caption.php');
 include dirname(__FILE__).('/widgets/overlay_copy_link.php');
 include dirname(__FILE__).('/widgets/overlay_confirm.php');
 include dirname(__FILE__).('/widgets/overlay_prompt.php');
