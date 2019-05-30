@@ -1472,6 +1472,10 @@ sensitive: form.status_nsfw.checked,
 spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value
 }
+if(place == "reply") params.in_reply_to_id = $('#reply_status_form').attr('sid');
+else if(place == "single_reply") params.in_reply_to_id = $('#single_reply_status_form').attr('tid');
+console.log(params);
+console.log(place);
 if(!$('#'+place+'_status_form .status_poll_editor').hasClass("invisible")) {
 params.poll = new Object;
 params.poll.options = new Array;
@@ -1516,6 +1520,8 @@ spoiler_text : form.status_spoiler.value,
 visibility : form.privacy_option.value,
 media_ids: media_array
 }
+if(place == "reply") params.in_reply_to_id = $('#reply_status_form').attr('sid');
+else if(place == "single_reply") params.in_reply_to_id = $('#single_reply_status_form').attr('tid');
 submitStatusArray(params,function(data) {
 $('#'+place+'_status_form .media_attachments_preview_area').empty();
 $('#'+place+'_status_form .status_spoiler').addClass('invisible');
