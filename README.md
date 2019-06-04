@@ -32,7 +32,6 @@ We moved our instances list to our webpage: https://www.halcyon.social/instances
 - Image size reduction function of timeline.（タイムラインの画像サイズ縮小）
 - Sensitive image can switched for show / hide.（画像の非表示化）
 - Notification tab is split(All / Reply / Follow / Boost &amp; Fav / Direct).（通知タブの分類分け）
-- Only voting, posting of votes is not supported.（投票だけ、投票の投稿は未対応）
 
 
 
