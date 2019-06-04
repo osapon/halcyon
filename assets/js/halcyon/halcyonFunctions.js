@@ -470,8 +470,11 @@ async function post(param) {
 function uploadFile(idx, file) {
   return new Promise((resolve, reject) => {
     let formData = new FormData();
-    formData.append('file', file);
+    formData.append('file', file.upload);
+    console.log("アップロード済", file );
+    if(file.caption) formData.append('description',file.caption);
     api.postMedia("media", formData, function (postMedia) {
+      console.log("アップロード済", postMedia );
       resolve(postMedia.id);
     });
   });

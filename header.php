@@ -32,7 +32,7 @@ if($_COOKIE['darktheme'] == "true") echo '<link rel="stylesheet" href="/assets/c
 else if($_COOKIE['darktheme'] == "unset") {
 ?>
 <script>
-if(window.matchMedia("prefers-color-scheme:dark").matches)
+if(window.matchMedia("(prefers-color-scheme: dark)").matches)
 document.write('<link rel="stylesheet" href="/assets/css/dark.css" media="all">');
 </script>
 <?php }} ?>

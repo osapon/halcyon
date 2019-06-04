@@ -4,9 +4,6 @@
 </header>
 <div class="status_preview"></div>
 <form id="report_status_form" name="report_status_form" class="status_form">
-<div class="status_top">
-<input class="status_spoiler invisible" name="status_spoiler" placeholder="<?=_('Content warning')?>" type="text">
-</div>
 <div class="status_main">
 <div class="status_textarea">
 <textarea name="status_textarea" placeholder="<?=_('Please describe what the problem with the Toot is.')?>"></textarea>
