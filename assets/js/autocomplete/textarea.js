@@ -62,26 +62,27 @@ blurredEle = null;
 getDropDown().removeClass('showDropDown').addClass('hideDropDown');
 });
 if(resultname) {
-if(resultname == "acct") {
-if(ele.display_name == "") ele.display_name = ele.username;
-for(var i=0;i<ele.emojis.length;i++) {
-  ele.display_name = ele.display_name.replace(new RegExp(":"+ele.emojis[i].shortcode+":","g"),"<img src='"+ele.emojis[i].url+"' class='emoji'>");
-}
-$(liNode).data("value",prepend+ele[resultname]+" ");
-$(liNode).addClass("account_box").append($("<div>").addClass("icon_box").append($("<img>").attr("src",ele.avatar).css("float","left")))
-.append($("<div>").addClass("label_box").append($("<span>").addClass("dn").append($("<h3>").html(ele.display_name).addClass("emoji_poss"))).append($("<span>").addClass("un").html(prepend+ele.acct)));
-}
-else {
-$(liNode).data("value",prepend+ele[resultname]+": ");
-if(ele.value) {
-$(liNode).addClass("account_box").append($("<div>").addClass("icon_box").append($("<span>").addClass("emoji_poss").html(ele.value).css("float","left").css("font-size","32px")))
-.append($("<div>").addClass("label_box").append($("<span>").addClass("dn").append($("<h3>").html(ele.name))));
-}
-else {
-$(liNode).addClass("account_box").append($("<div>").addClass("icon_box").append($("<img>").attr("src",ele.url).css("float","left")))
-.append($("<div>").addClass("label_box").append($("<span>").addClass("dn").append($("<h3>").html(ele.name))));
-}
-}
+  if(resultname == "acct") {
+    if(ele.display_name == "") ele.display_name = ele.username;
+    ele.display_name = htmlEscape(ele.display_name);
+    for(var i=0;i<ele.emojis.length;i++) {
+      ele.display_name = ele.display_name.replace(new RegExp(":"+ele.emojis[i].shortcode+":","g"),"<img src='"+ele.emojis[i].url+"' class='emoji'>");
+    }
+    $(liNode).data("value",prepend+ele[resultname]+" ");
+    $(liNode).addClass("account_box").append($("<div>").addClass("icon_box").append($("<img>").attr("src",ele.avatar).css("float","left")))
+    .append($("<div>").addClass("label_box").append($("<span>").addClass("dn").append($("<h3>").html(ele.display_name).addClass("emoji_poss"))).append($("<span>").addClass("un").html(prepend+ele.acct)));
+  }
+  else {
+    $(liNode).data("value",prepend+ele[resultname]+": ");
+    if(ele.value) {
+      $(liNode).addClass("account_box").append($("<div>").addClass("icon_box").append($("<span>").addClass("emoji_poss").html(ele.value).css("float","left").css("font-size","32px")))
+      .append($("<div>").addClass("label_box").append($("<span>").addClass("dn").append($("<h3>").html(ele.name))));
+    }
+    else {
+      $(liNode).addClass("account_box").append($("<div>").addClass("icon_box").append($("<img>").attr("src",ele.url).css("float","left")))
+      .append($("<div>").addClass("label_box").append($("<span>").addClass("dn").append($("<h3>").html(ele.name))));
+    }
+  }
 }
 else {
 $(liNode).data("value",prepend+ele+" ");
