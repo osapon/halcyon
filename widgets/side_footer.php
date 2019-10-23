@@ -1,4 +1,6 @@
-<footer class="side_widgets_footer side_widget"><ul>
+<footer class="side_widgets_footer side_widget">
+<ul>
+<li style="color:red;">2020年1月末で、halcyon.osa-p.netでの提供を終了します。引き続きHalcyonを利用したい方は、<a href="https://www.halcyon.social/instances.php" style="font-weight:bold; text-decoration:underline;">本家の提供リスト</a>から他のサーバーを探してください。日本の国旗が表示されているサーバなら日本語表示が可能です。</li>
 <li><?=_('Halcyon for')?> <a href="https://github.com/tootsuite/mastodon">Mastodon</a> <?=_('and')?> <a href="https://git.pleroma.social/pleroma/pleroma">Pleroma</a></li>
 <li>
 <a id="shortcut_guide"><?=_('Shortcut key')?></a>

@@ -105,6 +105,9 @@ location.href = "/";
 </header>
 <main id="main">
 <div id="login_form_wrap">
+
+<div style="background-color:#FFF; color:red; width:50%;margin:24px auto;">2020年1月末で、halcyon.osa-p.netでの提供を終了します。引き続きHalcyonを利用したい方は、<a href="https://www.halcyon.social/instances.php" style="font-weight:bold; text-decoration:underline;">本家の提供リスト</a>から他のサーバーを探してください。日本の国旗が表示されているサーバなら日本語表示が可能です。</div>
+
 <div class="login_form">
 <form method="POST" >
 <h2><?=_('Login to Halcyon')?></h2>
